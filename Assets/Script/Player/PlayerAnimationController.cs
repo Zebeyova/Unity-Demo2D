@@ -10,11 +10,14 @@ namespace Script.Player
 
         #region 哈希表
 
-        public int idleTurn = Animator.StringToHash("IdleTurn");
         public int isTurnComplete = Animator.StringToHash("IsTurnComplete");
+
         public int idleWalk = Animator.StringToHash("IdleWalk");
-        public int walkTurn = Animator.StringToHash("WalkTurn");
         public int walkRun = Animator.StringToHash("WalkRun");
+        public int idleRun = Animator.StringToHash("IdleRun");
+
+        public int idleTurn = Animator.StringToHash("IdleTurn");
+        public int walkTurn = Animator.StringToHash("WalkTurn");
         public int runTurn = Animator.StringToHash("RunTurn");
 
         #endregion
@@ -33,41 +36,44 @@ namespace Script.Player
 
         public void UpdateState(bool isWalking, bool isRunning)
         {
+            if (InTurnState()) return;
             animator.SetBool(idleWalk, isWalking && !isRunning);
-            animator.SetBool(walkRun, isRunning);
-            if (!IsInState(walkTurn) && !IsInState(runTurn))
-            {
-                if (isWalking)
-                {
-                    animator.SetBool(idleWalk, true);
-                    animator.SetBool(walkRun, false);
-                }
-
-                if (isRunning)
-                {
-                    animator.SetBool(idleWalk, false);
-                    animator.SetBool(walkRun, true);
-                }
-            }
+            animator.SetBool(walkRun, isRunning && isWalking);
+            animator.SetBool(idleRun, !isWalking && isRunning);
         }
 
-        public void StartTurn(bool isWalking, bool isRunning, System.Action turnComplete)
+        public void StartTurn(bool isRunning, System.Action turnComplete)
         {
             _onTurnComplete = turnComplete;
             animator.SetBool(isTurnComplete, false);
-            animator.SetBool(idleWalk, true);
-            animator.SetTrigger(walkTurn);
+            
+            animator.SetBool(idleWalk, false);
+            animator.SetBool(walkRun, false);
+            animator.SetBool(idleRun, false);
+
+            if (isRunning)
+            {
+                animator.SetBool(idleWalk, false);
+                animator.SetBool(idleRun, true);
+                animator.SetBool(walkRun, true);
+                animator.SetTrigger(runTurn);
+            }
+            else
+            {
+                animator.SetBool(idleWalk, true);
+                animator.SetTrigger(walkTurn);
+            }
         }
 
-        private bool IsInState(int stateHash)
+        private bool GetCurrentState(int stateHash)
         {
             if (!animator) return false;
             return animator.GetCurrentAnimatorStateInfo(0).shortNameHash == stateHash;
         }
 
-        private bool IsInTurnState()
+        private bool InTurnState()
         {
-            return IsInState(idleTurn) || IsInState(walkTurn) || IsInState(runTurn);
+            return (GetCurrentState(idleTurn) || GetCurrentState(walkTurn) || GetCurrentState(runTurn));
         }
 
         #region 动画事件注册

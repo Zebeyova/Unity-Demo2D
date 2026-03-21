@@ -592,13 +592,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 364368703}
-  idleTurn: -1548010464
   isTurnComplete: 827104369
   idleWalk: 235557682
-  walkTurn: 662867711
   walkRun: -1624701500
-  idleState: 2081823275
-  walkState: 765711723
+  idleTurn: -1548010464
+  walkTurn: 662867711
+  runTurn: -174254117
 --- !u!61 &364368708
 BoxCollider2D:
   m_ObjectHideFlags: 0

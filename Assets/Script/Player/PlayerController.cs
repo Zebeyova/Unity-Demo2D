@@ -42,14 +42,14 @@ namespace Script.Player
             var shouldRun = _isWalking && Input.GetKey(KeyCode.LeftShift) && !_isTurning;
 
             if (_isRunning != shouldRun) _isRunning = shouldRun;
-
             var wantToRight = horizontal > 0; //想要朝哪里转向
             if (_isWalking && !_isTurning)
+            {
                 if (_currentFacing != wantToRight)
                 {
                     _targetFacing = wantToRight;
                     _isTurning = true;
-                    _animationController.StartTurn(_isWalking, _isRunning, () =>
+                    _animationController.StartTurn(_isRunning, () =>
                     {
                         _currentFacing = _targetFacing;
                         _spriteRenderer.flipX = !_currentFacing;
@@ -57,11 +57,11 @@ namespace Script.Player
                     });
                     return;
                 }
-
+            }            
             var currentSpeed = speed;
             if (_isTurning) return;
             if (_isRunning) currentSpeed *= runSpeedMultiplier;
-
+            
             _animationController.UpdateState(_isWalking, _isRunning);
 
             var targetPosition =
