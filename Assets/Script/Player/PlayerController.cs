@@ -23,9 +23,6 @@ namespace Script.Player
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _currentFacing = !_spriteRenderer.flipX;
             _animationController = GetComponent<PlayerAnimationController>();
-            _animationController.SetBool(_animationController.isTurnComplete, true);
-            _animationController.SetBool(_animationController.idleWalk, false);
-            _animationController.OnTurnComplete += HandleTurnComplete;
 
             _isTurning = false;
             _isWalking = false;
@@ -37,12 +34,6 @@ namespace Script.Player
             PlayerMove();
         }
 
-        private void OnDestroy()
-        {
-            if (_animationController != null)
-                _animationController.OnTurnComplete -= HandleTurnComplete;
-        }
-
         private void PlayerMove()
         {
             var horizontal = Input.GetAxis("Horizontal");
@@ -50,58 +41,32 @@ namespace Script.Player
 
             var shouldRun = _isWalking && Input.GetKey(KeyCode.LeftShift) && !_isTurning;
 
-            if (_isRunning != shouldRun)
-            {
-                _isRunning = shouldRun;
-
-                if (shouldRun)
-                {
-                    _isRunning = true;
-                    _animationController.SetBool(_animationController.walkRun, true);
-                    _animationController.SetBool(_animationController.idleWalk, false);
-                }
-                else
-                {
-                    _isRunning = false;
-                    _animationController.SetBool(_animationController.walkRun, false);
-                    _animationController.SetBool(_animationController.idleWalk, !_isWalking);
-                }
-            }
-
-            if (!_isRunning) _animationController.SetBool(_animationController.idleWalk, _isWalking);
+            if (_isRunning != shouldRun) _isRunning = shouldRun;
 
             var wantToRight = horizontal > 0; //想要朝哪里转向
             if (_isWalking && !_isTurning)
-                if (wantToRight != _currentFacing)
+                if (_currentFacing != wantToRight)
                 {
                     _targetFacing = wantToRight;
                     _isTurning = true;
-                    _animationController.SetBool(_animationController.isTurnComplete, false);
-                    _animationController.SetTrigger(_animationController.walkTurn);
-                    _animationController.SetBool(_animationController.idleWalk, true);
+                    _animationController.StartTurn(_isWalking, _isRunning, () =>
+                    {
+                        _currentFacing = _targetFacing;
+                        _spriteRenderer.flipX = !_currentFacing;
+                        _isTurning = false;
+                    });
                     return;
                 }
 
-            if (_isTurning) return;
-
             var currentSpeed = speed;
+            if (_isTurning) return;
             if (_isRunning) currentSpeed *= runSpeedMultiplier;
+
+            _animationController.UpdateState(_isWalking, _isRunning);
 
             var targetPosition =
                 _rigidbody2D.position + new Vector2(horizontal * currentSpeed * Time.fixedDeltaTime, 0);
             _rigidbody2D.MovePosition(targetPosition);
         }
-
-        #region 动画事件
-
-        private void HandleTurnComplete()
-        {
-            _currentFacing = _targetFacing;
-            _spriteRenderer.flipX = !_currentFacing;
-            _animationController.SetBool(_animationController.isTurnComplete, true);
-            _isTurning = false;
-        }
-
-        #endregion
     }
 }
