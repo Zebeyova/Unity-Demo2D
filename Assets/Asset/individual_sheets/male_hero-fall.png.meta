@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 6df6dcdeaae3b5a4788598f631fb0dd3
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2022205368860861276
+    second: male_hero-fall_0
+  - first:
+      213: 5413524922204236507
+    second: male_hero-fall_1
+  - first:
+      213: 8320902743424799017
+    second: male_hero-fall_2
+  - first:
+      213: -457386141322465800
+    second: male_hero-fall_3
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -41,7 +53,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -90,7 +102,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: male_hero-fall_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 53
+        width: 30
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c53e6d1a111501c10800000000000000
+      internalID: 2022205368860861276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-fall_1
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 52
+        width: 29
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bda25b21c34b02b40800000000000000
+      internalID: 5413524922204236507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-fall_2
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 49
+        width: 28
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 921986885f8c97370800000000000000
+      internalID: 8320902743424799017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-fall_3
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 48
+        width: 29
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fda9415ab907a9f0800000000000000
+      internalID: -457386141322465800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

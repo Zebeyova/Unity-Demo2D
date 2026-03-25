@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Script.Player
@@ -5,29 +6,13 @@ namespace Script.Player
     public class PlayerAnimationController : MonoBehaviour
     {
         public Animator animator;
-        private SpriteRenderer _spriteRenderer;
-        private System.Action _onTurnComplete;
-
-        #region 哈希表
-
-        public int isCompleted = Animator.StringToHash("IsCompleted");
-
-        public int idleWalk = Animator.StringToHash("IdleWalk");
-        public int walkRun = Animator.StringToHash("WalkRun");
-        public int idleRun = Animator.StringToHash("IdleRun");
-
-        public int idleTurn = Animator.StringToHash("IdleTurn");
-        public int walkTurn = Animator.StringToHash("WalkTurn");
-        public int runTurn = Animator.StringToHash("RunTurn");
-        public int runSlide = Animator.StringToHash("RunSlide");
-
-        #endregion
+        private Action _onComplete;
 
         private void Awake()
         {
             CheckComponent();
-            animator.SetBool(isCompleted, true);
-            animator.SetBool(idleWalk, false);
+            animator.SetBool(_isCompleted, true);
+            animator.SetBool(_idleWalk, false);
         }
 
         private void CheckComponent()
@@ -38,47 +23,50 @@ namespace Script.Player
         public void UpdateState(bool isWalking, bool isRunning)
         {
             if (InTurnState()) return;
-            animator.SetBool(idleWalk, isWalking && !isRunning);
-            animator.SetBool(walkRun, isRunning && isWalking);
-            animator.SetBool(idleRun, !isWalking && isRunning);
-        }
-
-        public void WalkAnimation()
-        {
-            animator.SetBool(idleWalk, true);
-            animator.SetTrigger(walkTurn);
+            animator.SetBool(_idleWalk, isWalking && !isRunning);
+            animator.SetBool(_walkRun, isRunning && isWalking);
+            animator.SetBool(_idleRun, !isWalking && isRunning);
         }
 
         public void RunAnimation(bool isSliding)
         {
-            if (GetCurrentState(runSlide)) return;
-            if (isSliding)
+            if (GetCurrentState(_runSlide)) return;
+            animator.SetBool(_idleWalk, false);
+            animator.SetBool(_idleRun, true);
+            animator.SetBool(_walkRun, true);
+            animator.SetTrigger(isSliding ? _runSlide : _runTurn);
+        }
+        
+        public void JumpAnimation(bool isJumping)
+        {
+            if (isJumping && !GetCurrentState(_anyJump) && !GetCurrentState(_jumpFall))
             {
-                animator.SetBool(idleWalk, false);
-                animator.SetBool(idleRun, true);
-                animator.SetBool(walkRun, true);
-                animator.SetTrigger(runSlide);
+                animator.SetBool(_anyJump, true);
             }
-            else
+            else if (!isJumping)
             {
-                animator.SetBool(idleWalk, false);
-                animator.SetBool(idleRun, true);
-                animator.SetBool(walkRun, true);
-                animator.SetTrigger(runTurn);
+                animator.SetBool(_anyJump, false);
             }
         }
 
-        public void StartTurn(bool isRunning, bool isSliding, System.Action turnComplete)
+        public void StartTurn(bool isRunning, bool isSliding, Action turnComplete)
         {
-            _onTurnComplete = turnComplete;
-            animator.SetBool(isCompleted, false);
+            _onComplete = turnComplete;
+            animator.SetBool(_isCompleted, false);
 
-            animator.SetBool(idleWalk, false);
-            animator.SetBool(walkRun, false);
-            animator.SetBool(idleRun, false);
+            animator.SetBool(_idleWalk, false);
+            animator.SetBool(_walkRun, false);
+            animator.SetBool(_idleRun, false);
 
-            if (isRunning) RunAnimation(isSliding);
-            else WalkAnimation();
+            if (isRunning)
+            {
+                RunAnimation(isSliding);
+            }
+            else
+            {
+                animator.SetBool(_idleWalk, true);
+                animator.SetTrigger(_walkTurn);
+            }
         }
 
         private bool GetCurrentState(int stateHash)
@@ -87,18 +75,40 @@ namespace Script.Player
             return animator.GetCurrentAnimatorStateInfo(0).shortNameHash == stateHash;
         }
 
-        private bool InTurnState()
+        public bool InTurnState()
         {
-            return (GetCurrentState(idleTurn) || GetCurrentState(walkTurn) || GetCurrentState(runTurn));
+            return GetCurrentState(_idleTurn) || GetCurrentState(_walkTurn) || GetCurrentState(_runTurn);
         }
+
+        #region 哈希表
+
+        private readonly int _isCompleted = Animator.StringToHash("IsCompleted");
+        private readonly int _idleWalk = Animator.StringToHash("IdleWalk");
+        private readonly int _idleRun = Animator.StringToHash("IdleRun");
+        private readonly int _walkRun = Animator.StringToHash("WalkRun");
+        private readonly int _idleTurn = Animator.StringToHash("IdleTurn");
+        private readonly int _walkTurn = Animator.StringToHash("WalkTurn");
+        private readonly int _runTurn = Animator.StringToHash("RunTurn");
+        private readonly int _runSlide = Animator.StringToHash("RunSlide");
+        private readonly int _anyJump = Animator.StringToHash("AnyJump");
+        private readonly int _jumpFall = Animator.StringToHash("JumpFall");
+
+        #endregion
 
         #region 动画事件注册
 
         public void TurnComplete()
         {
-            _onTurnComplete?.Invoke();
-            _onTurnComplete = null;
-            animator.SetBool(isCompleted, true);
+            _onComplete?.Invoke();
+            _onComplete = null;
+            animator.SetBool(_isCompleted, true);
+        }
+
+        public void JumpComplete()
+        {
+            animator.SetTrigger(_jumpFall);
+            animator.SetBool(_isCompleted, true);
+            animator.SetBool(_anyJump, false);
         }
 
         #endregion
