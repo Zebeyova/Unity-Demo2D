@@ -21,32 +21,39 @@ namespace Script.Player
 
         private void Update()
         {
-            _isJumping = !_isSliding && Input.GetKeyDown(KeyCode.K);
-            if (_isJumping && _inGround)
-            {
-                Jump();
-            }
-
-            ControlMove();
+            IsGround();
+            SlideTimer();
         }
 
         private void FixedUpdate()
         {
-            IsGround();
-            SlideTimer();
+            ControlMove();
             MoveOperation();
         }
 
         private void ControlMove()
         {
             var horizontal = Input.GetAxis("Horizontal");
+            var isCurrentlyTurning = _animationController.InTurnState();
+
             _targetFacing = horizontal > 0;
             _isWalking = Mathf.Abs(horizontal) > moveThreshold;
-            var wantToTurn = _isWalking && !_isSliding && _currentFacing != _targetFacing;
-            var isCurrentlyTurning = _animationController.InTurnState();
             _isRunning = _isWalking && Input.GetKey(KeyCode.LeftShift) && !isCurrentlyTurning;
-            var canSlide = _isRunning && Input.GetKey(KeyCode.Space) && !_isSlidingOnCoolDown;
-            _isSliding = canSlide && !isCurrentlyTurning;
+            _isSliding = _isRunning && Input.GetKey(KeyCode.Space) && !_isSlidingOnCoolDown && !isCurrentlyTurning;
+            _isJumping = !_inJumping && Input.GetKeyDown(KeyCode.K);
+
+            if (_isJumping && _inGround)
+            {
+                if (!_inJumping)
+                {
+                    _inJumping = true;
+                    _animationController.JumpAnimation(true);
+                }
+                if (_inJumping)
+                {
+                    _inJumping = false;
+                }
+            }
 
             if (_isSliding)
             {
@@ -54,8 +61,8 @@ namespace Script.Player
                 _isSlidingOnCoolDown = true;
                 return;
             }
-            
-            if (wantToTurn && !isCurrentlyTurning)
+
+            if (_isWalking && !_isSliding && _currentFacing != _targetFacing && !isCurrentlyTurning)
             {
                 _animationController.StartTurn(_isRunning, _isSliding, () =>
                 {
@@ -67,46 +74,27 @@ namespace Script.Player
             }
 
             if (isCurrentlyTurning) return;
-            
-
             _animationController.UpdateState(_isWalking, _isRunning);
         }
 
-        private void Jump()
+        private void MoveOperation()
         {
-            if (!_inJumping)
-            {
-                _inJumping = true;
-                _animationController.JumpAnimation(true);
-            }
-
-            if (_inJumping)
-            {
-                _inJumping = false;
-            }
-
-            _animationController.UpdateState(_isWalking, _isRunning);
-        }
-
-        void MoveOperation()
-        {
-            if (_isJumping)
+            if (_inJumping) return;
+            if (_inGround && _isJumping)
             {
                 _rb2D.velocity = new Vector2(_rb2D.velocity.x, 0);
                 _rb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
 
-            if (_inGround && !_isJumping)
-            {
-                var currentSpeed = baseSpeed;
-                if (_isRunning) currentSpeed *= runSpeedMultiplier;
-                if (_isSliding) currentSpeed *= runSpeedMultiplier;
+            if (!_inGround || _isJumping) return;
+            var currentSpeed = baseSpeed;
+            if (_isRunning) currentSpeed *= runSpeedMultiplier;
+            if (_isSliding) currentSpeed *= runSpeedMultiplier;
 
-                var horizontal = Input.GetAxis("Horizontal");
-                var targetPosition =
-                    _rb2D.position + new Vector2(horizontal * currentSpeed * Time.fixedDeltaTime, 0);
-                _rb2D.MovePosition(targetPosition);
-            }
+            var horizontal = Input.GetAxis("Horizontal");
+            var targetPosition =
+                _rb2D.position + new Vector2(horizontal * currentSpeed * Time.fixedDeltaTime, 0);
+            _rb2D.MovePosition(targetPosition);
         }
 
         private void SlideTimer()
