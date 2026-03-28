@@ -21,17 +21,17 @@ namespace Script.Player
 
         private void Update()
         {
-            IsGround();
             SlideTimer();
+            _inGround = _cr2D.IsTouchingLayers(groundLayerMask);
         }
 
         private void FixedUpdate()
         {
-            ControlMove();
+            PlayerMove();
             MoveOperation();
         }
-
-        private void ControlMove()
+        
+        private void PlayerMove()
         {
             var horizontal = Input.GetAxis("Horizontal");
             var isCurrentlyTurning = _animationController.InTurnState();
@@ -46,9 +46,10 @@ namespace Script.Player
             {
                 if (!_inJumping)
                 {
-                    _inJumping = true;
                     _animationController.JumpAnimation(true);
+                    _inJumping = true;
                 }
+
                 if (_inJumping)
                 {
                     _inJumping = false;
@@ -92,9 +93,7 @@ namespace Script.Player
             if (_isSliding) currentSpeed *= runSpeedMultiplier;
 
             var horizontal = Input.GetAxis("Horizontal");
-            var targetPosition =
-                _rb2D.position + new Vector2(horizontal * currentSpeed * Time.fixedDeltaTime, 0);
-            _rb2D.MovePosition(targetPosition);
+            _rb2D.velocity = new Vector2(horizontal * currentSpeed, _rb2D.velocity.y);
         }
 
         private void SlideTimer()
@@ -103,11 +102,6 @@ namespace Script.Player
             if (_slideTimer > 0) return;
             _isSlidingOnCoolDown = false;
             _slideTimer = slideCool;
-        }
-
-        private void IsGround()
-        {
-            _inGround = _cr2D.IsTouchingLayers(groundLayerMask);
         }
 
         #region 属性配置
@@ -127,12 +121,10 @@ namespace Script.Player
         private bool _inGround;
 
         private bool _isRunning;
-
         private bool _isWalking;
-
         private bool _isJumping;
         private bool _inJumping;
-
+        
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
         private float _slideTimer;
