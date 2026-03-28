@@ -24,7 +24,7 @@ namespace Script.Player
         {
             if (InTurnState()) return;
             animator.SetBool(_idleWalk, isWalking && !isRunning);
-            animator.SetBool(_walkRun, isRunning && isWalking);
+            animator.SetBool(_walkRun, !isWalking && isRunning);
             animator.SetBool(_idleRun, !isWalking && isRunning);
         }
 
@@ -32,11 +32,11 @@ namespace Script.Player
         {
             if (GetCurrentState(_runSlide)) return;
             animator.SetBool(_idleWalk, false);
-            animator.SetBool(_idleRun, true);
             animator.SetBool(_walkRun, true);
+            animator.SetBool(_idleRun, true);
             animator.SetTrigger(isSliding ? _runSlide : _runTurn);
         }
-        
+
         public void JumpAnimation(bool isJumping)
         {
             if (isJumping && !GetCurrentState(_anyJump) && !GetCurrentState(_jumpFall))
@@ -49,7 +49,7 @@ namespace Script.Player
             }
         }
 
-        public void StartTurn(bool isRunning, bool isSliding, Action turnComplete)
+        public void StartTurn(bool isRunning, Action turnComplete)
         {
             _onComplete = turnComplete;
             animator.SetBool(_isCompleted, false);
@@ -60,7 +60,7 @@ namespace Script.Player
 
             if (isRunning)
             {
-                RunAnimation(isSliding);
+                RunAnimation(false);
             }
             else
             {
