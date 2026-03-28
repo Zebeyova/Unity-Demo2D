@@ -33,60 +33,26 @@ namespace Script.Player
         {
             ChangeState();
             PlayerControl();
+            InputCheck();
+            _inGround = _cr2D.IsTouchingLayers(groundLayerMask);
         }
 
         private void FixedUpdate()
         {
-            InputCheck();
             MoveOperation();
             SlideTimer();
-            _inGround = _cr2D.IsTouchingLayers(groundLayerMask);
-        }
-
-        private void PlayerControl()
-        {
-            if (_isJumping && _inGround) //跳跃
-            {
-                if (!_inJumping)
-                {
-                    _animationController.JumpAnimation(true);
-                    _inJumping = true;
-                    _animationController.UpdateState(_isWalking, _isRunning);
-                    return;
-                }
-
-                if (_inJumping)
-                {
-                    _inJumping = false;
-                    return;
-                }
-            }
-
-            if (_isSliding) //滑铲
-            {
-                _animationController.RunAnimation(_isSliding);
-                _isSlidingOnCoolDown = true;
-                _animationController.UpdateState(_isWalking, _isRunning);
-                return;
-            }
-
-            if ((_isWalking || _isRunning) && !_isSliding && _currentFacing != _targetFacing && !_inTurning) //转向
-            {
-                _animationController.StartTurn(_isRunning, () =>
-                {
-                    _currentFacing = _targetFacing;
-                    _spriteRenderer.flipX = !_currentFacing;
-                });
-                _animationController.UpdateState(_isWalking, _isRunning);
-                return;
-            }
-
-            if (_inTurning) return;
-            _animationController.UpdateState(_isWalking, _isRunning);
         }
 
         private void ChangeState()
         {
+            _horizontal = Input.GetAxis("Horizontal");
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                _currentState = PlayerState.Jump;
+                return;
+            }
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 _currentState = PlayerState.Run;
@@ -98,28 +64,18 @@ namespace Script.Player
                 return;
             }
 
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
+            if (Mathf.Abs(_horizontal) > 0)
             {
                 _currentState = PlayerState.Walk;
-                return;
             }
-
-
-            if (Input.GetKeyDown(KeyCode.K))
+            else if (Mathf.Abs(_horizontal) == 0)
             {
-                _currentState = PlayerState.Jump;
-                return;
+                _currentState = PlayerState.Idle;
             }
-
-            _currentState = PlayerState.Idle;
         }
 
         private void InputCheck()
         {
-            _horizontal = Input.GetAxis("Horizontal");
-            _targetFacing = _horizontal > 0;
-            _inTurning = _animationController.InTurnState();
-
             switch (_currentState)
             {
                 case PlayerState.Idle:
@@ -140,15 +96,64 @@ namespace Script.Player
                     break;
                 case PlayerState.Jump:
                     _isWalking = _isRunning = _isSliding = false;
-                    _inJumping = false;
-                    _isJumping = !_inJumping;
+                    _isJumping = true;
+                    print(_inJumping.ToString());
                     break;
             }
         }
 
+        private void PlayerControl()
+        {
+            if (_isJumping && _inGround) //跳跃
+            {
+                if (!_inJumping)
+                {
+                    _animationController.JumpAnimation(true);
+                    _inJumping = true;
+                    MoveOperation();
+                    _animationController.UpdateState(_isWalking, _isRunning);
+                    return;
+                }
+
+                if (_inJumping)
+                {
+                    _inJumping = false;
+                    return;
+                }
+            }
+
+            if (_isSliding) //滑铲
+            {
+                _animationController.RunAnimation(_isSliding);
+                _isSlidingOnCoolDown = true;
+                _animationController.UpdateState(_isWalking, _isRunning);
+                return;
+            }
+
+            _targetFacing = _horizontal > 0;
+            _inTurning = _animationController.InTurnState();
+
+            var shouldTurn = (!_inTurning && _currentFacing != _targetFacing &&
+                              Mathf.Abs(_horizontal) > horizontalInputThreshold &&
+                              (_isWalking || _isRunning) && !_isSliding);
+
+            if (shouldTurn) //转向
+            {
+                _animationController.StartTurn(_isRunning, () =>
+                {
+                    _currentFacing = _targetFacing;
+                    _spriteRenderer.flipX = !_currentFacing;
+                });
+                _animationController.UpdateState(_isWalking, _isRunning);
+                return;
+            }
+
+            if (_inTurning) return;
+            _animationController.UpdateState(_isWalking, _isRunning);
+        }
+
         private void MoveOperation()
         {
-            if (_inJumping) return;
             if (_inGround && _isJumping) _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpForce);
             var currentSpeed = baseSpeed;
             if (_isRunning) currentSpeed *= runSpeedMultiplier;
@@ -170,6 +175,7 @@ namespace Script.Player
         public float runSpeedMultiplier = 2f;
         public float slideCool = 1f;
         public float jumpForce = 8f;
+        public float horizontalInputThreshold = 0.02f; //水平输入阈值
 
         #endregion
 
