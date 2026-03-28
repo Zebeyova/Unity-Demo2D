@@ -21,6 +21,7 @@ namespace Script.Player
 
         private void Update()
         {
+            InputCheck();
             SlideTimer();
             _inGround = _cr2D.IsTouchingLayers(groundLayerMask);
         }
@@ -30,23 +31,15 @@ namespace Script.Player
             PlayerMove();
             MoveOperation();
         }
-        
+
         private void PlayerMove()
         {
-            var horizontal = Input.GetAxis("Horizontal");
-            var isCurrentlyTurning = _animationController.InTurnState();
-
-            _targetFacing = horizontal > 0;
-            _isWalking = Mathf.Abs(horizontal) > moveThreshold;
-            _isRunning = _isWalking && Input.GetKey(KeyCode.LeftShift) && !isCurrentlyTurning;
-            _isSliding = _isRunning && Input.GetKey(KeyCode.Space) && !_isSlidingOnCoolDown && !isCurrentlyTurning;
-            _isJumping = !_inJumping && Input.GetKeyDown(KeyCode.K);
-
             if (_isJumping && _inGround)
             {
                 if (!_inJumping)
                 {
                     _animationController.JumpAnimation(true);
+                    _animationController.UpdateState(_isWalking, _isRunning);
                     _inJumping = true;
                 }
 
@@ -59,11 +52,12 @@ namespace Script.Player
             if (_isSliding)
             {
                 _animationController.RunAnimation(_isSliding);
+                _animationController.UpdateState(_isWalking, _isRunning);
                 _isSlidingOnCoolDown = true;
                 return;
             }
 
-            if (_isWalking && !_isSliding && _currentFacing != _targetFacing && !isCurrentlyTurning)
+            if (_isWalking && !_isSliding && _currentFacing != _targetFacing && !_inTurning)
             {
                 _animationController.StartTurn(_isRunning, _isSliding, () =>
                 {
@@ -74,26 +68,30 @@ namespace Script.Player
                 return;
             }
 
-            if (isCurrentlyTurning) return;
+            if (_inTurning) return;
             _animationController.UpdateState(_isWalking, _isRunning);
+        }
+
+        private void InputCheck()
+        {
+            _horizontal = Input.GetAxis("Horizontal");
+            _inTurning = _animationController.InTurnState();
+            _targetFacing = _horizontal > 0;
+            _isWalking = Mathf.Abs(_horizontal) > 0;
+            _isRunning = _isWalking && Input.GetKey(KeyCode.LeftShift);
+            _isSliding = _isRunning && Input.GetKey(KeyCode.Space) && !_isSlidingOnCoolDown;
+            _isJumping = !_inJumping && Input.GetKeyDown(KeyCode.K);
         }
 
         private void MoveOperation()
         {
             if (_inJumping) return;
-            if (_inGround && _isJumping)
-            {
-                _rb2D.velocity = new Vector2(_rb2D.velocity.x, 0);
-                _rb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            }
-
-            if (!_inGround || _isJumping) return;
+            if (_inGround && _isJumping) _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpForce);
+            if (_isJumping) return;
             var currentSpeed = baseSpeed;
             if (_isRunning) currentSpeed *= runSpeedMultiplier;
             if (_isSliding) currentSpeed *= runSpeedMultiplier;
-
-            var horizontal = Input.GetAxis("Horizontal");
-            _rb2D.velocity = new Vector2(horizontal * currentSpeed, _rb2D.velocity.y);
+            _rb2D.velocity = new Vector2(_horizontal * currentSpeed, _rb2D.velocity.y);
         }
 
         private void SlideTimer()
@@ -107,7 +105,6 @@ namespace Script.Player
         #region 属性配置
 
         public float baseSpeed = 2f;
-        public float moveThreshold = 0.1f;
         public float runSpeedMultiplier = 2f;
         public float slideCool = 1f;
         public float jumpForce = 8f;
@@ -116,15 +113,17 @@ namespace Script.Player
 
         #region 私有成员
 
+        private float _horizontal;
+        private bool _inTurning; //在转身中
         private bool _currentFacing;
         private bool _targetFacing;
         private bool _inGround;
 
         private bool _isRunning;
         private bool _isWalking;
-        private bool _isJumping;
+        private bool _isJumping; //准备跳跃
         private bool _inJumping;
-        
+
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
         private float _slideTimer;
