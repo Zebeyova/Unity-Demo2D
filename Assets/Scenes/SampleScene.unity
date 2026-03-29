@@ -562,7 +562,7 @@ MonoBehaviour:
   baseSpeed: 2
   runSpeedMultiplier: 2
   slideCool: 0.6
-  jumpForce: 8
+  jumpForce: 10
   horizontalInputThreshold: 0.01
 --- !u!50 &364368706
 Rigidbody2D:
