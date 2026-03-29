@@ -102,7 +102,7 @@ namespace Script.Player
         {
             _inTurning = _animationController.InTurnState();
 
-            if (_isJumping && _inGround) //跳跃
+            if (_isJumping) //跳跃
             {
                 if (_inGround)
                 {
@@ -113,6 +113,7 @@ namespace Script.Player
 
                 return;
             }
+
             JumpTurn();
 
             if (_isSliding) //滑铲
@@ -147,6 +148,7 @@ namespace Script.Player
 
         private void JumpTurn()
         {
+            if (_inGround) return;
             _horizontal = Input.GetAxis("Horizontal");
             _targetFacing = _horizontal > 0;
             if (_currentFacing == _targetFacing || _horizontal == 0) return;
