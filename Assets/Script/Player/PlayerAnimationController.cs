@@ -7,6 +7,7 @@ namespace Script.Player
     {
         public Animator animator;
         private Action _onComplete;
+        private PlayerController _playerController;
 
         private void Awake()
         {
@@ -18,6 +19,7 @@ namespace Script.Player
         private void CheckComponent()
         {
             if (!animator) animator = GetComponent<Animator>();
+            if (!_playerController) _playerController = GetComponent<PlayerController>();
         }
 
         public void UpdateState(bool isWalking, bool isRunning)
@@ -40,17 +42,13 @@ namespace Script.Player
         public void JumpAnimation(bool isJumping)
         {
             if (isJumping && !GetCurrentState(_anyJump) && !GetCurrentState(_jumpFall))
-            {
                 animator.SetBool(_anyJump, true);
-            }
-            else if (!isJumping)
-            {
-                animator.SetBool(_anyJump, false);
-            }
+            else if (!isJumping) animator.SetBool(_anyJump, false);
         }
 
         public void StartTurn(bool isRunning, Action turnComplete)
         {
+            if (GetCurrentState(_anyJump) || GetCurrentState(_jumpFall)) return;
             _onComplete = turnComplete;
             animator.SetBool(_isCompleted, false);
 
@@ -106,9 +104,15 @@ namespace Script.Player
 
         public void JumpComplete()
         {
+            animator.SetBool(_anyJump, false);
             animator.SetTrigger(_jumpFall);
+        }
+
+        public void FallComplete()
+        {
             animator.SetBool(_isCompleted, true);
             animator.SetBool(_anyJump, false);
+            UpdateState(_playerController.GetWalk(), _playerController.GetRun());
         }
 
         #endregion

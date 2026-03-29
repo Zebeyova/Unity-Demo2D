@@ -13,20 +13,17 @@ namespace Script.Player
 
     public class PlayerController : MonoBehaviour
     {
+        public LayerMask groundLayerMask;
         private PlayerAnimationController _animationController;
         private Collider2D _cr2D;
-        public LayerMask groundLayerMask;
+        private PlayerState _currentState = PlayerState.Idle;
         private Rigidbody2D _rb2D;
         private SpriteRenderer _spriteRenderer;
-        private PlayerState _currentState = PlayerState.Idle;
 
         private void Awake()
         {
-            _rb2D = GetComponent<Rigidbody2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            CheckComponent();
             _currentFacing = !_spriteRenderer.flipX;
-            _animationController = GetComponent<PlayerAnimationController>();
-            _cr2D = GetComponent<Collider2D>();
         }
 
         private void Update()
@@ -43,6 +40,14 @@ namespace Script.Player
             SlideTimer();
         }
 
+        private void CheckComponent()
+        {
+            if (!_cr2D) _cr2D = GetComponent<Collider2D>();
+            if (!_rb2D) _rb2D = GetComponent<Rigidbody2D>();
+            if (!_spriteRenderer) _spriteRenderer = GetComponent<SpriteRenderer>();
+            if (!_animationController) _animationController = GetComponent<PlayerAnimationController>();
+        }
+
         private void ChangeState()
         {
             _horizontal = Input.GetAxis("Horizontal");
@@ -56,22 +61,14 @@ namespace Script.Player
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 _currentState = PlayerState.Run;
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    _currentState = PlayerState.Slide;
-                }
+                if (Input.GetKeyDown(KeyCode.Space)) _currentState = PlayerState.Slide;
 
                 return;
             }
 
             if (Mathf.Abs(_horizontal) > 0)
-            {
                 _currentState = PlayerState.Walk;
-            }
-            else if (Mathf.Abs(_horizontal) == 0)
-            {
-                _currentState = PlayerState.Idle;
-            }
+            else if (Mathf.Abs(_horizontal) == 0) _currentState = PlayerState.Idle;
         }
 
         private void InputCheck()
@@ -97,30 +94,26 @@ namespace Script.Player
                 case PlayerState.Jump:
                     _isWalking = _isRunning = _isSliding = false;
                     _isJumping = true;
-                    print(_inJumping.ToString());
                     break;
             }
         }
 
         private void PlayerControl()
         {
+            _inTurning = _animationController.InTurnState();
+
             if (_isJumping && _inGround) //跳跃
             {
-                if (!_inJumping)
+                if (_inGround)
                 {
                     _animationController.JumpAnimation(true);
-                    _inJumping = true;
                     MoveOperation();
                     _animationController.UpdateState(_isWalking, _isRunning);
-                    return;
                 }
 
-                if (_inJumping)
-                {
-                    _inJumping = false;
-                    return;
-                }
+                return;
             }
+            JumpTurn();
 
             if (_isSliding) //滑铲
             {
@@ -130,31 +123,40 @@ namespace Script.Player
                 return;
             }
 
-            _targetFacing = _horizontal > 0;
-            _inTurning = _animationController.InTurnState();
-
-            var shouldTurn = (!_inTurning && _currentFacing != _targetFacing &&
-                              Mathf.Abs(_horizontal) > horizontalInputThreshold &&
-                              (_isWalking || _isRunning) && !_isSliding);
-
-            if (shouldTurn) //转向
-            {
-                _animationController.StartTurn(_isRunning, () =>
-                {
-                    _currentFacing = _targetFacing;
-                    _spriteRenderer.flipX = !_currentFacing;
-                });
-                _animationController.UpdateState(_isWalking, _isRunning);
-                return;
-            }
-
+            Turn();
             if (_inTurning) return;
             _animationController.UpdateState(_isWalking, _isRunning);
         }
 
+        private void Turn()
+        {
+            _horizontal = Input.GetAxis("Horizontal");
+            _targetFacing = _horizontal > 0;
+            var shouldTurn = !_inTurning && _currentFacing != _targetFacing &&
+                             (_isWalking || _isRunning) && !_isSliding &&
+                             Mathf.Abs(_horizontal) > horizontalInputThreshold;
+            if (!shouldTurn) return;
+
+            _animationController.StartTurn(_isRunning, () =>
+            {
+                _currentFacing = _targetFacing;
+                _spriteRenderer.flipX = !_currentFacing;
+            });
+            _animationController.UpdateState(_isWalking, _isRunning);
+        }
+
+        private void JumpTurn()
+        {
+            _horizontal = Input.GetAxis("Horizontal");
+            _targetFacing = _horizontal > 0;
+            if (_currentFacing == _targetFacing || _horizontal == 0) return;
+            _currentFacing = _targetFacing;
+            _spriteRenderer.flipX = !_currentFacing;
+        }
+
         private void MoveOperation()
         {
-            if (_inGround && _isJumping) _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpForce);
+            if (_isJumping && _inGround) _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpForce);
             var currentSpeed = baseSpeed;
             if (_isRunning) currentSpeed *= runSpeedMultiplier;
             if (_isSliding) currentSpeed *= runSpeedMultiplier;
@@ -173,9 +175,9 @@ namespace Script.Player
 
         public float baseSpeed = 2f;
         public float runSpeedMultiplier = 2f;
-        public float slideCool = 1f;
-        public float jumpForce = 8f;
-        public float horizontalInputThreshold = 0.02f; //水平输入阈值
+        public float slideCool = 0.6f;
+        public float jumpForce = 10f;
+        public float horizontalInputThreshold = 0.01f; //水平输入阈值
 
         #endregion
 
@@ -190,11 +192,20 @@ namespace Script.Player
         private bool _isRunning;
         private bool _isWalking;
         private bool _isJumping; //准备跳跃
-        private bool _inJumping;
 
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
         private float _slideTimer;
+
+        public bool GetWalk()
+        {
+            return _isWalking;
+        }
+
+        public bool GetRun()
+        {
+            return _isRunning;
+        }
 
         #endregion
     }
