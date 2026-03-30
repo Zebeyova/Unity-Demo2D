@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Script
+namespace Script.Enemy
 {
     public class EnemyAnimationController : MonoBehaviour
     {
