@@ -13,13 +13,6 @@ namespace Script
 
     public class PlayerController : MonoBehaviour
     {
-        public LayerMask groundLayerMask;
-        private PlayerAnimationController _animationController;
-        private Collider2D _cr2D;
-        private PlayerState _currentState = PlayerState.Idle;
-        private Rigidbody2D _rb2D;
-        private SpriteRenderer _spriteRenderer;
-
         private void Awake()
         {
             CheckComponent();
@@ -173,7 +166,7 @@ namespace Script
             _slideTimer = slideCool;
         }
 
-        #region 属性配置
+        #region 属性
 
         public float baseSpeed = 2f;
         public float runSpeedMultiplier = 2f;
@@ -183,7 +176,14 @@ namespace Script
 
         #endregion
 
-        #region 私有成员
+        #region 成员
+
+        public LayerMask groundLayerMask;
+        private PlayerAnimationController _animationController;
+        private Collider2D _cr2D;
+        private PlayerState _currentState = PlayerState.Idle;
+        private Rigidbody2D _rb2D;
+        private SpriteRenderer _spriteRenderer;
 
         private float _horizontal;
         private bool _inTurning; //在转身中
@@ -198,6 +198,11 @@ namespace Script
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
         private float _slideTimer;
+
+        public Collider2D GetCr2D()
+        {
+            return _cr2D;
+        }
 
         public bool GetWalk()
         {

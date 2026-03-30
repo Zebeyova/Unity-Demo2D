@@ -10,19 +10,28 @@ namespace Script
 
     public class EnemyController : MonoBehaviour
     {
-        private Rigidbody2D _rb2dEnemy;
+        #region 属性
+
+        public float baseSpeed = 0.5f;
+
+        #endregion
+
+        #region 成员
+
+        public EnemyType enemyType;
         private Collider2D _cr2DEnemy;
-        public EnemyType enemyType = EnemyType.Guard;
+        private Rigidbody2D _rb2dEnemy;
+        private Transform _playerTransform;
+        private Transform _enemyTransform;
+        private EnemyDetectionArea _enemyDetectionArea;
+
+        #endregion
 
         private void Awake()
         {
             CheckComponent();
-        }
-
-        private void CheckComponent()
-        {
-            if (!_rb2dEnemy) _rb2dEnemy = GetComponent<Rigidbody2D>();
-            if (!_cr2DEnemy) _cr2DEnemy = GetComponent<Collider2D>();
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null) _playerTransform = player.transform;
         }
 
         private void FixedUpdate()
@@ -30,15 +39,47 @@ namespace Script
             EnemyControl();
         }
 
+        private void CheckComponent()
+        {
+            if (!_rb2dEnemy) _rb2dEnemy = GetComponent<Rigidbody2D>();
+            if (!_cr2DEnemy) _cr2DEnemy = GetComponent<Collider2D>();
+            if (!_enemyTransform) _enemyTransform = GetComponent<Transform>();
+            if (!_enemyDetectionArea) _enemyDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
+        }
+
         private void EnemyControl()
         {
+            if (!_playerTransform) return;
             switch (enemyType)
             {
                 case EnemyType.Guard:
+                    GuardMove();
                     break;
                 case EnemyType.Patrol:
+                    PatrolMove();
                     break;
+                default:
+                    return;
             }
+        }
+
+        private void GuardMove()
+        {
+            Vector3 Distance;
+            if (_enemyDetectionArea.GetDetectionArea())
+            {
+                Distance = (_playerTransform.position - gameObject.transform.position).normalized;
+                _rb2dEnemy.velocity = Distance * baseSpeed;
+            }
+            else
+            {
+                Distance = (_enemyTransform.position - gameObject.transform.position).normalized;
+                _rb2dEnemy.velocity = Distance * baseSpeed;
+            }
+        }
+
+        private void PatrolMove()
+        {
         }
     }
 }
