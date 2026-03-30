@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Script.Player
+namespace Script
 {
     public enum PlayerState
     {
