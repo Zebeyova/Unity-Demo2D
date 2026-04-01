@@ -25,7 +25,8 @@ namespace Script.Enemy
         private Rigidbody2D _rb2dEnemy;
         private Transform _playerTransform;
         private SpriteRenderer _spriteRenderer;
-        private EnemyDetectionArea _enemyDetectionArea;
+        private EnemyAnimationController _eAnimationController;
+        private EnemyDetectionArea _eDetectionArea;
 
         #endregion
 
@@ -34,7 +35,6 @@ namespace Script.Enemy
             CheckComponent();
             GameObject player = GameObject.FindWithTag("Player");
             if (player != null) _playerTransform = player.transform;
-            _startPosition = transform.position;
         }
 
         private void FixedUpdate()
@@ -47,7 +47,8 @@ namespace Script.Enemy
             if (!_rb2dEnemy) _rb2dEnemy = GetComponent<Rigidbody2D>();
             if (!_cr2DEnemy) _cr2DEnemy = GetComponent<Collider2D>();
             if (!_spriteRenderer) _spriteRenderer = GetComponent<SpriteRenderer>();
-            if (!_enemyDetectionArea) _enemyDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
+            if (!_eAnimationController) _eAnimationController = GetComponent<EnemyAnimationController>();
+            if (!_eDetectionArea) _eDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
         }
 
         private void EnemyControl()
@@ -68,9 +69,25 @@ namespace Script.Enemy
 
         private void GuardMove()
         {
-            var Distance = _enemyDetectionArea.GetDetectionArea()
-                ? (_playerTransform.position - gameObject.transform.position).normalized
-                : (_startPosition - gameObject.transform.position).normalized;
+            Vector3 Distance;
+            if (_startPosition == Vector3.zero) _startPosition = transform.position;
+            if (_eDetectionArea.GetDetectionArea())
+            {
+                Distance = (_playerTransform.position - gameObject.transform.position).normalized;
+                _eAnimationController.WalkAnimation();
+            }
+            else
+            {
+                if (Vector3.Distance(_startPosition, gameObject.transform.position) < 0.5f)
+                {
+                    _eAnimationController.IdleAnimation();
+                    _rb2dEnemy.velocity = Vector3.zero;
+                    return;
+                }
+
+                Distance = (_startPosition - gameObject.transform.position).normalized;
+                _eAnimationController.WalkAnimation();
+            }
 
             _spriteRenderer.flipX = Vector3.Cross(Distance, gameObject.transform.forward).y > 0; //左边
             _rb2dEnemy.velocity = Distance * baseSpeed;
