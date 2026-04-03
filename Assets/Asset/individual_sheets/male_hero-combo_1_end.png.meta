@@ -113,12 +113,12 @@ TextureImporter:
       name: male_hero-combo_1_end_0
       rect:
         serializedVersion: 2
-        x: 54
+        x: 53
         y: 48
         width: 35
         height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -138,8 +138,8 @@ TextureImporter:
         y: 48
         width: 36
         height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,10 +157,10 @@ TextureImporter:
         serializedVersion: 2
         x: 302
         y: 48
-        width: 27
+        width: 41
         height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: male_hero-combo_1_end_3
       rect:
         serializedVersion: 2
-        x: 330
-        y: 53
-        width: 13
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 426
+        y: 48
+        width: 45
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,48 +189,6 @@ TextureImporter:
       bones: []
       spriteID: f225e78432f6a6920800000000000000
       internalID: 2984319900417151535
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: male_hero-combo_1_end_4
-      rect:
-        serializedVersion: 2
-        x: 426
-        y: 48
-        width: 36
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af7c36f902b6a79d0800000000000000
-      internalID: -2775788432463247366
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: male_hero-combo_1_end_5
-      rect:
-        serializedVersion: 2
-        x: 464
-        y: 56
-        width: 7
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7679480bebdbca0a0800000000000000
-      internalID: -6868906704943933593
       vertices: []
       indices: 
       edges: []

@@ -11,29 +11,10 @@ namespace Script.Enemy
 
     public class EnemyController : MonoBehaviour
     {
-        #region 属性
-
-        public float baseSpeed = 0.5f;
-        private Vector3 _startPosition;
-
-        #endregion
-
-        #region 成员
-
-        public EnemyType enemyType;
-        private Collider2D _cr2DEnemy;
-        private Rigidbody2D _rb2dEnemy;
-        private Transform _playerTransform;
-        private SpriteRenderer _spriteRenderer;
-        private EnemyAnimationController _eAnimationController;
-        private EnemyDetectionArea _eDetectionArea;
-
-        #endregion
-
         private void Awake()
         {
             CheckComponent();
-            GameObject player = GameObject.FindWithTag("Player");
+            var player = GameObject.FindWithTag("Player");
             if (player != null) _playerTransform = player.transform;
         }
 
@@ -89,6 +70,9 @@ namespace Script.Enemy
             }
             else //返回守卫状态
             {
+                Distance = (_startPosition - gameObject.transform.position).normalized;
+                transform.Rotate(Vector3.up, Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
+                    Space.Self); //左边
                 if (Vector3.Distance(_startPosition, gameObject.transform.position) < 0.5f)
                 {
                     _rb2dEnemy.velocity = Vector3.zero;
@@ -96,9 +80,6 @@ namespace Script.Enemy
                     return;
                 }
 
-                Distance = (_startPosition - gameObject.transform.position).normalized;
-                transform.Rotate(Vector3.up, Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
-                    Space.Self); //左边
                 _eAnimationController.WalkAnimation();
                 _rb2dEnemy.velocity = Distance * baseSpeed;
             }
@@ -107,5 +88,24 @@ namespace Script.Enemy
         private void PatrolMove()
         {
         }
+
+        #region 属性
+
+        public float baseSpeed = 0.5f;
+        private Vector3 _startPosition;
+
+        #endregion
+
+        #region 成员
+
+        public EnemyType enemyType;
+        private Collider2D _cr2DEnemy;
+        private Rigidbody2D _rb2dEnemy;
+        private Transform _playerTransform;
+        private SpriteRenderer _spriteRenderer;
+        private EnemyAnimationController _eAnimationController;
+        private EnemyDetectionArea _eDetectionArea;
+
+        #endregion
     }
 }

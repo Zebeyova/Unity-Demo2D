@@ -125,12 +125,12 @@ TextureImporter:
       name: Golem_1_idle_0
       rect:
         serializedVersion: 2
-        x: 10
+        x: 26
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 38
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,12 +146,12 @@ TextureImporter:
       name: Golem_1_idle_2
       rect:
         serializedVersion: 2
-        x: 100
+        x: 206
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 38
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,12 +167,12 @@ TextureImporter:
       name: Golem_1_idle_3
       rect:
         serializedVersion: 2
-        x: 190
+        x: 296
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 38
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,12 +188,12 @@ TextureImporter:
       name: Golem_1_idle_5
       rect:
         serializedVersion: 2
-        x: 280
+        x: 476
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 39
+        height: 36
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -209,12 +209,12 @@ TextureImporter:
       name: Golem_1_idle_6
       rect:
         serializedVersion: 2
-        x: 370
+        x: 566
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 38
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,12 +230,12 @@ TextureImporter:
       name: Golem_1_idle_7
       rect:
         serializedVersion: 2
-        x: 460
+        x: 656
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 38
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -248,43 +248,43 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_idle_9
+      name: Golem_1_idle_1
       rect:
         serializedVersion: 2
-        x: 550
+        x: 116
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 38
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 750fc12c46558bfa0800000000000000
-      internalID: -5784779830115635113
+      spriteID: 1ac5c36c4f0bdc5b0800000000000000
+      internalID: -5346422617274557279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_idle_10
+      name: Golem_1_idle_4
       rect:
         serializedVersion: 2
-        x: 640
+        x: 386
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 39
+        height: 36
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b86c756c4886dfbf0800000000000000
-      internalID: -288959881609230709
+      spriteID: 2c1c56252a9201fc0800000000000000
+      internalID: -3526272731087257150
       vertices: []
       indices: 
       edges: []

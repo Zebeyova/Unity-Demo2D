@@ -134,12 +134,12 @@ TextureImporter:
       name: Golem_1_walk_0
       rect:
         serializedVersion: 2
-        x: 10
+        x: 29
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 31
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: Golem_1_walk_2
       rect:
         serializedVersion: 2
-        x: 100
+        x: 209
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 34
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: Golem_1_walk_4
       rect:
         serializedVersion: 2
-        x: 190
+        x: 385
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 39
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,12 +197,12 @@ TextureImporter:
       name: Golem_1_walk_5
       rect:
         serializedVersion: 2
-        x: 280
+        x: 474
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 42
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,12 +218,12 @@ TextureImporter:
       name: Golem_1_walk_6
       rect:
         serializedVersion: 2
-        x: 370
+        x: 567
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 38
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,12 +239,12 @@ TextureImporter:
       name: Golem_1_walk_7
       rect:
         serializedVersion: 2
-        x: 460
+        x: 658
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 36
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,12 +260,12 @@ TextureImporter:
       name: Golem_1_walk_9
       rect:
         serializedVersion: 2
-        x: 550
+        x: 839
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 32
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -278,64 +278,64 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_walk_10
+      name: Golem_1_walk_1
       rect:
         serializedVersion: 2
-        x: 640
+        x: 119
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 32
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b039ee213349d0a20800000000000000
-      internalID: 3030241071372079883
+      spriteID: 4f8687a1dd2792360800000000000000
+      internalID: 7145368577757440244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_walk_12
+      name: Golem_1_walk_3
       rect:
         serializedVersion: 2
-        x: 730
+        x: 298
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 35
+        height: 40
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ad86a6cfdbf4c6a0800000000000000
-      internalID: -6429737429449142878
+      spriteID: a03306635c0296130800000000000000
+      internalID: 3560413011806008074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem_1_walk_13
+      name: Golem_1_walk_8
       rect:
         serializedVersion: 2
-        x: 820
+        x: 749
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 33
+        height: 40
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb4ff869dc8bf8ae0800000000000000
-      internalID: -1544812954030967621
+      spriteID: a7fb002029446b910800000000000000
+      internalID: 1852743690599055226
       vertices: []
       indices: 
       edges: []

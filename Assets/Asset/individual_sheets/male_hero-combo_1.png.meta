@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: 1264393231116710960
     second: male_hero-combo_1_3
+  - first:
+      213: 1252059004846095826
+    second: male_hero-combo_1_4
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -111,8 +114,8 @@ TextureImporter:
         y: 48
         width: 58
         height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -132,9 +135,9 @@ TextureImporter:
         y: 48
         width: 61
         height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 37, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -153,8 +156,8 @@ TextureImporter:
         y: 48
         width: 59
         height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,27 +165,6 @@ TextureImporter:
       bones: []
       spriteID: 0f920272130911560800000000000000
       internalID: 7282760613219019248
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: male_hero-combo_1_3
-      rect:
-        serializedVersion: 2
-        x: 361
-        y: 53
-        width: 4
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 034be15d1f60c8110800000000000000
-      internalID: 1264393231116710960
       vertices: []
       indices: 
       edges: []
