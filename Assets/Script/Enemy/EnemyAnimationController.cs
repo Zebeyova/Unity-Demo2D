@@ -5,6 +5,7 @@ namespace Script.Enemy
     public class EnemyAnimationController : MonoBehaviour
     {
         public Animator animator;
+        private bool _isAttacking;
 
         private void Awake()
         {
@@ -26,9 +27,36 @@ namespace Script.Enemy
             animator.SetBool(_idleWalk, true);
         }
 
+        public void AttackAnimation()
+        {
+            switch (_isAttacking)
+            {
+                case true:
+                    return;
+                case false:
+                    animator.SetBool(_idleWalk, false);
+                    animator.SetBool(_isCompleted, false);
+                    animator.SetTrigger(_anyAttack);
+                    _isAttacking = true;
+                    break;
+            }
+        }
+
         #region 哈希表
 
+        private readonly int _isCompleted = Animator.StringToHash("IsCompleted");
         private readonly int _idleWalk = Animator.StringToHash("IdleWalk");
+        private readonly int _anyAttack = Animator.StringToHash("AnyAttack");
+
+        #endregion
+
+        #region 动画事件
+
+        public void AttackCompleted()
+        {
+            _isAttacking = false;
+            animator.SetBool(_isCompleted, true);
+        }
 
         #endregion
     }

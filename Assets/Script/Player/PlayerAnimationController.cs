@@ -108,13 +108,6 @@ namespace Script.Player
             animator.SetTrigger(_jumpFall);
         }
 
-        public void FallComplete()
-        {
-            animator.SetBool(_isCompleted, true);
-            animator.SetBool(_anyJump, false);
-            UpdateState(_playerController.GetWalk(), _playerController.GetRun());
-        }
-
         #endregion
     }
 }

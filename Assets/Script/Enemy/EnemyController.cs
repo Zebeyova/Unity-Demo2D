@@ -71,26 +71,37 @@ namespace Script.Enemy
         {
             Vector3 Distance;
             if (_startPosition == Vector3.zero) _startPosition = transform.position;
-            if (_eDetectionArea.GetDetectionArea())
+            if (_eDetectionArea.GetDetectionArea()) //追击状态
             {
-                Distance = (_playerTransform.position - gameObject.transform.position).normalized;
+                Distance = _playerTransform.position - gameObject.transform.position;
+                transform.Rotate(Vector3.up, Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
+                    Space.Self); //左边
+                if (Distance.magnitude < 1.2f)
+                {
+                    _rb2dEnemy.velocity = Vector3.zero;
+                    _eAnimationController.AttackAnimation();
+                    return;
+                }
+
+                Distance = Distance.normalized;
                 _eAnimationController.WalkAnimation();
+                _rb2dEnemy.velocity = Distance * baseSpeed;
             }
-            else
+            else //返回守卫状态
             {
                 if (Vector3.Distance(_startPosition, gameObject.transform.position) < 0.5f)
                 {
-                    _eAnimationController.IdleAnimation();
                     _rb2dEnemy.velocity = Vector3.zero;
+                    _eAnimationController.IdleAnimation();
                     return;
                 }
 
                 Distance = (_startPosition - gameObject.transform.position).normalized;
+                transform.Rotate(Vector3.up, Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
+                    Space.Self); //左边
                 _eAnimationController.WalkAnimation();
+                _rb2dEnemy.velocity = Distance * baseSpeed;
             }
-
-            _spriteRenderer.flipX = Vector3.Cross(Distance, gameObject.transform.forward).y > 0; //左边
-            _rb2dEnemy.velocity = Distance * baseSpeed;
         }
 
         private void PatrolMove()
