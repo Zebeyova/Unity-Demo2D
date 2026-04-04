@@ -7,7 +7,6 @@ namespace Script.Player
     {
         public Animator animator;
 
-        private bool _isLoop;
         private Action _onComplete;
         private PlayerController _playerController;
 
@@ -15,13 +14,6 @@ namespace Script.Player
         {
             CheckComponent();
             animator.SetBool(_idleWalk, false);
-        }
-
-        private void Update()
-        {
-            //TODO:射线检测,FallLoop动画未做完,目前可以做到每帧检测地面,需要想办法如何在fall与fallLoop动画切换
-            _isLoop = Physics2D.Raycast(transform.position, Vector2.down, 0.2f, _playerController.groundLayerMask)
-                .collider;
         }
 
 
@@ -50,7 +42,7 @@ namespace Script.Player
 
         public void JumpAnimation(bool isJumping)
         {
-            if (isJumping && !GetCurrentState(_anyJump) && !GetCurrentState(_jumpFall) && !GetCurrentState(_fallLoop))
+            if (isJumping && !GetCurrentState(_anyJump) && !GetCurrentState(_jumpFall))
                 animator.SetBool(_anyJump, true);
             else if (!isJumping) animator.SetBool(_anyJump, false);
         }
@@ -99,7 +91,6 @@ namespace Script.Player
         private readonly int _runSlide = Animator.StringToHash("RunSlide");
         private readonly int _anyJump = Animator.StringToHash("AnyJump");
         private readonly int _jumpFall = Animator.StringToHash("JumpFall");
-        private readonly int _fallLoop = Animator.StringToHash("FallLoop");
 
         #endregion
 
@@ -118,12 +109,9 @@ namespace Script.Player
             animator.SetTrigger(_jumpFall);
         }
 
-        private void FallSelect()
+        public void FallComplete()
         {
-            if (_isLoop)
-                animator.SetBool(_isCompleted, true);
-            else
-                animator.SetBool(_fallLoop, true);
+            animator.SetBool(_isCompleted, true);
         }
 
         #endregion
