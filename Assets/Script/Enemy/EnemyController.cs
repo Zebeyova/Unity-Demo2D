@@ -91,7 +91,7 @@ namespace Script.Enemy
             if (_startPosition == Vector3.zero)
             {
                 _startPosition = transform.position;
-                RandomBorder(false);
+                RandomBorder();
             }
 
             if (_eDetectionArea.GetDetectionArea())
@@ -131,7 +131,7 @@ namespace Script.Enemy
                         Distance = Distance.normalized;
                         _rb2dEnemy.velocity = Distance * baseSpeed;
                         if (Vector3.Distance(_startPosition, gameObject.transform.position) < endError)
-                            RandomBorder(true);
+                            RandomBorder();
                         return;
                 }
                 transform.Rotate(Vector3.up, Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
@@ -141,7 +141,7 @@ namespace Script.Enemy
             }
         }
 
-        private void RandomBorder(bool reset)
+        private void RandomBorder()
         {
             //TODO:需要修改
             var RandomBorderNum = Random.Range(0f, endError);
