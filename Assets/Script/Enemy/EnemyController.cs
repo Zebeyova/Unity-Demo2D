@@ -50,29 +50,16 @@ namespace Script.Enemy
 
         private void GuardMove()
         {
-            Vector3 Distance;
+            var Distance = _playerTransform.position - gameObject.transform.position;
             if (_startPosition == Vector3.zero) _startPosition = transform.position;
             if (_eDetectionArea.GetDetectionArea()) //追击状态
             {
-                Distance = _playerTransform.position - gameObject.transform.position;
-                transform.Rotate(Vector3.up, Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
-                    Space.Self); //左边
-                if (Distance.magnitude < 1.2f)
-                {
-                    _rb2dEnemy.velocity = Vector3.zero;
-                    _eAnimationController.AttackAnimation();
-                    return;
-                }
-
-                Distance = Distance.normalized;
-                _eAnimationController.WalkAnimation();
-                _rb2dEnemy.velocity = Distance * baseSpeed;
+                FindPlayerOperation(Distance);
             }
             else //返回守卫状态
             {
                 Distance = (_startPosition - gameObject.transform.position).normalized;
-                transform.Rotate(Vector3.up, Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
-                    Space.Self); //左边
+
                 if (Vector3.Distance(_startPosition, gameObject.transform.position) < endError)
                 {
                     _rb2dEnemy.velocity = Vector3.zero;
@@ -80,36 +67,23 @@ namespace Script.Enemy
                     return;
                 }
 
-                _eAnimationController.WalkAnimation();
-                _rb2dEnemy.velocity = Distance * baseSpeed;
+                EnemyMove(Distance);
             }
         }
 
         private void PatrolMove()
         {
-            Vector3 Distance;
             if (_startPosition == Vector3.zero)
             {
                 _startPosition = transform.position;
                 RandomBorder();
             }
 
+            var Distance = _playerTransform.position - gameObject.transform.position;
             if (_eDetectionArea.GetDetectionArea())
             {
                 _patrolDirection = 0;
-                Distance = _playerTransform.position - gameObject.transform.position;
-                transform.Rotate(Vector3.up, Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
-                    Space.Self); //左边
-                if (Distance.magnitude < 1.2f)
-                {
-                    _rb2dEnemy.velocity = Vector3.zero;
-                    _eAnimationController.AttackAnimation();
-                    return;
-                }
-
-                Distance = Distance.normalized;
-                _eAnimationController.WalkAnimation();
-                _rb2dEnemy.velocity = Distance * baseSpeed;
+                FindPlayerOperation(Distance);
             }
             else
             {
@@ -125,25 +99,38 @@ namespace Script.Enemy
                         break;
                     default:
                         Distance = _startPosition - gameObject.transform.position;
-                        transform.Rotate(Vector3.up,
-                            Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
-                            Space.Self);
-                        Distance = Distance.normalized;
-                        _rb2dEnemy.velocity = Distance * baseSpeed;
+                        EnemyMove(Distance);
                         if (Vector3.Distance(_startPosition, gameObject.transform.position) < endError)
                             RandomBorder();
                         return;
                 }
-                transform.Rotate(Vector3.up, Vector3.Cross(Distance, gameObject.transform.forward).y > 0 ? 180 : 0,
-                    Space.Self);
-                Distance = Distance.normalized;
-                _rb2dEnemy.velocity = Distance * baseSpeed;
+
+                EnemyMove(Distance);
             }
+        }
+
+        private void EnemyMove(Vector3 distance)
+        {
+            transform.Rotate(Vector3.up, Vector3.Cross(distance, gameObject.transform.forward).y > 0 ? 180 : 0,
+                Space.Self);
+            _eAnimationController.WalkAnimation();
+            _rb2dEnemy.velocity = distance.normalized * baseSpeed;
+        }
+
+        private void FindPlayerOperation(Vector3 distance)
+        {
+            if (distance.magnitude < 1.2f)
+            {
+                _rb2dEnemy.velocity = Vector3.zero;
+                _eAnimationController.AttackAnimation();
+                return;
+            }
+
+            EnemyMove(distance);
         }
 
         private void RandomBorder()
         {
-            //TODO:需要修改
             var RandomBorderNum = Random.Range(0f, endError);
             _patrolDirection = Random.Range(0, 2) == 0 ? -1 : 1;
 
@@ -154,10 +141,9 @@ namespace Script.Enemy
 
         #region 属性
 
-        public float baseSpeed = 0.5f;
-        public float endError = 0.5f;
-        private Vector3 _startPosition;
-
+        public float baseSpeed = 0.5f; //基础速度
+        public float endError = 0.5f; //边界误差
+        private Vector3 _startPosition; //起始点
         private Vector3 _leftPatrolBorder; //左边界
         private Vector3 _rightPatrolBorder; //右边界
         private int _patrolDirection; //巡逻方向
