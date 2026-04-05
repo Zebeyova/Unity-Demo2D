@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Script.Player
 {
@@ -8,7 +9,8 @@ namespace Script.Player
         Walk,
         Run,
         Slide,
-        Jump
+        Jump,
+        Attack
     }
 
     public class PlayerController : MonoBehaviour
@@ -45,6 +47,22 @@ namespace Script.Player
         {
             _horizontal = Input.GetAxis("Horizontal");
 
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                if (inAttacking)
+                {
+                    comboCount = (comboCount == 0) ? 1 : 0;
+                }
+                else
+                {
+                    comboCount = 0;
+                }
+
+                _currentState = PlayerState.Attack;
+                _isAttacking = true;
+                return;
+            }
+
             if (Input.GetKeyDown(KeyCode.K))
             {
                 _currentState = PlayerState.Jump;
@@ -69,24 +87,28 @@ namespace Script.Player
             switch (_currentState)
             {
                 case PlayerState.Idle:
-                    _isWalking = _isRunning = _isSliding = _isJumping = false;
+                    _isWalking = _isRunning = _isSliding = _isJumping = _isAttacking = false;
                     break;
                 case PlayerState.Walk:
-                    _isRunning = _isSliding = _isJumping = false;
+                    _isRunning = _isSliding = _isJumping = _isAttacking = false;
                     _isWalking = true;
                     break;
                 case PlayerState.Run:
-                    _isWalking = _isSliding = _isJumping = false;
+                    _isWalking = _isSliding = _isJumping = _isAttacking = false;
                     _isRunning = Mathf.Abs(_horizontal) > 0;
                     break;
                 case PlayerState.Slide:
-                    _isWalking = _isJumping = false;
+                    _isWalking = _isJumping = _isAttacking = false;
                     _isRunning = true;
                     _isSliding = _isRunning && !_isSlidingOnCoolDown;
                     break;
                 case PlayerState.Jump:
-                    _isWalking = _isRunning = _isSliding = false;
+                    _isWalking = _isRunning = _isSliding = _isAttacking = false;
                     _isJumping = true;
+                    break;
+                case PlayerState.Attack:
+                    _isWalking = _isRunning = _isSliding = _isJumping = false;
+                    _isAttacking = true;
                     break;
             }
         }
@@ -94,6 +116,15 @@ namespace Script.Player
         private void PlayerControl()
         {
             _inTurning = _animationController.InTurnState();
+
+            if (_isAttacking)
+            {
+                MoveOperation();
+                inAttacking = true;
+                _animationController.AttackAnimation(true, comboCount);
+                _animationController.UpdateState(_isWalking, _isRunning);
+                return;
+            }
 
             if (_isJumping) //跳跃
             {
@@ -151,6 +182,7 @@ namespace Script.Player
 
         private void MoveOperation()
         {
+            if (_isAttacking) _rb2D.velocity = Vector2.zero;
             if (_isJumping && _inGround) _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpForce);
             var currentSpeed = baseSpeed;
             if (_isRunning) currentSpeed *= runSpeedMultiplier;
@@ -173,6 +205,8 @@ namespace Script.Player
         public float slideCool = 0.6f;
         public float jumpForce = 10f;
         public float horizontalInputThreshold = 0.01f; //水平输入阈值
+        public int comboCount; //攻击计数器
+        public bool inAttacking;
 
         #endregion
 
@@ -194,25 +228,11 @@ namespace Script.Player
         private bool _isRunning;
         private bool _isWalking;
         private bool _isJumping; //准备跳跃
+        private bool _isAttacking;
 
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
         private float _slideTimer;
-
-        public Collider2D GetCr2D()
-        {
-            return _cr2D;
-        }
-
-        public bool GetWalk()
-        {
-            return _isWalking;
-        }
-
-        public bool GetRun()
-        {
-            return _isRunning;
-        }
 
         #endregion
     }

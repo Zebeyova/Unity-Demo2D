@@ -9,6 +9,8 @@ namespace Script.Player
 
         private Action _onComplete;
         private PlayerController _playerController;
+        private int _attackAnimStartCount;
+        private int _attackAnimEndCount;
 
         private void Awake()
         {
@@ -33,7 +35,7 @@ namespace Script.Player
 
         public void RunAnimation(bool isSliding)
         {
-            if (GetCurrentState(_runSlide)) return;
+            if (GetState(_runSlide)) return;
             animator.SetBool(_idleWalk, false);
             animator.SetBool(_walkRun, true);
             animator.SetBool(_idleRun, true);
@@ -42,14 +44,30 @@ namespace Script.Player
 
         public void JumpAnimation(bool isJumping)
         {
-            if (isJumping && !GetCurrentState(_anyJump) && !GetCurrentState(_jumpFall))
+            if (isJumping && !GetState(_anyJump) && !GetState(_jumpFall))
                 animator.SetBool(_anyJump, true);
             else if (!isJumping) animator.SetBool(_anyJump, false);
         }
 
+        public void AttackAnimation(bool isAttacking, int count)
+        {
+            if (GetState(_attack1) || GetState(_attack2))
+            {
+                // 正在攻击，改变count
+                animator.SetInteger(_attackCount, count);
+            }
+            else
+            {
+                animator.SetBool(_anyAttack, isAttacking);
+                animator.SetInteger(_attackCount, count);
+            }
+
+            _attackAnimStartCount = count;
+        }
+
         public void StartTurn(bool isRunning, Action turnComplete)
         {
-            if (GetCurrentState(_anyJump) || GetCurrentState(_jumpFall)) return;
+            if (GetState(_anyJump) || GetState(_jumpFall)) return;
             _onComplete = turnComplete;
             animator.SetBool(_isCompleted, false);
 
@@ -68,7 +86,7 @@ namespace Script.Player
             }
         }
 
-        private bool GetCurrentState(int stateHash)
+        private bool GetState(int stateHash)
         {
             if (!animator) return false;
             return animator.GetCurrentAnimatorStateInfo(0).shortNameHash == stateHash;
@@ -76,7 +94,7 @@ namespace Script.Player
 
         public bool InTurnState()
         {
-            return GetCurrentState(_idleTurn) || GetCurrentState(_walkTurn) || GetCurrentState(_runTurn);
+            return GetState(_walkToTurn) || GetState(_runToTurn);
         }
 
         #region 哈希表
@@ -85,12 +103,19 @@ namespace Script.Player
         private readonly int _idleWalk = Animator.StringToHash("IdleWalk");
         private readonly int _idleRun = Animator.StringToHash("IdleRun");
         private readonly int _walkRun = Animator.StringToHash("WalkRun");
-        private readonly int _idleTurn = Animator.StringToHash("IdleTurn");
         private readonly int _walkTurn = Animator.StringToHash("WalkTurn");
         private readonly int _runTurn = Animator.StringToHash("RunTurn");
         private readonly int _runSlide = Animator.StringToHash("RunSlide");
         private readonly int _anyJump = Animator.StringToHash("AnyJump");
         private readonly int _jumpFall = Animator.StringToHash("JumpFall");
+        private readonly int _anyAttack = Animator.StringToHash("AnyAttack");
+        private readonly int _attackCount = Animator.StringToHash("AttackCount");
+
+        //状态表
+        private readonly int _walkToTurn = Animator.StringToHash("Walk_Turn");
+        private readonly int _runToTurn = Animator.StringToHash("run_Turn");
+        private readonly int _attack1 = Animator.StringToHash("Attack1");
+        private readonly int _attack2 = Animator.StringToHash("Attack2");
 
         #endregion
 
@@ -112,6 +137,26 @@ namespace Script.Player
         public void FallComplete()
         {
             animator.SetBool(_isCompleted, true);
+        }
+
+        public void AttackStart()
+        {
+            animator.SetBool(_anyAttack, false);
+            _attackAnimEndCount = _attackAnimStartCount;
+        }
+
+        public void AttackEnd()
+        {
+            if (_attackAnimEndCount == _attackAnimStartCount)
+            {
+                animator.SetBool(_isCompleted, true);
+                _playerController.inAttacking = false;
+                _playerController.comboCount = 0;
+            }
+            else
+            {
+                animator.SetBool(_isCompleted, false);
+            }
         }
 
         #endregion

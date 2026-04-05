@@ -1,7 +1,25 @@
 fileFormatVersion: 2
 guid: 08ad9961a1362c44f8576526a478f091
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -6636957603738870837
+    second: male_hero-combo_3_end_0
+  - first:
+      213: -1312561918489925613
+    second: male_hero-combo_3_end_1
+  - first:
+      213: -2674944374364836345
+    second: male_hero-combo_3_end_2
+  - first:
+      213: 1821612904803966970
+    second: male_hero-combo_3_end_3
+  - first:
+      213: 2622384617751288451
+    second: male_hero-combo_3_end_4
+  - first:
+      213: -57080928467386056
+    second: male_hero-combo_3_end_5
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -41,7 +59,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -90,7 +108,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: male_hero-combo_3_end_0
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 48
+        width: 31
+        height: 49
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcb11d7393ac4e3a0800000000000000
+      internalID: -6636957603738870837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_end_1
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 48
+        width: 29
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 318e3bea3e7d8cde0800000000000000
+      internalID: -1312561918489925613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_end_2
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 48
+        width: 31
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70eed049340b0ead0800000000000000
+      internalID: -2674944374364836345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_end_3
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 48
+        width: 34
+        height: 36
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff9b1d194ba74910800000000000000
+      internalID: 1821612904803966970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_end_4
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 48
+        width: 37
+        height: 36
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38a93857ae4946420800000000000000
+      internalID: 2622384617751288451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_end_5
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 48
+        width: 39
+        height: 37
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 831804fa235353ff0800000000000000
+      internalID: -57080928467386056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

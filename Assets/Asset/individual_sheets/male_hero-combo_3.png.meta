@@ -1,7 +1,43 @@
 fileFormatVersion: 2
 guid: 06bbb8ae116b84549b3188cf1ef19bc3
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -4440368788355775544
+    second: male_hero-combo_3_0
+  - first:
+      213: -1561558055071992624
+    second: male_hero-combo_3_1
+  - first:
+      213: -879066962679507849
+    second: male_hero-combo_3_2
+  - first:
+      213: 455931075148956212
+    second: male_hero-combo_3_3
+  - first:
+      213: -160422501593988426
+    second: male_hero-combo_3_4
+  - first:
+      213: 4621755147831592737
+    second: male_hero-combo_3_5
+  - first:
+      213: 3680119503444053874
+    second: male_hero-combo_3_6
+  - first:
+      213: 1996470053171103898
+    second: male_hero-combo_3_7
+  - first:
+      213: 2557062486458433979
+    second: male_hero-combo_3_8
+  - first:
+      213: -717832082577243802
+    second: male_hero-combo_3_9
+  - first:
+      213: 8553779566649394196
+    second: male_hero-combo_3_10
+  - first:
+      213: 1686772887009802693
+    second: male_hero-combo_3_11
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -41,7 +77,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -90,7 +126,259 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: male_hero-combo_3_0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 48
+        width: 36
+        height: 35
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c38252fc14a062c0800000000000000
+      internalID: -4440368788355775544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_1
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 48
+        width: 37
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d4b84fe83b345ae0800000000000000
+      internalID: -1561558055071992624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_2
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 48
+        width: 37
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 774d4b3414decc3f0800000000000000
+      internalID: -879066962679507849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_3
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 48
+        width: 64
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 432c050b5eac35600800000000000000
+      internalID: 455931075148956212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_4
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 48
+        width: 51
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b2c282b59016cdf0800000000000000
+      internalID: -160422501593988426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_5
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 48
+        width: 64
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 127c551e1d5c32040800000000000000
+      internalID: 4621755147831592737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_6
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 48
+        width: 62
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27f05c5b039621330800000000000000
+      internalID: 3680119503444053874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_7
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 48
+        width: 47
+        height: 52
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9808f38fe2e4bb10800000000000000
+      internalID: 1996470053171103898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_8
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 48
+        width: 56
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb105d598c28c7320800000000000000
+      internalID: 2557062486458433979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_9
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 48
+        width: 57
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 661ca9d268fb906f0800000000000000
+      internalID: -717832082577243802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_10
+      rect:
+        serializedVersion: 2
+        x: 1333
+        y: 48
+        width: 37
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 414c12d223125b670800000000000000
+      internalID: 8553779566649394196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: male_hero-combo_3_11
+      rect:
+        serializedVersion: 2
+        x: 1461
+        y: 48
+        width: 55
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c9bafaf00f986710800000000000000
+      internalID: 1686772887009802693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
