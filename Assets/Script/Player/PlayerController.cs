@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Script.Player
 {
@@ -50,13 +49,9 @@ namespace Script.Player
             if (Input.GetKeyDown(KeyCode.J))
             {
                 if (inAttacking)
-                {
-                    comboCount = (comboCount == 0) ? 1 : 0;
-                }
+                    comboCount = comboCount == 0 ? 1 : 0;
                 else
-                {
                     comboCount = 0;
-                }
 
                 _currentState = PlayerState.Attack;
                 _isAttacking = true;
@@ -128,13 +123,10 @@ namespace Script.Player
 
             if (_isJumping) //跳跃
             {
-                if (_inGround)
-                {
-                    _animationController.JumpAnimation(true);
-                    MoveOperation();
-                    _animationController.UpdateState(_isWalking, _isRunning);
-                }
-
+                if (!_inGround) return;
+                _animationController.JumpAnimation(true);
+                MoveOperation();
+                _animationController.UpdateState(_isWalking, _isRunning);
                 return;
             }
 

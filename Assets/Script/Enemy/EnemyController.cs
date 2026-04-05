@@ -35,6 +35,7 @@ namespace Script.Enemy
         private void EnemyControl()
         {
             if (!_playerTransform) return;
+            //TODO:需要添加攻击冷却,受伤动画以及死亡动画
             switch (enemyType)
             {
                 case EnemyType.Guard:

@@ -6,11 +6,10 @@ namespace Script.Player
     public class PlayerAnimationController : MonoBehaviour
     {
         public Animator animator;
-
+        private int _attackAnimEndCount;
+        private int _attackAnimStartCount;
         private Action _onComplete;
         private PlayerController _playerController;
-        private int _attackAnimStartCount;
-        private int _attackAnimEndCount;
 
         private void Awake()
         {
@@ -121,6 +120,7 @@ namespace Script.Player
 
         #region 动画事件注册
 
+//TODO:_isCompleted变量使用次数过多,感觉干扰到了其他动画的播放,需要修改,修改为:  _isTurnCompleted,_isJumpFallCompleted,_isAttackCompleted
         public void TurnComplete()
         {
             _onComplete?.Invoke();
