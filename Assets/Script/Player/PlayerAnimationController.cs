@@ -5,18 +5,11 @@ namespace Script.Player
 {
     public class PlayerAnimationController : MonoBehaviour
     {
-        public Animator animator;
-        private int _attackAnimEndCount;
-        private int _attackAnimStartCount;
-        private Action _onComplete;
-        private PlayerController _playerController;
-
         private void Awake()
         {
             CheckComponent();
             animator.SetBool(_idleWalk, false);
         }
-
 
         private void CheckComponent()
         {
@@ -48,27 +41,33 @@ namespace Script.Player
             else if (!isJumping) animator.SetBool(_anyJump, false);
         }
 
-        public void AttackAnimation(bool isAttacking, int count)
+        private void AttackAnimation(int count)
         {
-            if (GetState(_attack1) || GetState(_attack2))
+            _inAttacking = true;
+            animator.SetBool(_idleWalk, false);
+            animator.SetBool(_walkRun, false);
+            animator.SetBool(_idleRun, false);
+
+            animator.SetTrigger(_anyAttack);
+            animator.SetInteger(_attackCount, count);
+        }
+
+        public void ComboRequest(int count)
+        {
+            if (!_inAttacking && count == 1)
             {
-                // 正在攻击，改变count
-                animator.SetInteger(_attackCount, count);
-            }
-            else
-            {
-                animator.SetBool(_anyAttack, isAttacking);
-                animator.SetInteger(_attackCount, count);
+                AttackAnimation(1);
+                return;
             }
 
-            _attackAnimStartCount = count;
+            if (count == 2) AttackAnimation(2);
         }
 
         public void StartTurn(bool isRunning, Action turnComplete)
         {
-            if (GetState(_anyJump) || GetState(_jumpFall)) return;
+            if (GetState(_jump) || GetState(_fall) || GetState(_attack1) || GetState(_attack2)) return;
             _onComplete = turnComplete;
-            animator.SetBool(_isCompleted, false);
+            animator.SetBool(_isTurnCompleted, false);
 
             animator.SetBool(_idleWalk, false);
             animator.SetBool(_walkRun, false);
@@ -96,9 +95,21 @@ namespace Script.Player
             return GetState(_walkToTurn) || GetState(_runToTurn);
         }
 
+        #region 成员
+
+        public Animator animator;
+        private bool _comboRequested; //连击请求
+        private Action _onComplete;
+        private PlayerController _playerController;
+        private bool _inAttacking;
+
+        #endregion
+
         #region 哈希表
 
-        private readonly int _isCompleted = Animator.StringToHash("IsCompleted");
+        private readonly int _isTurnCompleted = Animator.StringToHash("IsTurnCompleted");
+        private readonly int _isJumpFallCompleted = Animator.StringToHash("IsJumpFallCompleted");
+        private readonly int _isAttackCompleted = Animator.StringToHash("IsAttackCompleted");
         private readonly int _idleWalk = Animator.StringToHash("IdleWalk");
         private readonly int _idleRun = Animator.StringToHash("IdleRun");
         private readonly int _walkRun = Animator.StringToHash("WalkRun");
@@ -113,6 +124,8 @@ namespace Script.Player
         //状态表
         private readonly int _walkToTurn = Animator.StringToHash("Walk_Turn");
         private readonly int _runToTurn = Animator.StringToHash("run_Turn");
+        private readonly int _jump = Animator.StringToHash("Jump");
+        private readonly int _fall = Animator.StringToHash("Fall");
         private readonly int _attack1 = Animator.StringToHash("Attack1");
         private readonly int _attack2 = Animator.StringToHash("Attack2");
 
@@ -120,12 +133,11 @@ namespace Script.Player
 
         #region 动画事件注册
 
-//TODO:_isCompleted变量使用次数过多,感觉干扰到了其他动画的播放,需要修改,修改为:  _isTurnCompleted,_isJumpFallCompleted,_isAttackCompleted
         public void TurnComplete()
         {
             _onComplete?.Invoke();
             _onComplete = null;
-            animator.SetBool(_isCompleted, true);
+            animator.SetBool(_isTurnCompleted, true);
         }
 
         public void JumpComplete()
@@ -136,27 +148,25 @@ namespace Script.Player
 
         public void FallComplete()
         {
-            animator.SetBool(_isCompleted, true);
-        }
-
-        public void AttackStart()
-        {
-            animator.SetBool(_anyAttack, false);
-            _attackAnimEndCount = _attackAnimStartCount;
+            animator.SetBool(_isJumpFallCompleted, true);
         }
 
         public void AttackEnd()
         {
-            if (_attackAnimEndCount == _attackAnimStartCount)
+            var currentAnimCount = animator.GetInteger(_attackCount);
+
+            switch (currentAnimCount)
             {
-                animator.SetBool(_isCompleted, true);
-                _playerController.inAttacking = false;
-                _playerController.comboCount = 0;
+                case 1 when _playerController.comboCount >= 2:
+                    AttackAnimation(2);
+                    return;
+                case 2:
+                    break;
             }
-            else
-            {
-                animator.SetBool(_isCompleted, false);
-            }
+
+            _playerController.OnAttackFinished();
+            _inAttacking = false;
+            animator.SetBool(_isAttackCompleted, true);
         }
 
         #endregion

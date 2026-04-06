@@ -796,16 +796,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdf97a09b6341b47a244aeb2257aa06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   baseSpeed: 2
-  runSpeedMultiplier: 2
+  runSpeedMultiplier: 1.5
   slideCool: 0.6
   jumpForce: 10
   horizontalInputThreshold: 0.01
   comboCount: 0
-  inAttacking: 0
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!50 &364368706
 Rigidbody2D:
   serializedVersion: 4

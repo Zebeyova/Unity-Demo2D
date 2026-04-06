@@ -23,14 +23,13 @@ namespace Script.Player
         private void Update()
         {
             ChangeState();
-            PlayerControl();
             InputCheck();
             _inGround = _cr2D.IsTouchingLayers(groundLayerMask);
         }
 
         private void FixedUpdate()
         {
-            MoveOperation();
+            PlayerControl();
             SlideTimer();
         }
 
@@ -48,13 +47,10 @@ namespace Script.Player
 
             if (Input.GetKeyDown(KeyCode.J))
             {
-                if (inAttacking)
-                    comboCount = comboCount == 0 ? 1 : 0;
-                else
-                    comboCount = 0;
-
+                if (comboCount == 0) comboCount = 1;
+                else if (comboCount == 1) comboCount = 2;
+                _animationController.ComboRequest(comboCount);
                 _currentState = PlayerState.Attack;
-                _isAttacking = true;
                 return;
             }
 
@@ -68,41 +64,39 @@ namespace Script.Player
             {
                 _currentState = PlayerState.Run;
                 if (Input.GetKeyDown(KeyCode.Space)) _currentState = PlayerState.Slide;
-
                 return;
             }
 
             if (Mathf.Abs(_horizontal) > 0)
+            {
                 _currentState = PlayerState.Walk;
-            else if (Mathf.Abs(_horizontal) == 0) _currentState = PlayerState.Idle;
+                return;
+            }
+
+            if (Mathf.Abs(_horizontal) == 0) _currentState = PlayerState.Idle;
         }
 
         private void InputCheck()
         {
+            _isWalking = _isRunning = _isSliding = _isJumping = _isAttacking = false;
             switch (_currentState)
             {
                 case PlayerState.Idle:
-                    _isWalking = _isRunning = _isSliding = _isJumping = _isAttacking = false;
                     break;
                 case PlayerState.Walk:
-                    _isRunning = _isSliding = _isJumping = _isAttacking = false;
                     _isWalking = true;
                     break;
                 case PlayerState.Run:
-                    _isWalking = _isSliding = _isJumping = _isAttacking = false;
                     _isRunning = Mathf.Abs(_horizontal) > 0;
                     break;
                 case PlayerState.Slide:
-                    _isWalking = _isJumping = _isAttacking = false;
                     _isRunning = true;
                     _isSliding = _isRunning && !_isSlidingOnCoolDown;
                     break;
                 case PlayerState.Jump:
-                    _isWalking = _isRunning = _isSliding = _isAttacking = false;
                     _isJumping = true;
                     break;
                 case PlayerState.Attack:
-                    _isWalking = _isRunning = _isSliding = _isJumping = false;
                     _isAttacking = true;
                     break;
             }
@@ -112,20 +106,12 @@ namespace Script.Player
         {
             _inTurning = _animationController.InTurnState();
 
-            if (_isAttacking)
-            {
-                MoveOperation();
-                inAttacking = true;
-                _animationController.AttackAnimation(true, comboCount);
-                _animationController.UpdateState(_isWalking, _isRunning);
-                return;
-            }
+            MoveOperation();
 
             if (_isJumping) //跳跃
             {
                 if (!_inGround) return;
                 _animationController.JumpAnimation(true);
-                MoveOperation();
                 _animationController.UpdateState(_isWalking, _isRunning);
                 return;
             }
@@ -174,11 +160,12 @@ namespace Script.Player
 
         private void MoveOperation()
         {
+            //TODO:攻击时不应该移动,需要修复
             if (_isAttacking) _rb2D.velocity = Vector2.zero;
             if (_isJumping && _inGround) _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpForce);
             var currentSpeed = baseSpeed;
             if (_isRunning) currentSpeed *= runSpeedMultiplier;
-            if (_isSliding) currentSpeed *= runSpeedMultiplier;
+            if (_isSliding) currentSpeed *= runSpeedMultiplier * 1.35f;
             if (_isWalking || _isRunning) _rb2D.velocity = new Vector2(_horizontal * currentSpeed, _rb2D.velocity.y);
         }
 
@@ -190,17 +177,10 @@ namespace Script.Player
             _slideTimer = slideCool;
         }
 
-        #region 属性
-
-        public float baseSpeed = 2f;
-        public float runSpeedMultiplier = 2f;
-        public float slideCool = 0.6f;
-        public float jumpForce = 10f;
-        public float horizontalInputThreshold = 0.01f; //水平输入阈值
-        public int comboCount; //攻击计数器
-        public bool inAttacking;
-
-        #endregion
+        public void OnAttackFinished()
+        {
+            comboCount = 0;
+        }
 
         #region 成员
 
@@ -224,7 +204,18 @@ namespace Script.Player
 
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
+
+        #endregion
+
+        #region 属性
+
         private float _slideTimer;
+        public float baseSpeed = 2f;
+        public float runSpeedMultiplier = 1.5f;
+        public float slideCool = 0.6f;
+        public float jumpForce = 10f;
+        public float horizontalInputThreshold = 0.01f; //水平输入阈值
+        public int comboCount; //攻击计数器
 
         #endregion
     }
