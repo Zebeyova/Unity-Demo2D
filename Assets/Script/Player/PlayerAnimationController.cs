@@ -47,7 +47,6 @@ namespace Script.Player
             animator.SetBool(_idleWalk, false);
             animator.SetBool(_walkRun, false);
             animator.SetBool(_idleRun, false);
-
             animator.SetTrigger(_anyAttack);
             animator.SetInteger(_attackCount, count);
         }
@@ -60,7 +59,7 @@ namespace Script.Player
                 return;
             }
 
-            if (count == 2) AttackAnimation(2);
+            AttackAnimation(count);
         }
 
         public void StartTurn(bool isRunning, Action turnComplete)
@@ -131,7 +130,7 @@ namespace Script.Player
 
         #endregion
 
-        #region 动画事件注册
+        #region 动画事件
 
         public void TurnComplete()
         {
@@ -161,6 +160,7 @@ namespace Script.Player
                     AttackAnimation(2);
                     return;
                 case 2:
+                case 3:
                     break;
             }
 

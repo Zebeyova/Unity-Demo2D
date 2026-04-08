@@ -6,9 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack3.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack3.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asset/individual_sheets/male_hero-combo_3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asset/individual_sheets/male_hero-combo_3.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asset/individual_sheets/male_hero-combo_3_end.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asset/individual_sheets/male_hero-combo_3_end.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asset/individual_sheets/male_hero-hurt.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asset/individual_sheets/male_hero-hurt.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyDetectionArea.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyDetectionArea.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +43,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90585cf0c5a24f279207485a8de593e713e800/f9/253a7346/Gizmos.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee16c2cb688d4766af955c0ec92acd90573638/2b/b871ac1f/MethodImplOptions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/AnimEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@1.0.0/Editor/GridPaintPaletteClipboard.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -130,7 +136,7 @@
       <updated>1775470368749</updated>
       <workItem from="1775470371016" duration="3709000" />
       <workItem from="1775623454886" duration="6228000" />
-      <workItem from="1775634126090" duration="3020000" />
+      <workItem from="1775634126090" duration="5808000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -140,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775474497716</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="添加敌人撞墙处理逻辑">
+      <option name="closed" value="true" />
+      <created>1775637307228</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1775637307228</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,7 +183,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="备份" />
     <MESSAGE value="4.6备份" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.6备份" />
+    <MESSAGE value="添加敌人撞墙处理逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加敌人撞墙处理逻辑" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

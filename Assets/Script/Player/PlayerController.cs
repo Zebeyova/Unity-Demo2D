@@ -59,6 +59,13 @@ namespace Script.Player
                 return;
             }
 
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                _animationController.ComboRequest(3);
+                _currentState = PlayerState.Attack;
+                return;
+            }
+
             if (Input.GetKeyDown(KeyCode.J))
             {
                 _animationController.ComboRequest(1);

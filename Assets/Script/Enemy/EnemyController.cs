@@ -148,19 +148,16 @@ namespace Script.Enemy
 
         private void WallCheck()
         {
-            if (_startTiming || Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0),
-                    transform.right + Vector3.up,
-                    1f, wallLayerMask))
-            {
-                _startTiming = true;
-                _rb2dEnemy.velocity = Vector3.zero;
-                _eAnimationController.IdleAnimation();
-                _timer -= Time.unscaledDeltaTime;
-                if (!(_timer <= 0)) return;
-                _timer = 1f;
-                _isTouchWall = true;
-                _startTiming = false;
-            }
+            if (!_startTiming && !Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0),
+                    transform.right + Vector3.up, 1f, wallLayerMask)) return;
+            _startTiming = true;
+            _rb2dEnemy.velocity = Vector3.zero;
+            _eAnimationController.IdleAnimation();
+            _timer -= Time.unscaledDeltaTime;
+            if (!(_timer <= 0)) return;
+            _timer = 2f;
+            _isTouchWall = true;
+            _startTiming = false;
         }
 
         #region 属性
