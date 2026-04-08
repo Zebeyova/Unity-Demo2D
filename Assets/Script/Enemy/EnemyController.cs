@@ -1,4 +1,5 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Script.Enemy
@@ -18,9 +19,10 @@ namespace Script.Enemy
             if (player != null) _playerTransform = player.transform;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             EnemyControl();
+            WallCheck();
         }
 
         private void CheckComponent()
@@ -53,9 +55,9 @@ namespace Script.Enemy
         {
             var Distance = _playerTransform.position - gameObject.transform.position;
             if (_startPosition == Vector3.zero) _startPosition = transform.position;
-            if (_eDetectionArea.GetDetectionArea()) //追击状态
+            if (_eDetectionArea.GetDetectionArea() && !_isTouchWall) //追击状态
             {
-                FindPlayerOperation(Distance);
+                AttackOperation(Distance);
             }
             else //返回守卫状态
             {
@@ -81,10 +83,10 @@ namespace Script.Enemy
             }
 
             var Distance = _playerTransform.position - gameObject.transform.position;
-            if (_eDetectionArea.GetDetectionArea())
+            if (_eDetectionArea.GetDetectionArea() && !_isTouchWall)
             {
                 _patrolDirection = 0;
-                FindPlayerOperation(Distance);
+                AttackOperation(Distance);
             }
             else
             {
@@ -102,7 +104,11 @@ namespace Script.Enemy
                         Distance = _startPosition - gameObject.transform.position;
                         EnemyMove(Distance);
                         if (Vector3.Distance(_startPosition, gameObject.transform.position) < endError)
+                        {
                             RandomBorder();
+                            _isTouchWall = false;
+                        }
+
                         return;
                 }
 
@@ -118,7 +124,7 @@ namespace Script.Enemy
             _rb2dEnemy.velocity = distance.normalized * baseSpeed;
         }
 
-        private void FindPlayerOperation(Vector3 distance)
+        private void AttackOperation(Vector3 distance)
         {
             if (distance.magnitude < 1.2f)
             {
@@ -140,14 +146,35 @@ namespace Script.Enemy
             _rightPatrolBorder = _startPosition + transform.right * 2 + RandomVector;
         }
 
+        private void WallCheck()
+        {
+            if (_startTiming || Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0),
+                    transform.right + Vector3.up,
+                    1f, wallLayerMask))
+            {
+                _startTiming = true;
+                _rb2dEnemy.velocity = Vector3.zero;
+                _eAnimationController.IdleAnimation();
+                _timer -= Time.unscaledDeltaTime;
+                if (!(_timer <= 0)) return;
+                _timer = 1f;
+                _isTouchWall = true;
+                _startTiming = false;
+            }
+        }
+
         #region 属性
 
         public float baseSpeed = 0.5f; //基础速度
         public float endError = 0.5f; //边界误差
+        public LayerMask wallLayerMask;
         private Vector3 _startPosition; //起始点
         private Vector3 _leftPatrolBorder; //左边界
         private Vector3 _rightPatrolBorder; //右边界
         private int _patrolDirection; //巡逻方向
+        private bool _isTouchWall; //是否碰到墙壁
+        private float _timer = 2f;
+        private bool _startTiming; //开始计时
 
         #endregion
 

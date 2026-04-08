@@ -42,14 +42,6 @@ namespace Script.Enemy
             }
         }
 
-        #region 哈希表
-
-        private readonly int _isCompleted = Animator.StringToHash("IsCompleted");
-        private readonly int _idleWalk = Animator.StringToHash("IdleWalk");
-        private readonly int _anyAttack = Animator.StringToHash("AnyAttack");
-
-        #endregion
-
         #region 动画事件
 
         public void AttackCompleted()
@@ -57,6 +49,14 @@ namespace Script.Enemy
             _isAttacking = false;
             animator.SetBool(_isCompleted, true);
         }
+
+        #endregion
+
+        #region 哈希表
+
+        private readonly int _isCompleted = Animator.StringToHash("IsCompleted");
+        private readonly int _idleWalk = Animator.StringToHash("IdleWalk");
+        private readonly int _anyAttack = Animator.StringToHash("AnyAttack");
 
         #endregion
     }
