@@ -11,10 +11,24 @@ namespace Script.Player
             animator.SetBool(_idleWalk, false);
         }
 
+        private void Start()
+        {
+            _playerHealth.onTakeDamage.AddListener(HurtAnimation);
+            _playerHealth.onDeath.AddListener(() => HurtAnimation(0, 0));
+        }
+
+        private void OnDestroy()
+        {
+            if (!_isDestroy) return;
+            _playerHealth.onTakeDamage.RemoveListener(HurtAnimation);
+            _playerHealth.onDeath.RemoveListener(() => HurtAnimation(0, 0));
+        }
+
         private void CheckComponent()
         {
             if (!animator) animator = GetComponent<Animator>();
             if (!_playerController) _playerController = GetComponent<PlayerController>();
+            if (!_playerHealth) _playerHealth = GetComponent<Health>();
         }
 
         public void UpdateState(bool isWalking, bool isRunning)
@@ -49,6 +63,21 @@ namespace Script.Player
             animator.SetBool(_idleRun, false);
             animator.SetTrigger(_anyAttack);
             animator.SetInteger(_attackCount, count);
+        }
+
+        private void HurtAnimation(float damage, float currentHealth)
+        {
+            animator.SetBool(_isHurtCompleted, false);
+            if (currentHealth == 0)
+            {
+                if (_isDestroy) return;
+                animator.SetTrigger(_anyDeath);
+            }
+            else
+            {
+                animator.SetTrigger(_anyHurt);
+            }
+            _isDestroy=currentHealth == 0;
         }
 
         public void ComboRequest(int count)
@@ -96,11 +125,14 @@ namespace Script.Player
 
         #region 成员
 
-        public Animator animator;
+        private bool _inAttacking;
         private bool _comboRequested; //连击请求
         private Action _onComplete;
+        public Animator animator;
         private PlayerController _playerController;
-        private bool _inAttacking;
+        private Health _playerHealth;
+        private bool _isDestroy; //销毁玩家
+        public bool GetIsDestroy() => _isDestroy;
 
         #endregion
 
@@ -109,6 +141,7 @@ namespace Script.Player
         private readonly int _isTurnCompleted = Animator.StringToHash("IsTurnCompleted");
         private readonly int _isJumpFallCompleted = Animator.StringToHash("IsJumpFallCompleted");
         private readonly int _isAttackCompleted = Animator.StringToHash("IsAttackCompleted");
+        private readonly int _isHurtCompleted = Animator.StringToHash("IsHurtCompleted");
         private readonly int _idleWalk = Animator.StringToHash("IdleWalk");
         private readonly int _idleRun = Animator.StringToHash("IdleRun");
         private readonly int _walkRun = Animator.StringToHash("WalkRun");
@@ -119,6 +152,8 @@ namespace Script.Player
         private readonly int _jumpFall = Animator.StringToHash("JumpFall");
         private readonly int _anyAttack = Animator.StringToHash("AnyAttack");
         private readonly int _attackCount = Animator.StringToHash("AttackCount");
+        private readonly int _anyHurt = Animator.StringToHash("AnyHurt");
+        private readonly int _anyDeath = Animator.StringToHash("AnyDeath");
 
         //状态表
         private readonly int _walkToTurn = Animator.StringToHash("Walk_Turn");
@@ -150,7 +185,7 @@ namespace Script.Player
             animator.SetBool(_isJumpFallCompleted, true);
         }
 
-        public void AttackEnd()
+        public void AttackComplete()
         {
             var currentAnimCount = animator.GetInteger(_attackCount);
 
@@ -167,6 +202,12 @@ namespace Script.Player
             _playerController.OnAttackFinished();
             _inAttacking = false;
             animator.SetBool(_isAttackCompleted, true);
+        }
+
+        public void HurtComplete()
+        {
+            animator.SetBool(_isHurtCompleted, true);
+            if (_isDestroy) _playerController.DestroyPlayer();
         }
 
         #endregion

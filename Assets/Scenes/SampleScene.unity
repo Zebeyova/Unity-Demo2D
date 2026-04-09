@@ -367,9 +367,11 @@ GameObject:
   - component: {fileID: 213068914}
   - component: {fileID: 213068918}
   - component: {fileID: 213068919}
+  - component: {fileID: 213068921}
+  - component: {fileID: 213068920}
   m_Layer: 0
   m_Name: OrangeGolem_Patrol
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -510,8 +512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a409375dbe80174bbf6ff69f1954f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 0.5
-  endError: 0.5
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -529,6 +529,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 213068916}
+--- !u!114 &213068920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213068912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d232704a4b66ea479a18a6b8c5bb2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  invincibleTimer: 0
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &213068921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213068912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb1ed66be0a43bb93b4acf908761a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &312547367
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +660,8 @@ GameObject:
   - component: {fileID: 364368708}
   - component: {fileID: 364368705}
   - component: {fileID: 364368707}
+  - component: {fileID: 364368710}
+  - component: {fileID: 364368709}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -733,15 +767,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdf97a09b6341b47a244aeb2257aa06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  comboCount: 0
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  baseSpeed: 2
-  runSpeedMultiplier: 1.5
-  slideCool: 0.6
-  jumpForce: 10
-  horizontalInputThreshold: 0.01
-  comboCount: 0
 --- !u!50 &364368706
 Rigidbody2D:
   serializedVersion: 4
@@ -792,6 +821,38 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.18}
   m_Size: {x: 0.24, y: 0.36}
   m_Direction: 0
+--- !u!114 &364368709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364368701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d232704a4b66ea479a18a6b8c5bb2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  invincibleTimer: 0
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &364368710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364368701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb1ed66be0a43bb93b4acf908761a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &396445483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2448,9 +2509,11 @@ GameObject:
   - component: {fileID: 1378295034}
   - component: {fileID: 1378295036}
   - component: {fileID: 1378295035}
+  - component: {fileID: 1378295038}
+  - component: {fileID: 1378295037}
   m_Layer: 0
   m_Name: BlueGolem_Guard
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2604,12 +2667,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a409375dbe80174bbf6ff69f1954f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 0.5
-  endError: 0.5
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 128
   enemyType: 0
+--- !u!114 &1378295037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378295029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d232704a4b66ea479a18a6b8c5bb2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  invincibleTimer: 0
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1378295038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378295029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb1ed66be0a43bb93b4acf908761a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1561646509
 GameObject:
   m_ObjectHideFlags: 0
@@ -4466,9 +4559,80 @@ Transform:
   - {fileID: 519420032}
   - {fileID: 1229560160}
   - {fileID: 34891380}
+  - {fileID: 1967875714}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1967875713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1967875714}
+  - component: {fileID: 1967875716}
+  - component: {fileID: 1967875715}
+  m_Layer: 0
+  m_Name: CharacterProperties
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1967875714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967875713}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1913651727}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1967875715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967875713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164d523be7a8ef14f8c66a73cd003d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  damage: 10
+  defense: 20
+  baseSpeed: 0.5
+  endError: 0.5
+--- !u!114 &1967875716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967875713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19e19ca0b4e58a4b847f311cd94cef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  damage: 10
+  defense: 20
+  baseSpeed: 3
+  runSpeedMultiplier: 1.5
+  slideCool: 0.6
+  jumpForce: 10
+  horizontalInputThreshold: 0.01
+  invincibleTime: 0.2
 --- !u!1 &2019207367
 GameObject:
   m_ObjectHideFlags: 0

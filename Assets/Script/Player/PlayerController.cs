@@ -14,18 +14,22 @@ namespace Script.Player
 
     public class PlayerController : MonoBehaviour
     {
+        public int comboCount;
+
+        private float _slideTimer;
+
         private void Awake()
         {
             CheckComponent();
-            _currentFacing = !_spriteRenderer.flipX;
+            _currentFacing = transform.localRotation.y == 0;
         }
 
         private void Update()
         {
+            _inGround = _cr2D.IsTouchingLayers(groundLayerMask);
             InputCheck();
             ChangeState();
             PlayerControl();
-            _inGround = _cr2D.IsTouchingLayers(groundLayerMask);
         }
 
         private void FixedUpdate()
@@ -38,8 +42,8 @@ namespace Script.Player
         {
             if (!_cr2D) _cr2D = GetComponent<Collider2D>();
             if (!_rb2D) _rb2D = GetComponent<Rigidbody2D>();
-            if (!_spriteRenderer) _spriteRenderer = GetComponent<SpriteRenderer>();
             if (!_animationController) _animationController = GetComponent<PlayerAnimationController>();
+            if (!_properties) _properties = FindObjectOfType<PlayerProperties>();
         }
 
         private void ChangeState()
@@ -50,6 +54,13 @@ namespace Script.Player
             {
                 if (!Input.GetKeyDown(KeyCode.J)) return;
                 _animationController.ComboRequest(2);
+                return;
+            }
+
+            if (_currentState == PlayerState.Run && Input.GetKeyDown(KeyCode.Space) && _inGround &&
+                !_isSlidingOnCoolDown)
+            {
+                _currentState = PlayerState.Slide;
                 return;
             }
 
@@ -76,13 +87,6 @@ namespace Script.Player
             if (Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(_horizontal) > 0)
             {
                 _currentState = PlayerState.Run;
-                return;
-            }
-
-            if (_currentState == PlayerState.Run && Input.GetKeyDown(KeyCode.Space) && _inGround &&
-                !_isSlidingOnCoolDown)
-            {
-                _currentState = PlayerState.Slide;
                 return;
             }
 
@@ -129,7 +133,7 @@ namespace Script.Player
 
             if (_isJumping && _inGround)
             {
-                _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpForce);
+                _rb2D.velocity = new Vector2(_rb2D.velocity.x, _properties.jumpForce);
                 _animationController.JumpAnimation(true);
                 _animationController.UpdateState(_isWalking, _isRunning);
                 _isJumping = false;
@@ -158,13 +162,13 @@ namespace Script.Player
             _targetFacing = _horizontal > 0;
             var shouldTurn = !_inTurning && _currentFacing != _targetFacing &&
                              (_isWalking || _isRunning) && !_isSliding &&
-                             Mathf.Abs(_horizontal) > horizontalInputThreshold;
+                             Mathf.Abs(_horizontal) > _properties.horizontalInputThreshold;
             if (!shouldTurn) return;
 
             _animationController.StartTurn(_isRunning, () =>
             {
                 _currentFacing = _targetFacing;
-                _spriteRenderer.flipX = !_currentFacing;
+                transform.localRotation = Quaternion.Euler(0, _currentFacing ? 0 : 180, 0);
             });
             _animationController.UpdateState(_isWalking, _isRunning);
         }
@@ -176,7 +180,7 @@ namespace Script.Player
             _targetFacing = _horizontal > 0;
             if (_currentFacing == _targetFacing || _horizontal == 0) return;
             _currentFacing = _targetFacing;
-            _spriteRenderer.flipX = !_currentFacing;
+            transform.localRotation = Quaternion.Euler(0, _currentFacing ? 0 : 180, 0);
         }
 
         private void MoveOperation()
@@ -187,9 +191,9 @@ namespace Script.Player
                 return;
             }
 
-            var currentSpeed = baseSpeed;
-            if (_isSliding) currentSpeed *= runSpeedMultiplier * 1.35f;
-            else if (_isRunning) currentSpeed *= runSpeedMultiplier;
+            var currentSpeed = _properties.baseSpeed;
+            if (_isSliding) currentSpeed *= _properties.runSpeedMultiplier * 1.35f;
+            else if (_isRunning) currentSpeed *= _properties.runSpeedMultiplier;
 
             if (_isWalking || _isRunning)
                 _rb2D.velocity = new Vector2(_horizontal * currentSpeed, _rb2D.velocity.y);
@@ -200,7 +204,7 @@ namespace Script.Player
             if (_isSlidingOnCoolDown) _slideTimer -= Time.fixedDeltaTime;
             if (_slideTimer > 0) return;
             _isSlidingOnCoolDown = false;
-            _slideTimer = slideCool;
+            _slideTimer = _properties.slideCool;
         }
 
         public void OnAttackFinished()
@@ -209,14 +213,19 @@ namespace Script.Player
             _currentState = PlayerState.Idle;
         }
 
+        public void DestroyPlayer()
+        {
+            Destroy(gameObject);
+        }
+
         #region 成员
 
         public LayerMask groundLayerMask;
         private PlayerAnimationController _animationController;
+        private PlayerProperties _properties;
         private Collider2D _cr2D;
         private PlayerState _currentState = PlayerState.Idle;
         private Rigidbody2D _rb2D;
-        private SpriteRenderer _spriteRenderer;
 
         private float _horizontal;
         private bool _inTurning;
@@ -230,18 +239,6 @@ namespace Script.Player
         private bool _isAttacking;
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
-
-        #endregion
-
-        #region 属性
-
-        private float _slideTimer;
-        public float baseSpeed = 2f;
-        public float runSpeedMultiplier = 1.5f;
-        public float slideCool = 0.6f;
-        public float jumpForce = 10f;
-        public float horizontalInputThreshold = 0.01f;
-        public int comboCount;
 
         #endregion
     }

@@ -32,6 +32,7 @@ namespace Script.Enemy
             if (!_spriteRenderer) _spriteRenderer = GetComponent<SpriteRenderer>();
             if (!_eAnimationController) _eAnimationController = GetComponent<EnemyAnimationController>();
             if (!_eDetectionArea) _eDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
+            if (!_enemyProperties) _enemyProperties = FindObjectOfType<EnemyProperties>();
         }
 
         private void EnemyControl()
@@ -63,10 +64,11 @@ namespace Script.Enemy
             {
                 Distance = (_startPosition - gameObject.transform.position).normalized;
 
-                if (Vector3.Distance(_startPosition, gameObject.transform.position) < endError)
+                if (Vector3.Distance(_startPosition, gameObject.transform.position) < _enemyProperties.endError)
                 {
                     _rb2dEnemy.velocity = Vector3.zero;
                     _eAnimationController.IdleAnimation();
+                    _isTouchWall = false;
                     return;
                 }
 
@@ -94,16 +96,16 @@ namespace Script.Enemy
                 {
                     case -1:
                         Distance = _leftPatrolBorder - gameObject.transform.position;
-                        if (Distance.magnitude < endError) _patrolDirection = 1;
+                        if (Distance.magnitude < _enemyProperties.endError) _patrolDirection = 1;
                         break;
                     case 1:
                         Distance = _rightPatrolBorder - gameObject.transform.position;
-                        if (Distance.magnitude < endError) _patrolDirection = -1;
+                        if (Distance.magnitude < _enemyProperties.endError) _patrolDirection = -1;
                         break;
                     default:
                         Distance = _startPosition - gameObject.transform.position;
                         EnemyMove(Distance);
-                        if (Vector3.Distance(_startPosition, gameObject.transform.position) < endError)
+                        if (Vector3.Distance(_startPosition, gameObject.transform.position) < _enemyProperties.endError)
                         {
                             RandomBorder();
                             _isTouchWall = false;
@@ -121,12 +123,12 @@ namespace Script.Enemy
             transform.Rotate(Vector3.up, Vector3.Cross(distance, gameObject.transform.forward).y > 0 ? 180 : 0,
                 Space.Self);
             _eAnimationController.WalkAnimation();
-            _rb2dEnemy.velocity = distance.normalized * baseSpeed;
+            _rb2dEnemy.velocity = distance.normalized * _enemyProperties.baseSpeed;
         }
 
         private void AttackOperation(Vector3 distance)
         {
-            if (distance.magnitude < 1.2f)
+            if (distance.magnitude < _enemyProperties.distanceFromPlayer)
             {
                 _rb2dEnemy.velocity = Vector3.zero;
                 _eAnimationController.AttackAnimation();
@@ -138,7 +140,7 @@ namespace Script.Enemy
 
         private void RandomBorder()
         {
-            var RandomBorderNum = Random.Range(0f, endError);
+            var RandomBorderNum = Random.Range(0f, _enemyProperties.endError);
             _patrolDirection = Random.Range(0, 2) == 0 ? -1 : 1;
 
             var RandomVector = new Vector3(RandomBorderNum, 0, 0);
@@ -162,8 +164,6 @@ namespace Script.Enemy
 
         #region 属性
 
-        public float baseSpeed = 0.5f; //基础速度
-        public float endError = 0.5f; //边界误差
         public LayerMask wallLayerMask;
         private Vector3 _startPosition; //起始点
         private Vector3 _leftPatrolBorder; //左边界
@@ -184,6 +184,7 @@ namespace Script.Enemy
         private SpriteRenderer _spriteRenderer;
         private EnemyAnimationController _eAnimationController;
         private EnemyDetectionArea _eDetectionArea;
+        private EnemyProperties _enemyProperties;
 
         #endregion
     }
