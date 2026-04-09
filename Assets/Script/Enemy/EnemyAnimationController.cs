@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Script.Enemy
@@ -58,6 +57,8 @@ namespace Script.Enemy
         private readonly int _isCompleted = Animator.StringToHash("IsCompleted");
         private readonly int _idleWalk = Animator.StringToHash("IdleWalk");
         private readonly int _anyAttack = Animator.StringToHash("AnyAttack");
+        private readonly int _anyHurt= Animator.StringToHash("AnyHurt");
+        private readonly int _anyDie = Animator.StringToHash("AnyDie");
 
         #endregion
     }

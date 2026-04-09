@@ -8,21 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Attack2.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Hurt.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Hurt.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Skills.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Skills.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Asset/individual_sheets/male_hero-death.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asset/individual_sheets/male_hero-death.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyProperties.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +43,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90585cf0c5a24f279207485a8de593e713e800/f9/253a7346/Gizmos.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee16c2cb688d4766af955c0ec92acd90573638/2b/b871ac1f/MethodImplOptions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee16c2cb688d4766af955c0ec92acd90573638/99/1d7e52af/Single.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity Projects/Demo2D/Assets/Animation/Player/Attack1.anim" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerProperties.cs" root0="FORCE_HIGHLIGHTING" />
@@ -149,7 +139,7 @@
       <workItem from="1775470371016" duration="3709000" />
       <workItem from="1775623454886" duration="6228000" />
       <workItem from="1775634126090" duration="11345000" />
-      <workItem from="1775703375396" duration="17167000" />
+      <workItem from="1775703375396" duration="19516000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -175,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775640923586</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="添加玩家受伤,无敌时间,死亡,销毁逻辑">
+      <option name="closed" value="true" />
+      <created>1775724948345</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1775724948345</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,7 +204,8 @@
     <MESSAGE value="4.6备份" />
     <MESSAGE value="添加敌人撞墙处理逻辑" />
     <MESSAGE value="skills技能添加完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="skills技能添加完成" />
+    <MESSAGE value="添加玩家受伤,无敌时间,死亡,销毁逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加玩家受伤,无敌时间,死亡,销毁逻辑" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

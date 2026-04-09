@@ -38,7 +38,7 @@ namespace Script.Enemy
         private void EnemyControl()
         {
             if (!_playerTransform) return;
-            //TODO:需要添加攻击冷却,受伤动画以及死亡动画
+            //TODO:受伤动画以及死亡动画
             switch (enemyType)
             {
                 case EnemyType.Guard:
@@ -58,7 +58,15 @@ namespace Script.Enemy
             if (_startPosition == Vector3.zero) _startPosition = transform.position;
             if (_eDetectionArea.GetDetectionArea() && !_isTouchWall) //追击状态
             {
-                AttackOperation(Distance);
+                if (_isAttackingCooldown)
+                {
+                    _rb2dEnemy.velocity = Vector3.zero;
+                    _eAnimationController.IdleAnimation();
+                }
+                else
+                {
+                    AttackOperation(Distance);
+                }
             }
             else //返回守卫状态
             {
@@ -88,7 +96,15 @@ namespace Script.Enemy
             if (_eDetectionArea.GetDetectionArea() && !_isTouchWall)
             {
                 _patrolDirection = 0;
-                AttackOperation(Distance);
+                if (_isAttackingCooldown)
+                {
+                    _rb2dEnemy.velocity = Vector3.zero;
+                    _eAnimationController.IdleAnimation();
+                }
+                else
+                {
+                    AttackOperation(Distance);
+                }
             }
             else
             {
@@ -126,28 +142,6 @@ namespace Script.Enemy
             _rb2dEnemy.velocity = distance.normalized * _enemyProperties.baseSpeed;
         }
 
-        private void AttackOperation(Vector3 distance)
-        {
-            if (distance.magnitude < _enemyProperties.distanceFromPlayer)
-            {
-                _rb2dEnemy.velocity = Vector3.zero;
-                _eAnimationController.AttackAnimation();
-                return;
-            }
-
-            EnemyMove(distance);
-        }
-
-        private void RandomBorder()
-        {
-            var RandomBorderNum = Random.Range(0f, _enemyProperties.endError);
-            _patrolDirection = Random.Range(0, 2) == 0 ? -1 : 1;
-
-            var RandomVector = new Vector3(RandomBorderNum, 0, 0);
-            _leftPatrolBorder = _startPosition - transform.right * 2 - RandomVector;
-            _rightPatrolBorder = _startPosition + transform.right * 2 + RandomVector;
-        }
-
         private void WallCheck()
         {
             if (!_startTiming && !Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0),
@@ -162,6 +156,39 @@ namespace Script.Enemy
             _startTiming = false;
         }
 
+        private void RandomBorder()
+        {
+            var RandomBorderNum = Random.Range(0f, _enemyProperties.endError);
+            _patrolDirection = Random.Range(0, 2) == 0 ? -1 : 1;
+
+            var RandomVector = new Vector3(RandomBorderNum, 0, 0);
+            _leftPatrolBorder = _startPosition - transform.right * 2 - RandomVector;
+            _rightPatrolBorder = _startPosition + transform.right * 2 + RandomVector;
+        }
+
+        private void AttackOperation(Vector3 distance)
+        {
+            if (distance.magnitude < _enemyProperties.distanceFromPlayer && !_allowAttack)
+            {
+                _rb2dEnemy.velocity = Vector3.zero;
+                _eAnimationController.AttackAnimation();
+                _isAttackingCooldown = true;
+                if (_attackCooldownCoroutine != null) StopCoroutine(_attackCooldownCoroutine);
+                _attackCooldownCoroutine = StartCoroutine(AttackCooldown());
+                return;
+            }
+
+            EnemyMove(distance);
+        }
+
+        private System.Collections.IEnumerator AttackCooldown()
+        {
+            _allowAttack = true;
+            yield return new WaitForSeconds(_enemyProperties.attackCoolDown);
+            _isAttackingCooldown = false;
+            _allowAttack = false;
+        }
+
         #region 属性
 
         public LayerMask wallLayerMask;
@@ -172,6 +199,8 @@ namespace Script.Enemy
         private bool _isTouchWall; //是否碰到墙壁
         private float _timer = 2f;
         private bool _startTiming; //开始计时
+        private bool _allowAttack; //允许攻击
+        private bool _isAttackingCooldown; //攻击冷却中
 
         #endregion
 
@@ -185,6 +214,7 @@ namespace Script.Enemy
         private EnemyAnimationController _eAnimationController;
         private EnemyDetectionArea _eDetectionArea;
         private EnemyProperties _enemyProperties;
+        private Coroutine _attackCooldownCoroutine; //攻击冷却协程
 
         #endregion
     }

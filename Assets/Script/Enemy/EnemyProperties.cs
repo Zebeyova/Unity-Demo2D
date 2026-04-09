@@ -8,6 +8,7 @@ namespace Script.Enemy
         public float damage = 10f;
         public float defense = 20f;
         public float baseSpeed = 0.5f; //基础速度
+        public float attackCoolDown = 1f;
         [Space] public float endError = 0.3f; //边界误差
         public float distanceFromPlayer=0.93f;
     }
