@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -38,7 +39,6 @@ namespace Script.Enemy
         private void EnemyControl()
         {
             if (!_playerTransform) return;
-            //TODO:受伤动画以及死亡动画
             switch (enemyType)
             {
                 case EnemyType.Guard:
@@ -181,12 +181,17 @@ namespace Script.Enemy
             EnemyMove(distance);
         }
 
-        private System.Collections.IEnumerator AttackCooldown()
+        private IEnumerator AttackCooldown()
         {
             _allowAttack = true;
             yield return new WaitForSeconds(_enemyProperties.attackCoolDown);
             _isAttackingCooldown = false;
             _allowAttack = false;
+        }
+
+        public void DestroyEnemy()
+        {
+            Destroy(gameObject);
         }
 
         #region 属性

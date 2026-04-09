@@ -77,7 +77,8 @@ namespace Script.Player
             {
                 animator.SetTrigger(_anyHurt);
             }
-            _isDestroy=currentHealth == 0;
+
+            _isDestroy = currentHealth == 0;
         }
 
         public void ComboRequest(int count)
@@ -132,7 +133,6 @@ namespace Script.Player
         private PlayerController _playerController;
         private Health _playerHealth;
         private bool _isDestroy; //销毁玩家
-        public bool GetIsDestroy() => _isDestroy;
 
         #endregion
 

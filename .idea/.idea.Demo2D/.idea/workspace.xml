@@ -11,7 +11,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyProperties.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +139,7 @@
       <workItem from="1775470371016" duration="3709000" />
       <workItem from="1775623454886" duration="6228000" />
       <workItem from="1775634126090" duration="11345000" />
-      <workItem from="1775703375396" duration="19516000" />
+      <workItem from="1775703375396" duration="20490000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -173,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775724948345</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="敌人攻击冷却已添加">
+      <option name="closed" value="true" />
+      <created>1775727830098</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1775727830098</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +213,8 @@
     <MESSAGE value="添加敌人撞墙处理逻辑" />
     <MESSAGE value="skills技能添加完成" />
     <MESSAGE value="添加玩家受伤,无敌时间,死亡,销毁逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加玩家受伤,无敌时间,死亡,销毁逻辑" />
+    <MESSAGE value="敌人攻击冷却已添加" />
+    <option name="LAST_COMMIT_MESSAGE" value="敌人攻击冷却已添加" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
