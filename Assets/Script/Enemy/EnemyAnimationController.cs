@@ -62,7 +62,6 @@ namespace Script.Enemy
 
         private void HurtAnimation(float damage, float currentHealth)
         {
-            //TODO:受伤动画播放有延迟需要修改
             animator.SetBool(_isCompleted, false);
             if (currentHealth == 0)
             {

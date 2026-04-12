@@ -14,10 +14,6 @@ namespace Script.Player
 
     public class PlayerController : MonoBehaviour
     {
-        public int comboCount;
-
-        private float _slideTimer;
-
         private void Awake()
         {
             CheckComponent();
@@ -220,6 +216,7 @@ namespace Script.Player
 
         #region 成员
 
+        public int comboCount;
         public LayerMask groundLayerMask;
         private PlayerAnimationController _animationController;
         private PlayerProperties _properties;
@@ -239,6 +236,7 @@ namespace Script.Player
         private bool _isAttacking;
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
+        private float _slideTimer;
 
         #endregion
     }
