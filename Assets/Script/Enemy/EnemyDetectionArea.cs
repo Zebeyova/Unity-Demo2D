@@ -25,10 +25,7 @@ namespace Script.Enemy
             if (collision.CompareTag("Player")) _inDetectionArea = true;
         }
 
-        public bool GetDetectionArea()
-        {
-            return _inDetectionArea;
-        }
+        public bool GetDetectionArea() => _inDetectionArea;
 
         private void StartTimer()
         {

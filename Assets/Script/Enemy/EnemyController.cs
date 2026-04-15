@@ -54,7 +54,7 @@ namespace Script.Enemy
 
         private void GuardMove()
         {
-            var Distance = _playerTransform.position - gameObject.transform.position;
+            var Distance = new Vector3(_playerTransform.position.x - gameObject.transform.position.x, 0, 0);
             if (_startPosition == Vector3.zero) _startPosition = transform.position;
             if (_eDetectionArea.GetDetectionArea() && !_isTouchWall) //追击状态
             {
@@ -62,11 +62,10 @@ namespace Script.Enemy
                 {
                     _rb2dEnemy.velocity = Vector3.zero;
                     _eAnimationController.IdleAnimation();
+                    return;
                 }
-                else
-                {
-                    AttackOperation(Distance);
-                }
+
+                AttackOperation(Distance);
             }
             else //返回守卫状态
             {
@@ -92,23 +91,22 @@ namespace Script.Enemy
                 RandomBorder();
             }
 
-            var Distance = _playerTransform.position - gameObject.transform.position;
-            if (_eDetectionArea.GetDetectionArea() && !_isTouchWall)
+            var Distance = new Vector3(_playerTransform.position.x - gameObject.transform.position.x, 0, 0);
+            if (_eDetectionArea.GetDetectionArea() && !_isTouchWall) //准备攻击
             {
                 _patrolDirection = 0;
                 if (_isAttackingCooldown)
                 {
                     _rb2dEnemy.velocity = Vector3.zero;
                     _eAnimationController.IdleAnimation();
+                    return;
                 }
-                else
-                {
-                    AttackOperation(Distance);
-                }
+
+                AttackOperation(Distance);
             }
             else
             {
-                switch (_patrolDirection)
+                switch (_patrolDirection) //巡逻
                 {
                     case -1:
                         Distance = _leftPatrolBorder - gameObject.transform.position;
@@ -120,24 +118,22 @@ namespace Script.Enemy
                         break;
                     default:
                         Distance = _startPosition - gameObject.transform.position;
-                        EnemyMove(Distance);
                         if (Vector3.Distance(_startPosition, gameObject.transform.position) < _enemyProperties.endError)
                         {
                             RandomBorder();
                             _isTouchWall = false;
                         }
 
+                        EnemyMove(Distance);
                         return;
                 }
-
-                EnemyMove(Distance);
             }
         }
 
         private void EnemyMove(Vector3 distance)
         {
             transform.Rotate(Vector3.up, Vector3.Cross(distance, gameObject.transform.forward).y > 0 ? 180 : 0,
-                Space.Self);
+                Space.Self); //旋转
             _eAnimationController.WalkAnimation();
             _rb2dEnemy.velocity = distance.normalized * _enemyProperties.baseSpeed;
         }
