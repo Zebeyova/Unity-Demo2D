@@ -1,5 +1,6 @@
 using Script.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Script
 {
@@ -7,6 +8,7 @@ namespace Script
     {
         private static readonly int Radius = Shader.PropertyToID("_Radius");
         private static readonly int Center = Shader.PropertyToID("_Center");
+        private static bool _needRespawnFadeOut;
 
         public Material blackMaskMaterial;
         [Range(0f, 2f)] public float radius = 2f;
@@ -28,6 +30,11 @@ namespace Script
         private void Start()
         {
             _playerHealth.onDeath.AddListener(ChangeRadius);
+            if (_needRespawnFadeOut)
+            {
+                if (_changeRadiusCoroutine != null) StopCoroutine(_changeRadiusCoroutine);
+                _changeRadiusCoroutine = StartCoroutine(ChangeRadiusCoroutine(true));
+            }
         }
         private void Update()
         {
@@ -38,19 +45,36 @@ namespace Script
         private void ChangeRadius()
         {
             if (_changeRadiusCoroutine != null) StopCoroutine(_changeRadiusCoroutine);
-            _changeRadiusCoroutine = StartCoroutine(ChangeRadiusCoroutine());
+            _changeRadiusCoroutine = StartCoroutine(ChangeRadiusCoroutine(false));
         }
-        System.Collections.IEnumerator ChangeRadiusCoroutine()
+        private System.Collections.IEnumerator ChangeRadiusCoroutine(bool respawn)
         {
-            while (radius > 0f)
+            if (respawn)
             {
-                radius -= Time.deltaTime * 1.5f;
-                blackMaskMaterial.SetFloat(Radius, radius);
-                yield return null;
-            }
+                radius = 0f;
+                while (radius < 2f)
+                {
+                    radius += Time.deltaTime * 1.5f;
+                    blackMaskMaterial.SetFloat(Radius, radius);
+                    yield return null;
+                }
 
-            radius = 0f;
-            blackMaskMaterial.SetFloat(Radius, radius);
+                _needRespawnFadeOut = false;
+            }
+            else
+            {
+                radius = 2f;
+                while (radius > 0f)
+                {
+                    radius -= Time.deltaTime * 1.5f;
+                    blackMaskMaterial.SetFloat(Radius, radius);
+                    yield return null;
+                }
+
+                yield return new WaitForSeconds(0.5f);
+                _needRespawnFadeOut = true;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
         private void OnRenderImage(RenderTexture source, RenderTexture destination)
         {

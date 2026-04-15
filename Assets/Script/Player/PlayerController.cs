@@ -46,7 +46,7 @@ namespace Script.Player
         {
             _horizontal = Input.GetAxis("Horizontal");
 
-            if (_isAttacking)
+            if (_isAttacking) //二段连击
             {
                 if (!Input.GetKeyDown(KeyCode.J)) return;
                 _animationController.ComboRequest(2);
@@ -54,50 +54,50 @@ namespace Script.Player
             }
 
             if (_currentState == PlayerState.Run && Input.GetKeyDown(KeyCode.Space) && _inGround &&
-                !_isSlidingOnCoolDown)
+                !_isSlidingOnCoolDown) //滑铲
             {
                 _currentState = PlayerState.Slide;
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.K)) //跳跃
             {
                 _currentState = PlayerState.Jump;
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(KeyCode.L)) //攻技能
             {
                 _animationController.ComboRequest(3);
                 _currentState = PlayerState.Attack;
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.J))
+            if (Input.GetKeyDown(KeyCode.J)) //攻击
             {
                 _animationController.ComboRequest(1);
                 _currentState = PlayerState.Attack;
                 return;
             }
 
-            if (Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(_horizontal) > 0)
+            if (Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(_horizontal) > 0) //按住跑步
             {
                 _currentState = PlayerState.Run;
                 return;
             }
 
-            if (Mathf.Abs(_horizontal) > 0)
+            if (Mathf.Abs(_horizontal) > 0) //前进
             {
                 _currentState = PlayerState.Walk;
                 return;
             }
 
-            _currentState = PlayerState.Idle;
+            _currentState = PlayerState.Idle; //待机
         }
 
         private void InputCheck()
         {
-            _isWalking = _isRunning = _isSliding = _isJumping = _isAttacking = false;
+            _isWalking = _isRunning = _isSliding = _isJumping = _isAttacking = false; //状态重置
             switch (_currentState)
             {
                 case PlayerState.Idle:
