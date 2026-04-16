@@ -28,12 +28,12 @@ namespace Script.Enemy
 
         private void CheckComponent()
         {
-            if (!_rb2dEnemy) _rb2dEnemy = GetComponent<Rigidbody2D>();
-            if (!_cr2DEnemy) _cr2DEnemy = GetComponent<Collider2D>();
-            if (!_spriteRenderer) _spriteRenderer = GetComponent<SpriteRenderer>();
-            if (!_eAnimationController) _eAnimationController = GetComponent<EnemyAnimationController>();
-            if (!_eDetectionArea) _eDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
-            if (!_enemyProperties) _enemyProperties = FindObjectOfType<EnemyProperties>();
+            _rb2dEnemy = GetComponent<Rigidbody2D>();
+            _cr2DEnemy = GetComponent<Collider2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _eAnimationController = GetComponent<EnemyAnimationController>();
+            _eDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
+            _enemyProperties = FindObjectOfType<EnemyProperties>();
         }
 
         private void EnemyControl()

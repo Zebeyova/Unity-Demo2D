@@ -1,12 +1,10 @@
 using Script.Enemy;
-using Script.Player;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script
 {
-    public class HealthBar : MonoBehaviour
+    public class HealthBarEnemy : MonoBehaviour
     {
         private bool _bufferChanged;
         private void Awake()
@@ -16,7 +14,6 @@ namespace Script
         private void Start()
         {
             _health.onTakeDamage.AddListener(ChangeHealthBar);
-            text.text = $"{_playerProperties.maxHealth} / {_playerProperties.maxHealth}";
         }
         private void Update()
         {
@@ -26,17 +23,15 @@ namespace Script
         {
             bufferBar = transform.parent.Find("HealthBufferBar").GetComponent<Image>();
             bar = transform.parent.Find("HealthBar").GetComponent<Image>();
-            text = GetComponentInChildren<TMP_Text>();
 
-            _health = GameObject.FindWithTag("Player").GetComponent<Health>();
-            _playerProperties = FindObjectOfType<PlayerProperties>().GetComponent<PlayerProperties>();
+            _health = transform.parent.parent.GetComponent<Health>();
+            _enemyProperties = FindObjectOfType<EnemyProperties>().GetComponent<EnemyProperties>();
             _otherProperties = FindObjectOfType<OtherProperties>().GetComponent<OtherProperties>();
         }
         private void ChangeHealthBar(float damage, float currentHealth)
         {
             _bufferChanged = true;
-            bar.fillAmount = currentHealth / _playerProperties.maxHealth;
-            text.text = $"{currentHealth} / {_playerProperties.maxHealth}";
+            bar.fillAmount = currentHealth / _enemyProperties.maxHealth;
         }
         private void BufferBar()
         {
@@ -50,9 +45,7 @@ namespace Script
 
         public Image bufferBar;
         public Image bar;
-        public TMP_Text text;
         private Health _health;
-        private PlayerProperties _playerProperties;
         private EnemyProperties _enemyProperties;
         private OtherProperties _otherProperties;
 

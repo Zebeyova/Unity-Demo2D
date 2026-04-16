@@ -30,9 +30,9 @@ namespace Script.Enemy
 
         private void CheckComponent()
         {
-            if (!animator) animator = GetComponent<Animator>();
-            if (!_enemyHealth) _enemyHealth = GetComponent<Health>();
-            if (!_enemyController) _enemyController = GetComponent<EnemyController>();
+            animator = GetComponent<Animator>();
+            _enemyHealth = GetComponent<Health>();
+            _enemyController = GetComponent<EnemyController>();
         }
 
         public void IdleAnimation()

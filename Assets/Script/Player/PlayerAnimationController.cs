@@ -26,9 +26,9 @@ namespace Script.Player
 
         private void CheckComponent()
         {
-            if (!animator) animator = GetComponent<Animator>();
-            if (!_playerController) _playerController = GetComponent<PlayerController>();
-            if (!_playerHealth) _playerHealth = GetComponent<Health>();
+            animator = GetComponent<Animator>();
+            _playerController = GetComponent<PlayerController>();
+            _playerHealth = GetComponent<Health>();
         }
 
         public void UpdateState(bool isWalking, bool isRunning)

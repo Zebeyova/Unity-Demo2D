@@ -1,3 +1,4 @@
+using System.Collections;
 using Script.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,20 +13,14 @@ namespace Script
 
         public Material blackMaskMaterial;
         [Range(0f, 2f)] public float radius = 2f;
+        private Camera _camera;
         private Coroutine _changeRadiusCoroutine;
         private PlayerController _playerController;
-        private Camera _camera;
         private Health _playerHealth;
         private void Awake()
         {
             CheckComponent();
             if (blackMaskMaterial != null) blackMaskMaterial = new Material(blackMaskMaterial);
-        }
-        private void CheckComponent()
-        {
-            if (!_playerController) _playerController = FindObjectOfType<PlayerController>();
-            if (!_camera) _camera = Camera.main;
-            if (!_playerHealth) _playerHealth = _playerController.GetComponent<Health>();
         }
         private void Start()
         {
@@ -42,12 +37,28 @@ namespace Script
             Vector2 _pPos = _camera.WorldToViewportPoint(_playerController.transform.position);
             blackMaskMaterial.SetVector(Center, new Vector4(_pPos.x, _pPos.y, 0, 0));
         }
+        private void OnRenderImage(RenderTexture source, RenderTexture destination)
+        {
+            if (blackMaskMaterial == null)
+            {
+                Graphics.Blit(source, destination);
+                return;
+            }
+
+            Graphics.Blit(source, destination, blackMaskMaterial);
+        }
+        private void CheckComponent()
+        {
+            _playerController = FindObjectOfType<PlayerController>();
+            _camera = Camera.main;
+            _playerHealth = _playerController.GetComponent<Health>();
+        }
         private void ChangeRadius()
         {
             if (_changeRadiusCoroutine != null) StopCoroutine(_changeRadiusCoroutine);
             _changeRadiusCoroutine = StartCoroutine(ChangeRadiusCoroutine(false));
         }
-        private System.Collections.IEnumerator ChangeRadiusCoroutine(bool respawn)
+        private IEnumerator ChangeRadiusCoroutine(bool respawn)
         {
             if (respawn)
             {
@@ -75,16 +86,6 @@ namespace Script
                 _needRespawnFadeOut = true;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
-        }
-        private void OnRenderImage(RenderTexture source, RenderTexture destination)
-        {
-            if (blackMaskMaterial == null)
-            {
-                Graphics.Blit(source, destination);
-                return;
-            }
-
-            Graphics.Blit(source, destination, blackMaskMaterial);
         }
     }
 }

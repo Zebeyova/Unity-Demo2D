@@ -36,10 +36,10 @@ namespace Script.Player
 
         private void CheckComponent()
         {
-            if (!_cr2D) _cr2D = GetComponent<Collider2D>();
-            if (!_rb2D) _rb2D = GetComponent<Rigidbody2D>();
-            if (!_animationController) _animationController = GetComponent<PlayerAnimationController>();
-            if (!_properties) _properties = FindObjectOfType<PlayerProperties>();
+            _cr2D = GetComponent<Collider2D>();
+            _rb2D = GetComponent<Rigidbody2D>();
+            _animationController = GetComponent<PlayerAnimationController>();
+            _properties = FindObjectOfType<PlayerProperties>();
         }
 
         private void ChangeState()

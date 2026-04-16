@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="3" />
+    <option name="SCOPE_TYPE" value="10" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
@@ -9,8 +9,15 @@
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/BlackMask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/BlackMask.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/HealthBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/HealthBar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,15 +55,16 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee16c2cb688d4766af955c0ec92acd90573638/99/1d7e52af/Single.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/HLSLSupport.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Projects/Demo2D/Assets/Scene/SampleScene.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/BlackMask.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Projects/Demo2D/Assets/Script/Enemy/EnemyAnimationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy/EnemyProperties.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/HealthBar.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/HealthBarEnemy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/OtherProperties.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerProperties.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerProperties.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@1.0.0/Editor/GridPaintPaletteClipboard.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -154,7 +162,9 @@
       <workItem from="1775802387559" duration="4765000" />
       <workItem from="1775895281463" duration="15513000" />
       <workItem from="1775966978659" duration="7235000" />
-      <workItem from="1776238259851" duration="15376000" />
+      <workItem from="1776238259851" duration="15460000" />
+      <workItem from="1776317866026" duration="4576000" />
+      <workItem from="1776333933292" duration="2518000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -260,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776255319223</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="增加血条">
+      <option name="closed" value="true" />
+      <created>1776257794303</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1776257794303</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
