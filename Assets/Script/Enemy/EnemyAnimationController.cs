@@ -86,6 +86,7 @@ namespace Script.Enemy
 
         public void HurtCompleted()
         {
+            _isAttacking = false;
             animator.SetBool(_isCompleted, true);
             if (_isDestroy) _enemyController.DestroyEnemy();
         }
