@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="10" />
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Script" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
@@ -9,15 +10,13 @@
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/BlackMask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/BlackMask.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/HealthBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/HealthBar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/HealthBarEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/HealthBarEnemy.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +54,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee16c2cb688d4766af955c0ec92acd90573638/99/1d7e52af/Single.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/HLSLSupport.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity Projects/Demo2D/Assets/Scene/SampleScene.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Unity Projects/Demo2D/Assets/Scene/SampleScene.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/BlackMask.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -68,6 +69,9 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@1.0.0/Editor/GridPaintPaletteClipboard.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="NamedScopeManager">
+    <scope name="Script" pattern="file:Assets/Script/*" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 4
@@ -278,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776257794303</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Revert &quot;修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug&quot;&#10;&#10;This reverts commit e5136bc8">
+      <option name="closed" value="true" />
+      <created>1776345308976</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1776345308976</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,7 +332,8 @@
     <MESSAGE value="修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug" />
     <MESSAGE value="增加physicsMaterial2D修复了撞墙因摩擦力导致玩家无法下降的问题" />
     <MESSAGE value="增加血条" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加血条" />
+    <MESSAGE value="Revert &quot;修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug&quot;&#10;&#10;This reverts commit e5136bc8" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug&quot;&#10;&#10;This reverts commit e5136bc8" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

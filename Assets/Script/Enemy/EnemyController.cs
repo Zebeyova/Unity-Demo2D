@@ -116,15 +116,17 @@ namespace Script.Enemy
                         break;
                     default:
                         Distance = _startPosition - gameObject.transform.position;
+                        EnemyMove(Distance);
                         if (Vector3.Distance(_startPosition, gameObject.transform.position) < _enemyProperties.endError)
                         {
                             RandomBorder();
                             _isTouchWall = false;
                         }
 
-                        EnemyMove(Distance);
                         return;
                 }
+
+                EnemyMove(Distance);
             }
         }
 

@@ -7,6 +7,7 @@ namespace Script
     public class HealthBarEnemy : MonoBehaviour
     {
         private bool _bufferChanged;
+        private Vector3 _startRotation;
         private void Awake()
         {
             CheckComponent();
@@ -14,6 +15,7 @@ namespace Script
         private void Start()
         {
             _health.onTakeDamage.AddListener(ChangeHealthBar);
+            _startRotation = gameObject.transform.eulerAngles;
         }
         private void Update()
         {
@@ -35,6 +37,7 @@ namespace Script
         }
         private void BufferBar()
         {
+            transform.parent.eulerAngles = _startRotation; //保持血条不旋转
             if (!_bufferChanged) return;
             bufferBar.fillAmount = Mathf.Lerp(bufferBar.fillAmount, bar.fillAmount,
                 Time.deltaTime * _otherProperties.bufferBarSpeed);

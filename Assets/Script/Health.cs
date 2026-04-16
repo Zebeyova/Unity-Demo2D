@@ -1,3 +1,4 @@
+using System.Collections;
 using Script.Enemy;
 using Script.Player;
 using UnityEngine;
@@ -51,7 +52,7 @@ namespace Script
         private bool _invincible;
         private Coroutine _invincibilityCoroutine;
 
-        System.Collections.IEnumerator EnableInvincibility() //无敌计时协程
+        private IEnumerator EnableInvincibility() //无敌计时协程
         {
             _invincible = true;
             yield return new WaitForSeconds(_playerProperties.invincibleTime);
