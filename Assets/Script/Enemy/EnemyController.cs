@@ -29,8 +29,6 @@ namespace Script.Enemy
         private void CheckComponent()
         {
             _rb2dEnemy = GetComponent<Rigidbody2D>();
-            _cr2DEnemy = GetComponent<Collider2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
             _eAnimationController = GetComponent<EnemyAnimationController>();
             _eDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
             _enemyProperties = FindObjectOfType<EnemyProperties>();
@@ -208,10 +206,8 @@ namespace Script.Enemy
         #region 成员
 
         public EnemyType enemyType;
-        private Collider2D _cr2DEnemy;
         private Rigidbody2D _rb2dEnemy;
         private Transform _playerTransform;
-        private SpriteRenderer _spriteRenderer;
         private EnemyAnimationController _eAnimationController;
         private EnemyDetectionArea _eDetectionArea;
         private EnemyProperties _enemyProperties;
