@@ -32,10 +32,12 @@ namespace Script.Enemy
             _eAnimationController = GetComponent<EnemyAnimationController>();
             _eDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
             _enemyProperties = FindObjectOfType<EnemyProperties>();
+            _health = GetComponent<Health>();
         }
 
         private void EnemyControl()
         {
+            if (_health.currentHealth == 0) _eAnimationController.HurtAnimation(0, 0);
             if (!_playerTransform) return;
             switch (enemyType)
             {
@@ -214,6 +216,7 @@ namespace Script.Enemy
         private EnemyDetectionArea _eDetectionArea;
         private EnemyProperties _enemyProperties;
         private Coroutine _attackCooldownCoroutine; //攻击冷却协程
+        private Health _health;
 
         #endregion
     }

@@ -55,6 +55,15 @@ namespace Script
                     targetHealth.Injured(_playerProperties.damage);
             }
         }
+        private void PlayerSkillsOperation()
+        {
+            if (_allowInjured)
+            {
+                var targetHealth = _target.GetComponent<Health>();
+                if (targetHealth && targetHealth.isActiveAndEnabled)
+                    targetHealth.Injured(_playerProperties.skillDamage);
+            }
+        }
         private void EnemyAttackOperation()
         {
             if (_allowInjured)

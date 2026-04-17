@@ -15,14 +15,15 @@ namespace Script
 
         private void Start()
         {
-            currentHealth = _playerProperties.maxHealth;
+            currentHealth = transform.CompareTag("Player") ? _enemyProperties.maxHealth : _playerProperties.maxHealth;
         }
 
         public void Injured(float damage)
         {
             if (_invincible || damage < 0) return;
             currentHealth -= damage;
-            currentHealth = Mathf.Clamp(currentHealth, 0, _playerProperties.maxHealth); //确保生命不会出现负数
+            currentHealth = Mathf.Clamp(currentHealth, 0,
+                transform.CompareTag("Player") ? _enemyProperties.maxHealth : _playerProperties.maxHealth); //确保生命不会出现负数
             onTakeDamage?.Invoke(damage, currentHealth);
             if (currentHealth <= 0)
             {
@@ -42,8 +43,8 @@ namespace Script
 
         private void CheckComponent()
         {
-            if (!_playerProperties) _playerProperties = FindObjectOfType<PlayerProperties>();
-            if (!_enemyProperties) _enemyProperties = FindObjectOfType<EnemyProperties>();
+            _playerProperties = FindObjectOfType<PlayerProperties>();
+            _enemyProperties = FindObjectOfType<EnemyProperties>();
         }
 
         #region 属性

@@ -68,7 +68,6 @@ namespace Script.Player
 
             if (Input.GetKeyDown(KeyCode.L)) //攻技能
             {
-                //TODO:未实现技能伤害
                 _animationController.ComboRequest(3);
                 _currentState = PlayerState.Attack;
                 return;

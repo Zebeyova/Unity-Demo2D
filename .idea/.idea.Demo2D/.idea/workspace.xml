@@ -9,11 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/shelf/___.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/shelf/在还原之前未提交的更改_[更改]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Health.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerProperties.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,15 +53,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee16c2cb688d4766af955c0ec92acd90573638/99/1d7e52af/Single.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/HLSLSupport.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Projects/Demo2D/Assets/Scene/SampleScene.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Projects/Demo2D/Assets/Scene/SampleScene.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/BlackMask.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy/EnemyProperties.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/HealthBar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/HealthBarEnemy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/OtherProperties.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/OtherProperties.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerProperties.cs" root0="FORCE_HIGHLIGHTING" />
@@ -166,6 +166,7 @@
       <workItem from="1776238259851" duration="15460000" />
       <workItem from="1776317866026" duration="4576000" />
       <workItem from="1776333933292" duration="2518000" />
+      <workItem from="1776403279706" duration="1976000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -295,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776347188846</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="4.16备份">
+      <option name="closed" value="true" />
+      <created>1776347845103</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1776347845103</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +347,8 @@
     <MESSAGE value="增加血条" />
     <MESSAGE value="Revert &quot;修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug&quot;&#10;&#10;This reverts commit e5136bc8" />
     <MESSAGE value="备份" />
-    <option name="LAST_COMMIT_MESSAGE" value="备份" />
+    <MESSAGE value="4.16备份" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.16备份" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

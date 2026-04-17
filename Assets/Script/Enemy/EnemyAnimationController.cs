@@ -60,7 +60,7 @@ namespace Script.Enemy
             }
         }
 
-        private void HurtAnimation(float damage, float currentHealth)
+        public void HurtAnimation(float damage, float currentHealth)
         {
             animator.SetBool(_isCompleted, false);
             if (currentHealth == 0)

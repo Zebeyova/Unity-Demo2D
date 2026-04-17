@@ -4402,6 +4402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damage: 15
+  skillDamage: 30
   defense: 20
   baseSpeed: 2
   runSpeedMultiplier: 1.5
