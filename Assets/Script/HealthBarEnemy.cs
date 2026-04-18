@@ -1,4 +1,5 @@
 using Script.Enemy;
+using Script.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +29,7 @@ namespace Script
 
             _health = transform.parent.parent.GetComponent<Health>();
             _enemyProperties = FindObjectOfType<EnemyProperties>().GetComponent<EnemyProperties>();
-            _otherProperties = FindObjectOfType<OtherProperties>().GetComponent<OtherProperties>();
+            _playerProperties = FindObjectOfType<PlayerProperties>().GetComponent<PlayerProperties>();
         }
         private void ChangeHealthBar(float damage, float currentHealth)
         {
@@ -40,7 +41,7 @@ namespace Script
             transform.parent.eulerAngles = _startRotation; //保持血条不旋转
             if (!_bufferChanged) return;
             bufferBar.fillAmount = Mathf.Lerp(bufferBar.fillAmount, bar.fillAmount,
-                Time.deltaTime * _otherProperties.bufferBarSpeed);
+                Time.deltaTime * _playerProperties.bufferBarSpeed);
             if (bar.fillAmount.Equals(bufferBar.fillAmount)) _bufferChanged = false;
         }
 
@@ -50,7 +51,7 @@ namespace Script
         public Image bar;
         private Health _health;
         private EnemyProperties _enemyProperties;
-        private OtherProperties _otherProperties;
+        private PlayerProperties _playerProperties;
 
         #endregion
     }

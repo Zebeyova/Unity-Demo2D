@@ -237,6 +237,7 @@ namespace Script.Player
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
         private float _slideTimer;
+        public float GetSlideTimer() => _slideTimer;
 
         #endregion
     }

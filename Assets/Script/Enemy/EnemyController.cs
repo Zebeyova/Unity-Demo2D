@@ -22,13 +22,14 @@ namespace Script.Enemy
 
         private void Update()
         {
+            if (_health.currentHealth == 0) _eAnimationController.HurtAnimation(0, 0);
             EnemyControl();
             WallCheck();
         }
 
         private void CheckComponent()
         {
-            _rb2dEnemy = GetComponent<Rigidbody2D>();
+            _rb2DEnemy = GetComponent<Rigidbody2D>();
             _eAnimationController = GetComponent<EnemyAnimationController>();
             _eDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
             _enemyProperties = FindObjectOfType<EnemyProperties>();
@@ -37,7 +38,6 @@ namespace Script.Enemy
 
         private void EnemyControl()
         {
-            if (_health.currentHealth == 0) _eAnimationController.HurtAnimation(0, 0);
             if (!_playerTransform) return;
             switch (enemyType)
             {
@@ -60,7 +60,7 @@ namespace Script.Enemy
             {
                 if (_isAttackingCooldown)
                 {
-                    _rb2dEnemy.velocity = Vector3.zero;
+                    _rb2DEnemy.velocity = Vector3.zero;
                     _eAnimationController.IdleAnimation();
                     return;
                 }
@@ -73,7 +73,7 @@ namespace Script.Enemy
 
                 if (Vector3.Distance(_startPosition, gameObject.transform.position) < _enemyProperties.endError)
                 {
-                    _rb2dEnemy.velocity = Vector3.zero;
+                    _rb2DEnemy.velocity = Vector3.zero;
                     _eAnimationController.IdleAnimation();
                     _isTouchWall = false;
                     return;
@@ -97,7 +97,7 @@ namespace Script.Enemy
                 _patrolDirection = 0;
                 if (_isAttackingCooldown)
                 {
-                    _rb2dEnemy.velocity = Vector3.zero;
+                    _rb2DEnemy.velocity = Vector3.zero;
                     _eAnimationController.IdleAnimation();
                     return;
                 }
@@ -137,7 +137,7 @@ namespace Script.Enemy
             transform.Rotate(Vector3.up, Vector3.Cross(distance, gameObject.transform.forward).y > 0 ? 180 : 0,
                 Space.Self); //旋转
             _eAnimationController.WalkAnimation();
-            _rb2dEnemy.velocity = distance.normalized * _enemyProperties.baseSpeed;
+            _rb2DEnemy.velocity = distance.normalized * _enemyProperties.baseSpeed;
         }
 
         private void WallCheck()
@@ -145,7 +145,7 @@ namespace Script.Enemy
             if (!_startTiming && !Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0),
                     transform.right + Vector3.up, 1f, wallLayerMask)) return;
             _startTiming = true;
-            _rb2dEnemy.velocity = Vector3.zero;
+            _rb2DEnemy.velocity = Vector3.zero;
             _eAnimationController.IdleAnimation();
             _timer -= Time.unscaledDeltaTime;
             if (!(_timer <= 0)) return;
@@ -160,15 +160,15 @@ namespace Script.Enemy
             _patrolDirection = Random.Range(0, 2) == 0 ? -1 : 1;
 
             var RandomVector = new Vector3(RandomBorderNum, 0, 0);
-            _leftPatrolBorder = _startPosition - transform.right * 2 - RandomVector;
-            _rightPatrolBorder = _startPosition + transform.right * 2 + RandomVector;
+            _leftPatrolBorder = _startPosition - transform.right * _enemyProperties.patrolMaxDistance - RandomVector;
+            _rightPatrolBorder = _startPosition + transform.right * _enemyProperties.patrolMaxDistance + RandomVector;
         }
 
         private void AttackOperation(Vector3 distance)
         {
             if (distance.magnitude < _enemyProperties.distanceFromPlayer && !_allowAttack)
             {
-                _rb2dEnemy.velocity = Vector3.zero;
+                _rb2DEnemy.velocity = Vector3.zero;
                 _eAnimationController.AttackAnimation();
                 _isAttackingCooldown = true;
                 if (_attackCooldownCoroutine != null) StopCoroutine(_attackCooldownCoroutine);
@@ -210,7 +210,7 @@ namespace Script.Enemy
         #region 成员
 
         public EnemyType enemyType;
-        private Rigidbody2D _rb2dEnemy;
+        private Rigidbody2D _rb2DEnemy;
         private Transform _playerTransform;
         private EnemyAnimationController _eAnimationController;
         private EnemyDetectionArea _eDetectionArea;
