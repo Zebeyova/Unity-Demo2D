@@ -54,14 +54,15 @@ namespace Script.Player
             else if (!isJumping) animator.SetBool(_anyJump, false);
         }
 
-        private void AttackAnimation(int count)
+        public void AttackAnimation(int count)
         {
-            _inAttacking = true;
+            animator.SetInteger(_attackCount, count);
+            if (GetState(_attack1) || GetState(_attack2) || GetState(_skills)) return;
             animator.SetBool(_idleWalk, false);
             animator.SetBool(_walkRun, false);
             animator.SetBool(_idleRun, false);
+
             animator.SetTrigger(_anyAttack);
-            animator.SetInteger(_attackCount, count);
         }
 
         private void HurtAnimation(float damage, float currentHealth)
@@ -78,18 +79,6 @@ namespace Script.Player
             {
                 animator.SetTrigger(_anyHurt);
             }
-
-        }
-
-        public void ComboRequest(int count)
-        {
-            if (!_inAttacking && count == 1)
-            {
-                AttackAnimation(1);
-                return;
-            }
-
-            AttackAnimation(count);
         }
 
         public void StartTurn(bool isRunning, Action turnComplete)
@@ -126,7 +115,6 @@ namespace Script.Player
 
         #region 成员
 
-        private bool _inAttacking;
         private bool _comboRequested; //连击请求
         private Action _onComplete;
         public Animator animator;
@@ -162,6 +150,7 @@ namespace Script.Player
         private readonly int _fall = Animator.StringToHash("Fall");
         private readonly int _attack1 = Animator.StringToHash("Attack1");
         private readonly int _attack2 = Animator.StringToHash("Attack2");
+        private readonly int _skills = Animator.StringToHash("Skills");
 
         #endregion
 
@@ -187,21 +176,14 @@ namespace Script.Player
 
         public void AttackComplete()
         {
-            var currentAnimCount = animator.GetInteger(_attackCount);
-
-            switch (currentAnimCount)
+            if (_playerController.comboCount > 1 && !GetState(_attack2))
             {
-                case 1 when _playerController.comboCount >= 2:
-                    AttackAnimation(2);
-                    return;
-                case 2:
-                case 3:
-                    break;
+                AttackAnimation(2);
+                return;
             }
 
-            _playerController.OnAttackFinished();
-            _inAttacking = false;
             animator.SetBool(_isAttackCompleted, true);
+            _playerController.OnAttackFinished();
         }
 
         public void HurtComplete()

@@ -56,7 +56,7 @@ namespace Script.Enemy
             }
         }
 
-        private void HurtAnimation(float damage, float currentHealth)
+        private void HurtAnimation(float damage, float currentHealth) //TODO:敌人有概率不销毁
         {
             if (_isDestroy) return;
             animator.SetBool(_isCompleted, false);

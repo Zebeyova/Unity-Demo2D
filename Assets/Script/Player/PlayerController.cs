@@ -63,24 +63,25 @@ namespace Script.Player
 
             if (Input.GetKeyDown(KeyCode.L)) //攻技能
             {
-                _animationController.ComboRequest(3);
+                _animationController.AttackAnimation(3);
                 _currentState = PlayerState.Attack;
                 _isAttacking = true;
-                return;
-            }
-
-            if (_isAttacking && comboCount == 1) //二段连击
-            {
-                if (!Input.GetKeyDown(KeyCode.J)) return;
-                _animationController.ComboRequest(2);
                 return;
             }
 
             if (Input.GetKeyDown(KeyCode.J)) //攻击
             {
-                _animationController.ComboRequest(1);
+                if (_isAttacking && comboCount > 1) //二段连击
+                {
+                    _animationController.AttackAnimation(2);
+                    comboCount = 0;
+                    return;
+                }
+
+                _animationController.AttackAnimation(1);
                 _currentState = PlayerState.Attack;
                 _isAttacking = true;
+                comboCount++;
                 return;
             }
 
@@ -210,7 +211,6 @@ namespace Script.Player
         private bool _currentFacing;
         private bool _targetFacing;
         private bool _inGround;
-        private bool _isIdling;
         private bool _isRunning;
         private bool _isWalking;
         private bool _isJumping;
@@ -218,10 +218,6 @@ namespace Script.Player
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
         private float _slideTimer;
-        public void SetIsIdling(bool value)
-        {
-            _isIdling = value;
-        }
         public float GetSlideTimer()
         {
             return _slideTimer;
