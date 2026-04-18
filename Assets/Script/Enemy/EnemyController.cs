@@ -22,7 +22,6 @@ namespace Script.Enemy
 
         private void Update()
         {
-            if (_health.currentHealth == 0) _eAnimationController.HurtAnimation(0, 0);
             EnemyControl();
             WallCheck();
         }
@@ -187,10 +186,7 @@ namespace Script.Enemy
             _allowAttack = false;
         }
 
-        public void DestroyEnemy()
-        {
-            Destroy(gameObject);
-        }
+        public void DestroyEnemy() => Destroy(gameObject);
 
         #region 属性
 

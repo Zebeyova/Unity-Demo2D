@@ -9,19 +9,19 @@ namespace Script
     {
         private bool _bufferChanged;
         private Vector3 _startRotation;
-        private void Awake()
-        {
-            CheckComponent();
-        }
+
+        private void Awake() => CheckComponent();
+
         private void Start()
         {
             _health.onTakeDamage.AddListener(ChangeHealthBar);
             _startRotation = gameObject.transform.eulerAngles;
         }
-        private void Update()
-        {
-            BufferBar();
-        }
+
+        private void Update() => BufferBar();
+
+        private void OnDestroy() => _health.onTakeDamage.RemoveListener(ChangeHealthBar);
+
         private void CheckComponent()
         {
             bufferBar = transform.parent.Find("HealthBufferBar").GetComponent<Image>();
@@ -31,11 +31,13 @@ namespace Script
             _enemyProperties = FindObjectOfType<EnemyProperties>().GetComponent<EnemyProperties>();
             _playerProperties = FindObjectOfType<PlayerProperties>().GetComponent<PlayerProperties>();
         }
+
         private void ChangeHealthBar(float damage, float currentHealth)
         {
             _bufferChanged = true;
             bar.fillAmount = currentHealth / _enemyProperties.maxHealth;
         }
+
         private void BufferBar()
         {
             transform.parent.eulerAngles = _startRotation; //保持血条不旋转

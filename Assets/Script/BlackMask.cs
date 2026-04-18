@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Script.Player;
 using UnityEngine;
@@ -37,6 +38,8 @@ namespace Script
             Vector2 _pPos = _camera.WorldToViewportPoint(_playerController.transform.position);
             blackMaskMaterial.SetVector(Center, new Vector4(_pPos.x, _pPos.y, 0, 0));
         }
+        private void OnDestroy() => _playerHealth.onDeath.RemoveListener(ChangeRadius);
+
         private void OnRenderImage(RenderTexture source, RenderTexture destination)
         {
             if (blackMaskMaterial == null)

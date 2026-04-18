@@ -8,10 +8,8 @@ namespace Script
 {
     public class Health : MonoBehaviour
     {
-        private void Awake()
-        {
-            CheckComponent();
-        }
+        private void Awake() => CheckComponent();
+
 
         private void Start()
         {
@@ -27,7 +25,7 @@ namespace Script
             onTakeDamage?.Invoke(damage, currentHealth);
             if (currentHealth <= 0)
             {
-                Die();
+                onDeath?.Invoke();
             }
             else
             {
@@ -36,15 +34,16 @@ namespace Script
             }
         }
 
-        private void Die()
-        {
-            onDeath?.Invoke();
-        }
-
         private void CheckComponent()
         {
             _playerProperties = FindObjectOfType<PlayerProperties>();
             _enemyProperties = FindObjectOfType<EnemyProperties>();
+        }
+        private IEnumerator EnableInvincibility() //无敌计时协程
+        {
+            _invincible = true;
+            yield return new WaitForSeconds(_playerProperties.invincibleTime);
+            _invincible = false;
         }
 
         #region 属性
@@ -52,13 +51,6 @@ namespace Script
         public float currentHealth;
         private bool _invincible;
         private Coroutine _invincibilityCoroutine;
-
-        private IEnumerator EnableInvincibility() //无敌计时协程
-        {
-            _invincible = true;
-            yield return new WaitForSeconds(_playerProperties.invincibleTime);
-            _invincible = false;
-        }
 
         #endregion
 

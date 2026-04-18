@@ -19,7 +19,6 @@ namespace Script.Player
 
         private void OnDestroy()
         {
-            if (!_isDestroy) return;
             _playerHealth.onTakeDamage.RemoveListener(HurtAnimation);
             _playerHealth.onDeath.RemoveListener(() => HurtAnimation(0, 0));
         }
@@ -67,7 +66,9 @@ namespace Script.Player
 
         private void HurtAnimation(float damage, float currentHealth)
         {
+            _isDestroy = currentHealth == 0;
             animator.SetBool(_isHurtCompleted, false);
+            _playerController.comboCount = 0; //受伤时重置连击数
             if (currentHealth == 0)
             {
                 if (_isDestroy) return;
@@ -78,7 +79,6 @@ namespace Script.Player
                 animator.SetTrigger(_anyHurt);
             }
 
-            _isDestroy = currentHealth == 0;
         }
 
         public void ComboRequest(int count)
@@ -207,7 +207,9 @@ namespace Script.Player
         public void HurtComplete()
         {
             animator.SetBool(_isHurtCompleted, true);
-            if (_isDestroy) _playerController.DestroyPlayer();
+            if (!_isDestroy) return;
+            animator.SetTrigger(_anyDeath);
+            _playerController.DestroyPlayer();
         }
 
         #endregion

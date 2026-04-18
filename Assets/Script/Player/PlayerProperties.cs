@@ -15,4 +15,4 @@ namespace Script.Player
         public float invincibleTime = 0.2f; //无敌时间
         public float bufferBarSpeed = 2f;
     }
-}
+}   

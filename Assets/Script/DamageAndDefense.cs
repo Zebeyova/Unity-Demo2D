@@ -11,10 +11,7 @@ namespace Script
         private PlayerProperties _playerProperties;
         private GameObject _target;
 
-        private void Awake()
-        {
-            CheckComponent();
-        }
+        private void Awake() =>CheckComponent();
 
         private void OnCollisionExit2D(Collision2D other)
         {

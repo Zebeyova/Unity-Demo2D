@@ -5,13 +5,11 @@ namespace Script.Enemy
     public class EnemyDetectionArea : MonoBehaviour
     {
         private bool _inDetectionArea;
+        public bool GetDetectionArea() => _inDetectionArea;
         private bool _startTiming;
         private float _timer;
 
-        private void Update()
-        {
-            StartTimer();
-        }
+        private void Update() => StartTimer();
 
         private void OnTriggerExit2D(Collider2D collision)
         {
@@ -24,12 +22,7 @@ namespace Script.Enemy
         {
             if (collision.CompareTag("Player")) _inDetectionArea = true;
         }
-
-        public bool GetDetectionArea()
-        {
-            return _inDetectionArea;
-        }
-
+        
         private void StartTimer()
         {
             if (!_startTiming) return;

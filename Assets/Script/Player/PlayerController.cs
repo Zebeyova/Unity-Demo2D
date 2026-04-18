@@ -23,7 +23,6 @@ namespace Script.Player
         private void Update()
         {
             _inGround = _cr2D.IsTouchingLayers(groundLayerMask);
-            InputCheck();
             ChangeState();
             PlayerControl();
         }
@@ -45,24 +44,20 @@ namespace Script.Player
         private void ChangeState()
         {
             _horizontal = Input.GetAxis("Horizontal");
-
-            if (_isAttacking) //二段连击
-            {
-                if (!Input.GetKeyDown(KeyCode.J)) return;
-                _animationController.ComboRequest(2);
-                return;
-            }
+            _isWalking = _isRunning = _isSliding = _isJumping = _isAttacking = false;
 
             if (_currentState == PlayerState.Run && Input.GetKeyDown(KeyCode.Space) && _inGround &&
                 !_isSlidingOnCoolDown) //滑铲
             {
                 _currentState = PlayerState.Slide;
+                _isSliding = true;
                 return;
             }
 
             if (Input.GetKeyDown(KeyCode.K)) //跳跃
             {
                 _currentState = PlayerState.Jump;
+                _isJumping = true;
                 return;
             }
 
@@ -70,6 +65,14 @@ namespace Script.Player
             {
                 _animationController.ComboRequest(3);
                 _currentState = PlayerState.Attack;
+                _isAttacking = true;
+                return;
+            }
+
+            if (_isAttacking && comboCount == 1) //二段连击
+            {
+                if (!Input.GetKeyDown(KeyCode.J)) return;
+                _animationController.ComboRequest(2);
                 return;
             }
 
@@ -77,47 +80,25 @@ namespace Script.Player
             {
                 _animationController.ComboRequest(1);
                 _currentState = PlayerState.Attack;
+                _isAttacking = true;
                 return;
             }
 
             if (Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(_horizontal) > 0) //按住跑步
             {
                 _currentState = PlayerState.Run;
+                _isRunning = Mathf.Abs(_horizontal) > 0;
                 return;
             }
 
             if (Mathf.Abs(_horizontal) > 0) //前进
             {
                 _currentState = PlayerState.Walk;
+                _isWalking = true;
                 return;
             }
 
             _currentState = PlayerState.Idle; //待机
-        }
-
-        private void InputCheck()
-        {
-            _isWalking = _isRunning = _isSliding = _isJumping = _isAttacking = false; //状态重置
-            switch (_currentState)
-            {
-                case PlayerState.Idle:
-                    break;
-                case PlayerState.Walk:
-                    _isWalking = true;
-                    break;
-                case PlayerState.Run:
-                    _isRunning = Mathf.Abs(_horizontal) > 0;
-                    break;
-                case PlayerState.Slide:
-                    _isSliding = true;
-                    break;
-                case PlayerState.Jump:
-                    _isJumping = true;
-                    break;
-                case PlayerState.Attack:
-                    _isAttacking = true;
-                    break;
-            }
         }
 
         private void PlayerControl()
@@ -229,7 +210,7 @@ namespace Script.Player
         private bool _currentFacing;
         private bool _targetFacing;
         private bool _inGround;
-
+        private bool _isIdling;
         private bool _isRunning;
         private bool _isWalking;
         private bool _isJumping;
@@ -237,7 +218,14 @@ namespace Script.Player
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
         private float _slideTimer;
-        public float GetSlideTimer() => _slideTimer;
+        public void SetIsIdling(bool value)
+        {
+            _isIdling = value;
+        }
+        public float GetSlideTimer()
+        {
+            return _slideTimer;
+        }
 
         #endregion
     }

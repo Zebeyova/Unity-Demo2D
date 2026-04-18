@@ -9,22 +9,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/AndroidProjectSystem.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem_Guard.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem_Guard.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem_Patrol.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem_Patrol.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Die.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Die.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Die.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Die.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/BlackMask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/BlackMask.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyProperties.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyDetectionArea.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyDetectionArea.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Health.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/HealthBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/HealthBar.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/HealthBarEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/HealthBarEnemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/OtherProperties.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/OtherProperties.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Player/PlayerProperties.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +58,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90585cf0c5a24f279207485a8de593e713e800/88/e1c2cd22/UnityEvent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/HLSLSupport.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/BlackMask.cs" root0="FORCE_HIGHLIGHTING" />
@@ -64,7 +67,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Script/Enemy/EnemyProperties.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/HealthBar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/HealthBarEnemy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/OtherProperties.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Player/PlayerProperties.cs" root0="FORCE_HIGHLIGHTING" />
@@ -86,31 +88,41 @@
     <option name="showMembers" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.nasller.CodeGlancePro",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.nasller.CodeGlancePro&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="附加到 Unity 编辑器.附加到 Unity 编辑器">
     <configuration name="启动 Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Unity\2020.3.48f1c1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;E:\Unity Projects\Demo2D&quot; -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="E:\Unity Projects\Demo2D" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="独立播放器" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/BuildAndRun\Demo2D.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="E:\Unity Projects\Demo2D\BuildAndRun" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
@@ -179,7 +191,8 @@
       <workItem from="1776410355604" duration="602000" />
       <workItem from="1776499109305" duration="52000" />
       <workItem from="1776499675606" duration="47000" />
-      <workItem from="1776499751975" duration="3364000" />
+      <workItem from="1776499751975" duration="3712000" />
+      <workItem from="1776506278680" duration="9821000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -325,7 +338,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776405454956</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Demo2D第一版">
+      <option name="closed" value="true" />
+      <created>1776503200817</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1776503200817</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,7 +391,8 @@
     <MESSAGE value="备份" />
     <MESSAGE value="4.16备份" />
     <MESSAGE value="添加技能伤害并修复了多段攻击混杂技能伤害有概率导致敌人无法销毁,玩家无法输入的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加技能伤害并修复了多段攻击混杂技能伤害有概率导致敌人无法销毁,玩家无法输入的问题" />
+    <MESSAGE value="Demo2D第一版" />
+    <option name="LAST_COMMIT_MESSAGE" value="Demo2D第一版" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

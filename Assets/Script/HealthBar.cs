@@ -9,10 +9,8 @@ namespace Script
     public class HealthBar : MonoBehaviour
     {
         private bool _bufferChanged;
-        private void Awake()
-        {
-            CheckComponent();
-        }
+        private void Awake() => CheckComponent();
+
         private void Start()
         {
             _health.onTakeDamage.AddListener(ChangeHealthBar);
@@ -23,6 +21,8 @@ namespace Script
             BufferBar();
             slideCoolDownBar.fillAmount = _playerController.GetSlideTimer() / _playerProperties.slideCool; //滑铲冷却条
         }
+        private void OnDestroy() => _health.onTakeDamage.RemoveListener(ChangeHealthBar);
+
         private void CheckComponent()
         {
             bufferBar = transform.parent.Find("HealthBufferBar").GetComponent<Image>();

@@ -10,22 +10,18 @@ namespace Script.Enemy
         private bool _isAttacking;
         private bool _isDestroy; //销毁敌人
 
-        private void Awake()
-        {
-            CheckComponent();
-        }
+        private void Awake() => CheckComponent();
 
         private void Start()
         {
             _enemyHealth.onTakeDamage.AddListener(HurtAnimation);
-            _enemyHealth.onDeath.AddListener(() => HurtAnimation(0, 0));
+            _enemyHealth.onDeath.AddListener(() => DieAnimation(0));
         }
 
         private void OnDestroy()
         {
-            if (!_isDestroy) return;
             _enemyHealth.onTakeDamage.RemoveListener(HurtAnimation);
-            _enemyHealth.onDeath.RemoveListener(() => HurtAnimation(0, 0));
+            _enemyHealth.onDeath.RemoveListener(() => DieAnimation(0));
         }
 
         private void CheckComponent()
@@ -60,20 +56,18 @@ namespace Script.Enemy
             }
         }
 
-        public void HurtAnimation(float damage, float currentHealth)
+        private void HurtAnimation(float damage, float currentHealth)
         {
+            if (_isDestroy) return;
             animator.SetBool(_isCompleted, false);
-            if (currentHealth == 0)
-            {
-                if (_isDestroy) return;
-                animator.SetTrigger(_anyDie);
-            }
-            else
-            {
-                animator.SetTrigger(_anyHurt);
-            }
-
+            animator.SetTrigger(_anyHurt);
+        }
+        private void DieAnimation(float currentHealth)
+        {
+            if (_isDestroy) return;
             _isDestroy = currentHealth == 0;
+            animator.SetBool(_isCompleted, false);
+            animator.SetTrigger(_anyDie);
         }
 
         #region 动画事件
