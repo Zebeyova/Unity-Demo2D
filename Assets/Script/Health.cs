@@ -13,7 +13,7 @@ namespace Script
 
         private void Start()
         {
-            currentHealth = transform.CompareTag("Player") ? _enemyProperties.maxHealth : _playerProperties.maxHealth;
+            currentHealth = transform.CompareTag("Player") ? _playerProperties.maxHealth : _enemyProperties.maxHealth;
         }
 
         public void Injured(float damage)
@@ -21,7 +21,7 @@ namespace Script
             if (_invincible || damage < 0) return;
             currentHealth -= damage;
             currentHealth = Mathf.Clamp(currentHealth, 0,
-                transform.CompareTag("Player") ? _enemyProperties.maxHealth : _playerProperties.maxHealth); //确保生命不会出现负数
+                transform.CompareTag("Player") ? _playerProperties.maxHealth : _enemyProperties.maxHealth); //确保生命不会出现负数
             onTakeDamage?.Invoke(damage, currentHealth);
             if (currentHealth <= 0)
             {

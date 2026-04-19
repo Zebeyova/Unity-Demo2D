@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Script.Enemy
@@ -5,7 +6,6 @@ namespace Script.Enemy
     public class EnemyAnimationController : MonoBehaviour
     {
         public Animator animator;
-        private EnemyController _enemyController;
         private Health _enemyHealth;
         private bool _isAttacking;
         private bool _isDestroy; //销毁敌人
@@ -28,7 +28,6 @@ namespace Script.Enemy
         {
             animator = GetComponent<Animator>();
             _enemyHealth = GetComponent<Health>();
-            _enemyController = GetComponent<EnemyController>();
         }
 
         public void IdleAnimation()
@@ -56,9 +55,8 @@ namespace Script.Enemy
             }
         }
 
-        private void HurtAnimation(float damage, float currentHealth) //TODO:敌人有概率不销毁
+        private void HurtAnimation(float damage, float currentHealth)
         {
-            if (_isDestroy) return;
             animator.SetBool(_isCompleted, false);
             animator.SetTrigger(_anyHurt);
         }
@@ -68,6 +66,15 @@ namespace Script.Enemy
             _isDestroy = currentHealth == 0;
             animator.SetBool(_isCompleted, false);
             animator.SetTrigger(_anyDie);
+            animator.Update(0f);
+            StartCoroutine(DestroyEnemy());
+        }
+        private IEnumerator DestroyEnemy()
+        {
+            yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Die"));
+            var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            yield return new WaitForSeconds(stateInfo.length);
+            Destroy(gameObject);
         }
 
         #region 动画事件
@@ -82,7 +89,6 @@ namespace Script.Enemy
         {
             _isAttacking = false;
             animator.SetBool(_isCompleted, true);
-            if (_isDestroy) _enemyController.DestroyEnemy();
         }
 
         #endregion
