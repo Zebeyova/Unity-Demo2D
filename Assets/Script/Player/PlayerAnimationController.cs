@@ -67,18 +67,11 @@ namespace Script.Player
 
         private void HurtAnimation(float damage, float currentHealth)
         {
+            if (_isDestroy) return;
             _isDestroy = currentHealth == 0;
             animator.SetBool(_isHurtCompleted, false);
             _playerController.comboCount = 0; //受伤时重置连击数
-            if (currentHealth == 0)
-            {
-                if (_isDestroy) return;
-                animator.SetTrigger(_anyDeath);
-            }
-            else
-            {
-                animator.SetTrigger(_anyHurt);
-            }
+            animator.SetTrigger(currentHealth == 0 ? _anyDeath : _anyHurt);
         }
 
         public void StartTurn(bool isRunning, Action turnComplete)

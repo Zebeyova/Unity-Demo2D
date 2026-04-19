@@ -32,7 +32,6 @@ namespace Script.Enemy
             _eAnimationController = GetComponent<EnemyAnimationController>();
             _eDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
             _enemyProperties = FindObjectOfType<EnemyProperties>();
-            // _health = GetComponent<Health>();
         }
 
         private void EnemyControl()
@@ -186,8 +185,6 @@ namespace Script.Enemy
             _allowAttack = false;
         }
 
-        // public void DestroyEnemy() => Destroy(gameObject);
-
         #region 属性
 
         public LayerMask wallLayerMask;
@@ -212,7 +209,6 @@ namespace Script.Enemy
         private EnemyDetectionArea _eDetectionArea;
         private EnemyProperties _enemyProperties;
         private Coroutine _attackCooldownCoroutine; //攻击冷却协程
-        // private Health _health;
 
         #endregion
     }

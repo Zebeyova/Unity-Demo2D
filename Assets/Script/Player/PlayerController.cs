@@ -191,10 +191,7 @@ namespace Script.Player
             _currentState = PlayerState.Idle;
         }
 
-        public void DestroyPlayer()
-        {
-            Destroy(gameObject);
-        }
+        public void DestroyPlayer() => Destroy(gameObject);
 
         #region 成员
 
