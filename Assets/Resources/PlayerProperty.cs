@@ -4,6 +4,7 @@ namespace Resources
 {
     public enum PlayerStats
     {
+        Idle,
         Walk,
         WalkTurn,
         Run,

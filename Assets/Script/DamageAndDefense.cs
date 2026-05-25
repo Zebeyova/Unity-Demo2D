@@ -1,5 +1,4 @@
-﻿using Resources;
-using Script.Enemy;
+﻿using Script.Enemy;
 using Script.Player;
 using UnityEngine;
 
@@ -8,8 +7,8 @@ namespace Script
     public class DamageAndDefense : MonoBehaviour
     {
         private bool _allowInjured;
-        private EnemyProperties _enemyProperties;
-        private PlayerProperty _playerProperty;
+        private EnemyRunningData _enemyRunningData;
+        private PlayerRunningData _playerRunningData;
         private GameObject _target;
 
         private void Awake() =>CheckComponent();
@@ -40,8 +39,8 @@ namespace Script
 
         private void CheckComponent()
         {
-            _playerProperty = FindObjectOfType<PlayerProperty>();
-            _enemyProperties = FindObjectOfType<EnemyProperties>();
+            _playerRunningData = FindObjectOfType<PlayerRunningData>();
+            _enemyRunningData = FindObjectOfType<EnemyRunningData>();
         }
 
         private void PlayerAttackOperation()
@@ -50,7 +49,7 @@ namespace Script
             {
                 var targetHealth = _target.GetComponent<Health>();
                 if (targetHealth && targetHealth.isActiveAndEnabled)
-                    targetHealth.Injured(_playerProperty.damage);
+                    targetHealth.Injured(_playerRunningData.Damage);
             }
         }
         private void PlayerSkillsOperation()
@@ -59,7 +58,7 @@ namespace Script
             {
                 var targetHealth = _target.GetComponent<Health>();
                 if (targetHealth && targetHealth.isActiveAndEnabled)
-                    targetHealth.Injured(_playerProperty.skillDamage);
+                    targetHealth.Injured(_playerRunningData.SkillDamage);
             }
         }
         private void EnemyAttackOperation()
@@ -68,7 +67,7 @@ namespace Script
             {
                 var targetHealth = _target.GetComponent<Health>();
                 if (targetHealth && targetHealth.isActiveAndEnabled)
-                    targetHealth.Injured(_enemyProperties.damage);
+                    targetHealth.Injured(_enemyRunningData.Damage);
             }
         }
     }

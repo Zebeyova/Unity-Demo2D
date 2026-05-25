@@ -25,7 +25,7 @@ namespace Script.Player
         private void CheckComponent()
         {
             animator = GetComponent<Animator>();
-            _playerController = GetComponent<PlayerController>();
+            _runData = GetComponent<PlayerRunningData>();
             _playerHealth = GetComponent<Health>();
         }
 
@@ -51,7 +51,7 @@ namespace Script.Player
         {
             if (_isDestroy) return;
             _isDestroy = currentHealth == 0;
-            _playerController.comboCount = 0; //受伤时重置连击数
+            _runData.comboCount = 0; //受伤时重置连击数
         }
 
         public void StartTurn(bool isRunning, Action turnComplete)
@@ -84,7 +84,7 @@ namespace Script.Player
         private bool _comboRequested; //连击请求
         private Action _onComplete;
         public Animator animator;
-        private PlayerController _playerController;
+        private PlayerRunningData _runData;
         private Health _playerHealth;
         private bool _isDestroy; //销毁玩家
 

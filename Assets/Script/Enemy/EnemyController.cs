@@ -1,4 +1,5 @@
 using System.Collections;
+using Resources;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -31,7 +32,7 @@ namespace Script.Enemy
             _rb2DEnemy = GetComponent<Rigidbody2D>();
             _eAnimationController = GetComponent<EnemyAnimationController>();
             _eDetectionArea = GetComponentInChildren<EnemyDetectionArea>();
-            _enemyProperties = FindObjectOfType<EnemyProperties>();
+            _runData = FindObjectOfType<EnemyRunningData>();
         }
 
         private void EnemyControl()
@@ -69,7 +70,7 @@ namespace Script.Enemy
             {
                 Distance = (_startPosition - gameObject.transform.position).normalized;
 
-                if (Vector3.Distance(_startPosition, gameObject.transform.position) < _enemyProperties.endError)
+                if (Vector3.Distance(_startPosition, gameObject.transform.position) < _runData.EndError)
                 {
                     _rb2DEnemy.velocity = Vector3.zero;
                     _eAnimationController.IdleAnimation();
@@ -108,16 +109,16 @@ namespace Script.Enemy
                 {
                     case -1:
                         Distance = _leftPatrolBorder - gameObject.transform.position;
-                        if (Distance.magnitude < _enemyProperties.endError) _patrolDirection = 1;
+                        if (Distance.magnitude < _runData.EndError) _patrolDirection = 1;
                         break;
                     case 1:
                         Distance = _rightPatrolBorder - gameObject.transform.position;
-                        if (Distance.magnitude < _enemyProperties.endError) _patrolDirection = -1;
+                        if (Distance.magnitude < _runData.EndError) _patrolDirection = -1;
                         break;
                     default:
                         Distance = _startPosition - gameObject.transform.position;
                         EnemyMove(Distance);
-                        if (Vector3.Distance(_startPosition, gameObject.transform.position) < _enemyProperties.endError)
+                        if (Vector3.Distance(_startPosition, gameObject.transform.position) < _runData.EndError)
                         {
                             RandomBorder();
                             _isTouchWall = false;
@@ -135,7 +136,7 @@ namespace Script.Enemy
             transform.Rotate(Vector3.up, Vector3.Cross(distance, gameObject.transform.forward).y > 0 ? 180 : 0,
                 Space.Self); //旋转
             _eAnimationController.WalkAnimation();
-            _rb2DEnemy.velocity = distance.normalized * _enemyProperties.baseSpeed;
+            _rb2DEnemy.velocity = distance.normalized * _runData.BaseSpeed;
         }
 
         private void WallCheck()
@@ -154,17 +155,17 @@ namespace Script.Enemy
 
         private void RandomBorder()
         {
-            var RandomBorderNum = Random.Range(0f, _enemyProperties.endError);
+            var RandomBorderNum = Random.Range(0f, _runData.EndError);
             _patrolDirection = Random.Range(0, 2) == 0 ? -1 : 1;
 
             var RandomVector = new Vector3(RandomBorderNum, 0, 0);
-            _leftPatrolBorder = _startPosition - transform.right * _enemyProperties.patrolMaxDistance - RandomVector;
-            _rightPatrolBorder = _startPosition + transform.right * _enemyProperties.patrolMaxDistance + RandomVector;
+            _leftPatrolBorder = _startPosition - transform.right * _runData.PatrolMaxDistance - RandomVector;
+            _rightPatrolBorder = _startPosition + transform.right * _runData.PatrolMaxDistance + RandomVector;
         }
 
         private void AttackOperation(Vector3 distance)
         {
-            if (distance.magnitude < _enemyProperties.distanceFromPlayer && !_allowAttack)
+            if (distance.magnitude < _runData.DistanceFromPlayer && !_allowAttack)
             {
                 _rb2DEnemy.velocity = Vector3.zero;
                 _eAnimationController.AttackAnimation();
@@ -180,7 +181,7 @@ namespace Script.Enemy
         private IEnumerator AttackCooldown()
         {
             _allowAttack = true;
-            yield return new WaitForSeconds(_enemyProperties.attackCoolDown);
+            yield return new WaitForSeconds(_runData.AttackCoolDown);
             _isAttackingCooldown = false;
             _allowAttack = false;
         }
@@ -205,9 +206,9 @@ namespace Script.Enemy
         public EnemyType enemyType;
         private Rigidbody2D _rb2DEnemy;
         private Transform _playerTransform;
+        private EnemyRunningData _runData;
         private EnemyAnimationController _eAnimationController;
         private EnemyDetectionArea _eDetectionArea;
-        private EnemyProperties _enemyProperties;
         private Coroutine _attackCooldownCoroutine; //攻击冷却协程
 
         #endregion

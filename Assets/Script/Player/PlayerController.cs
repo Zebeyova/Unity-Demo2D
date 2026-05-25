@@ -1,17 +1,8 @@
+using Resources;
 using UnityEngine;
 
 namespace Script.Player
 {
-    public enum PlayerState
-    {
-        Idle,
-        Walk,
-        Run,
-        Slide,
-        Jump,
-        Attack
-    }
-
     public class PlayerController : MonoBehaviour
     {
         private void Awake()
@@ -37,6 +28,7 @@ namespace Script.Player
         {
             _cr2D = GetComponent<Collider2D>();
             _rb2D = GetComponent<Rigidbody2D>();
+            _runData = GetComponent<PlayerRunningData>();
             _animationController = GetComponent<PlayerAnimationController>();
         }
 
@@ -45,60 +37,61 @@ namespace Script.Player
             _horizontal = Input.GetAxis("Horizontal");
             _isWalking = _isRunning = _isSliding = _isJumping = _isAttacking = false;
 
-            if (_currentState == PlayerState.Run && Input.GetKeyDown(KeyCode.Space) && _inGround &&
+            if ((_runData.currentState == PlayerStats.Run) && Input.GetKeyDown(KeyCode.Space) && _inGround &&
                 !_isSlidingOnCoolDown) //滑铲
             {
-                _currentState = PlayerState.Slide;
+                _runData.currentState = PlayerStats.Slide;
                 _isSliding = true;
                 return;
             }
 
             if (Input.GetKeyDown(KeyCode.K)) //跳跃
             {
-                _currentState = PlayerState.Jump;
+                _runData.currentState = PlayerStats.Jump;
                 _isJumping = true;
                 return;
             }
 
             if (Input.GetKeyDown(KeyCode.L)) //攻技能
             {
+                _runData.currentState = PlayerStats.Skills;
                 _animationController.AttackAnimation(3);
-                _currentState = PlayerState.Attack;
                 _isAttacking = true;
                 return;
             }
 
             if (Input.GetKeyDown(KeyCode.J)) //攻击
             {
-                if (_isAttacking && comboCount > 1) //二段连击
+                if (_isAttacking && _runData.comboCount > 5) //二段连击
                 {
+                    _runData.currentState = PlayerStats.Attack2;
                     _animationController.AttackAnimation(2);
-                    comboCount = 0;
+                    _runData.comboCount = 0;
                     return;
                 }
 
+                _runData.currentState = PlayerStats.Attack1;
                 _animationController.AttackAnimation(1);
-                _currentState = PlayerState.Attack;
                 _isAttacking = true;
-                comboCount++;
+                _runData.comboCount++;
                 return;
             }
 
             if (Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(_horizontal) > 0) //按住跑步
             {
-                _currentState = PlayerState.Run;
+                _runData.currentState = PlayerStats.Run;
                 _isRunning = Mathf.Abs(_horizontal) > 0;
                 return;
             }
 
             if (Mathf.Abs(_horizontal) > 0) //前进
             {
-                _currentState = PlayerState.Walk;
+                _runData.currentState = PlayerStats.Walk;
                 _isWalking = true;
                 return;
             }
 
-            _currentState = PlayerState.Idle; //待机
+            _runData.currentState = PlayerStats.Idle; //待机
         }
 
         private void PlayerControl()
@@ -110,7 +103,7 @@ namespace Script.Player
 
             if (_isJumping && _inGround)
             {
-                _rb2D.velocity = new Vector2(_rb2D.velocity.x, PlayerPropertyManager.PlayerProperty.jumpForce);
+                _rb2D.velocity = new Vector2(_rb2D.velocity.x, _runData.JumpForce);
                 _animationController.JumpAnimation(true);
                 _animationController.UpdateState(_isWalking, _isRunning);
                 _isJumping = false;
@@ -139,7 +132,7 @@ namespace Script.Player
             _targetFacing = _horizontal > 0;
             var shouldTurn = !_inTurning && _currentFacing != _targetFacing &&
                              (_isWalking || _isRunning) && !_isSliding &&
-                             Mathf.Abs(_horizontal) > PlayerPropertyManager.PlayerProperty.horizontalInputThreshold;
+                             Mathf.Abs(_horizontal) > _runData.HorizontalInputThreshold;
             if (!shouldTurn) return;
 
             _animationController.StartTurn(_isRunning, () =>
@@ -168,9 +161,9 @@ namespace Script.Player
                 return;
             }
 
-            var currentSpeed = PlayerPropertyManager.PlayerProperty.baseSpeed;
-            if (_isSliding) currentSpeed *= PlayerPropertyManager.PlayerProperty.runSpeedMultiplier * 1.35f;
-            else if (_isRunning) currentSpeed *= PlayerPropertyManager.PlayerProperty.runSpeedMultiplier;
+            var currentSpeed = _runData.BaseSpeed;
+            if (_isSliding) currentSpeed *= _runData.RunSpeedMultiplier * 1.35f;
+            else if (_isRunning) currentSpeed *= _runData.RunSpeedMultiplier;
 
             if (_isWalking || _isRunning)
                 _rb2D.velocity = new Vector2(_horizontal * currentSpeed, _rb2D.velocity.y);
@@ -181,25 +174,28 @@ namespace Script.Player
             if (_isSlidingOnCoolDown) _slideTimer -= Time.fixedDeltaTime;
             if (_slideTimer > 0) return;
             _isSlidingOnCoolDown = false;
-            _slideTimer = PlayerPropertyManager.PlayerProperty.slideCool;
+            _slideTimer = _runData.SlideCool;
         }
 
         public void OnAttackFinished()
         {
-            comboCount = 0;
-            _currentState = PlayerState.Idle;
+            _runData.comboCount = 0;
+            _runData.currentState = PlayerStats.Idle;
         }
 
         public void DestroyPlayer() => Destroy(gameObject);
 
         #region 成员
 
-        public int comboCount;
         public LayerMask groundLayerMask;
+        private PlayerRunningData _runData;
         private PlayerAnimationController _animationController;
         private Collider2D _cr2D;
-        private PlayerState _currentState = PlayerState.Idle;
         private Rigidbody2D _rb2D;
+
+        #endregion
+
+        #region 属性
 
         private float _horizontal;
         private bool _inTurning;
@@ -213,6 +209,7 @@ namespace Script.Player
         private bool _isSliding;
         private bool _isSlidingOnCoolDown;
         private float _slideTimer;
+
         public float GetSlideTimer()
         {
             return _slideTimer;
