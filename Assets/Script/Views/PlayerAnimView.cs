@@ -16,6 +16,8 @@ namespace Script.Views
         public event Action OnJumpPeak;
         public event Action OnLanding;
         public event Action OnTurnEnd;
+        public event Action OnSlideEnd;
+        public event Action OnAttackEnd;
 
         private static readonly Dictionary<PlayerStats, int> AnimDictionary = new Dictionary<PlayerStats, int>
         {
@@ -82,8 +84,29 @@ namespace Script.Views
             _runTimeData.currentState = PlayerStats.Death;
         }
 
-        public void TriggerJumpPeak() => OnJumpPeak?.Invoke();
-        public void TriggerLanding() => OnLanding?.Invoke();
-        public void TriggerTurnEnd() => OnTurnEnd?.Invoke();
+        public void TriggerJumpPeak()
+        {
+            OnJumpPeak?.Invoke();
+        }
+
+        public void TriggerLanding()
+        {
+            OnLanding?.Invoke();
+        }
+
+        public void TriggerTurnEnd()
+        {
+            OnTurnEnd?.Invoke();
+        }
+
+        public void TriggerSlideEnd()
+        {
+            OnSlideEnd?.Invoke();
+        }
+
+        public void TriggerAttackEnd()
+        {
+            OnAttackEnd?.Invoke();
+        }
     }
 }

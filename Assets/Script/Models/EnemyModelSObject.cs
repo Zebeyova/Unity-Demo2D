@@ -11,8 +11,8 @@ namespace Script.Models
         Die
     }
 
-    [CreateAssetMenu(fileName = "NewEnemyProperty", menuName = "GameModel/EnemyModelSO")]
-    public class EnemyModelSO : ScriptableObject
+    [CreateAssetMenu(fileName = "NewEnemyProperty", menuName = "GameModel/EnemyModelSObject")]
+    public class EnemyModelSObject : ScriptableObject
     {
         [Header("敌人属性")] public readonly float maxHealth = 100f;
         public readonly float damage = 10f;

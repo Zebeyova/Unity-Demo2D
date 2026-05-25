@@ -4,26 +4,26 @@ namespace Script.Models
 {
     public static class ModelManager
     {
-        private static PlayerModelSO _playerModelSo;
-        private static EnemyModelSO _enemyModelSo;
+        private static PlayerModelSObject _playerModelSObject;
+        private static EnemyModelSObject _enemyModelSObject;
 
-        public static PlayerModelSO PlayerModelSo
+        public static PlayerModelSObject PlayerModelSObject
         {
             get
             {
-                if (!_playerModelSo) _playerModelSo = Resources.Load<PlayerModelSO>("PlayerModel");
-                if (!_playerModelSo) Debug.LogError("PlayerModelSO not loaded"); //注销这行代码大部分的"开销较大"会消失
-                return _playerModelSo;
+                if (!_playerModelSObject) _playerModelSObject = Resources.Load<PlayerModelSObject>("PlayerModel");
+                if (!_playerModelSObject) Debug.LogError("PlayerModelSObject not loaded");
+                return _playerModelSObject;
             }
         }
 
-        public static EnemyModelSO EnemyModelSo
+        public static EnemyModelSObject EnemyModelSObject
         {
             get
             {
-                if (!_enemyModelSo) _enemyModelSo = Resources.Load<EnemyModelSO>("EnemyModel");
-                if (!_enemyModelSo) Debug.LogError("EnemyModelSO not loaded");
-                return _enemyModelSo;
+                if (!_enemyModelSObject) _enemyModelSObject = Resources.Load<EnemyModelSObject>("EnemyModel");
+                if (!_enemyModelSObject) Debug.LogError("EnemyModelSObject not loaded");
+                return _enemyModelSObject;
             }
         }
     }

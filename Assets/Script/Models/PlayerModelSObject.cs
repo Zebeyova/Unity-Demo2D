@@ -19,8 +19,8 @@ namespace Script.Models
         Death
     }
 
-    [CreateAssetMenu(fileName = "NewPlayerProperty", menuName = "GameModel/PlayerModelSO")]
-    public class PlayerModelSO : ScriptableObject
+    [CreateAssetMenu(fileName = "NewPlayerProperty", menuName = "GameModel/PlayerModelSObject")]
+    public class PlayerModelSObject : ScriptableObject
     {
         [Header("玩家属性")] public readonly float maxHealth = 100f;
         public readonly float damage = 15f;
