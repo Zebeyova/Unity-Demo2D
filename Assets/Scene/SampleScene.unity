@@ -1266,10 +1266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e30b704461788c4193572e390a774d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bufferBar: {fileID: 511142592}
   bar: {fileID: 562690699}
-  slideCoolDownBar: {fileID: 79091179}
+  bufferBar: {fileID: 511142592}
   text: {fileID: 19004154}
+  isPlayer: 1
 --- !u!1 &625379477
 GameObject:
   m_ObjectHideFlags: 0
@@ -5566,7 +5566,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrangeGolem_Patrol
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7510729193996682952, guid: c86b59ffd4982a0429e08232db28f947, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c86b59ffd4982a0429e08232db28f947, type: 3}
 --- !u!1001 &7618713010891150879
 PrefabInstance:
@@ -5575,6 +5576,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1561646510}
     m_Modifications:
+    - target: {fileID: 1630047660133863705, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
+      propertyPath: bar
+      value: 
+      objectReference: {fileID: 562690699}
+    - target: {fileID: 1630047660133863705, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 19004154}
+    - target: {fileID: 1630047660133863705, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
+      propertyPath: bufferBar
+      value: 
+      objectReference: {fileID: 511142592}
     - target: {fileID: 4725334110921229003, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

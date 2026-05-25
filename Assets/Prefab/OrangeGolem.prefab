@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7510729193996682953}
   - component: {fileID: 7510729193996682955}
-  - component: {fileID: 7510729193996682952}
   m_Layer: 0
   m_Name: DetectionArea
   m_TagString: Untagged
@@ -58,18 +57,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 1.2}
   m_EdgeRadius: 0
---- !u!114 &7510729193996682952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7510729193996682958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abf0af07b4ff62d4e937aaeed2c4951f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7510729194114917004
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +245,6 @@ GameObject:
   - component: {fileID: 7510729195238832683}
   - component: {fileID: 7510729195238832724}
   - component: {fileID: 7510729195238832725}
-  - component: {fileID: 7510729195238832682}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -323,20 +309,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7510729195238832682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7510729195238832680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45989ec52da4a8944950f2535a15cacf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bufferBar: {fileID: 7510729195513780694}
-  bar: {fileID: 7510729195238832725}
 --- !u!1 &7510729195513780695
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,8 +400,7 @@ GameObject:
   - component: {fileID: 7510729195683642499}
   - component: {fileID: 3836796103045337786}
   - component: {fileID: 7510729195683642496}
-  - component: {fileID: 7510729195683642497}
-  - component: {fileID: 7510729195683642502}
+  - component: {fileID: 5582776902805295895}
   m_Layer: 0
   m_Name: OrangeGolem
   m_TagString: Enemy
@@ -574,10 +545,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a409375dbe80174bbf6ff69f1954f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  enemyType: 0
 --- !u!114 &3836796103045337786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,7 +563,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   currentHealth: 0
-  isAttackingCooldown: 0
 --- !u!114 &7510729195683642496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,8 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e33a620dd9c174ba88ba4fa55ed140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 7510729195683642508}
---- !u!114 &7510729195683642497
+--- !u!114 &5582776902805295895
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -615,25 +584,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7510729195683642503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb1ed66be0a43bb93b4acf908761a61, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e30b704461788c4193572e390a774d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7510729195683642502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7510729195683642503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d232704a4b66ea479a18a6b8c5bb2cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  onTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
+  bar: {fileID: 7510729195513780694}
+  bufferBar: {fileID: 7510729195238832725}
+  text: {fileID: 0}
+  isPlayer: 0

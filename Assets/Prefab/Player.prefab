@@ -16,8 +16,7 @@ GameObject:
   - component: {fileID: 7618713011203048798}
   - component: {fileID: 5829982090977190860}
   - component: {fileID: 7618713011203048796}
-  - component: {fileID: 7618713011203048793}
-  - component: {fileID: 7618713011203048794}
+  - component: {fileID: 1630047660133863705}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -160,7 +159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdf97a09b6341b47a244aeb2257aa06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comboCount: 0
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -176,7 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373bb169ba7ea224390c1d6e4299f54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  property: {fileID: 0}
   currentState: 0
   currentHealth: 0
   comboCount: 0
@@ -192,8 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19deb32aa8d25ed4a829ff990ad42dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 7618713011203048736}
---- !u!114 &7618713011203048793
+  crossFadeTime: 0.1
+--- !u!114 &1630047660133863705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,25 +199,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7618713011203048738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb1ed66be0a43bb93b4acf908761a61, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e30b704461788c4193572e390a774d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7618713011203048794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7618713011203048738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d232704a4b66ea479a18a6b8c5bb2cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  onTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
+  bar: {fileID: 0}
+  bufferBar: {fileID: 0}
+  text: {fileID: 0}
+  isPlayer: 1

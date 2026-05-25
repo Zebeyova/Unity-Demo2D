@@ -1,11 +1,11 @@
 using System.Collections;
-using Script.Player;
+using Script.RunTimeData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Script
+namespace Script.Views
 {
-    public class BlackMask : MonoBehaviour
+    public class BlackMaskView : MonoBehaviour
     {
         private static readonly int Radius = Shader.PropertyToID("_Radius");
         private static readonly int Center = Shader.PropertyToID("_Center");
@@ -13,53 +13,53 @@ namespace Script
 
         public Material blackMaskMaterial;
         [Range(0f, 2f)] public float radius = 2f;
+
         private Camera _camera;
         private Coroutine _changeRadiusCoroutine;
-        private PlayerController _playerController;
-        private Health _playerHealth;
+        private PlayerRunTimeData _playerData;
+
         private void Awake()
         {
-            CheckComponent();
-            if (blackMaskMaterial != null) blackMaskMaterial = new Material(blackMaskMaterial);
+            if (blackMaskMaterial)
+                blackMaskMaterial = new Material(blackMaskMaterial);
+            _camera = Camera.main;
+            _playerData = FindObjectOfType<PlayerRunTimeData>();
         }
+
         private void Start()
         {
-            _playerHealth.onDeath.AddListener(ChangeRadius);
+            _playerData.OnDeath += OnPlayerDeath;
             if (_needRespawnFadeOut)
-            {
-                if (_changeRadiusCoroutine != null) StopCoroutine(_changeRadiusCoroutine);
-                _changeRadiusCoroutine = StartCoroutine(ChangeRadiusCoroutine(true));
-            }
+                StartCoroutine(ChangeRadiusCoroutine(true));
         }
-        private void Update()
-        {
-            if (!_playerController) return;
-            Vector2 _pPos = _camera.WorldToViewportPoint(_playerController.transform.position);
-            blackMaskMaterial.SetVector(Center, new Vector4(_pPos.x, _pPos.y, 0, 0));
-        }
-        private void OnDestroy() => _playerHealth.onDeath.RemoveListener(ChangeRadius);
 
-        private void OnRenderImage(RenderTexture source, RenderTexture destination)
+        private void OnDestroy()
+        {
+            if (_playerData)
+                _playerData.OnDeath -= OnPlayerDeath;
+        }
+
+        private void OnRenderImage(RenderTexture src, RenderTexture dst)
         {
             if (blackMaskMaterial == null)
-            {
-                Graphics.Blit(source, destination);
-                return;
-            }
+                Graphics.Blit(src, dst);
+            else
+                Graphics.Blit(src, dst, blackMaskMaterial);
+        }
 
-            Graphics.Blit(source, destination, blackMaskMaterial);
-        }
-        private void CheckComponent()
+        private void Update()
         {
-            _playerController = FindObjectOfType<PlayerController>();
-            _camera = Camera.main;
-            _playerHealth = _playerController.GetComponent<Health>();
+            if (!_playerData) return;
+            Vector2 viewPos = _camera.WorldToViewportPoint(_playerData.transform.position);
+            blackMaskMaterial.SetVector(Center, new Vector4(viewPos.x, viewPos.y, 0, 0));
         }
-        private void ChangeRadius()
+
+        private void OnPlayerDeath()
         {
             if (_changeRadiusCoroutine != null) StopCoroutine(_changeRadiusCoroutine);
             _changeRadiusCoroutine = StartCoroutine(ChangeRadiusCoroutine(false));
         }
+
         private IEnumerator ChangeRadiusCoroutine(bool respawn)
         {
             if (respawn)

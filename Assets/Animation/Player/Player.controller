@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Walk_Turn
+  m_Name: WalkTurn
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -260,9 +260,9 @@ AnimatorStateMachine:
   - {fileID: 676355801389172407}
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 730, y: 0, z: 0}
+  m_AnyStatePosition: {x: 720, y: -40, z: 0}
   m_EntryPosition: {x: 520, y: 0, z: 0}
-  m_ExitPosition: {x: 730, y: 50, z: 0}
+  m_ExitPosition: {x: 720, y: 0, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -7106542677348586637}
 --- !u!1102 &-4555134522605844375
@@ -670,7 +670,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Run_Turn
+  m_Name: RunTurn
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
