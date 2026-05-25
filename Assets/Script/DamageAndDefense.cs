@@ -1,4 +1,5 @@
-﻿using Script.Enemy;
+﻿using Resources;
+using Script.Enemy;
 using Script.Player;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Script
     {
         private bool _allowInjured;
         private EnemyProperties _enemyProperties;
-        private PlayerProperties _playerProperties;
+        private PlayerProperty _playerProperty;
         private GameObject _target;
 
         private void Awake() =>CheckComponent();
@@ -39,7 +40,7 @@ namespace Script
 
         private void CheckComponent()
         {
-            _playerProperties = FindObjectOfType<PlayerProperties>();
+            _playerProperty = FindObjectOfType<PlayerProperty>();
             _enemyProperties = FindObjectOfType<EnemyProperties>();
         }
 
@@ -49,7 +50,7 @@ namespace Script
             {
                 var targetHealth = _target.GetComponent<Health>();
                 if (targetHealth && targetHealth.isActiveAndEnabled)
-                    targetHealth.Injured(_playerProperties.damage);
+                    targetHealth.Injured(_playerProperty.damage);
             }
         }
         private void PlayerSkillsOperation()
@@ -58,7 +59,7 @@ namespace Script
             {
                 var targetHealth = _target.GetComponent<Health>();
                 if (targetHealth && targetHealth.isActiveAndEnabled)
-                    targetHealth.Injured(_playerProperties.skillDamage);
+                    targetHealth.Injured(_playerProperty.skillDamage);
             }
         }
         private void EnemyAttackOperation()

@@ -13,7 +13,9 @@ namespace Script
 
         private void Start()
         {
-            currentHealth = transform.CompareTag("Player") ? _playerProperties.maxHealth : _enemyProperties.maxHealth;
+            currentHealth = transform.CompareTag("Player")
+                ? PlayerPropertyManager.PlayerProperty.maxHealth
+                : _enemyProperties.maxHealth;
         }
 
         public void Injured(float damage)
@@ -21,7 +23,9 @@ namespace Script
             if (_invincible || damage < 0) return;
             currentHealth -= damage;
             currentHealth = Mathf.Clamp(currentHealth, 0,
-                transform.CompareTag("Player") ? _playerProperties.maxHealth : _enemyProperties.maxHealth); //确保生命不会出现负数
+                transform.CompareTag("Player")
+                    ? PlayerPropertyManager.PlayerProperty.maxHealth
+                    : _enemyProperties.maxHealth); //确保生命不会出现负数
             onTakeDamage?.Invoke(damage, currentHealth);
             if (currentHealth <= 0)
             {
@@ -36,13 +40,13 @@ namespace Script
 
         private void CheckComponent()
         {
-            _playerProperties = FindObjectOfType<PlayerProperties>();
             _enemyProperties = FindObjectOfType<EnemyProperties>();
         }
+
         private IEnumerator EnableInvincibility() //无敌计时协程
         {
             _invincible = true;
-            yield return new WaitForSeconds(_playerProperties.invincibleTime);
+            yield return new WaitForSeconds(PlayerPropertyManager.PlayerProperty.invincibleTime);
             _invincible = false;
         }
 
@@ -56,7 +60,6 @@ namespace Script
 
         #region 成员
 
-        private PlayerProperties _playerProperties;
         private EnemyProperties _enemyProperties;
         public UnityEvent<float, float> onTakeDamage; //受伤事件广播
         public UnityEvent onDeath; //死亡事件广播

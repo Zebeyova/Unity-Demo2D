@@ -8,7 +8,6 @@ namespace Script.Player
         private void Awake()
         {
             CheckComponent();
-            animator.SetBool(_idleWalk, false);
         }
 
         private void Start()
@@ -32,57 +31,33 @@ namespace Script.Player
 
         public void UpdateState(bool isWalking, bool isRunning)
         {
-            if (InTurnState()) return;
-            animator.SetBool(_idleWalk, isWalking && !isRunning);
-            animator.SetBool(_walkRun, !isWalking && isRunning);
-            animator.SetBool(_idleRun, !isWalking && isRunning);
+            if (TurnState()) return;
         }
 
         public void RunAnimation(bool isSliding)
         {
-            if (GetState(_runSlide)) return;
-            animator.SetBool(_idleWalk, false);
-            animator.SetBool(_walkRun, true);
-            animator.SetBool(_idleRun, true);
-            animator.SetTrigger(isSliding ? _runSlide : _runTurn);
         }
 
         public void JumpAnimation(bool isJumping)
         {
-            if (isJumping && !GetState(_anyJump) && !GetState(_jumpFall))
-                animator.SetBool(_anyJump, true);
-            else if (!isJumping) animator.SetBool(_anyJump, false);
         }
 
         public void AttackAnimation(int count)
         {
-            animator.SetInteger(_attackCount, count);
             if (GetState(_attack1) || GetState(_attack2) || GetState(_skills)) return;
-            animator.SetBool(_idleWalk, false);
-            animator.SetBool(_walkRun, false);
-            animator.SetBool(_idleRun, false);
-
-            animator.SetTrigger(_anyAttack);
         }
 
         private void HurtAnimation(float damage, float currentHealth)
         {
             if (_isDestroy) return;
             _isDestroy = currentHealth == 0;
-            animator.SetBool(_isHurtCompleted, false);
             _playerController.comboCount = 0; //受伤时重置连击数
-            animator.SetTrigger(currentHealth == 0 ? _anyDeath : _anyHurt);
         }
 
         public void StartTurn(bool isRunning, Action turnComplete)
         {
             if (GetState(_jump) || GetState(_fall) || GetState(_attack1) || GetState(_attack2)) return;
             _onComplete = turnComplete;
-            animator.SetBool(_isTurnCompleted, false);
-
-            animator.SetBool(_idleWalk, false);
-            animator.SetBool(_walkRun, false);
-            animator.SetBool(_idleRun, false);
 
             if (isRunning)
             {
@@ -90,8 +65,6 @@ namespace Script.Player
             }
             else
             {
-                animator.SetBool(_idleWalk, true);
-                animator.SetTrigger(_walkTurn);
             }
         }
 
@@ -101,7 +74,7 @@ namespace Script.Player
             return animator.GetCurrentAnimatorStateInfo(0).shortNameHash == stateHash;
         }
 
-        public bool InTurnState()
+        public bool TurnState()
         {
             return GetState(_walkToTurn) || GetState(_runToTurn);
         }
@@ -119,24 +92,6 @@ namespace Script.Player
 
         #region 哈希表
 
-        private readonly int _isTurnCompleted = Animator.StringToHash("IsTurnCompleted");
-        private readonly int _isJumpFallCompleted = Animator.StringToHash("IsJumpFallCompleted");
-        private readonly int _isAttackCompleted = Animator.StringToHash("IsAttackCompleted");
-        private readonly int _isHurtCompleted = Animator.StringToHash("IsHurtCompleted");
-        private readonly int _idleWalk = Animator.StringToHash("IdleWalk");
-        private readonly int _idleRun = Animator.StringToHash("IdleRun");
-        private readonly int _walkRun = Animator.StringToHash("WalkRun");
-        private readonly int _walkTurn = Animator.StringToHash("WalkTurn");
-        private readonly int _runTurn = Animator.StringToHash("RunTurn");
-        private readonly int _runSlide = Animator.StringToHash("RunSlide");
-        private readonly int _anyJump = Animator.StringToHash("AnyJump");
-        private readonly int _jumpFall = Animator.StringToHash("JumpFall");
-        private readonly int _anyAttack = Animator.StringToHash("AnyAttack");
-        private readonly int _attackCount = Animator.StringToHash("AttackCount");
-        private readonly int _anyHurt = Animator.StringToHash("AnyHurt");
-        private readonly int _anyDeath = Animator.StringToHash("AnyDeath");
-
-        //状态表
         private readonly int _walkToTurn = Animator.StringToHash("Walk_Turn");
         private readonly int _runToTurn = Animator.StringToHash("run_Turn");
         private readonly int _jump = Animator.StringToHash("Jump");
@@ -144,48 +99,6 @@ namespace Script.Player
         private readonly int _attack1 = Animator.StringToHash("Attack1");
         private readonly int _attack2 = Animator.StringToHash("Attack2");
         private readonly int _skills = Animator.StringToHash("Skills");
-
-        #endregion
-
-        #region 动画事件
-
-        public void TurnComplete()
-        {
-            _onComplete?.Invoke();
-            _onComplete = null;
-            animator.SetBool(_isTurnCompleted, true);
-        }
-
-        public void JumpComplete()
-        {
-            animator.SetBool(_anyJump, false);
-            animator.SetTrigger(_jumpFall);
-        }
-
-        public void FallComplete()
-        {
-            animator.SetBool(_isJumpFallCompleted, true);
-        }
-
-        public void AttackComplete()
-        {
-            if (_playerController.comboCount > 1 && !GetState(_attack2))
-            {
-                AttackAnimation(2);
-                return;
-            }
-
-            animator.SetBool(_isAttackCompleted, true);
-            _playerController.OnAttackFinished();
-        }
-
-        public void HurtComplete()
-        {
-            animator.SetBool(_isHurtCompleted, true);
-            if (!_isDestroy) return;
-            animator.SetTrigger(_anyDeath);
-            _playerController.DestroyPlayer();
-        }
 
         #endregion
     }

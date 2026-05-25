@@ -1,8 +1,25 @@
 using UnityEngine;
 
-namespace Script.Player
+namespace Resources
 {
-    public class PlayerProperties : MonoBehaviour
+    public enum PlayerStats
+    {
+        Walk,
+        WalkTurn,
+        Run,
+        RunTurn,
+        Slide,
+        Jump,
+        Fall,
+        Attack1,
+        Attack2,
+        Skills,
+        Hurt,
+        Death
+    }
+
+    [CreateAssetMenu(fileName = "NewPlayerProperty", menuName = "Game/PlayerProperty")]
+    public class PlayerProperty : ScriptableObject
     {
         [Header("玩家属性")] public float maxHealth = 100f;
         public float damage = 15f;
@@ -15,4 +32,4 @@ namespace Script.Player
         public float invincibleTime = 0.2f; //无敌时间
         public float bufferBarSpeed = 2f;
     }
-}   
+}

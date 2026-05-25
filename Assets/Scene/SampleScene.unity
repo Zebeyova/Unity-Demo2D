@@ -4551,7 +4551,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1967875714}
-  - component: {fileID: 1967875716}
   - component: {fileID: 1967875715}
   m_Layer: 0
   m_Name: Properties
@@ -4593,28 +4592,6 @@ MonoBehaviour:
   endError: 0.25
   distanceFromPlayer: 0.93
   patrolMaxDistance: 1.25
---- !u!114 &1967875716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967875713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d19e19ca0b4e58a4b847f311cd94cef0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  damage: 15
-  skillDamage: 30
-  baseSpeed: 2
-  runSpeedMultiplier: 1.5
-  slideCool: 0.6
-  jumpForce: 10
-  horizontalInputThreshold: 0.01
-  invincibleTime: 0.35
-  bufferBarSpeed: 2
 --- !u!1 &2019207367
 GameObject:
   m_ObjectHideFlags: 0
