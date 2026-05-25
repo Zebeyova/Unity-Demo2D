@@ -1,4 +1,3 @@
-using System;
 using Script.Models;
 using Script.RunTimeData;
 using Script.Views;
@@ -24,6 +23,7 @@ namespace Script.Controllers
         // 转向
         private bool _currentFacingRight = true;
         private bool _targetFacingRight;
+        private bool? _pendingTurnFacingRight;
 
         private void Awake()
         {
@@ -38,14 +38,15 @@ namespace Script.Controllers
             var animView = GetComponent<PlayerAnimView>();
             animView.OnJumpPeak += OnJumpPeakHandler;
             animView.OnLanding += OnLandingHandler;
+            animView.OnTurnEnd += OnTurnEndHandler;
         }
 
         private void Update()
         {
             _inGround = _collider.IsTouchingLayers(groundLayerMask);
             HandleInput();
-            Move();
             HandleTurn();
+            Move();
         }
 
         private void FixedUpdate()
@@ -59,6 +60,7 @@ namespace Script.Controllers
             _isWalking = _isRunning = _isSliding = _isAttacking = false;
 
             // 滑铲
+            //TODO:滑铲冷却消失
             if (Input.GetKeyDown(KeyCode.Space) && _runTimeData.currentState == PlayerStats.Run && _inGround &&
                 !_isSlidingOnCooldown)
             {
@@ -90,7 +92,7 @@ namespace Script.Controllers
             if (Input.GetKeyDown(KeyCode.J))
             {
                 _isAttacking = true;
-                if (_runTimeData.comboCount > 5) // 二段连击阈值
+                if (_runTimeData.comboCount > 3) // 二段连击阈值
                 {
                     _runTimeData.currentState = PlayerStats.Attack2;
                     _runTimeData.comboCount = 0;
@@ -108,6 +110,8 @@ namespace Script.Controllers
 
             var isSpecialState = _runTimeData.currentState == PlayerStats.Jump ||
                                  _runTimeData.currentState == PlayerStats.Fall ||
+                                 _runTimeData.currentState == PlayerStats.WalkTurn ||
+                                 _runTimeData.currentState == PlayerStats.RunTurn ||
                                  _runTimeData.currentState == PlayerStats.Slide ||
                                  _runTimeData.currentState == PlayerStats.Attack1 ||
                                  _runTimeData.currentState == PlayerStats.Attack2 ||
@@ -148,22 +152,18 @@ namespace Script.Controllers
         // 结束滑铲状态
         private void EndSlide()
         {
-            if (_runTimeData.currentState == PlayerStats.Slide)
-            {
-                _runTimeData.currentState = _inGround ? PlayerStats.Idle : PlayerStats.Fall;
-                _isSliding = false;
-            }
+            if (_runTimeData.currentState != PlayerStats.Slide) return;
+            _runTimeData.currentState = _inGround ? PlayerStats.Idle : PlayerStats.Fall;
+            _isSliding = false;
         }
 
         // 结束攻击状态
         private void EndAttack()
         {
-            if (_runTimeData.currentState == PlayerStats.Attack1 || _runTimeData.currentState == PlayerStats.Attack2 ||
-                _runTimeData.currentState == PlayerStats.Skills)
-            {
-                _runTimeData.currentState = _inGround ? PlayerStats.Idle : PlayerStats.Fall;
-                _isAttacking = false;
-            }
+            if (_runTimeData.currentState != PlayerStats.Attack1 && _runTimeData.currentState != PlayerStats.Attack2 &&
+                _runTimeData.currentState != PlayerStats.Skills) return;
+            _runTimeData.currentState = _inGround ? PlayerStats.Idle : PlayerStats.Fall;
+            _isAttacking = false;
         }
 
         private void Move()
@@ -186,22 +186,33 @@ namespace Script.Controllers
         {
             _targetFacingRight = _horizontal > 0;
             if (_currentFacingRight == _targetFacingRight ||
-                !(Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold)) return;
-            _runTimeData.currentState = _runTimeData.currentState switch
+                Mathf.Abs(_horizontal) <= _runTimeData.HorizontalInputThreshold)
             {
-                PlayerStats.Walk => PlayerStats.WalkTurn,
-                PlayerStats.Run => PlayerStats.RunTurn,
-                _ => _runTimeData.currentState
-            };
-            _currentFacingRight = _targetFacingRight;
-            transform.localRotation = Quaternion.Euler(0, _currentFacingRight ? 0 : 180, 0);
+                _pendingTurnFacingRight = null;
+                return;
+            }
+
+            if (_inGround && (_runTimeData.currentState == PlayerStats.Walk ||
+                              _runTimeData.currentState == PlayerStats.Run))
+            {
+                _runTimeData.currentState = _runTimeData.currentState == PlayerStats.Walk
+                    ? PlayerStats.WalkTurn
+                    : PlayerStats.RunTurn;
+                _pendingTurnFacingRight = _targetFacingRight;
+            }
+            else if (_runTimeData.currentState == PlayerStats.Jump || _runTimeData.currentState == PlayerStats.Fall)
+            {
+                _currentFacingRight = _targetFacingRight;
+                transform.localRotation = Quaternion.Euler(0, (_currentFacingRight ? 0 : 180), 0);
+                _pendingTurnFacingRight = null;
+            }
         }
 
         private void TryAttack(PlayerStats state)
         {
             // 检测前方是否有敌人
-            var direction = _currentFacingRight ? Vector2.right : Vector2.left;
-            var hit = Physics2D.Raycast(transform.position, direction, 1f);
+            var hit = Physics2D.Raycast(transform.position,
+                (_currentFacingRight ? Vector2.right : Vector2.left), 1f);
             if (hit.collider && hit.collider.CompareTag("Enemy"))
             {
                 _runTimeData.AttackEnemy(hit.collider.gameObject, state);
@@ -216,6 +227,7 @@ namespace Script.Controllers
             _isSlidingOnCooldown = false;
             _slideTimer = _runTimeData.SlideCool;
         }
+
         private void OnJumpPeakHandler()
         {
             if (_runTimeData.currentState == PlayerStats.Jump)
@@ -231,6 +243,39 @@ namespace Script.Controllers
                 _runTimeData.currentState = PlayerStats.Walk;
             else
                 _runTimeData.currentState = PlayerStats.Idle;
+        }
+
+        private void OnTurnEndHandler()
+        {
+            if (_runTimeData.currentState != PlayerStats.WalkTurn &&
+                _runTimeData.currentState != PlayerStats.RunTurn)
+                return;
+
+            // 应用待处理的转身
+            if (_pendingTurnFacingRight.HasValue)
+            {
+                _currentFacingRight = _pendingTurnFacingRight.Value;
+                transform.localRotation = Quaternion.Euler(0, _currentFacingRight ? 0 : 180, 0);
+                _pendingTurnFacingRight = null;
+            }
+
+            // 根据输入和地面状态恢复移动状态
+            var wantsRun = Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(_horizontal) > 0.1f;
+            var wantsWalk = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
+
+            if (_inGround)
+            {
+                if (wantsRun)
+                    _runTimeData.currentState = PlayerStats.Run;
+                else if (wantsWalk)
+                    _runTimeData.currentState = PlayerStats.Walk;
+                else
+                    _runTimeData.currentState = PlayerStats.Idle;
+            }
+            else
+            {
+                _runTimeData.currentState = PlayerStats.Fall;
+            }
         }
     }
 }

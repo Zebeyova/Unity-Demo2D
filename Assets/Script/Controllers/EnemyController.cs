@@ -47,7 +47,7 @@ namespace Script.Controllers
 
         private void CreateDetectionTrigger()
         {
-            GameObject triggerObj = new GameObject("DetectionTrigger");
+            var triggerObj = new GameObject("DetectionTrigger");
             triggerObj.transform.SetParent(transform);
             triggerObj.transform.localPosition = Vector3.zero;
             var coll = triggerObj.AddComponent<CircleCollider2D>();
@@ -68,7 +68,7 @@ namespace Script.Controllers
 
         private void Update()
         {
-            if (_player == null) return;
+            if (!_player) return;
             UpdateDetection();
             EnemyAI();
             WallCheck();
@@ -76,15 +76,11 @@ namespace Script.Controllers
 
         private void UpdateDetection()
         {
-            if (_exitDelay)
-            {
-                _exitDelayTimer -= Time.deltaTime;
-                if (_exitDelayTimer <= 0)
-                {
-                    _playerInTrigger = false;
-                    _exitDelay = false;
-                }
-            }
+            if (!_exitDelay) return;
+            _exitDelayTimer -= Time.deltaTime;
+            if (!(_exitDelayTimer <= 0)) return;
+            _playerInTrigger = false;
+            _exitDelay = false;
         }
 
         private bool IsPlayerDetected() => _playerInTrigger;
@@ -100,8 +96,8 @@ namespace Script.Controllers
 
         private void GuardBehavior()
         {
-            Vector3 toPlayer = _player.position - transform.position;
-            bool playerDetected = IsPlayerDetected();
+            var toPlayer = _player.position - transform.position;
+            var playerDetected = IsPlayerDetected();
 
             if (playerDetected && !_isTouchingWall)
             {
@@ -115,7 +111,7 @@ namespace Script.Controllers
             }
             else
             {
-                Vector3 backToStart = (_startPos - transform.position).normalized;
+                var backToStart = (_startPos - transform.position).normalized;
                 if (Vector3.Distance(_startPos, transform.position) < _data.EndError)
                 {
                     _rb.velocity = Vector2.zero;
@@ -130,7 +126,7 @@ namespace Script.Controllers
         private void PatrolBehavior()
         {
             if (_startPos == Vector3.zero) _startPos = transform.position;
-            bool playerDetected = IsPlayerDetected();
+            var playerDetected = IsPlayerDetected();
 
             if (playerDetected && !_isTouchingWall)
             {
@@ -154,7 +150,7 @@ namespace Script.Controllers
                 else
                     target = _startPos;
 
-                Vector3 dir = target - transform.position;
+                var dir = target - transform.position;
                 if (dir.magnitude < _data.EndError)
                 {
                     if (_patrolDir == 0)
@@ -184,7 +180,7 @@ namespace Script.Controllers
         private void Move(Vector3 direction)
         {
             // 转向
-            float dot = Vector3.Dot(direction, transform.right);
+            var dot = Vector3.Dot(direction, transform.right);
             if (dot < 0) // 如果方向与当前朝向相反，则翻转
             {
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -196,27 +192,25 @@ namespace Script.Controllers
 
         private void WallCheck()
         {
-            Vector2 origin = (Vector2)transform.position + Vector2.up * 0.5f;
-            RaycastHit2D hit = Physics2D.Raycast(origin, transform.right, 1f, wallLayerMask);
+            var origin = (Vector2)transform.position + Vector2.up * 0.5f;
+            var hit = Physics2D.Raycast(origin, transform.right, 1f, wallLayerMask);
             if (!hit && !_wallTiming) return;
 
             _wallTiming = true;
             _rb.velocity = Vector2.zero;
             _data.currentState = EnemyState.Idle;
             _wallTimer -= Time.deltaTime;
-            if (_wallTimer <= 0)
-            {
-                _wallTimer = 2f;
-                _isTouchingWall = true;
-                _wallTiming = false;
-            }
+            if (!(_wallTimer <= 0)) return;
+            _wallTimer = 2f;
+            _isTouchingWall = true;
+            _wallTiming = false;
         }
 
         private void InitPatrolBorder() => RandomBorder();
 
         private void RandomBorder()
         {
-            float offset = Random.Range(0f, _data.EndError);
+            var offset = Random.Range(0f, _data.EndError);
             _patrolDir = Random.Range(0, 2) == 0 ? -1 : 1;
             _leftBorder = _startPos - transform.right * _data.PatrolMaxDistance - new Vector3(offset, 0, 0);
             _rightBorder = _startPos + transform.right * _data.PatrolMaxDistance + new Vector3(offset, 0, 0);

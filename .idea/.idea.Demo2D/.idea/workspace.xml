@@ -15,70 +15,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Views/HealthBarView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Attack.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Hurt.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Hurt.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Attack.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Hurt.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Hurt.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Attack2.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Death.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Death.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Fall.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Fall.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Fall_Loop.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Fall_Loop.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Hurt.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Hurt.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Idle_Turn.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Idle_Turn.anim.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Jump.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Jump.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Run_Turn.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Run_Turn.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Skills.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Skills.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Slide.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Slide.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Walk_Turn.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Walk_Turn.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/EnemyProperty.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/EnemyProperty.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/EnemyProperty.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/EnemyProperty.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerProperty.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerProperty.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerProperty.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerProperty.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/PropertyManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/PropertyManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/BlackMask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/BlackMaskView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/BlackMask.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/BlackMaskView.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/DamageAndDefense.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyAnimationController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyDetectionArea.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyDetectionArea.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyRunningData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy/EnemyRunningData.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Health.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Health.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/HealthBar.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/HealthBar.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/HealthBarView.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/HealthBarEnemy.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/HealthBarEnemy.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerAnimationController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerRunningData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Player/PlayerRunningData.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,7 +209,10 @@
       <workItem from="1776590270164" duration="2031000" />
       <workItem from="1779374739984" duration="2788000" />
       <workItem from="1779432855224" duration="371000" />
-      <workItem from="1779676108061" duration="30117000" />
+      <workItem from="1779676108061" duration="30396000" />
+      <workItem from="1779711577196" duration="26000" />
+      <workItem from="1779711633279" duration="65000" />
+      <workItem from="1779713205809" duration="4525000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -477,7 +422,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779688983619</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="成功修改部分动画文件">
+      <option name="closed" value="true" />
+      <created>1779708591014</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1779708591014</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,7 +482,8 @@
     <MESSAGE value="4.19备份" />
     <MESSAGE value="将玩家数据修改为Unity资源文件,实现单例模式" />
     <MESSAGE value="将敌人的属性也修改掉了" />
-    <option name="LAST_COMMIT_MESSAGE" value="将敌人的属性也修改掉了" />
+    <MESSAGE value="成功修改部分动画文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="成功修改部分动画文件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
