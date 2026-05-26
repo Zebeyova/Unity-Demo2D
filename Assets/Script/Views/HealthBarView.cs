@@ -14,54 +14,58 @@ namespace Script.Views
 
         private float _maxHealth;
         private bool _bufferDirty;
-        private PlayerRunTimeData _playerData;
-        private EnemyRunTimeData _enemyData;
+        private PlayerRunTimeData _playerRunTimeData;
+        private EnemyRunTimeData _enemyRunTimeData;
 
         private void Awake()
         {
             if (isPlayer)
             {
-                _playerData = GameObject.FindWithTag("Player")?.GetComponent<PlayerRunTimeData>();
-                if (_playerData)
-                {
-                    _maxHealth = _playerData.MaxHealth;
-                    _playerData.OnHurt += OnHurt;
-                    OnHurt(_playerData.currentHealth, _maxHealth);
-                }
+                _playerRunTimeData = GameObject.FindWithTag("Player")?.GetComponent<PlayerRunTimeData>();
+                if (!_playerRunTimeData) return;
+                _maxHealth = _playerRunTimeData.MaxHealth;
             }
             else
             {
-                _enemyData = GetComponentInParent<EnemyRunTimeData>();
-                if (_enemyData)
-                {
-                    _maxHealth = _enemyData.MaxHealth;
-                    _enemyData.OnHealthChanged += OnHurt;
-                    OnHurt(_enemyData.currentHealth, _maxHealth);
-                }
+                _enemyRunTimeData = GetComponentInParent<EnemyRunTimeData>();
+                if (!_enemyRunTimeData) return;
+                _maxHealth = _enemyRunTimeData.MaxHealth;
+            }
+        }
+
+        private void Start()
+        {
+            if (isPlayer)
+            {
+                _playerRunTimeData.OnHurt += OnHurt;
+                OnHurt(_playerRunTimeData.currentHealth, _maxHealth);
+            }
+            else
+            {
+                _enemyRunTimeData.OnHealthChanged += OnHurt;
+                OnHurt(_enemyRunTimeData.currentHealth, _maxHealth);
             }
         }
 
         private void OnDestroy()
         {
-            if (_playerData) _playerData.OnHurt -= OnHurt;
-            if (_enemyData) _enemyData.OnHealthChanged -= OnHurt;
-        }
-
-        private void OnHurt(float current, float max)
-        {
-            _maxHealth = max;
-            _bufferDirty = true;
-            bar.fillAmount = current / max;
-            if (text) text.text = $"{current:F0} / {max:F0}";
+            if (_playerRunTimeData) _playerRunTimeData.OnHurt -= OnHurt;
+            if (_enemyRunTimeData) _enemyRunTimeData.OnHealthChanged -= OnHurt;
         }
 
         private void Update()
         {
             if (!_bufferDirty || !bufferBar) return;
-            var speed = isPlayer ? _playerData?.BufferBarSpeed ?? 2f : 2f;
+            var speed = isPlayer ? _playerRunTimeData?.BufferBarSpeed ?? 2f : 2f;
             bufferBar.fillAmount = Mathf.Lerp(bufferBar.fillAmount, bar.fillAmount, Time.deltaTime * speed);
-            if (Mathf.Approximately(bufferBar.fillAmount, bar.fillAmount))
-                _bufferDirty = false;
+            if (Mathf.Approximately(bufferBar.fillAmount, bar.fillAmount)) _bufferDirty = false;
+        }
+
+        private void OnHurt(float current, float max)
+        {
+            _bufferDirty = true;
+            bar.fillAmount = current / max;
+            if (text) text.text = $"{current:F0} / {_maxHealth:F0}";
         }
     }
 }

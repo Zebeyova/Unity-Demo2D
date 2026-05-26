@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1553162199321736378}
   - component: {fileID: 1553162199321736381}
   - component: {fileID: 1553162199321736380}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBufferBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,8 @@ GameObject:
   - component: {fileID: 1553162199653548408}
   - component: {fileID: 1553162199653548411}
   - component: {fileID: 1553162199653548410}
-  m_Layer: 5
+  - component: {fileID: 4531185136398651748}
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,6 +178,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4531185136398651748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553162199653548412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e30b704461788c4193572e390a774d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bar: {fileID: 1553162199321736380}
+  bufferBar: {fileID: 1553162199321736380}
+  text: {fileID: 0}
+  isPlayer: 0
 --- !u!1 &1553162199798353092
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +205,7 @@ GameObject:
   - component: {fileID: 1553162199798353093}
   - component: {fileID: 1553162199798353088}
   - component: {fileID: 1553162199798353091}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,8 +285,7 @@ GameObject:
   - component: {fileID: 1553162200061419327}
   - component: {fileID: 5846534670834696400}
   - component: {fileID: 1553162200061419326}
-  - component: {fileID: 3077744107644693366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlueGolem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -416,8 +432,6 @@ MonoBehaviour:
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  detectSizeX: 4
-  detectSizeY: 1.2
 --- !u!114 &5846534670834696400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,22 +459,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crossFadeTime: 0.1
---- !u!114 &3077744107644693366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553162200061419299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e30b704461788c4193572e390a774d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bar: {fileID: 1553162199321736380}
-  bufferBar: {fileID: 1553162199321736380}
-  text: {fileID: 0}
-  isPlayer: 0
 --- !u!1 &1553162200413182755
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +470,7 @@ GameObject:
   - component: {fileID: 1553162200413182752}
   - component: {fileID: 1553162200413182782}
   - component: {fileID: 1553162200413182753}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBarBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,9 +14,6 @@ namespace Script.Views
         private EnemyRunTimeData _runTimeData;
         private EnemyState _lastState;
 
-        public event Action OnAttackEnd;
-        public event Action OnHurtEnd;
-
         private static readonly Dictionary<EnemyState, int> AnimDictionary = new Dictionary<EnemyState, int>()
         {
             { EnemyState.Idle, Animator.StringToHash(nameof(EnemyState.Idle)) },
@@ -35,14 +32,12 @@ namespace Script.Views
         private void Start()
         {
             _runTimeData.OnHealthChanged += OnHealthChangedHandler;
-            _runTimeData.OnDeath += OnDeathHandler;
         }
 
         private void OnDestroy()
         {
             if (!_runTimeData) return;
             _runTimeData.OnHealthChanged -= OnHealthChangedHandler;
-            _runTimeData.OnDeath -= OnDeathHandler;
         }
 
         private void Update()
@@ -69,13 +64,17 @@ namespace Script.Views
             _runTimeData.currentState = current <= 0 ? EnemyState.Die : EnemyState.Hurt;
         }
 
-        private void OnDeathHandler()
-        {
-            _runTimeData.currentState = EnemyState.Die;
-        }
+        #region 动画事件调用
 
-        // 动画事件调用
+        public event Action OnAttackPlayer;
+        public event Action OnAttackEnd;
+        public event Action OnHurtEnd;
+        public event Action OnDeathEnd;
+        public void TriggerAttackPlayer() => OnAttackPlayer?.Invoke();
         public void TriggerAttackEnd() => OnAttackEnd?.Invoke();
         public void TriggerHurtEnd() => OnHurtEnd?.Invoke();
+        public void TriggerDeathEnd() => OnDeathEnd?.Invoke();
+
+        #endregion
     }
 }

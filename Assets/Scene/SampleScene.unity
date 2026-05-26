@@ -1188,7 +1188,6 @@ GameObject:
   - component: {fileID: 562690698}
   - component: {fileID: 562690700}
   - component: {fileID: 562690699}
-  - component: {fileID: 562690701}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -1254,22 +1253,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 562690697}
   m_CullTransparentMesh: 1
---- !u!114 &562690701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562690697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e30b704461788c4193572e390a774d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bar: {fileID: 562690699}
-  bufferBar: {fileID: 511142592}
-  text: {fileID: 19004154}
-  isPlayer: 1
 --- !u!1 &625379477
 GameObject:
   m_ObjectHideFlags: 0
@@ -4329,6 +4312,7 @@ GameObject:
   - component: {fileID: 1803460061}
   - component: {fileID: 1803460060}
   - component: {fileID: 1803460059}
+  - component: {fileID: 1803460062}
   m_Layer: 5
   m_Name: PlayerUIScreen
   m_TagString: Untagged
@@ -4420,6 +4404,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1803460062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803460057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e30b704461788c4193572e390a774d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bar: {fileID: 562690699}
+  bufferBar: {fileID: 511142592}
+  text: {fileID: 19004154}
+  isPlayer: 1
 --- !u!1 &1896081686
 GameObject:
   m_ObjectHideFlags: 0
@@ -5650,6 +5650,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7618713011203048799, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
       propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618713011203048799, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8008030742122443067, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}

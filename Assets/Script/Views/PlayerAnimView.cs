@@ -13,11 +13,6 @@ namespace Script.Views
         private Animator _anim;
         private PlayerRunTimeData _runTimeData;
         private PlayerStats _lastState;
-        public event Action OnJumpPeak;
-        public event Action OnLanding;
-        public event Action OnTurnEnd;
-        public event Action OnSlideEnd;
-        public event Action OnAttackEnd;
 
         private static readonly Dictionary<PlayerStats, int> AnimDictionary = new Dictionary<PlayerStats, int>
         {
@@ -85,29 +80,21 @@ namespace Script.Views
             _runTimeData.currentState = PlayerStats.Death;
         }
 
-        public void TriggerJumpPeak()
-        {
-            OnJumpPeak?.Invoke();
-        }
+        #region 动画事件回调
 
-        public void TriggerLanding()
-        {
-            OnLanding?.Invoke();
-        }
+        public event Action OnJumpPeak;
+        public event Action OnLanding;
+        public event Action OnTurnEnd;
+        public event Action OnSlideEnd;
+        public event Action OnAttackEnd;
+        public event Action OnHurtEnd;
+        public void TriggerJumpPeak() => OnJumpPeak?.Invoke();
+        public void TriggerLanding() => OnLanding?.Invoke();
+        public void TriggerTurnEnd() => OnTurnEnd?.Invoke();
+        public void TriggerSlideEnd() => OnSlideEnd?.Invoke();
+        public void TriggerAttackEnd() => OnAttackEnd?.Invoke();
+        public void TriggerHurtEnd() => OnHurtEnd?.Invoke();
 
-        public void TriggerTurnEnd()
-        {
-            OnTurnEnd?.Invoke();
-        }
-
-        public void TriggerSlideEnd()
-        {
-            OnSlideEnd?.Invoke();
-        }
-
-        public void TriggerAttackEnd()
-        {
-            OnAttackEnd?.Invoke();
-        }
+        #endregion
     }
 }

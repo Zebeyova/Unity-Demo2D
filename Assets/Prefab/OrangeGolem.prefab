@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7510729194114917000}
   - component: {fileID: 7510729194114917001}
   - component: {fileID: 7510729194114917006}
-  m_Layer: 5
+  - component: {fileID: 6183631631395966413}
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,6 +103,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6183631631395966413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510729194114917004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e30b704461788c4193572e390a774d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bar: {fileID: 7510729195513780694}
+  bufferBar: {fileID: 7510729195238832725}
+  text: {fileID: 0}
+  isPlayer: 0
 --- !u!1 &7510729194711803549
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +130,7 @@ GameObject:
   - component: {fileID: 7510729194711803548}
   - component: {fileID: 7510729194711803550}
   - component: {fileID: 7510729194711803551}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBarBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +205,7 @@ GameObject:
   - component: {fileID: 7510729195238832683}
   - component: {fileID: 7510729195238832724}
   - component: {fileID: 7510729195238832725}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +280,7 @@ GameObject:
   - component: {fileID: 7510729195513780688}
   - component: {fileID: 7510729195513780689}
   - component: {fileID: 7510729195513780694}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBufferBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,8 +360,7 @@ GameObject:
   - component: {fileID: 7510729195683642499}
   - component: {fileID: 3836796103045337786}
   - component: {fileID: 7510729195683642496}
-  - component: {fileID: 5582776902805295895}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OrangeGolem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -491,8 +507,6 @@ MonoBehaviour:
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  detectSizeX: 4
-  detectSizeY: 1.2
 --- !u!114 &3836796103045337786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,19 +534,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crossFadeTime: 0.1
---- !u!114 &5582776902805295895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7510729195683642503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e30b704461788c4193572e390a774d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bar: {fileID: 7510729195513780694}
-  bufferBar: {fileID: 7510729195238832725}
-  text: {fileID: 0}
-  isPlayer: 0

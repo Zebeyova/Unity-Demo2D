@@ -20,15 +20,15 @@ namespace Script.Controllers
         private EnemyAnimView _animView;
 
         private Rigidbody2D _rb;
-        private Transform _player;
+        private GameObject _player;
 
         private Vector3 _startPos;
         private Vector3 _leftBorder, _rightBorder;
         private int _patrolDir; // -1左, 1右, 0未初始化
         private bool _isTouchingWall;
+        private bool _isAttack;
         private float _wallTimer = 2f;
         private bool _wallTiming;
-        private bool _isAttack;
 
         // 延迟退出检测
         private bool _playerInTrigger;
@@ -40,7 +40,7 @@ namespace Script.Controllers
             _runTimeData = GetComponent<EnemyRunTimeData>();
             _rb = GetComponent<Rigidbody2D>();
             _animView = GetComponent<EnemyAnimView>();
-            _player = GameObject.FindWithTag("Player")?.transform;
+            _player = GameObject.FindWithTag("Player");
             _startPos = transform.position;
 
             CreateDetectionTrigger();
@@ -48,23 +48,28 @@ namespace Script.Controllers
 
         private void Start()
         {
+            _animView.OnAttackPlayer += OnAttackPlayerHandler;
             _animView.OnAttackEnd += OnAttackEndHandler;
             _animView.OnHurtEnd += OnHurtEndHandler;
+            _animView.OnDeathEnd += OnDeathEndHandler;
         }
 
         private void OnDestroy()
         {
             if (!_animView) return;
+            _animView.OnAttackPlayer -= OnAttackPlayerHandler;
             _animView.OnAttackEnd -= OnAttackEndHandler;
             _animView.OnHurtEnd -= OnHurtEndHandler;
+            _animView.OnDeathEnd -= OnDeathEndHandler;
         }
 
         private void Update()
         {
             if (!_player) return;
-            EnemyAI();
             UpdateDetectionDelay();
             WallCheck();
+            if (_runTimeData.currentState == EnemyState.Hurt || _runTimeData.currentState == EnemyState.Die) return;
+            EnemyAI();
         }
 
         private void EnemyAI()
@@ -121,7 +126,7 @@ namespace Script.Controllers
             if (playerDetected && !_isTouchingWall)
             {
                 StopMoveAndIdle();
-                AttackOrMove(_player.position - transform.position);
+                AttackOrMove(_player.transform.position - transform.position);
             }
             else
             {
@@ -150,7 +155,7 @@ namespace Script.Controllers
             {
                 _patrolDir = 0; // 停止巡逻，转为追击
                 StopMoveAndIdle();
-                AttackOrMove(_player.position - transform.position);
+                AttackOrMove(_player.transform.position - transform.position);
             }
             else
             {
@@ -200,9 +205,10 @@ namespace Script.Controllers
 
         private void Move(Vector3 direction)
         {
-            if (direction.x != 0)
+            var moveDir = new Vector2(direction.x, 0).normalized;
+            if (moveDir.x != 0)
             {
-                var shouldFaceRight = direction.x > 0;
+                var shouldFaceRight = moveDir.x > 0;
                 if ((shouldFaceRight && transform.localScale.x < 0) || (!shouldFaceRight && transform.localScale.x > 0))
                 {
                     transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
@@ -211,7 +217,7 @@ namespace Script.Controllers
             }
 
             _runTimeData.currentState = EnemyState.Walk;
-            _rb.velocity = direction.normalized * _runTimeData.BaseSpeed;
+            _rb.velocity = moveDir.normalized * _runTimeData.BaseSpeed;
         }
 
         private void StopMoveAndIdle()
@@ -241,6 +247,11 @@ namespace Script.Controllers
 
         #region 动画事件回调
 
+        private void OnAttackPlayerHandler()
+        {
+            _runTimeData.AttackPlayer(_player);
+        }
+
         private void OnAttackEndHandler()
         {
             if (_runTimeData.currentState != EnemyState.Attack) return;
@@ -248,7 +259,7 @@ namespace Script.Controllers
             if (IsPlayerDetected() && !_isTouchingWall)
             {
                 // 继续追击或再次攻击
-                AttackOrMove(_player.position - transform.position);
+                AttackOrMove(_player.transform.position - transform.position);
             }
             else
             {
@@ -272,11 +283,16 @@ namespace Script.Controllers
         private void OnHurtEndHandler()
         {
             if (_runTimeData.currentState != EnemyState.Hurt) return;
-            // 受伤结束：根据当前情况恢复移动或待机
             if (IsPlayerDetected() && !_isTouchingWall)
-                AttackOrMove(_player.position - transform.position);
+                AttackOrMove(_player.transform.position - transform.position);
             else
                 StopMoveAndIdle();
+        }
+
+        private void OnDeathEndHandler()
+        {
+            if(_runTimeData.currentState != EnemyState.Die) return;
+            Destroy(gameObject);
         }
 
         #endregion

@@ -11,15 +11,15 @@ namespace Script.RunTimeData
         public float currentHealth;
 
         public float MaxHealth => ModelManager.PlayerModelSObject?.maxHealth ?? 100f;
-        public float Damage => ModelManager.PlayerModelSObject?.damage ?? 15f;
-        public float SkillDamage => ModelManager.PlayerModelSObject?.skillDamage ?? 30f;
+        private float Damage => ModelManager.PlayerModelSObject?.damage ?? 15f;
+        private float SkillDamage => ModelManager.PlayerModelSObject?.skillDamage ?? 30f;
         public float BaseSpeed => ModelManager.PlayerModelSObject?.baseSpeed ?? 2f;
         public float RunSpeedMultiplier => ModelManager.PlayerModelSObject?.runSpeedMultiplier ?? 1.5f;
         public float SlideSpeedMultiplier => ModelManager.PlayerModelSObject?.slideSpeedMultiplier ?? 1.5f;
         public float SlideCool => ModelManager.PlayerModelSObject?.slideCool ?? 0.6f;
         public float JumpForce => ModelManager.PlayerModelSObject?.jumpForce ?? 10f;
         public float HorizontalInputThreshold => ModelManager.PlayerModelSObject?.horizontalInputThreshold ?? 0.01f;
-        public float InvincibleTime => ModelManager.PlayerModelSObject?.invincibleTime ?? 0.2f;
+        private float InvincibleTime => ModelManager.PlayerModelSObject?.invincibleTime ?? 0.2f;
         public float BufferBarSpeed => ModelManager.PlayerModelSObject?.bufferBarSpeed ?? 2f;
 
         public event Action<float, float> OnHurt;

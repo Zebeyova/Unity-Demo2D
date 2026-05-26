@@ -41,6 +41,7 @@ namespace Script.Controllers
             _animView.OnTurnEnd += OnTurnEndHandler;
             _animView.OnSlideEnd += OnSlideEndHandler;
             _animView.OnAttackEnd += OnAttackEndHandler;
+            _animView.OnHurtEnd += OnHurtEndHandler;
         }
 
         private void OnDestroy()
@@ -51,6 +52,7 @@ namespace Script.Controllers
             _animView.OnTurnEnd -= OnTurnEndHandler;
             _animView.OnSlideEnd -= OnSlideEndHandler;
             _animView.OnAttackEnd -= OnAttackEndHandler;
+            _animView.OnHurtEnd -= OnHurtEndHandler;
         }
 
         private void Update()
@@ -213,8 +215,8 @@ namespace Script.Controllers
         private void TryAttack(PlayerStats state)
         {
             // 检测前方是否有敌人
-            var hit = Physics2D.Raycast(transform.position,
-                _currentFacingRight ? Vector2.right : Vector2.left, 1f);
+            var hit = Physics2D.Raycast(_collider.bounds.center,
+                _currentFacingRight ? Vector2.right : Vector2.left, 1f, LayerMask.GetMask("Enemy"));
             if (hit.collider && hit.collider.CompareTag("Enemy"))
                 _runTimeData.AttackEnemy(hit.collider.gameObject, state);
         }
@@ -295,6 +297,19 @@ namespace Script.Controllers
                 _runTimeData.currentState != PlayerStats.Attack2) return;
             _runTimeData.currentState = _inGround ? PlayerStats.Idle : PlayerStats.Fall;
             _isAttacking = false;
+        }
+
+        private void OnHurtEndHandler()
+        {
+            if (_runTimeData.currentState != PlayerStats.Hurt) return;
+            var wantsWalk = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
+            var wantsRun = Input.GetKey(KeyCode.LeftShift) && wantsWalk;
+            if (wantsRun)
+                _runTimeData.currentState = PlayerStats.Run;
+            else if (wantsWalk)
+                _runTimeData.currentState = PlayerStats.Walk;
+            else
+                _runTimeData.currentState = PlayerStats.Idle;
         }
     }
 }
