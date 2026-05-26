@@ -16,13 +16,14 @@
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/FallLoop.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/FallLoop.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeData/PlayerRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/PlayerRunTimeData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +79,9 @@
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/HLSLSupport.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Animation/Player/Slide.anim" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/EnemyModel.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/PlayerModel.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs.meta" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@1.0.0/Editor/GridPaintPaletteClipboard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.33/UnityEditor.TestRunner/CommandLineTest/Executer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.33/UnityEditor.TestRunner/CommandLineTest/ExitCallbacks.cs" root0="SKIP_HIGHLIGHTING" />
@@ -99,29 +102,35 @@
     <option name="showMembers" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.gutterIcons&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cidr.known.project.marker": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.gutterIcons",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "repository"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="附加到 Unity 编辑器.附加到 Unity 编辑器">
     <configuration name="启动 Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Unity\2020.3.48f1c1\Editor\Unity.exe" />
@@ -216,7 +225,7 @@
       <workItem from="1779711577196" duration="26000" />
       <workItem from="1779711633279" duration="65000" />
       <workItem from="1779713205809" duration="8698000" />
-      <workItem from="1779758909168" duration="2789000" />
+      <workItem from="1779758909168" duration="11939000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -450,7 +459,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779721931520</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="玩家动画问题解决">
+      <option name="closed" value="true" />
+      <created>1779761733792</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1779761733792</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -480,7 +497,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="4.6备份" />
     <MESSAGE value="添加敌人撞墙处理逻辑" />
     <MESSAGE value="skills技能添加完成" />
     <MESSAGE value="添加玩家受伤,无敌时间,死亡,销毁逻辑" />
@@ -505,7 +521,8 @@
     <MESSAGE value="成功修改部分动画文件" />
     <MESSAGE value="5.25备份" />
     <MESSAGE value="差一个run_turn.fallloop动画,顶头跳跃修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="差一个run_turn.fallloop动画,顶头跳跃修复" />
+    <MESSAGE value="玩家动画问题解决" />
+    <option name="LAST_COMMIT_MESSAGE" value="玩家动画问题解决" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

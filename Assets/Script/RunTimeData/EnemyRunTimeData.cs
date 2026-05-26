@@ -16,6 +16,8 @@ namespace Script.RunTimeData
         public float EndError => ModelManager.EnemyModelSObject?.endError ?? 0.3f;
         public float DistanceFromPlayer => ModelManager.EnemyModelSObject?.distanceFromPlayer ?? 0.93f;
         public float PatrolMaxDistance => ModelManager.EnemyModelSObject?.patrolMaxDistance ?? 2f;
+        public float DetectSizeX => ModelManager.EnemyModelSObject?.detectSizeX ?? 4f;
+        public float DetectSizeY => ModelManager.EnemyModelSObject?.detectSizeY ?? 1.2f;
         public event Action<float, float> OnHealthChanged;
         public event Action OnDeath;
 

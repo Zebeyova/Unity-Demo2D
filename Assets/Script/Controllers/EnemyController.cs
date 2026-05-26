@@ -1,4 +1,3 @@
-using System.Collections;
 using Script.Models;
 using Script.RunTimeData;
 using Script.Views;
@@ -6,53 +5,87 @@ using UnityEngine;
 
 namespace Script.Controllers
 {
-    public enum EnemyType { Guard, Patrol }
+    public enum EnemyType
+    {
+        Guard,
+        Patrol
+    }
 
     public class EnemyController : MonoBehaviour
     {
         public EnemyType enemyType;
         public LayerMask wallLayerMask;
-        [Header("Detection")]
-        public float detectRadius = 5f;
 
-        private EnemyRunTimeData _data;
+        private EnemyRunTimeData _runTimeData;
+        private EnemyAnimView _animView;
+
         private Rigidbody2D _rb;
         private Transform _player;
 
         private Vector3 _startPos;
         private Vector3 _leftBorder, _rightBorder;
-        private int _patrolDir;
+        private int _patrolDir; // -1左, 1右, 0未初始化
         private bool _isTouchingWall;
         private float _wallTimer = 2f;
         private bool _wallTiming;
-        private bool _attackCooldown;
-        private Coroutine _attackCooldownCoroutine;
+        private bool _isAttack;
 
-        // 延迟退出检测相关
+        // 延迟退出检测
         private bool _playerInTrigger;
         private bool _exitDelay;
         private float _exitDelayTimer = 1f;
 
         private void Awake()
         {
-            _data = GetComponent<EnemyRunTimeData>();
+            _runTimeData = GetComponent<EnemyRunTimeData>();
             _rb = GetComponent<Rigidbody2D>();
-            GetComponent<EnemyAnimView>();
+            _animView = GetComponent<EnemyAnimView>();
             _player = GameObject.FindWithTag("Player")?.transform;
             _startPos = transform.position;
 
-            // 自动创建触发器子物体
             CreateDetectionTrigger();
         }
+
+        private void Start()
+        {
+            _animView.OnAttackEnd += OnAttackEndHandler;
+            _animView.OnHurtEnd += OnHurtEndHandler;
+        }
+
+        private void OnDestroy()
+        {
+            if (!_animView) return;
+            _animView.OnAttackEnd -= OnAttackEndHandler;
+            _animView.OnHurtEnd -= OnHurtEndHandler;
+        }
+
+        private void Update()
+        {
+            if (!_player) return;
+            EnemyAI();
+            UpdateDetectionDelay();
+            WallCheck();
+        }
+
+        private void EnemyAI()
+        {
+            switch (enemyType)
+            {
+                case EnemyType.Guard: GuardBehavior(); break;
+                case EnemyType.Patrol: PatrolBehavior(); break;
+            }
+        }
+
+        #region 触发器检测
 
         private void CreateDetectionTrigger()
         {
             var triggerObj = new GameObject("DetectionTrigger");
             triggerObj.transform.SetParent(transform);
-            triggerObj.transform.localPosition = Vector3.zero;
-            var coll = triggerObj.AddComponent<CircleCollider2D>();
+            triggerObj.transform.localPosition = new Vector3(1, 0.6f, 0);
+            var coll = triggerObj.AddComponent<BoxCollider2D>();
             coll.isTrigger = true;
-            coll.radius = detectRadius;
+            coll.size = new Vector2(_runTimeData.DetectSizeX, _runTimeData.DetectSizeY);
             var detector = triggerObj.AddComponent<DetectionLogic>();
             detector.OnPlayerEnter += () =>
             {
@@ -66,15 +99,7 @@ namespace Script.Controllers
             };
         }
 
-        private void Update()
-        {
-            if (!_player) return;
-            UpdateDetection();
-            EnemyAI();
-            WallCheck();
-        }
-
-        private void UpdateDetection()
+        private void UpdateDetectionDelay()
         {
             if (!_exitDelay) return;
             _exitDelayTimer -= Time.deltaTime;
@@ -85,153 +110,188 @@ namespace Script.Controllers
 
         private bool IsPlayerDetected() => _playerInTrigger;
 
-        private void EnemyAI()
-        {
-            switch (enemyType)
-            {
-                case EnemyType.Guard: GuardBehavior(); break;
-                case EnemyType.Patrol: PatrolBehavior(); break;
-            }
-        }
+        #endregion
+
+        #region Guard 逻辑
 
         private void GuardBehavior()
         {
-            var toPlayer = _player.position - transform.position;
             var playerDetected = IsPlayerDetected();
 
             if (playerDetected && !_isTouchingWall)
             {
-                if (_attackCooldown)
-                {
-                    _rb.velocity = Vector2.zero;
-                    _data.currentState = EnemyState.Idle;
-                    return;
-                }
-                AttackOrMove(toPlayer);
-            }
-            else
-            {
-                var backToStart = (_startPos - transform.position).normalized;
-                if (Vector3.Distance(_startPos, transform.position) < _data.EndError)
-                {
-                    _rb.velocity = Vector2.zero;
-                    _data.currentState = EnemyState.Idle;
-                    _isTouchingWall = false;
-                    return;
-                }
-                Move(backToStart);
-            }
-        }
-
-        private void PatrolBehavior()
-        {
-            if (_startPos == Vector3.zero) _startPos = transform.position;
-            var playerDetected = IsPlayerDetected();
-
-            if (playerDetected && !_isTouchingWall)
-            {
-                _patrolDir = 0;
-                if (_attackCooldown)
-                {
-                    _rb.velocity = Vector2.zero;
-                    _data.currentState = EnemyState.Idle;
-                    return;
-                }
+                StopMoveAndIdle();
                 AttackOrMove(_player.position - transform.position);
             }
             else
             {
-                if (_patrolDir == 0) InitPatrolBorder();
-                Vector3 target;
-                if (_patrolDir == -1)
-                    target = _leftBorder;
-                else if (_patrolDir == 1)
-                    target = _rightBorder;
-                else
-                    target = _startPos;
-
-                var dir = target - transform.position;
-                if (dir.magnitude < _data.EndError)
+                // 返回起始点
+                var dir = _startPos - transform.position;
+                if (dir.magnitude < _runTimeData.EndError)
                 {
-                    if (_patrolDir == 0)
-                        RandomBorder();
-                    else
-                        _patrolDir = -_patrolDir;
+                    StopMoveAndIdle();
+                    _isTouchingWall = false;
+                    return;
                 }
+
                 Move(dir);
             }
         }
 
-        private void AttackOrMove(Vector3 direction)
+        #endregion
+
+        #region Patrol 逻辑
+
+        private void PatrolBehavior()
         {
-            if (direction.magnitude < _data.DistanceFromPlayer)
+            var playerDetected = IsPlayerDetected();
+
+            if (playerDetected && !_isTouchingWall)
             {
-                _rb.velocity = Vector2.zero;
-                _data.currentState = EnemyState.Attack;
-                if (_attackCooldownCoroutine != null) StopCoroutine(_attackCooldownCoroutine);
-                _attackCooldownCoroutine = StartCoroutine(AttackCooldownRoutine());
+                _patrolDir = 0; // 停止巡逻，转为追击
+                StopMoveAndIdle();
+                AttackOrMove(_player.position - transform.position);
             }
             else
             {
-                Move(direction);
+                if (_patrolDir == 0) RandomBorder(); // 首次初始化边界
+
+                var target = _patrolDir switch
+                {
+                    -1 => _leftBorder,
+                    1 => _rightBorder,
+                    _ => _startPos
+                };
+
+                var dir = target - transform.position;
+                if (dir.magnitude < _runTimeData.EndError)
+                {
+                    if (_patrolDir == 0)
+                        RandomBorder(); // 第一次到达起始点后随机边界
+                    else
+                        _patrolDir = -_patrolDir; // 掉头
+                }
+
+                Move(dir);
             }
+        }
+
+        private void RandomBorder()
+        {
+            var offset = Random.Range(0f, _runTimeData.EndError);
+            _patrolDir = Random.Range(0, 2) == 0 ? -1 : 1;
+            _leftBorder = _startPos - transform.right * _runTimeData.PatrolMaxDistance - new Vector3(offset, 0, 0);
+            _rightBorder = _startPos + transform.right * _runTimeData.PatrolMaxDistance + new Vector3(offset, 0, 0);
+        }
+
+        #endregion
+
+        private void AttackOrMove(Vector3 direction)
+        {
+            if (direction.magnitude < _runTimeData.DistanceFromPlayer)
+            {
+                // 停止移动，播放攻击动画
+                _isAttack = true;
+                _rb.velocity = Vector2.zero;
+                _runTimeData.currentState = EnemyState.Attack;
+            }
+            else Move(direction);
         }
 
         private void Move(Vector3 direction)
         {
-            // 转向
-            var dot = Vector3.Dot(direction, transform.right);
-            if (dot < 0) // 如果方向与当前朝向相反，则翻转
+            if (direction.x != 0)
             {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                var shouldFaceRight = direction.x > 0;
+                if ((shouldFaceRight && transform.localScale.x < 0) || (!shouldFaceRight && transform.localScale.x > 0))
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
+                        transform.localScale.z);
+                }
             }
 
-            _data.currentState = EnemyState.Walk;
-            _rb.velocity = direction.normalized * _data.BaseSpeed;
+            _runTimeData.currentState = EnemyState.Walk;
+            _rb.velocity = direction.normalized * _runTimeData.BaseSpeed;
+        }
+
+        private void StopMoveAndIdle()
+        {
+            if (_isAttack) return; // 攻击中不切换Idle
+            _rb.velocity = Vector2.zero;
+            _runTimeData.currentState = EnemyState.Idle;
         }
 
         private void WallCheck()
         {
             var origin = (Vector2)transform.position + Vector2.up * 0.5f;
             var hit = Physics2D.Raycast(origin, transform.right, 1f, wallLayerMask);
+
             if (!hit && !_wallTiming) return;
 
             _wallTiming = true;
             _rb.velocity = Vector2.zero;
-            _data.currentState = EnemyState.Idle;
+            _runTimeData.currentState = EnemyState.Idle;
             _wallTimer -= Time.deltaTime;
+
             if (!(_wallTimer <= 0)) return;
             _wallTimer = 2f;
             _isTouchingWall = true;
             _wallTiming = false;
         }
 
-        private void InitPatrolBorder() => RandomBorder();
+        #region 动画事件回调
 
-        private void RandomBorder()
+        private void OnAttackEndHandler()
         {
-            var offset = Random.Range(0f, _data.EndError);
-            _patrolDir = Random.Range(0, 2) == 0 ? -1 : 1;
-            _leftBorder = _startPos - transform.right * _data.PatrolMaxDistance - new Vector3(offset, 0, 0);
-            _rightBorder = _startPos + transform.right * _data.PatrolMaxDistance + new Vector3(offset, 0, 0);
+            if (_runTimeData.currentState != EnemyState.Attack) return;
+            // 攻击结束：根据是否检测到玩家及是否在冷却来决定状态
+            if (IsPlayerDetected() && !_isTouchingWall)
+            {
+                // 继续追击或再次攻击
+                AttackOrMove(_player.position - transform.position);
+            }
+            else
+            {
+                _isAttack = false;
+                if (enemyType == EnemyType.Guard)
+                {
+                    var toStart = _startPos - transform.position;
+                    if (toStart.magnitude > _runTimeData.EndError)
+                        Move(toStart);
+                    else
+                        StopMoveAndIdle();
+                }
+                else // Patrol
+                {
+                    if (_patrolDir == 0) RandomBorder();
+                    StopMoveAndIdle();
+                }
+            }
         }
 
-        private IEnumerator AttackCooldownRoutine()
+        private void OnHurtEndHandler()
         {
-            _attackCooldown = true;
-            yield return new WaitForSeconds(_data.AttackCoolDown);
-            _attackCooldown = false;
+            if (_runTimeData.currentState != EnemyState.Hurt) return;
+            // 受伤结束：根据当前情况恢复移动或待机
+            if (IsPlayerDetected() && !_isTouchingWall)
+                AttackOrMove(_player.position - transform.position);
+            else
+                StopMoveAndIdle();
         }
 
-        // 嵌套触发器逻辑类
+        #endregion
+
+        // 嵌套触发器类
         private class DetectionLogic : MonoBehaviour
         {
             public event System.Action OnPlayerEnter;
             public event System.Action OnPlayerExit;
+
             private void OnTriggerEnter2D(Collider2D other)
             {
                 if (other.CompareTag("Player")) OnPlayerEnter?.Invoke();
             }
+
             private void OnTriggerExit2D(Collider2D other)
             {
                 if (other.CompareTag("Player")) OnPlayerExit?.Invoke();

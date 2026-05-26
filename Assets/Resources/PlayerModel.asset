@@ -17,6 +17,7 @@ MonoBehaviour:
   skillDamage: 30
   baseSpeed: 2
   runSpeedMultiplier: 1.5
+  slideSpeedMultiplier: 1.35
   slideCool: 0.6
   jumpForce: 10
   horizontalInputThreshold: 0.01

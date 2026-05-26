@@ -23,16 +23,16 @@ namespace Script.Models
     [CreateAssetMenu(fileName = "NewPlayerProperty", menuName = "GameModel/PlayerModelSObject")]
     public class PlayerModelSObject : ScriptableObject
     {
-        [Header("玩家属性")] public readonly float maxHealth = 100f;
-        public readonly float damage = 15f;
-        public readonly float skillDamage = 30f;
-        public readonly float baseSpeed = 2f;
-        public readonly float runSpeedMultiplier = 1.5f;
-        public readonly float slideSpeedMultiplier = 1.35f;
-        public readonly float slideCool = 0.6f;
-        public readonly float jumpForce = 10f;
-        [Space] public readonly float horizontalInputThreshold = 0.01f;
-        public readonly float invincibleTime = 0.2f; //无敌时间
-        public readonly float bufferBarSpeed = 2f;
+        [Header("玩家属性")] public  float maxHealth = 100f;
+        public float damage = 15f;
+        public float skillDamage = 30f;
+        public float baseSpeed = 2f;
+        public float runSpeedMultiplier = 1.5f;
+        public float slideSpeedMultiplier = 1.35f;
+        public float slideCool = 0.6f;
+        public float jumpForce = 10f;
+        [Space] public float horizontalInputThreshold = 0.01f;
+        public float invincibleTime = 0.2f; //无敌时间
+        public float bufferBarSpeed = 2f;
     }
 }

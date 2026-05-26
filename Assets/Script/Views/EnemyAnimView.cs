@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Script.Models;
 using Script.RunTimeData;
 using UnityEngine;
@@ -9,38 +11,38 @@ namespace Script.Views
         [SerializeField] private float crossFadeTime = 0.1f;
 
         private Animator _anim;
-        private EnemyRunTimeData _data;
-        private Coroutine _currentAnimCoroutine;
-
-        // 动画哈希值
-        private readonly int _idle = Animator.StringToHash("Idle");
-        private readonly int _walk = Animator.StringToHash("Walk");
-        private readonly int _attack = Animator.StringToHash("Attack");
-        private readonly int _hurt = Animator.StringToHash("PlayerHurt");
-        private readonly int _die = Animator.StringToHash("Die");
-
-        // 状态跟踪
+        private EnemyRunTimeData _runTimeData;
         private EnemyState _lastState;
+
+        public event Action OnAttackEnd;
+        public event Action OnHurtEnd;
+
+        private static readonly Dictionary<EnemyState, int> AnimDictionary = new Dictionary<EnemyState, int>()
+        {
+            { EnemyState.Idle, Animator.StringToHash(nameof(EnemyState.Idle)) },
+            { EnemyState.Walk, Animator.StringToHash(nameof(EnemyState.Walk)) },
+            { EnemyState.Attack, Animator.StringToHash(nameof(EnemyState.Attack)) },
+            { EnemyState.Hurt, Animator.StringToHash(nameof(EnemyState.Hurt)) },
+            { EnemyState.Die, Animator.StringToHash(nameof(EnemyState.Die)) }
+        };
 
         private void Awake()
         {
             _anim = GetComponent<Animator>();
-            _data = GetComponent<EnemyRunTimeData>();
+            _runTimeData = GetComponent<EnemyRunTimeData>();
         }
 
         private void Start()
         {
-            _data.OnHealthChanged += OnHealthChangedHandler;
-            _data.OnDeath += OnDeathHandler;
+            _runTimeData.OnHealthChanged += OnHealthChangedHandler;
+            _runTimeData.OnDeath += OnDeathHandler;
         }
 
         private void OnDestroy()
         {
-            if (_data != null)
-            {
-                _data.OnHealthChanged -= OnHealthChangedHandler;
-                _data.OnDeath -= OnDeathHandler;
-            }
+            if (!_runTimeData) return;
+            _runTimeData.OnHealthChanged -= OnHealthChangedHandler;
+            _runTimeData.OnDeath -= OnDeathHandler;
         }
 
         private void Update()
@@ -50,53 +52,30 @@ namespace Script.Views
 
         private void UpdateAnimation()
         {
-            if (_data.currentState != _lastState)
-            {
-                _lastState = _data.currentState;
-
-                switch (_data.currentState)
-                {
-                    case EnemyState.Idle:
-                        PlayAnimation(_idle);
-                        break;
-                    case EnemyState.Walk:
-                        PlayAnimation(_walk);
-                        break;
-                    case EnemyState.Attack:
-                        PlayAnimation(_attack);
-                        break;
-                    case EnemyState.Hurt:
-                        PlayAnimation(_hurt);
-                        break;
-                    case EnemyState.Die:
-                        PlayAnimation(_die);
-                        break;
-                }
-            }
-        }
-
-        private void OnHealthChangedHandler(float current, float max)
-        {
-            if (current <= 0)
-            {
-                _data.currentState = EnemyState.Die;
-            }
-            else
-            {
-                _data.currentState = EnemyState.Hurt;
-            }
-        }
-
-        private void OnDeathHandler()
-        {
-            _data.currentState = EnemyState.Die;
+            if (_runTimeData.currentState == _lastState) return;
+            _lastState = _runTimeData.currentState;
+            if (AnimDictionary.TryGetValue(_lastState, out var hash)) PlayAnimation(hash);
         }
 
         private void PlayAnimation(int hash, float fade = -1)
         {
-            if (_anim == null) return;
-            float fadeTime = fade < 0 ? crossFadeTime : fade;
+            if (!_anim) return;
+            var fadeTime = fade < 0 ? crossFadeTime : fade;
             _anim.CrossFade(hash, fadeTime, 0);
         }
+
+        private void OnHealthChangedHandler(float current, float max)
+        {
+            _runTimeData.currentState = current <= 0 ? EnemyState.Die : EnemyState.Hurt;
+        }
+
+        private void OnDeathHandler()
+        {
+            _runTimeData.currentState = EnemyState.Die;
+        }
+
+        // 动画事件调用
+        public void TriggerAttackEnd() => OnAttackEnd?.Invoke();
+        public void TriggerHurtEnd() => OnHurtEnd?.Invoke();
     }
 }

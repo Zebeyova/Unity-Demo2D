@@ -11,11 +11,13 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164d523be7a8ef14f8c66a73cd003d8b, type: 3}
   m_Name: EnemyModel
-  m_EditorClassIdentifier: Assembly-CSharp:Script.Enemy:EnemyRunningData/EnemyProperty
+  m_EditorClassIdentifier: 
   maxHealth: 100
   damage: 10
   baseSpeed: 0.5
   attackCoolDown: 1
   endError: 0.3
   distanceFromPlayer: 0.93
-  patrolMaxDistance: 2
+  patrolMaxDistance: 1.5
+  detectSizeX: 4
+  detectSizeY: 1.2
