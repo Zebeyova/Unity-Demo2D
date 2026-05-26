@@ -29,6 +29,7 @@ namespace Script.Views
             { PlayerStats.Slide, Animator.StringToHash(nameof(PlayerStats.Slide)) },
             { PlayerStats.Jump, Animator.StringToHash(nameof(PlayerStats.Jump)) },
             { PlayerStats.Fall, Animator.StringToHash(nameof(PlayerStats.Fall)) },
+            { PlayerStats.FallLoop, Animator.StringToHash(nameof(PlayerStats.FallLoop)) },
             { PlayerStats.Attack1, Animator.StringToHash(nameof(PlayerStats.Attack1)) },
             { PlayerStats.Attack2, Animator.StringToHash(nameof(PlayerStats.Attack2)) },
             { PlayerStats.Skills, Animator.StringToHash(nameof(PlayerStats.Skills)) },

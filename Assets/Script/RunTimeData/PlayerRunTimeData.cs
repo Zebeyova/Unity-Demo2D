@@ -15,6 +15,7 @@ namespace Script.RunTimeData
         public float SkillDamage => ModelManager.PlayerModelSObject?.skillDamage ?? 30f;
         public float BaseSpeed => ModelManager.PlayerModelSObject?.baseSpeed ?? 2f;
         public float RunSpeedMultiplier => ModelManager.PlayerModelSObject?.runSpeedMultiplier ?? 1.5f;
+        public float SlideSpeedMultiplier => ModelManager.PlayerModelSObject?.slideSpeedMultiplier ?? 1.5f;
         public float SlideCool => ModelManager.PlayerModelSObject?.slideCool ?? 0.6f;
         public float JumpForce => ModelManager.PlayerModelSObject?.jumpForce ?? 10f;
         public float HorizontalInputThreshold => ModelManager.PlayerModelSObject?.horizontalInputThreshold ?? 0.01f;

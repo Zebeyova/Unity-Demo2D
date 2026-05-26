@@ -66,6 +66,14 @@ namespace Script.Controllers
             _horizontal = Input.GetAxis("Horizontal");
             _isWalking = _isRunning = _isSliding = _isAttacking = false;
 
+            // 跳跃
+            if (Input.GetKeyDown(KeyCode.K) && _inGround)
+            {
+                _runTimeData.currentState = PlayerStats.Jump;
+                _rb.velocity = new Vector2(_rb.velocity.x, _runTimeData.JumpForce);
+                return;
+            }
+
             // 滑铲
             if (Input.GetKeyDown(KeyCode.Space) && _runTimeData.currentState == PlayerStats.Run && _inGround &&
                 !_isSlidingOnCooldown)
@@ -73,14 +81,6 @@ namespace Script.Controllers
                 _runTimeData.currentState = PlayerStats.Slide;
                 _isSliding = true;
                 StartCoroutine(SlideCooldownRoutine());
-                return;
-            }
-
-            // 跳跃
-            if (Input.GetKeyDown(KeyCode.K) && _inGround)
-            {
-                _runTimeData.currentState = PlayerStats.Jump;
-                _rb.velocity = new Vector2(_rb.velocity.x, _runTimeData.JumpForce);
                 return;
             }
 
@@ -119,6 +119,7 @@ namespace Script.Controllers
 
             var isSpecialState = _runTimeData.currentState == PlayerStats.Jump ||
                                  _runTimeData.currentState == PlayerStats.Fall ||
+                                 _runTimeData.currentState == PlayerStats.FallLoop ||
                                  _runTimeData.currentState == PlayerStats.WalkTurn ||
                                  _runTimeData.currentState == PlayerStats.RunTurn ||
                                  _runTimeData.currentState == PlayerStats.Slide ||
@@ -128,16 +129,17 @@ namespace Script.Controllers
                                  _runTimeData.currentState == PlayerStats.Hurt ||
                                  _runTimeData.currentState == PlayerStats.Death;
 
+            var _wantMove = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
             if (!isSpecialState)
             {
                 // 奔跑
-                if (Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(_horizontal) > 0.1f)
+                if (Input.GetKey(KeyCode.LeftShift) && _wantMove)
                 {
                     _runTimeData.currentState = PlayerStats.Run;
                     _isRunning = true;
                 }
                 // 移动
-                else if (Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold)
+                else if (_wantMove)
                 {
                     _runTimeData.currentState = PlayerStats.Walk;
                     _isWalking = true;
@@ -150,7 +152,7 @@ namespace Script.Controllers
             else
             {
                 // 特殊状态下仍记录移动输入，用于空中移动速度
-                if (!(Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold)) return;
+                if (!(_wantMove)) return;
                 if (Input.GetKey(KeyCode.LeftShift))
                     _isRunning = true;
                 else
@@ -174,7 +176,7 @@ namespace Script.Controllers
             }
 
             var speed = _runTimeData.BaseSpeed;
-            if (_isSliding) speed *= _runTimeData.RunSpeedMultiplier * 1.35f;
+            if (_isSliding) speed *= _runTimeData.RunSpeedMultiplier * _runTimeData.SlideSpeedMultiplier;
             else if (_isRunning) speed *= _runTimeData.RunSpeedMultiplier;
 
             if (_isWalking || _isRunning || _isSliding)
@@ -183,7 +185,7 @@ namespace Script.Controllers
 
         private void HandleTurn()
         {
-            _targetFacingRight = _horizontal > 0;
+            _targetFacingRight = _horizontal > _runTimeData.HorizontalInputThreshold;
             if (_currentFacingRight == _targetFacingRight ||
                 Mathf.Abs(_horizontal) <= _runTimeData.HorizontalInputThreshold)
             {
@@ -219,19 +221,33 @@ namespace Script.Controllers
 
         private void OnJumpPeakHandler()
         {
-            if (_runTimeData.currentState == PlayerStats.Jump)
-                _runTimeData.currentState = PlayerStats.Fall;
+            if (_runTimeData.currentState != PlayerStats.Jump) return;
+            if (!_inGround) _runTimeData.currentState = PlayerStats.Fall;
+            else
+            {
+                if (_isRunning)
+                    _runTimeData.currentState = PlayerStats.Run;
+                else if (_isWalking)
+                    _runTimeData.currentState = PlayerStats.Walk;
+                else
+                    _runTimeData.currentState = PlayerStats.Idle;
+            }
         }
 
         private void OnLandingHandler()
         {
-            if (_runTimeData.currentState != PlayerStats.Fall) return;
-            if (_isRunning)
-                _runTimeData.currentState = PlayerStats.Run;
-            else if (_isWalking)
-                _runTimeData.currentState = PlayerStats.Walk;
+            if (_runTimeData.currentState != PlayerStats.Fall &&
+                _runTimeData.currentState != PlayerStats.FallLoop) return;
+            if (!_inGround) _runTimeData.currentState = PlayerStats.FallLoop;
             else
-                _runTimeData.currentState = PlayerStats.Idle;
+            {
+                if (_isRunning)
+                    _runTimeData.currentState = PlayerStats.Run;
+                else if (_isWalking)
+                    _runTimeData.currentState = PlayerStats.Walk;
+                else
+                    _runTimeData.currentState = PlayerStats.Idle;
+            }
         }
 
         private void OnTurnEndHandler()
@@ -249,9 +265,8 @@ namespace Script.Controllers
             }
 
             // 根据输入和地面状态恢复移动状态
-            var wantsRun = Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(_horizontal) > 0.1f;
             var wantsWalk = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
-
+            var wantsRun = Input.GetKey(KeyCode.LeftShift) && wantsWalk;
             if (_inGround)
             {
                 if (wantsRun)

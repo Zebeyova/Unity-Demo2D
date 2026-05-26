@@ -12,6 +12,7 @@ namespace Script.Models
         Slide,
         Jump,
         Fall,
+        FallLoop,
         Attack1,
         Attack2,
         Skills,
@@ -27,6 +28,7 @@ namespace Script.Models
         public readonly float skillDamage = 30f;
         public readonly float baseSpeed = 2f;
         public readonly float runSpeedMultiplier = 1.5f;
+        public readonly float slideSpeedMultiplier = 1.35f;
         public readonly float slideCool = 0.6f;
         public readonly float jumpForce = 10f;
         [Space] public readonly float horizontalInputThreshold = 0.01f;

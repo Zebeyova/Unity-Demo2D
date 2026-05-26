@@ -15,21 +15,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSObject.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Attack2.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/FallLoop.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/FallLoop.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Slide.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Slide.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSO.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/ModelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/ModelManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSO.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeData/PlayerRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/PlayerRunTimeData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" afterDir="false" />
     </list>
@@ -224,7 +215,8 @@
       <workItem from="1779676108061" duration="30396000" />
       <workItem from="1779711577196" duration="26000" />
       <workItem from="1779711633279" duration="65000" />
-      <workItem from="1779713205809" duration="8632000" />
+      <workItem from="1779713205809" duration="8698000" />
+      <workItem from="1779758909168" duration="2789000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -450,7 +442,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779717929240</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="差一个run_turn.fallloop动画,顶头跳跃修复">
+      <option name="closed" value="true" />
+      <created>1779721931520</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1779721931520</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,7 +504,8 @@
     <MESSAGE value="将敌人的属性也修改掉了" />
     <MESSAGE value="成功修改部分动画文件" />
     <MESSAGE value="5.25备份" />
-    <option name="LAST_COMMIT_MESSAGE" value="5.25备份" />
+    <MESSAGE value="差一个run_turn.fallloop动画,顶头跳跃修复" />
+    <option name="LAST_COMMIT_MESSAGE" value="差一个run_turn.fallloop动画,顶头跳跃修复" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
