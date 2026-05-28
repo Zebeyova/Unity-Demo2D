@@ -58,6 +58,7 @@ namespace Script.Controllers
         private void Update()
         {
             _inGround = _collider.IsTouchingLayers(groundLayerMask);
+            if(_runTimeData.currentState == PlayerStats.Hurt || _runTimeData.currentState == PlayerStats.Death) return;
             HandleInput();
             HandleTurn();
             Move();
@@ -132,7 +133,16 @@ namespace Script.Controllers
                                  _runTimeData.currentState == PlayerStats.Death;
 
             var _wantMove = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
-            if (!isSpecialState)
+            if (isSpecialState)
+            {
+                // 特殊状态下仍记录移动输入，用于空中移动速度
+                if (!(_wantMove)) return;
+                if (Input.GetKey(KeyCode.LeftShift))
+                    _isRunning = true;
+                else
+                    _isWalking = true;
+            }
+            else
             {
                 // 奔跑
                 if (Input.GetKey(KeyCode.LeftShift) && _wantMove)
@@ -150,15 +160,6 @@ namespace Script.Controllers
                 {
                     _runTimeData.currentState = PlayerStats.Idle;
                 }
-            }
-            else
-            {
-                // 特殊状态下仍记录移动输入，用于空中移动速度
-                if (!(_wantMove)) return;
-                if (Input.GetKey(KeyCode.LeftShift))
-                    _isRunning = true;
-                else
-                    _isWalking = true;
             }
         }
 

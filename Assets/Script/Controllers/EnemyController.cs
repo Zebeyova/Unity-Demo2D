@@ -26,13 +26,12 @@ namespace Script.Controllers
         private Vector3 _leftBorder, _rightBorder;
         private int _patrolDir; // -1左, 1右, 0未初始化
         private bool _isTouchingWall;
-        private bool _isAttack;
         private float _wallTimer = 2f;
         private bool _wallTiming;
 
         // 延迟退出检测
         private bool _playerInTrigger;
-        private bool _exitDelay;
+        private bool _enterDelay;
         private float _exitDelayTimer = 1f;
 
         private void Awake()
@@ -67,8 +66,9 @@ namespace Script.Controllers
         {
             if (!_player) return;
             UpdateDetectionDelay();
+            if (_runTimeData.currentState == EnemyState.Attack || _runTimeData.currentState == EnemyState.Hurt ||
+                _runTimeData.currentState == EnemyState.Die) return;
             WallCheck();
-            if (_runTimeData.currentState == EnemyState.Hurt || _runTimeData.currentState == EnemyState.Die) return;
             EnemyAI();
         }
 
@@ -95,22 +95,21 @@ namespace Script.Controllers
             detector.OnPlayerEnter += () =>
             {
                 _playerInTrigger = true;
-                _exitDelay = false;
+                _enterDelay = true;
             };
             detector.OnPlayerExit += () =>
             {
-                _exitDelay = true;
+                _enterDelay = false;
                 _exitDelayTimer = 1f;
             };
         }
 
         private void UpdateDetectionDelay()
         {
-            if (!_exitDelay) return;
+            if (_enterDelay) return;
             _exitDelayTimer -= Time.deltaTime;
             if (!(_exitDelayTimer <= 0)) return;
             _playerInTrigger = false;
-            _exitDelay = false;
         }
 
         private bool IsPlayerDetected() => _playerInTrigger;
@@ -124,10 +123,7 @@ namespace Script.Controllers
             var playerDetected = IsPlayerDetected();
 
             if (playerDetected && !_isTouchingWall)
-            {
-                StopMoveAndIdle();
                 AttackOrMove(_player.transform.position - transform.position);
-            }
             else
             {
                 // 返回起始点
@@ -154,7 +150,6 @@ namespace Script.Controllers
             if (playerDetected && !_isTouchingWall)
             {
                 _patrolDir = 0; // 停止巡逻，转为追击
-                StopMoveAndIdle();
                 AttackOrMove(_player.transform.position - transform.position);
             }
             else
@@ -196,7 +191,6 @@ namespace Script.Controllers
             if (direction.magnitude < _runTimeData.DistanceFromPlayer)
             {
                 // 停止移动，播放攻击动画
-                _isAttack = true;
                 _rb.velocity = Vector2.zero;
                 _runTimeData.currentState = EnemyState.Attack;
             }
@@ -222,7 +216,6 @@ namespace Script.Controllers
 
         private void StopMoveAndIdle()
         {
-            if (_isAttack) return; // 攻击中不切换Idle
             _rb.velocity = Vector2.zero;
             _runTimeData.currentState = EnemyState.Idle;
         }
@@ -249,7 +242,10 @@ namespace Script.Controllers
 
         private void OnAttackPlayerHandler()
         {
-            _runTimeData.AttackPlayer(_player);
+            if (IsPlayerDetected() &&
+                (_player.transform.position - transform.position).magnitude < _runTimeData.DistanceFromPlayer &&
+                !_isTouchingWall) _runTimeData.AttackPlayer(_player);
+            else OnAttackEndHandler();
         }
 
         private void OnAttackEndHandler()
@@ -263,7 +259,6 @@ namespace Script.Controllers
             }
             else
             {
-                _isAttack = false;
                 if (enemyType == EnemyType.Guard)
                 {
                     var toStart = _startPos - transform.position;
@@ -285,13 +280,12 @@ namespace Script.Controllers
             if (_runTimeData.currentState != EnemyState.Hurt) return;
             if (IsPlayerDetected() && !_isTouchingWall)
                 AttackOrMove(_player.transform.position - transform.position);
-            else
-                StopMoveAndIdle();
+            else StopMoveAndIdle();
         }
 
         private void OnDeathEndHandler()
         {
-            if(_runTimeData.currentState != EnemyState.Die) return;
+            if (_runTimeData.currentState != EnemyState.Die) return;
             Destroy(gameObject);
         }
 
