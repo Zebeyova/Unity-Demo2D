@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Script.Models;
+using Script.Interfaces;
 using Script.RunTimeData;
 using UnityEngine;
 
@@ -12,24 +12,24 @@ namespace Script.Views
 
         private Animator _anim;
         private PlayerRunTimeData _runTimeData;
-        private PlayerStats _lastState;
+        private ICharacterValue.Stats _lastState;
 
-        private static readonly Dictionary<PlayerStats, int> AnimDictionary = new Dictionary<PlayerStats, int>
+        private static readonly Dictionary<ICharacterValue.Stats, int> AnimDictionary = new Dictionary<ICharacterValue.Stats, int>
         {
-            { PlayerStats.Idle, Animator.StringToHash(nameof(PlayerStats.Idle)) },
-            { PlayerStats.Walk, Animator.StringToHash(nameof(PlayerStats.Walk)) },
-            { PlayerStats.Run, Animator.StringToHash(nameof(PlayerStats.Run)) },
-            { PlayerStats.WalkTurn, Animator.StringToHash(nameof(PlayerStats.WalkTurn)) },
-            { PlayerStats.RunTurn, Animator.StringToHash(nameof(PlayerStats.RunTurn)) },
-            { PlayerStats.Slide, Animator.StringToHash(nameof(PlayerStats.Slide)) },
-            { PlayerStats.Jump, Animator.StringToHash(nameof(PlayerStats.Jump)) },
-            { PlayerStats.Fall, Animator.StringToHash(nameof(PlayerStats.Fall)) },
-            { PlayerStats.FallLoop, Animator.StringToHash(nameof(PlayerStats.FallLoop)) },
-            { PlayerStats.Attack1, Animator.StringToHash(nameof(PlayerStats.Attack1)) },
-            { PlayerStats.Attack2, Animator.StringToHash(nameof(PlayerStats.Attack2)) },
-            { PlayerStats.Skills, Animator.StringToHash(nameof(PlayerStats.Skills)) },
-            { PlayerStats.Hurt, Animator.StringToHash(nameof(PlayerStats.Hurt)) },
-            { PlayerStats.Death, Animator.StringToHash(nameof(PlayerStats.Death)) }
+            { ICharacterValue.Stats.Idle, Animator.StringToHash(nameof(ICharacterValue.Stats.Idle)) },
+            { ICharacterValue.Stats.Walk, Animator.StringToHash(nameof(ICharacterValue.Stats.Walk)) },
+            { ICharacterValue.Stats.Run, Animator.StringToHash(nameof(ICharacterValue.Stats.Run)) },
+            { ICharacterValue.Stats.WalkTurn, Animator.StringToHash(nameof(ICharacterValue.Stats.WalkTurn)) },
+            { ICharacterValue.Stats.RunTurn, Animator.StringToHash(nameof(ICharacterValue.Stats.RunTurn)) },
+            { ICharacterValue.Stats.Slide, Animator.StringToHash(nameof(ICharacterValue.Stats.Slide)) },
+            { ICharacterValue.Stats.Jump, Animator.StringToHash(nameof(ICharacterValue.Stats.Jump)) },
+            { ICharacterValue.Stats.Fall, Animator.StringToHash(nameof(ICharacterValue.Stats.Fall)) },
+            { ICharacterValue.Stats.FallLoop, Animator.StringToHash(nameof(ICharacterValue.Stats.FallLoop)) },
+            { ICharacterValue.Stats.Attack, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack)) },
+            { ICharacterValue.Stats.Attack2, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack2)) },
+            { ICharacterValue.Stats.Skill, Animator.StringToHash(nameof(ICharacterValue.Stats.Skill)) },
+            { ICharacterValue.Stats.Hurt, Animator.StringToHash(nameof(ICharacterValue.Stats.Hurt)) },
+            { ICharacterValue.Stats.Death, Animator.StringToHash(nameof(ICharacterValue.Stats.Death)) }
         };
 
         private void Awake()
@@ -40,15 +40,13 @@ namespace Script.Views
 
         private void Start()
         {
-            _runTimeData.OnPlayerHurt += OnPlayerHealthChangedHandler;
-            _runTimeData.OnDeath += OnDeathHandler;
+            _runTimeData.OnPlayerHurt += OnPlayerPlayerHealthChangedHandler;
         }
 
         private void OnDestroy()
         {
             if (!_runTimeData) return;
-            _runTimeData.OnPlayerHurt -= OnPlayerHealthChangedHandler;
-            _runTimeData.OnDeath -= OnDeathHandler;
+            _runTimeData.OnPlayerHurt -= OnPlayerPlayerHealthChangedHandler;
         }
 
         private void Update()
@@ -70,14 +68,9 @@ namespace Script.Views
             _anim.CrossFade(hash, fadeTime, 0);
         }
 
-        private void OnPlayerHealthChangedHandler(float current, float max)
+        private void OnPlayerPlayerHealthChangedHandler(float current, float max)
         {
-            _runTimeData.currentState = current <= 0 ? PlayerStats.Death : PlayerStats.Hurt;
-        }
-
-        private void OnDeathHandler()
-        {
-            _runTimeData.currentState = PlayerStats.Death;
+            _runTimeData.currentState = current <= 0 ? ICharacterValue.Stats.Death : ICharacterValue.Stats.Hurt;
         }
 
         #region 动画事件回调

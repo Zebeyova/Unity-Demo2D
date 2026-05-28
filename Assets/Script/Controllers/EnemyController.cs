@@ -1,4 +1,4 @@
-using Script.Models;
+using Script.Interfaces;
 using Script.RunTimeData;
 using Script.Views;
 using UnityEngine;
@@ -68,8 +68,8 @@ namespace Script.Controllers
         {
             if (!_player) return;
             UpdateDetectionDelay();
-            if (_runTimeData.currentState == EnemyState.Attack || _runTimeData.currentState == EnemyState.Hurt ||
-                _runTimeData.currentState == EnemyState.Die) return;
+            if (_runTimeData.currentStats == ICharacterValue.Stats.Attack || _runTimeData.currentStats == ICharacterValue.Stats.Hurt ||
+                _runTimeData.currentStats == ICharacterValue.Stats.Death) return;
             WallCheck();
             EnemyAI();
         }
@@ -125,7 +125,7 @@ namespace Script.Controllers
             var playerDetected = IsPlayerDetected();
 
             if (playerDetected && !_isTouchingWall)
-                AttackOrMove(_player.transform.position - transform.position);
+                TryAttackOrMove(_player.transform.position - transform.position);
             else
             {
                 // 返回起始点
@@ -152,7 +152,7 @@ namespace Script.Controllers
             if (playerDetected && !_isTouchingWall)
             {
                 _patrolDir = 0; // 停止巡逻，转为追击
-                AttackOrMove(_player.transform.position - transform.position);
+                TryAttackOrMove(_player.transform.position - transform.position);
             }
             else
             {
@@ -188,13 +188,13 @@ namespace Script.Controllers
 
         #endregion
 
-        private void AttackOrMove(Vector3 direction)
+        private void TryAttackOrMove(Vector3 direction)
         {
             if (direction.magnitude < _runTimeData.DistanceFromPlayer)
             {
                 // 停止移动，播放攻击动画
                 StopMoveAndIdle();
-                _runTimeData.currentState = EnemyState.Attack;
+                _runTimeData.currentStats = ICharacterValue.Stats.Attack;
             }
             else Move(direction);
         }
@@ -207,14 +207,14 @@ namespace Script.Controllers
                 _spriteRenderer.flipX = moveDir.x < 0;
             }
 
-            _runTimeData.currentState = EnemyState.Walk;
+            _runTimeData.currentStats = ICharacterValue.Stats.Walk;
             _rb.velocity = moveDir.normalized * _runTimeData.BaseSpeed;
         }
 
         private void StopMoveAndIdle()
         {
             _rb.velocity = Vector2.zero;
-            _runTimeData.currentState = EnemyState.Idle;
+            _runTimeData.currentStats = ICharacterValue.Stats.Idle;
         }
 
         private void WallCheck()
@@ -226,7 +226,7 @@ namespace Script.Controllers
 
             _wallTiming = true;
             _rb.velocity = Vector2.zero;
-            _runTimeData.currentState = EnemyState.Idle;
+            _runTimeData.currentStats = ICharacterValue.Stats.Idle;
             _wallTimer -= Time.deltaTime;
 
             if (!(_wallTimer <= 0)) return;
@@ -247,12 +247,12 @@ namespace Script.Controllers
 
         private void OnAttackEndHandler()
         {
-            if (_runTimeData.currentState != EnemyState.Attack) return;
+            if (_runTimeData.currentStats != ICharacterValue.Stats.Attack) return;
             // 攻击结束：根据是否检测到玩家及是否在冷却来决定状态
             if (IsPlayerDetected() && !_isTouchingWall)
             {
                 // 继续追击或再次攻击
-                AttackOrMove(_player.transform.position - transform.position);
+                TryAttackOrMove(_player.transform.position - transform.position);
             }
             else
             {
@@ -274,15 +274,15 @@ namespace Script.Controllers
 
         private void OnHurtEndHandler()
         {
-            if (_runTimeData.currentState != EnemyState.Hurt) return;
+            if (_runTimeData.currentStats != ICharacterValue.Stats.Hurt) return;
             if (IsPlayerDetected() && !_isTouchingWall)
-                AttackOrMove(_player.transform.position - transform.position);
+                TryAttackOrMove(_player.transform.position - transform.position);
             else StopMoveAndIdle();
         }
 
         private void OnDeathEndHandler()
         {
-            if (_runTimeData.currentState != EnemyState.Die) return;
+            if (_runTimeData.currentStats != ICharacterValue.Stats.Death) return;
             Destroy(gameObject);
         }
 

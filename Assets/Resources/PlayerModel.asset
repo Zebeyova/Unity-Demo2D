@@ -12,14 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19e19ca0b4e58a4b847f311cd94cef0, type: 3}
   m_Name: PlayerModel
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  damage: 15
-  skillDamage: 30
-  baseSpeed: 2
   runSpeedMultiplier: 1.5
   slideSpeedMultiplier: 1.35
   slideCool: 0.6
   jumpForce: 10
   horizontalInputThreshold: 0.01
-  invincibleTime: 0.2
-  bufferBarSpeed: 2

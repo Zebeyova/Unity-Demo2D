@@ -25,7 +25,7 @@ namespace Script.Views
                 if (!_playerRunTimeData) return;
                 bar = GetComponentsInChildren<Image>()[2];
                 bufferBar = GetComponentsInChildren<Image>()[1];
-                _maxHealth = _playerRunTimeData.MaxHealth;
+                _maxHealth = _playerRunTimeData.BaseMaxHealth;
             }
             else
             {
@@ -33,7 +33,7 @@ namespace Script.Views
                 if (!_enemyRunTimeData) return;
                 bar = GetComponentsInChildren<Image>()[2];
                 bufferBar = GetComponentsInChildren<Image>()[1];
-                _maxHealth = _enemyRunTimeData.MaxHealth;
+                _maxHealth = _enemyRunTimeData.BaseMaxHealth;
             }
         }
 
@@ -42,12 +42,12 @@ namespace Script.Views
             if (isPlayer)
             {
                 _playerRunTimeData.OnPlayerHurt += OnPlayerHurt;
-                OnPlayerHurt(_playerRunTimeData.currentHealth, _maxHealth);
+                OnPlayerHurt(_playerRunTimeData.CurrentHealth, _maxHealth);
             }
             else
             {
                 _enemyRunTimeData.OnEnemyHurt += OnPlayerHurt;
-                OnPlayerHurt(_enemyRunTimeData.currentHealth, _maxHealth);
+                OnPlayerHurt(_enemyRunTimeData.CurrentHealth, _maxHealth);
             }
         }
 
@@ -60,8 +60,7 @@ namespace Script.Views
         private void Update()
         {
             if (!_bufferDirty || !bufferBar) return;
-            var speed = isPlayer ? _playerRunTimeData.BufferBarSpeed : 2f;
-            bufferBar.fillAmount = Mathf.Lerp(bufferBar.fillAmount, bar.fillAmount, Time.deltaTime * speed);
+            bufferBar.fillAmount = Mathf.Lerp(bufferBar.fillAmount, bar.fillAmount, Time.deltaTime * 2f);
             if (Mathf.Approximately(bufferBar.fillAmount, bar.fillAmount)) _bufferDirty = false;
         }
 

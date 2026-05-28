@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Script.Models;
+using Script.Interfaces;
 using Script.RunTimeData;
 using UnityEngine;
 
@@ -12,15 +12,15 @@ namespace Script.Views
 
         private Animator _anim;
         private EnemyRunTimeData _runTimeData;
-        private EnemyState _lastState;
+        private ICharacterValue.Stats _lastStats;
 
-        private static readonly Dictionary<EnemyState, int> AnimDictionary = new Dictionary<EnemyState, int>()
+        private static readonly Dictionary<ICharacterValue.Stats, int> AnimDictionary = new Dictionary<ICharacterValue.Stats, int>()
         {
-            { EnemyState.Idle, Animator.StringToHash(nameof(EnemyState.Idle)) },
-            { EnemyState.Walk, Animator.StringToHash(nameof(EnemyState.Walk)) },
-            { EnemyState.Attack, Animator.StringToHash(nameof(EnemyState.Attack)) },
-            { EnemyState.Hurt, Animator.StringToHash(nameof(EnemyState.Hurt)) },
-            { EnemyState.Die, Animator.StringToHash(nameof(EnemyState.Die)) }
+            { ICharacterValue.Stats.Idle, Animator.StringToHash(nameof(ICharacterValue.Stats.Idle)) },
+            { ICharacterValue.Stats.Walk, Animator.StringToHash(nameof(ICharacterValue.Stats.Walk)) },
+            { ICharacterValue.Stats.Attack, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack)) },
+            { ICharacterValue.Stats.Hurt, Animator.StringToHash(nameof(ICharacterValue.Stats.Hurt)) },
+            { ICharacterValue.Stats.Death, Animator.StringToHash(nameof(ICharacterValue.Stats.Death)) }
         };
 
         private void Awake()
@@ -47,9 +47,9 @@ namespace Script.Views
 
         private void UpdateAnimation()
         {
-            if (_runTimeData.currentState == _lastState) return;
-            _lastState = _runTimeData.currentState;
-            if (AnimDictionary.TryGetValue(_lastState, out var hash)) PlayAnimation(hash);
+            if (_runTimeData.currentStats == _lastStats) return;
+            _lastStats = _runTimeData.currentStats;
+            if (AnimDictionary.TryGetValue(_lastStats, out var hash)) PlayAnimation(hash);
         }
 
         private void PlayAnimation(int hash, float fade = -1)
@@ -61,7 +61,7 @@ namespace Script.Views
 
         private void OnEnemyHurtHandler(float current, float max)
         {
-            _runTimeData.currentState = current <= 0 ? EnemyState.Die : EnemyState.Hurt;
+            _runTimeData.currentStats = current <= 0 ? ICharacterValue.Stats.Death : ICharacterValue.Stats.Hurt;
         }
 
         #region 动画事件调用

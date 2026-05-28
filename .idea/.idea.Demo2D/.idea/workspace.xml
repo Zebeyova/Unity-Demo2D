@@ -15,14 +15,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Interfaces/ICharacterValue.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Interfaces/ICharacterValue.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Interfaces/IDamageable.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Interfaces/IDamageable.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/DamageSystem.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/DamageSystem.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Die.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Die.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Attack.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Die.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Die.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Hurt.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Hurt.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Skills.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Skills.anim.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/EnemyModel.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/EnemyModel.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerModel.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/PlayerModel.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeData/PlayerRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/PlayerRunTimeData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/BlackMaskView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/BlackMaskView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Views/HealthBarView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/HealthBarView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" afterDir="false" />
@@ -97,10 +121,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90585cf0c5a24f279207485a8de593e713e800/88/e1c2cd22/UnityEvent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/HLSLSupport.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Animation/Player/Attack.anim" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Animation/Player/Slide.anim" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/EnemyModel.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Resources/PlayerModel.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs.meta" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Interfaces/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/RunTimeData/DamageSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@1.0.0/Editor/GridPaintPaletteClipboard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.33/UnityEditor.TestRunner/CommandLineTest/Executer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.33/UnityEditor.TestRunner/CommandLineTest/ExitCallbacks.cs" root0="SKIP_HIGHLIGHTING" />
@@ -247,7 +274,7 @@
       <workItem from="1779758909168" duration="21710000" />
       <workItem from="1779851022897" duration="64000" />
       <workItem from="1779864614694" duration="6119000" />
-      <workItem from="1779947837049" duration="4466000" />
+      <workItem from="1779947837049" duration="28384000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -513,7 +540,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779949265265</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="血条正确">
+      <option name="closed" value="true" />
+      <created>1779953016188</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1779953016188</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +578,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="敌人攻击冷却已添加" />
     <MESSAGE value="完成敌人的受伤及死亡动画,但是受伤有延迟需要修改" />
     <MESSAGE value="增加死亡黑屏效果" />
     <MESSAGE value="重生完成" />
@@ -568,7 +602,8 @@
     <MESSAGE value="更新敌人逻辑" />
     <MESSAGE value="目前逻辑基本修复完成" />
     <MESSAGE value="bug修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug修复" />
+    <MESSAGE value="血条正确" />
+    <option name="LAST_COMMIT_MESSAGE" value="血条正确" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

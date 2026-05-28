@@ -28,7 +28,7 @@ namespace Script.Views
 
         private void Start()
         {
-            _playerData.OnDeath += OnPlayerDeath;
+            _playerData.OnPlayerDeath += OnPlayerDeath;
             if (_needRespawnFadeOut)
                 StartCoroutine(ChangeRadiusCoroutine(true));
         }
@@ -36,7 +36,7 @@ namespace Script.Views
         private void OnDestroy()
         {
             if (_playerData)
-                _playerData.OnDeath -= OnPlayerDeath;
+                _playerData.OnPlayerDeath -= OnPlayerDeath;
         }
 
         private void OnRenderImage(RenderTexture src, RenderTexture dst)
