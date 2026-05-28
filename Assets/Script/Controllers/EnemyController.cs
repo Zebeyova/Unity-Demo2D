@@ -20,6 +20,7 @@ namespace Script.Controllers
         private EnemyAnimView _animView;
 
         private Rigidbody2D _rb;
+        private SpriteRenderer _spriteRenderer;
         private GameObject _player;
 
         private Vector3 _startPos;
@@ -38,6 +39,7 @@ namespace Script.Controllers
         {
             _runTimeData = GetComponent<EnemyRunTimeData>();
             _rb = GetComponent<Rigidbody2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             _animView = GetComponent<EnemyAnimView>();
             _player = GameObject.FindWithTag("Player");
             _startPos = transform.position;
@@ -191,7 +193,7 @@ namespace Script.Controllers
             if (direction.magnitude < _runTimeData.DistanceFromPlayer)
             {
                 // 停止移动，播放攻击动画
-                _rb.velocity = Vector2.zero;
+                StopMoveAndIdle();
                 _runTimeData.currentState = EnemyState.Attack;
             }
             else Move(direction);
@@ -202,12 +204,7 @@ namespace Script.Controllers
             var moveDir = new Vector2(direction.x, 0).normalized;
             if (moveDir.x != 0)
             {
-                var shouldFaceRight = moveDir.x > 0;
-                if ((shouldFaceRight && transform.localScale.x < 0) || (!shouldFaceRight && transform.localScale.x > 0))
-                {
-                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
-                        transform.localScale.z);
-                }
+                _spriteRenderer.flipX = moveDir.x < 0;
             }
 
             _runTimeData.currentState = EnemyState.Walk;

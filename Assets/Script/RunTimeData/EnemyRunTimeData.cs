@@ -18,7 +18,7 @@ namespace Script.RunTimeData
         public float PatrolMaxDistance => ModelManager.EnemyModelSObject?.patrolMaxDistance ?? 2f;
         public float DetectSizeX => ModelManager.EnemyModelSObject?.detectSizeX ?? 4f;
         public float DetectSizeY => ModelManager.EnemyModelSObject?.detectSizeY ?? 1.2f;
-        public event Action<float, float> OnHealthChanged;
+        public event Action<float, float> OnEnemyHurt;
 
         private bool _invincible;
         private Coroutine _invincibilityCoroutine;
@@ -34,7 +34,7 @@ namespace Script.RunTimeData
             if (_invincible || damage <= 0 || currentHealth <= 0) return;
             currentHealth -= damage;
             currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
-            OnHealthChanged?.Invoke(currentHealth, MaxHealth);
+            OnEnemyHurt?.Invoke(currentHealth, MaxHealth);
             StartInvincibility();
         }
 

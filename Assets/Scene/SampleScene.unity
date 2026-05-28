@@ -2133,6 +2133,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &994228778 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553162199321736380, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
+  m_PrefabInstance: {fileID: 1553162199326214478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1112669694
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +2558,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
+--- !u!114 &1527534677 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553162199798353091, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
+  m_PrefabInstance: {fileID: 1553162199326214478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1561646509
 GameObject:
   m_ObjectHideFlags: 0
@@ -5310,13 +5332,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1112669695}
     m_Modifications:
+    - target: {fileID: 1553162199321736380, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1553162199653548408, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 1553162199798353091, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1553162200061419299, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
       propertyPath: m_Name
       value: BlueGolem_Guard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553162200061419323, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1553162200162522550, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
       propertyPath: m_RootOrder
@@ -5362,6 +5396,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4531185136398651748, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
+      propertyPath: bar
+      value: 
+      objectReference: {fileID: 1527534677}
+    - target: {fileID: 4531185136398651748, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
+      propertyPath: bufferBar
+      value: 
+      objectReference: {fileID: 994228778}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7100aa0a933c2284bb44f09b0f847714, type: 3}
 --- !u!1001 &7510729194006661013
@@ -5519,4 +5561,5 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6508066928209313303, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
+    - {fileID: 1630047660133863705, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}

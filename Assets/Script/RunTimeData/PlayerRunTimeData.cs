@@ -22,7 +22,7 @@ namespace Script.RunTimeData
         private float InvincibleTime => ModelManager.PlayerModelSObject?.invincibleTime ?? 0.2f;
         public float BufferBarSpeed => ModelManager.PlayerModelSObject?.bufferBarSpeed ?? 2f;
 
-        public event Action<float, float> OnHurt;
+        public event Action<float, float> OnPlayerHurt;
         public event Action OnDeath;
         private bool _invincible;
         private Coroutine _invincibilityCoroutine;
@@ -39,7 +39,7 @@ namespace Script.RunTimeData
 
             currentHealth -= damage;
             currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
-            OnHurt?.Invoke(currentHealth, MaxHealth);
+            OnPlayerHurt?.Invoke(currentHealth, MaxHealth);
 
             if (currentHealth <= 0)
                 OnDeath?.Invoke();

@@ -40,14 +40,14 @@ namespace Script.Views
 
         private void Start()
         {
-            _runTimeData.OnHurt += OnHealthChangedHandler;
+            _runTimeData.OnPlayerHurt += OnPlayerHealthChangedHandler;
             _runTimeData.OnDeath += OnDeathHandler;
         }
 
         private void OnDestroy()
         {
             if (!_runTimeData) return;
-            _runTimeData.OnHurt -= OnHealthChangedHandler;
+            _runTimeData.OnPlayerHurt -= OnPlayerHealthChangedHandler;
             _runTimeData.OnDeath -= OnDeathHandler;
         }
 
@@ -70,7 +70,7 @@ namespace Script.Views
             _anim.CrossFade(hash, fadeTime, 0);
         }
 
-        private void OnHealthChangedHandler(float current, float max)
+        private void OnPlayerHealthChangedHandler(float current, float max)
         {
             _runTimeData.currentState = current <= 0 ? PlayerStats.Death : PlayerStats.Hurt;
         }
