@@ -11,7 +11,7 @@ namespace Script.Models
         {
             get
             {
-                if (!_playerModelSObject) _playerModelSObject = Resources.Load<PlayerModelSObject>("PlayerModel");
+                if (!_playerModelSObject) _playerModelSObject = Resources.Load<PlayerModelSObject>("Models/PlayerModel");
                 if (!_playerModelSObject) Debug.LogError("PlayerModelSObject not loaded");
                 return _playerModelSObject;
             }
@@ -21,7 +21,7 @@ namespace Script.Models
         {
             get
             {
-                if (!_enemyModelSObject) _enemyModelSObject = Resources.Load<EnemyModelSObject>("EnemyModel");
+                if (!_enemyModelSObject) _enemyModelSObject = Resources.Load<EnemyModelSObject>("Models/EnemyModel");
                 if (!_enemyModelSObject) Debug.LogError("EnemyModelSObject not loaded");
                 return _enemyModelSObject;
             }

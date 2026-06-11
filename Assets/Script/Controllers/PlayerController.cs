@@ -58,7 +58,8 @@ namespace Script.Controllers
         private void Update()
         {
             _inGround = _collider.IsTouchingLayers(groundLayerMask);
-            if(_runTimeData.currentState == ICharacterValue.Stats.Hurt || _runTimeData.currentState == ICharacterValue.Stats.Death) return;
+            if (_runTimeData.currentState == ICharacterValue.Stats.Hurt ||
+                _runTimeData.currentState == ICharacterValue.Stats.Death) return;
             HandleInput();
             HandleTurn();
             Move();
@@ -78,7 +79,8 @@ namespace Script.Controllers
             }
 
             // 滑铲
-            if (Input.GetKeyDown(KeyCode.Space) && _runTimeData.currentState == ICharacterValue.Stats.Run && _inGround &&
+            if (Input.GetKeyDown(KeyCode.Space) && _runTimeData.currentState == ICharacterValue.Stats.Run &&
+                _inGround &&
                 !_isSlidingOnCooldown)
             {
                 _runTimeData.currentState = ICharacterValue.Stats.Slide;
@@ -295,7 +297,8 @@ namespace Script.Controllers
         private void OnAttackEndHandler()
         {
             if (_runTimeData.currentState != ICharacterValue.Stats.Attack &&
-                _runTimeData.currentState != ICharacterValue.Stats.Attack2) return;
+                _runTimeData.currentState != ICharacterValue.Stats.Attack2 &&
+                _runTimeData.currentState != ICharacterValue.Stats.Skill) return;
             _runTimeData.currentState = _inGround ? ICharacterValue.Stats.Idle : ICharacterValue.Stats.Fall;
             _isAttacking = false;
         }

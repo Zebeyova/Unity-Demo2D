@@ -15,41 +15,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Interfaces/ICharacterValue.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Interfaces/ICharacterValue.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Interfaces/IDamageable.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/Interfaces/IDamageable.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/DamageSystem.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/DamageSystem.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/BlueGolem.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Die.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/BlueGolem/Die.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Attack.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Die.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Die.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Hurt.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Enemy/OrangeGolem/Hurt.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Attack1.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Player.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Skills.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Skills.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/EnemyModel.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/EnemyModel.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerModel.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/PlayerModel.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asset/Free Pixel Art Forest/PSD/Background.psd" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asset/Free Pixel Art Forest/PSD/Background.psd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Material/Image/SlideCoolDownBar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Material/Image/SlideCoolDownBar.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/EnemyModel.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/EnemyModel.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerModel.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerModel.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/EnemyModelSObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeData/PlayerRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/PlayerRunTimeData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/BlackMaskView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/BlackMaskView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/HealthBarView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/HealthBarView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/PlayerAnimView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/ModelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/ModelManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +43,7 @@
   <component name="CopilotChats">
     <option name="panelChat">
       <chat>
-        <option name="activeSessionId" value="84149b3e-cd43-4fba-b354-01e494c3e72c" />
+        <option name="activeSessionId" value="80bd480b-4369-449c-b52a-7b2b9564a2cd" />
         <option name="sessions">
           <session>
             <option name="chatType" value="PANEL" />
@@ -81,6 +65,14 @@
           <session>
             <option name="chatType" value="PANEL" />
             <option name="id" value="84149b3e-cd43-4fba-b354-01e494c3e72c" />
+            <option name="modeId" value="Agent" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="80bd480b-4369-449c-b52a-7b2b9564a2cd" />
             <option name="modeId" value="Agent" />
             <option name="modelType" value="builtin_family" />
             <option name="modelValue" value="auto" />
@@ -123,11 +115,10 @@
     <setting file="file://D:/Unity/2020.3.48f1c1/Editor/Data/CGIncludes/UnityCG.cginc" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Animation/Player/Attack.anim" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Animation/Player/Slide.anim" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Resources/EnemyModel.asset" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Resources/PlayerModel.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs.meta" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Interfaces/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/RunTimeData/DamageSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/RunTimeData/PlayerRunTimeData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@1.0.0/Editor/GridPaintPaletteClipboard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.33/UnityEditor.TestRunner/CommandLineTest/Executer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.33/UnityEditor.TestRunner/CommandLineTest/ExitCallbacks.cs" root0="SKIP_HIGHLIGHTING" />
@@ -136,11 +127,28 @@
   <component name="NamedScopeManager">
     <scope name="Script" pattern="file:Assets/Script/*" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="3BynqIMW0LqFk6Ds36mr4JgpL9Y" />
+  <component name="ProjectSessionTemplates">
+    <option name="panelTemplate">
+      <template>
+        <option name="modeId" value="Agent" />
+        <option name="model">
+          <model>
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+          </model>
+        </option>
+        <option name="targetType" value="LOCAL" />
+      </template>
+    </option>
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
@@ -148,35 +156,36 @@
     <option name="showMembers" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.gutterIcons&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cidr.known.project.marker": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.sync",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="附加到 Unity 编辑器.附加到 Unity 编辑器">
     <configuration name="启动 Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Unity\2020.3.48f1c1\Editor\Unity.exe" />
@@ -274,7 +283,14 @@
       <workItem from="1779758909168" duration="21710000" />
       <workItem from="1779851022897" duration="64000" />
       <workItem from="1779864614694" duration="6119000" />
-      <workItem from="1779947837049" duration="28384000" />
+      <workItem from="1779947837049" duration="28491000" />
+      <workItem from="1780367333733" duration="61000" />
+      <workItem from="1780367440198" duration="13520000" />
+      <workItem from="1780453268837" duration="10980000" />
+      <workItem from="1780495397100" duration="984000" />
+      <workItem from="1780554897856" duration="766000" />
+      <workItem from="1781162013953" duration="222000" />
+      <workItem from="1781162271329" duration="2273000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -548,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779953016188</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="新增伤害系统">
+      <option name="closed" value="true" />
+      <created>1779982099783</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1779982099783</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -570,7 +594,16 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="113" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="147" />
+                  <entry key="Table.Default.Hash.ColumnIdWidth" value="100" />
+                  <entry key="Table.GitHub.CommitStatus.ColumnIdWidth" value="95" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -578,7 +611,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="完成敌人的受伤及死亡动画,但是受伤有延迟需要修改" />
     <MESSAGE value="增加死亡黑屏效果" />
     <MESSAGE value="重生完成" />
     <MESSAGE value="修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug" />
@@ -603,7 +635,8 @@
     <MESSAGE value="目前逻辑基本修复完成" />
     <MESSAGE value="bug修复" />
     <MESSAGE value="血条正确" />
-    <option name="LAST_COMMIT_MESSAGE" value="血条正确" />
+    <MESSAGE value="新增伤害系统" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增伤害系统" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
