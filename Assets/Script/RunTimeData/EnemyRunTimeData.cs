@@ -22,7 +22,7 @@ namespace Script.RunTimeData
         public float PatrolMaxDistance => ModelManager.EnemyModelSObject.patrolMaxDistance;
         public float DetectSizeX => ModelManager.EnemyModelSObject.detectSizeX;
         public float DetectSizeY => ModelManager.EnemyModelSObject.detectSizeY;
-        public bool IsInvincible { get; set; }
+        private bool IsInvincible { get; set; }
         public float InvincibleTime => ModelManager.EnemyModelSObject.InvincibleTime;
         private Coroutine _invincibilityCoroutine;
         public event Action<float, float> OnEnemyHurt;

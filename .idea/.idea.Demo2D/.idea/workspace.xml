@@ -14,17 +14,17 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
+    <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="敌人血条需要提取出来,做一个单独的Canvas,然后添加敌人的无敌效果,受到最大生命值百分比多少时进入短暂无敌,添加游戏界面暂停菜单,增加升级系统,数据存储">
+      <change afterPath="$PROJECT_DIR$/Assets/Material/Image/BeginnerGuide.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Material/Image/BeginnerGuide.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/UI/DirectionArrow.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/UI/DirectionArrow.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/UI/MainMenu.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/UI/MainMenu.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/BlackMaskView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/BlackMaskView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeData/EnemyRunTimeData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +190,7 @@
       <method v="2" />
     </configuration>
     <configuration name="独立播放器" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/BuildAndRun\Demo2D.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/BuildAndRun/Demo2D.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="E:\Unity Projects\Demo2D\BuildAndRun" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -284,7 +284,7 @@
       <workItem from="1781162013953" duration="222000" />
       <workItem from="1781162271329" duration="2713000" />
       <workItem from="1781176468534" duration="1339000" />
-      <workItem from="1781265174424" duration="1786000" />
+      <workItem from="1781265174424" duration="5973000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -574,7 +574,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781176181433</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="实现新游戏,退出游戏基本逻辑,优化指示箭头动画">
+      <option name="closed" value="true" />
+      <created>1781267284339</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1781267284339</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,8 +621,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="重生完成" />
-    <MESSAGE value="修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug" />
     <MESSAGE value="增加physicsMaterial2D修复了撞墙因摩擦力导致玩家无法下降的问题" />
     <MESSAGE value="增加血条" />
     <MESSAGE value="Revert &quot;修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug&quot;&#10;&#10;This reverts commit e5136bc8" />
@@ -638,7 +644,9 @@
     <MESSAGE value="血条正确" />
     <MESSAGE value="新增伤害系统" />
     <MESSAGE value="添加游戏开始界面,菜单滚动显示,敌人之间无碰撞&#10;TODO: 滚动遮罩添加羽化,玩家与敌人之间无碰撞,设置初始场景,添加鼠标点击事件" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加游戏开始界面,菜单滚动显示,敌人之间无碰撞&#10;TODO: 滚动遮罩添加羽化,玩家与敌人之间无碰撞,设置初始场景,添加鼠标点击事件" />
+    <MESSAGE value="实现新游戏,退出游戏基本逻辑,优化指示箭头动画" />
+    <MESSAGE value="敌人血条需要提取出来,做一个单独的Canvas,然后添加敌人的无敌效果,受到最大生命值百分比多少时进入短暂无敌,添加游戏界面暂停菜单,增加升级系统,数据存储" />
+    <option name="LAST_COMMIT_MESSAGE" value="敌人血条需要提取出来,做一个单独的Canvas,然后添加敌人的无敌效果,受到最大生命值百分比多少时进入短暂无敌,添加游戏界面暂停菜单,增加升级系统,数据存储" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

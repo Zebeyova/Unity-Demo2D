@@ -20,7 +20,6 @@ namespace Script.Controllers
         private EnemyAnimView _animView;
 
         private Rigidbody2D _rb;
-        private SpriteRenderer _spriteRenderer;
         private GameObject _player;
 
         private Vector3 _startPos;
@@ -32,14 +31,12 @@ namespace Script.Controllers
 
         // 延迟退出检测
         private bool _playerInTrigger;
-        private bool _enterDelay;
-        private float _exitDelayTimer = 1f;
 
         private void Awake()
         {
             _runTimeData = GetComponent<EnemyRunTimeData>();
             _rb = GetComponent<Rigidbody2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            GetComponent<SpriteRenderer>();
             _animView = GetComponent<EnemyAnimView>();
             _player = GameObject.FindWithTag("Player");
             _startPos = transform.position;
@@ -66,9 +63,11 @@ namespace Script.Controllers
 
         private void Update()
         {
+            Debug.DrawRay((Vector2)transform.position + Vector2.up * 0.5f, transform.right + transform.up, Color.red,
+                0.5f);
             if (!_player) return;
-            UpdateDetectionDelay();
-            if (_runTimeData.currentStats == ICharacterValue.Stats.Attack || _runTimeData.currentStats == ICharacterValue.Stats.Hurt ||
+            if (_runTimeData.currentStats == ICharacterValue.Stats.Attack ||
+                _runTimeData.currentStats == ICharacterValue.Stats.Hurt ||
                 _runTimeData.currentStats == ICharacterValue.Stats.Death) return;
             WallCheck();
             EnemyAI();
@@ -97,21 +96,11 @@ namespace Script.Controllers
             detector.OnPlayerEnter += () =>
             {
                 _playerInTrigger = true;
-                _enterDelay = true;
             };
             detector.OnPlayerExit += () =>
             {
-                _enterDelay = false;
-                _exitDelayTimer = 1f;
+                _playerInTrigger = false;
             };
-        }
-
-        private void UpdateDetectionDelay()
-        {
-            if (_enterDelay) return;
-            _exitDelayTimer -= Time.deltaTime;
-            if (!(_exitDelayTimer <= 0)) return;
-            _playerInTrigger = false;
         }
 
         private bool IsPlayerDetected() => _playerInTrigger;
@@ -168,6 +157,7 @@ namespace Script.Controllers
                 var dir = target - transform.position;
                 if (dir.magnitude < _runTimeData.EndError)
                 {
+                    _isTouchingWall = false;
                     if (_patrolDir == 0)
                         RandomBorder(); // 第一次到达起始点后随机边界
                     else
@@ -204,7 +194,7 @@ namespace Script.Controllers
             var moveDir = new Vector2(direction.x, 0).normalized;
             if (moveDir.x != 0)
             {
-                _spriteRenderer.flipX = moveDir.x < 0;
+                transform.eulerAngles = new Vector3(0, moveDir.x < 0 ? 180 : 0, 0);
             }
 
             _runTimeData.currentStats = ICharacterValue.Stats.Walk;
@@ -220,8 +210,7 @@ namespace Script.Controllers
         private void WallCheck()
         {
             var origin = (Vector2)transform.position + Vector2.up * 0.5f;
-            var hit = Physics2D.Raycast(origin, transform.right, 1f, wallLayerMask);
-
+            var hit = Physics2D.Raycast(origin, transform.right + transform.up, 1f, wallLayerMask);
             if (!hit && !_wallTiming) return;
 
             _wallTiming = true;

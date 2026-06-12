@@ -8,20 +8,20 @@ namespace Script.Views
 {
     public class EnemyAnimView : MonoBehaviour
     {
-        [SerializeField] private float crossFadeTime = 0.1f;
-
         private Animator _anim;
         private EnemyRunTimeData _runTimeData;
         private ICharacterValue.Stats _lastStats;
+        private const float CrossFadeTime = 0.1f;
 
-        private static readonly Dictionary<ICharacterValue.Stats, int> AnimDictionary = new Dictionary<ICharacterValue.Stats, int>()
-        {
-            { ICharacterValue.Stats.Idle, Animator.StringToHash(nameof(ICharacterValue.Stats.Idle)) },
-            { ICharacterValue.Stats.Walk, Animator.StringToHash(nameof(ICharacterValue.Stats.Walk)) },
-            { ICharacterValue.Stats.Attack, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack)) },
-            { ICharacterValue.Stats.Hurt, Animator.StringToHash(nameof(ICharacterValue.Stats.Hurt)) },
-            { ICharacterValue.Stats.Death, Animator.StringToHash(nameof(ICharacterValue.Stats.Death)) }
-        };
+        private static readonly Dictionary<ICharacterValue.Stats, int> AnimDictionary =
+            new Dictionary<ICharacterValue.Stats, int>()
+            {
+                { ICharacterValue.Stats.Idle, Animator.StringToHash(nameof(ICharacterValue.Stats.Idle)) },
+                { ICharacterValue.Stats.Walk, Animator.StringToHash(nameof(ICharacterValue.Stats.Walk)) },
+                { ICharacterValue.Stats.Attack, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack)) },
+                { ICharacterValue.Stats.Hurt, Animator.StringToHash(nameof(ICharacterValue.Stats.Hurt)) },
+                { ICharacterValue.Stats.Death, Animator.StringToHash(nameof(ICharacterValue.Stats.Death)) }
+            };
 
         private void Awake()
         {
@@ -55,7 +55,7 @@ namespace Script.Views
         private void PlayAnimation(int hash, float fade = -1)
         {
             if (!_anim) return;
-            var fadeTime = fade < 0 ? crossFadeTime : fade;
+            var fadeTime = fade < 0 ? CrossFadeTime : fade;
             _anim.CrossFade(hash, fadeTime, 0);
         }
 
