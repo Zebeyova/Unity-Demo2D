@@ -20,8 +20,7 @@ namespace Script.Views
 
         private void Awake()
         {
-            if (blackMaskMaterial)
-                blackMaskMaterial = new Material(blackMaskMaterial);
+            if (blackMaskMaterial) blackMaskMaterial = new Material(blackMaskMaterial);
             _camera = Camera.main;
             _playerData = FindObjectOfType<PlayerRunTimeData>();
         }
@@ -29,22 +28,18 @@ namespace Script.Views
         private void Start()
         {
             _playerData.OnPlayerDeath += OnPlayerDeath;
-            if (_needRespawnFadeOut)
-                StartCoroutine(ChangeRadiusCoroutine(true));
+            if (_needRespawnFadeOut) StartCoroutine(ChangeRadiusCoroutine(true));
         }
 
         private void OnDestroy()
         {
-            if (_playerData)
-                _playerData.OnPlayerDeath -= OnPlayerDeath;
+            if (_playerData) _playerData.OnPlayerDeath -= OnPlayerDeath;
         }
 
         private void OnRenderImage(RenderTexture src, RenderTexture dst)
         {
-            if (blackMaskMaterial == null)
-                Graphics.Blit(src, dst);
-            else
-                Graphics.Blit(src, dst, blackMaskMaterial);
+            if (blackMaskMaterial == null) Graphics.Blit(src, dst);
+            else Graphics.Blit(src, dst, blackMaskMaterial);
         }
 
         private void Update()

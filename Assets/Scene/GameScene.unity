@@ -5602,30 +5602,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1561646510}
     m_Modifications:
-    - target: {fileID: 1630047660133863705, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: bar
-      value: 
-      objectReference: {fileID: 562690699}
-    - target: {fileID: 1630047660133863705, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 19004154}
-    - target: {fileID: 1630047660133863705, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: bufferBar
-      value: 
-      objectReference: {fileID: 511142592}
-    - target: {fileID: 4725334110921229003, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4725334110921229003, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5829982090977190860, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: property
-      value: 
-      objectReference: {fileID: 11400000, guid: 16b9c515ac3fe3a459ca9213a4bc336d, type: 2}
     - target: {fileID: 7618713011203048737, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5674,23 +5650,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7618713011203048797, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: m_GravityScale
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7618713011203048799, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7618713011203048799, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8008030742122443067, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -6508066928209313303, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
-    - {fileID: 1630047660133863705, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
