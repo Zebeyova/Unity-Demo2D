@@ -1,7 +1,7 @@
 ﻿using Script.Interfaces;
 using UnityEngine;
 
-namespace Script.RunTimeData
+namespace Script.RunTimeDatas
 {
     public class DamageSystem : MonoBehaviour
     {

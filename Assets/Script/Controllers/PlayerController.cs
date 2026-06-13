@@ -1,6 +1,6 @@
 using System.Collections;
 using Script.Interfaces;
-using Script.RunTimeData;
+using Script.RunTimeDatas;
 using Script.Views;
 using UnityEngine;
 
@@ -68,7 +68,7 @@ namespace Script.Controllers
         private void HandleInput()
         {
             _horizontal = Input.GetAxis("Horizontal");
-            _isWalking = _isRunning = _isSliding = _isAttacking = false;
+            _isWalking = _isRunning = _isSliding =  false;
 
             // 跳跃
             if (Input.GetKeyDown(KeyCode.K) && _inGround)
@@ -177,6 +177,7 @@ namespace Script.Controllers
             if (_isAttacking)
             {
                 _rb.velocity = Vector2.zero;
+                _rb.gravityScale = 0;
                 return;
             }
 
@@ -269,7 +270,7 @@ namespace Script.Controllers
                 _pendingTurnFacingRight = null;
             }
 
-            // 根据输入和地面状态恢复移动状态
+            // 根据输入和地面状态恢复状态
             var wantsWalk = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
             var wantsRun = Input.GetKey(KeyCode.LeftShift) && wantsWalk;
             if (_inGround)
@@ -301,6 +302,7 @@ namespace Script.Controllers
                 _runTimeData.currentState != ICharacterValue.Stats.Skill) return;
             _runTimeData.currentState = _inGround ? ICharacterValue.Stats.Idle : ICharacterValue.Stats.Fall;
             _isAttacking = false;
+            _rb.gravityScale = 2;
         }
 
         private void OnHurtEndHandler()
@@ -314,6 +316,8 @@ namespace Script.Controllers
                 _runTimeData.currentState = ICharacterValue.Stats.Walk;
             else
                 _runTimeData.currentState = ICharacterValue.Stats.Idle;
+            _isAttacking = false;
+            _rb.gravityScale = 2;
         }
     }
 }

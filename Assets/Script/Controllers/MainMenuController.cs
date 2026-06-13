@@ -14,7 +14,6 @@ namespace Script.Controllers
         {
             Application.Quit();
 #if UNITY_EDITOR
-            print("Quit");
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
         }

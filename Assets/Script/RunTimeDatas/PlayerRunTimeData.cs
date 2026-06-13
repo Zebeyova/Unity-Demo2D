@@ -4,7 +4,7 @@ using Script.Interfaces;
 using Script.Models;
 using UnityEngine;
 
-namespace Script.RunTimeData
+namespace Script.RunTimeDatas
 {
     public class PlayerRunTimeData : MonoBehaviour, ICharacterValue, IDamageable
     {
