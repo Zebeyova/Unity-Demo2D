@@ -14,16 +14,12 @@ namespace Script.RunTimeDatas
             if (finalDamage > 0) ApplyDamageToTarget(defender, finalDamage);
         }
 
-        public void TakeDamageOrDeath(GameObject injuredParty, float damage)
-        {
-        }
-
-        public void Heal(float amount)
+        public void Heal(float amount) //回血
         {
             throw new System.NotImplementedException();
         }
 
-        private float GetAttackPower(GameObject attacker, ICharacterValue.Stats damageType)
+        private float GetAttackPower(GameObject attacker, ICharacterValue.Stats damageType) //拿到基础攻击力
         {
             var player = attacker.GetComponent<PlayerRunTimeData>();
             if (player) return damageType == ICharacterValue.Stats.Skill ? player.BaseSkillDamage : player.BaseDamage;
@@ -32,7 +28,7 @@ namespace Script.RunTimeDatas
             return 0f;
         }
 
-        private float GetDefensePower(GameObject defender)
+        private float GetDefensePower(GameObject defender) //拿到基础防御力
         {
             var player = defender.GetComponent<PlayerRunTimeData>();
             if (player) return player.BaseDefense;
@@ -40,12 +36,12 @@ namespace Script.RunTimeDatas
             return enemy ? enemy.BaseDefense : 0f;
         }
 
-        private float CalculateDamage(float attack, float defense)
+        private float CalculateDamage(float attack, float defense) //最终伤害计算
         {
             return Mathf.Max(0, attack * (1 - defense / 100));
         }
 
-        private void ApplyDamageToTarget(GameObject target, float damage)
+        private void ApplyDamageToTarget(GameObject target, float damage) //对目标进行伤害应用
         {
             var damageable = target.GetComponent<IDamageable>();
             damageable?.TakeDamage(damage);

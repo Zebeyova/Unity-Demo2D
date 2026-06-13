@@ -42,7 +42,7 @@ namespace Script.Views
             if (Mathf.Approximately(bufferBar.fillAmount, bar.fillAmount)) _bufferDirty = false;
         }
 
-        private void LateUpdate()
+        private void LateUpdate() //更新血条位置
         {
             var enemyPosition = _enemy.transform.position;
             transform.position = new Vector3(enemyPosition.x, enemyPosition.y + 1.5f, enemyPosition.z);

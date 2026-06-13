@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Script.Interfaces;
 using Script.RunTimeDatas;
@@ -8,29 +9,31 @@ namespace Script.Views
 {
     public class PlayerAnimView : MonoBehaviour
     {
-        [SerializeField] private float crossFadeTime = 0.1f;
+        [SerializeField] private float crossFadeTime = 0.1f; //动画过渡时间
 
         private Animator _anim;
         private PlayerRunTimeData _runTimeData;
         private ICharacterValue.Stats _lastState;
+        private Coroutine _restoreStateCoroutine;
 
-        private static readonly Dictionary<ICharacterValue.Stats, int> AnimDictionary = new Dictionary<ICharacterValue.Stats, int>
-        {
-            { ICharacterValue.Stats.Idle, Animator.StringToHash(nameof(ICharacterValue.Stats.Idle)) },
-            { ICharacterValue.Stats.Walk, Animator.StringToHash(nameof(ICharacterValue.Stats.Walk)) },
-            { ICharacterValue.Stats.Run, Animator.StringToHash(nameof(ICharacterValue.Stats.Run)) },
-            { ICharacterValue.Stats.WalkTurn, Animator.StringToHash(nameof(ICharacterValue.Stats.WalkTurn)) },
-            { ICharacterValue.Stats.RunTurn, Animator.StringToHash(nameof(ICharacterValue.Stats.RunTurn)) },
-            { ICharacterValue.Stats.Slide, Animator.StringToHash(nameof(ICharacterValue.Stats.Slide)) },
-            { ICharacterValue.Stats.Jump, Animator.StringToHash(nameof(ICharacterValue.Stats.Jump)) },
-            { ICharacterValue.Stats.Fall, Animator.StringToHash(nameof(ICharacterValue.Stats.Fall)) },
-            { ICharacterValue.Stats.FallLoop, Animator.StringToHash(nameof(ICharacterValue.Stats.FallLoop)) },
-            { ICharacterValue.Stats.Attack, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack)) },
-            { ICharacterValue.Stats.Attack2, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack2)) },
-            { ICharacterValue.Stats.Skill, Animator.StringToHash(nameof(ICharacterValue.Stats.Skill)) },
-            { ICharacterValue.Stats.Hurt, Animator.StringToHash(nameof(ICharacterValue.Stats.Hurt)) },
-            { ICharacterValue.Stats.Death, Animator.StringToHash(nameof(ICharacterValue.Stats.Death)) }
-        };
+        private static readonly Dictionary<ICharacterValue.Stats, int> AnimDictionary =
+            new Dictionary<ICharacterValue.Stats, int>
+            {
+                { ICharacterValue.Stats.Idle, Animator.StringToHash(nameof(ICharacterValue.Stats.Idle)) },
+                { ICharacterValue.Stats.Walk, Animator.StringToHash(nameof(ICharacterValue.Stats.Walk)) },
+                { ICharacterValue.Stats.Run, Animator.StringToHash(nameof(ICharacterValue.Stats.Run)) },
+                { ICharacterValue.Stats.WalkTurn, Animator.StringToHash(nameof(ICharacterValue.Stats.WalkTurn)) },
+                { ICharacterValue.Stats.RunTurn, Animator.StringToHash(nameof(ICharacterValue.Stats.RunTurn)) },
+                { ICharacterValue.Stats.Slide, Animator.StringToHash(nameof(ICharacterValue.Stats.Slide)) },
+                { ICharacterValue.Stats.Jump, Animator.StringToHash(nameof(ICharacterValue.Stats.Jump)) },
+                { ICharacterValue.Stats.Fall, Animator.StringToHash(nameof(ICharacterValue.Stats.Fall)) },
+                { ICharacterValue.Stats.FallLoop, Animator.StringToHash(nameof(ICharacterValue.Stats.FallLoop)) },
+                { ICharacterValue.Stats.Attack, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack)) },
+                { ICharacterValue.Stats.Attack2, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack2)) },
+                { ICharacterValue.Stats.Skill, Animator.StringToHash(nameof(ICharacterValue.Stats.Skill)) },
+                { ICharacterValue.Stats.Hurt, Animator.StringToHash(nameof(ICharacterValue.Stats.Hurt)) },
+                { ICharacterValue.Stats.Death, Animator.StringToHash(nameof(ICharacterValue.Stats.Death)) }
+            };
 
         private void Awake()
         {
@@ -64,8 +67,27 @@ namespace Script.Views
         private void PlayAnimation(int hash, float fade = -1)
         {
             if (!_anim) return;
+            if (_runTimeData.currentState == ICharacterValue.Stats.Attack ||
+                _runTimeData.currentState == ICharacterValue.Stats.Attack2 ||
+                _runTimeData.currentState == ICharacterValue.Stats.Skill ||
+                _runTimeData.currentState == ICharacterValue.Stats.Hurt)
+            {
+                if (_restoreStateCoroutine != null) StopCoroutine(_restoreStateCoroutine);
+                _restoreStateCoroutine = StartCoroutine(RestoreState());
+            }
+
             var fadeTime = fade < 0 ? crossFadeTime : fade;
             _anim.CrossFade(hash, fadeTime, 0);
+        }
+
+        private IEnumerator RestoreState()
+        {
+            yield return null;
+            var animLength = _anim.GetCurrentAnimatorStateInfo(0).length;
+            yield return new WaitForSeconds(animLength - crossFadeTime);
+            if (_runTimeData.currentState == ICharacterValue.Stats.Hurt) OnHurtEnd?.Invoke();
+            else OnAttackEnd?.Invoke();
+            _restoreStateCoroutine = null;
         }
 
         private void OnPlayerPlayerHealthChangedHandler(float current, float max)

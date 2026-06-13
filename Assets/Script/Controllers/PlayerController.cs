@@ -20,7 +20,6 @@ namespace Script.Controllers
         private bool _inGround;
         private bool _isWalking, _isRunning, _isAttacking, _isSliding;
         private bool _isSlidingOnCooldown;
-
         // 转向
         private bool _currentFacingRight = true;
         private bool _targetFacingRight;
