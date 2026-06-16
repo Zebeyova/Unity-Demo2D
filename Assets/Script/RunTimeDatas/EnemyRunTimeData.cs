@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Script.RunTimeDatas
 {
-    public class EnemyRunTimeData : MonoBehaviour, ICharacterValue, IDamageable
+    public class EnemyRunTimeData : MonoBehaviour, IDamageable
     {
-        [Header("动态数值")] public ICharacterValue.Stats currentStats;
+        [Header("动态数值")] public IDamageable.Stats currentStats;
         public float CurrentHealth { get; set; }
         public int Level { get; set; }
         public float Experience { get; set; }
@@ -32,7 +32,7 @@ namespace Script.RunTimeDatas
         private void Awake()
         {
             CurrentHealth = MaxHealth;
-            currentStats = ICharacterValue.Stats.Idle;
+            currentStats = IDamageable.Stats.Idle;
         }
 
         public void TakeDamage(float damage)

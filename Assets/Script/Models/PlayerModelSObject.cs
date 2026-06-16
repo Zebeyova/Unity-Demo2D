@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Script.Models
 {
     [CreateAssetMenu(fileName = "NewPlayerProperty", menuName = "GameModel/PlayerModelSObject")]
-    public class PlayerModelSObject : ScriptableObject,ICharacterValue
+    public class PlayerModelSObject : ScriptableObject
     {
         public int Level { get; set; }
         public float Experience { get; set; }

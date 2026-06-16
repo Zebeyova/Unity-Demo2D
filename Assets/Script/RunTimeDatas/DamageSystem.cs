@@ -78,12 +78,12 @@ namespace Script.RunTimeDatas
             SetTargetInvincible(target, false);
         }
 
-        private float GetAttackPower(GameObject attacker, ICharacterValue.Stats damageType)
+        private float GetAttackPower(GameObject attacker, IDamageable.Stats damageType)
         {
             var player = attacker.GetComponent<PlayerRunTimeData>();
-            if (player) return damageType == ICharacterValue.Stats.Skill ? player.SkillDamage : player.Damage;
+            if (player) return damageType == IDamageable.Stats.Skill ? player.SkillDamage : player.Damage;
             var enemy = attacker.GetComponent<EnemyRunTimeData>();
-            if (enemy) return damageType == ICharacterValue.Stats.Skill ? enemy.SkillDamage : enemy.Damage;
+            if (enemy) return damageType == IDamageable.Stats.Skill ? enemy.SkillDamage : enemy.Damage;
             return 0f;
         }
 

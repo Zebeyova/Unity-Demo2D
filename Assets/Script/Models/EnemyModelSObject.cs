@@ -1,10 +1,9 @@
-using Script.Interfaces;
 using UnityEngine;
 
 namespace Script.Models
 {
     [CreateAssetMenu(fileName = "NewEnemyProperty", menuName = "GameModel/EnemyModelSObject")]
-    public class EnemyModelSObject : ScriptableObject, ICharacterValue
+    public class EnemyModelSObject : ScriptableObject
     {
         public int Level { get; set; }
         public float Experience { get; set; }

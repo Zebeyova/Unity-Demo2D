@@ -61,8 +61,8 @@ namespace Script.Controllers
         private void Update()
         {
             _inGround = _collider.IsTouchingLayers(groundLayerMask);
-            if (_runTimeData.currentState == ICharacterValue.Stats.Hurt ||
-                _runTimeData.currentState == ICharacterValue.Stats.Death) return;
+            if (_runTimeData.currentState == IDamageable.Stats.Hurt ||
+                _runTimeData.currentState == IDamageable.Stats.Death) return;
             HandleInput();
             HandleTurn();
             Move();
@@ -76,17 +76,17 @@ namespace Script.Controllers
             // 跳跃
             if (Input.GetKeyDown(KeyCode.K) && _inGround)
             {
-                _runTimeData.currentState = ICharacterValue.Stats.Jump;
+                _runTimeData.currentState = IDamageable.Stats.Jump;
                 _rb.velocity = new Vector2(_rb.velocity.x, _runTimeData.JumpForce);
                 return;
             }
 
             // 滑铲
-            if (Input.GetKeyDown(KeyCode.Space) && _runTimeData.currentState == ICharacterValue.Stats.Run &&
+            if (Input.GetKeyDown(KeyCode.Space) && _runTimeData.currentState == IDamageable.Stats.Run &&
                 _inGround &&
                 !_isSlidingOnCooldown)
             {
-                _runTimeData.currentState = ICharacterValue.Stats.Slide;
+                _runTimeData.currentState = IDamageable.Stats.Slide;
                 _isSliding = true;
                 StartCoroutine(SlideCooldownRoutine());
                 return;
@@ -95,7 +95,7 @@ namespace Script.Controllers
             // 技能攻击
             if (Input.GetKeyDown(KeyCode.L))
             {
-                _runTimeData.currentState = ICharacterValue.Stats.Skill;
+                _runTimeData.currentState = IDamageable.Stats.Skill;
                 _isAttacking = true;
                 return;
             }
@@ -105,34 +105,34 @@ namespace Script.Controllers
             {
                 switch (_runTimeData.currentState)
                 {
-                    case ICharacterValue.Stats.Hurt:
-                    case ICharacterValue.Stats.Death:
+                    case IDamageable.Stats.Hurt:
+                    case IDamageable.Stats.Death:
                         return;
-                    case ICharacterValue.Stats.Attack:
-                        _runTimeData.currentState = ICharacterValue.Stats.Attack2;
+                    case IDamageable.Stats.Attack:
+                        _runTimeData.currentState = IDamageable.Stats.Attack2;
                         _isAttacking = true;
                         return;
                 }
 
-                if (_runTimeData.currentState != ICharacterValue.Stats.Attack2)
+                if (_runTimeData.currentState != IDamageable.Stats.Attack2)
                 {
-                    _runTimeData.currentState = ICharacterValue.Stats.Attack;
+                    _runTimeData.currentState = IDamageable.Stats.Attack;
                     _isAttacking = true;
                     return;
                 }
             }
 
-            var isSpecialState = _runTimeData.currentState == ICharacterValue.Stats.Jump ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.Fall ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.FallLoop ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.WalkTurn ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.RunTurn ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.Slide ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.Attack ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.Attack2 ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.Skill ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.Hurt ||
-                                 _runTimeData.currentState == ICharacterValue.Stats.Death;
+            var isSpecialState = _runTimeData.currentState == IDamageable.Stats.Jump ||
+                                 _runTimeData.currentState == IDamageable.Stats.Fall ||
+                                 _runTimeData.currentState == IDamageable.Stats.FallLoop ||
+                                 _runTimeData.currentState == IDamageable.Stats.WalkTurn ||
+                                 _runTimeData.currentState == IDamageable.Stats.RunTurn ||
+                                 _runTimeData.currentState == IDamageable.Stats.Slide ||
+                                 _runTimeData.currentState == IDamageable.Stats.Attack ||
+                                 _runTimeData.currentState == IDamageable.Stats.Attack2 ||
+                                 _runTimeData.currentState == IDamageable.Stats.Skill ||
+                                 _runTimeData.currentState == IDamageable.Stats.Hurt ||
+                                 _runTimeData.currentState == IDamageable.Stats.Death;
 
             var _wantMove = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
             if (isSpecialState)
@@ -149,18 +149,18 @@ namespace Script.Controllers
                 // 奔跑
                 if (Input.GetKey(KeyCode.LeftShift) && _wantMove)
                 {
-                    _runTimeData.currentState = ICharacterValue.Stats.Run;
+                    _runTimeData.currentState = IDamageable.Stats.Run;
                     _isRunning = true;
                 }
                 // 移动
                 else if (_wantMove)
                 {
-                    _runTimeData.currentState = ICharacterValue.Stats.Walk;
+                    _runTimeData.currentState = IDamageable.Stats.Walk;
                     _isWalking = true;
                 }
                 else
                 {
-                    _runTimeData.currentState = ICharacterValue.Stats.Idle;
+                    _runTimeData.currentState = IDamageable.Stats.Idle;
                 }
             }
         }
@@ -199,16 +199,16 @@ namespace Script.Controllers
                 return;
             }
 
-            if (_inGround && (_runTimeData.currentState == ICharacterValue.Stats.Walk ||
-                              _runTimeData.currentState == ICharacterValue.Stats.Run)) //地面转身
+            if (_inGround && (_runTimeData.currentState == IDamageable.Stats.Walk ||
+                              _runTimeData.currentState == IDamageable.Stats.Run)) //地面转身
             {
-                _runTimeData.currentState = _runTimeData.currentState == ICharacterValue.Stats.Walk
-                    ? ICharacterValue.Stats.WalkTurn
-                    : ICharacterValue.Stats.RunTurn;
+                _runTimeData.currentState = _runTimeData.currentState == IDamageable.Stats.Walk
+                    ? IDamageable.Stats.WalkTurn
+                    : IDamageable.Stats.RunTurn;
                 _pendingTurnFacingRight = _targetFacingRight;
             }
-            else if (_runTimeData.currentState == ICharacterValue.Stats.Jump ||
-                     _runTimeData.currentState == ICharacterValue.Stats.Fall) //空中转身
+            else if (_runTimeData.currentState == IDamageable.Stats.Jump ||
+                     _runTimeData.currentState == IDamageable.Stats.Fall) //空中转身
             {
                 _currentFacingRight = _targetFacingRight;
                 transform.localRotation = Quaternion.Euler(0, _currentFacingRight ? 0 : 180, 0);
@@ -218,39 +218,39 @@ namespace Script.Controllers
 
         private void OnJumpPeakHandler()
         {
-            if (_runTimeData.currentState != ICharacterValue.Stats.Jump) return;
-            if (!_inGround) _runTimeData.currentState = ICharacterValue.Stats.Fall;
+            if (_runTimeData.currentState != IDamageable.Stats.Jump) return;
+            if (!_inGround) _runTimeData.currentState = IDamageable.Stats.Fall;
             else
             {
                 if (_isRunning)
-                    _runTimeData.currentState = ICharacterValue.Stats.Run;
+                    _runTimeData.currentState = IDamageable.Stats.Run;
                 else if (_isWalking)
-                    _runTimeData.currentState = ICharacterValue.Stats.Walk;
+                    _runTimeData.currentState = IDamageable.Stats.Walk;
                 else
-                    _runTimeData.currentState = ICharacterValue.Stats.Idle;
+                    _runTimeData.currentState = IDamageable.Stats.Idle;
             }
         }
 
         private void OnLandingHandler()
         {
-            if (_runTimeData.currentState != ICharacterValue.Stats.Fall &&
-                _runTimeData.currentState != ICharacterValue.Stats.FallLoop) return;
-            if (!_inGround) _runTimeData.currentState = ICharacterValue.Stats.FallLoop;
+            if (_runTimeData.currentState != IDamageable.Stats.Fall &&
+                _runTimeData.currentState != IDamageable.Stats.FallLoop) return;
+            if (!_inGround) _runTimeData.currentState = IDamageable.Stats.FallLoop;
             else
             {
                 if (_isRunning)
-                    _runTimeData.currentState = ICharacterValue.Stats.Run;
+                    _runTimeData.currentState = IDamageable.Stats.Run;
                 else if (_isWalking)
-                    _runTimeData.currentState = ICharacterValue.Stats.Walk;
+                    _runTimeData.currentState = IDamageable.Stats.Walk;
                 else
-                    _runTimeData.currentState = ICharacterValue.Stats.Idle;
+                    _runTimeData.currentState = IDamageable.Stats.Idle;
             }
         }
 
         private void OnTurnEndHandler()
         {
-            if (_runTimeData.currentState != ICharacterValue.Stats.WalkTurn &&
-                _runTimeData.currentState != ICharacterValue.Stats.RunTurn)
+            if (_runTimeData.currentState != IDamageable.Stats.WalkTurn &&
+                _runTimeData.currentState != IDamageable.Stats.RunTurn)
                 return;
 
             // 应用待处理的转身
@@ -267,30 +267,30 @@ namespace Script.Controllers
             if (_inGround)
             {
                 if (wantsRun)
-                    _runTimeData.currentState = ICharacterValue.Stats.Run;
+                    _runTimeData.currentState = IDamageable.Stats.Run;
                 else if (wantsWalk)
-                    _runTimeData.currentState = ICharacterValue.Stats.Walk;
+                    _runTimeData.currentState = IDamageable.Stats.Walk;
                 else
-                    _runTimeData.currentState = ICharacterValue.Stats.Idle;
+                    _runTimeData.currentState = IDamageable.Stats.Idle;
             }
             else
             {
-                _runTimeData.currentState = ICharacterValue.Stats.Fall;
+                _runTimeData.currentState = IDamageable.Stats.Fall;
             }
         }
 
         private void OnSlideEndHandler()
         {
-            if (_runTimeData.currentState != ICharacterValue.Stats.Slide) return;
+            if (_runTimeData.currentState != IDamageable.Stats.Slide) return;
             _isSliding = false;
-            _runTimeData.currentState = _inGround ? ICharacterValue.Stats.Idle : ICharacterValue.Stats.Fall;
+            _runTimeData.currentState = _inGround ? IDamageable.Stats.Idle : IDamageable.Stats.Fall;
         }
 
         private void OnAttackHitHandler()
         {
             var state = _runTimeData.currentState;
-            if (state != ICharacterValue.Stats.Attack && state != ICharacterValue.Stats.Attack2 &&
-                state != ICharacterValue.Stats.Skill) return;
+            if (state != IDamageable.Stats.Attack && state != IDamageable.Stats.Attack2 &&
+                state != IDamageable.Stats.Skill) return;
 
             var hit = Physics2D.Raycast(_collider.bounds.center,
                 _currentFacingRight ? Vector2.right : Vector2.left,
@@ -308,25 +308,25 @@ namespace Script.Controllers
 
         private void OnAttackEndHandler()
         {
-            if (_runTimeData.currentState != ICharacterValue.Stats.Attack &&
-                _runTimeData.currentState != ICharacterValue.Stats.Attack2 &&
-                _runTimeData.currentState != ICharacterValue.Stats.Skill) return;
-            _runTimeData.currentState = _inGround ? ICharacterValue.Stats.Idle : ICharacterValue.Stats.Fall;
+            if (_runTimeData.currentState != IDamageable.Stats.Attack &&
+                _runTimeData.currentState != IDamageable.Stats.Attack2 &&
+                _runTimeData.currentState != IDamageable.Stats.Skill) return;
+            _runTimeData.currentState = _inGround ? IDamageable.Stats.Idle : IDamageable.Stats.Fall;
             _isAttacking = false;
             _rb.gravityScale = 2;
         }
 
         private void OnHurtEndHandler()
         {
-            if (_runTimeData.currentState != ICharacterValue.Stats.Hurt) return;
+            if (_runTimeData.currentState != IDamageable.Stats.Hurt) return;
             var wantsWalk = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
             var wantsRun = Input.GetKey(KeyCode.LeftShift) && wantsWalk;
             if (wantsRun)
-                _runTimeData.currentState = ICharacterValue.Stats.Run;
+                _runTimeData.currentState = IDamageable.Stats.Run;
             else if (wantsWalk)
-                _runTimeData.currentState = ICharacterValue.Stats.Walk;
+                _runTimeData.currentState = IDamageable.Stats.Walk;
             else
-                _runTimeData.currentState = ICharacterValue.Stats.Idle;
+                _runTimeData.currentState = IDamageable.Stats.Idle;
             _isAttacking = false;
             _rb.gravityScale = 2;
         }

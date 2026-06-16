@@ -1,4 +1,3 @@
-using System;
 using Script.RunTimeDatas;
 using UnityEngine;
 using UnityEngine.UI;

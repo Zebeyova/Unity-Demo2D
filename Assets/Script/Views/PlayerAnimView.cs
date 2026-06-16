@@ -13,26 +13,26 @@ namespace Script.Views
 
         private Animator _anim;
         private PlayerRunTimeData _runTimeData;
-        private ICharacterValue.Stats _lastState;
+        private IDamageable.Stats _lastState;
         private Coroutine _restoreStateCoroutine;
 
-        private static readonly Dictionary<ICharacterValue.Stats, int> AnimDictionary =
-            new Dictionary<ICharacterValue.Stats, int>
+        private static readonly Dictionary<IDamageable.Stats, int> AnimDictionary =
+            new Dictionary<IDamageable.Stats, int>
             {
-                { ICharacterValue.Stats.Idle, Animator.StringToHash(nameof(ICharacterValue.Stats.Idle)) },
-                { ICharacterValue.Stats.Walk, Animator.StringToHash(nameof(ICharacterValue.Stats.Walk)) },
-                { ICharacterValue.Stats.Run, Animator.StringToHash(nameof(ICharacterValue.Stats.Run)) },
-                { ICharacterValue.Stats.WalkTurn, Animator.StringToHash(nameof(ICharacterValue.Stats.WalkTurn)) },
-                { ICharacterValue.Stats.RunTurn, Animator.StringToHash(nameof(ICharacterValue.Stats.RunTurn)) },
-                { ICharacterValue.Stats.Slide, Animator.StringToHash(nameof(ICharacterValue.Stats.Slide)) },
-                { ICharacterValue.Stats.Jump, Animator.StringToHash(nameof(ICharacterValue.Stats.Jump)) },
-                { ICharacterValue.Stats.Fall, Animator.StringToHash(nameof(ICharacterValue.Stats.Fall)) },
-                { ICharacterValue.Stats.FallLoop, Animator.StringToHash(nameof(ICharacterValue.Stats.FallLoop)) },
-                { ICharacterValue.Stats.Attack, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack)) },
-                { ICharacterValue.Stats.Attack2, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack2)) },
-                { ICharacterValue.Stats.Skill, Animator.StringToHash(nameof(ICharacterValue.Stats.Skill)) },
-                { ICharacterValue.Stats.Hurt, Animator.StringToHash(nameof(ICharacterValue.Stats.Hurt)) },
-                { ICharacterValue.Stats.Death, Animator.StringToHash(nameof(ICharacterValue.Stats.Death)) }
+                { IDamageable.Stats.Idle, Animator.StringToHash(nameof(IDamageable.Stats.Idle)) },
+                { IDamageable.Stats.Walk, Animator.StringToHash(nameof(IDamageable.Stats.Walk)) },
+                { IDamageable.Stats.Run, Animator.StringToHash(nameof(IDamageable.Stats.Run)) },
+                { IDamageable.Stats.WalkTurn, Animator.StringToHash(nameof(IDamageable.Stats.WalkTurn)) },
+                { IDamageable.Stats.RunTurn, Animator.StringToHash(nameof(IDamageable.Stats.RunTurn)) },
+                { IDamageable.Stats.Slide, Animator.StringToHash(nameof(IDamageable.Stats.Slide)) },
+                { IDamageable.Stats.Jump, Animator.StringToHash(nameof(IDamageable.Stats.Jump)) },
+                { IDamageable.Stats.Fall, Animator.StringToHash(nameof(IDamageable.Stats.Fall)) },
+                { IDamageable.Stats.FallLoop, Animator.StringToHash(nameof(IDamageable.Stats.FallLoop)) },
+                { IDamageable.Stats.Attack, Animator.StringToHash(nameof(IDamageable.Stats.Attack)) },
+                { IDamageable.Stats.Attack2, Animator.StringToHash(nameof(IDamageable.Stats.Attack2)) },
+                { IDamageable.Stats.Skill, Animator.StringToHash(nameof(IDamageable.Stats.Skill)) },
+                { IDamageable.Stats.Hurt, Animator.StringToHash(nameof(IDamageable.Stats.Hurt)) },
+                { IDamageable.Stats.Death, Animator.StringToHash(nameof(IDamageable.Stats.Death)) }
             };
 
         private void Awake()
@@ -67,10 +67,10 @@ namespace Script.Views
         private void PlayAnimation(int hash, float fade = -1)
         {
             if (!_anim) return;
-            if (_runTimeData.currentState == ICharacterValue.Stats.Attack ||
-                _runTimeData.currentState == ICharacterValue.Stats.Attack2 ||
-                _runTimeData.currentState == ICharacterValue.Stats.Skill ||
-                _runTimeData.currentState == ICharacterValue.Stats.Hurt)
+            if (_runTimeData.currentState == IDamageable.Stats.Attack ||
+                _runTimeData.currentState == IDamageable.Stats.Attack2 ||
+                _runTimeData.currentState == IDamageable.Stats.Skill ||
+                _runTimeData.currentState == IDamageable.Stats.Hurt)
             {
                 if (_restoreStateCoroutine != null) StopCoroutine(_restoreStateCoroutine);
                 _restoreStateCoroutine = StartCoroutine(RestoreState());
@@ -85,14 +85,14 @@ namespace Script.Views
             yield return null;
             var animLength = _anim.GetCurrentAnimatorStateInfo(0).length;
             yield return new WaitForSeconds(animLength - crossFadeTime);
-            if (_runTimeData.currentState == ICharacterValue.Stats.Hurt) OnHurtEnd?.Invoke();
+            if (_runTimeData.currentState == IDamageable.Stats.Hurt) OnHurtEnd?.Invoke();
             else OnAttackEnd?.Invoke();
             _restoreStateCoroutine = null;
         }
 
         private void OnPlayerPlayerHealthChangedHandler(float current, float max)
         {
-            _runTimeData.currentState = current <= 0 ? ICharacterValue.Stats.Death : ICharacterValue.Stats.Hurt;
+            _runTimeData.currentState = current <= 0 ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
         }
 
         #region 动画事件回调

@@ -10,7 +10,7 @@ namespace Script
         {
             public GameObject attacker;
             public GameObject target;
-            public ICharacterValue.Stats attackType;
+            public IDamageable.Stats attackType;
         }
 
         public static class EventCenter
