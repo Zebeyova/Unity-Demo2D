@@ -6,10 +6,12 @@ namespace Script.Models
     [CreateAssetMenu(fileName = "NewEnemyProperty", menuName = "GameModel/EnemyModelSObject")]
     public class EnemyModelSObject : ScriptableObject, ICharacterValue
     {
-        public float BaseMaxHealth => 25f;
-        public float BaseDamage => 2f;
-        public float BaseSkillDamage => 0f;
-        public float BaseDefense => 10f;
+        public int Level { get; set; }
+        public float Experience { get; set; }
+        public float MaxHealth => 25f;
+        public float Damage => 2f;
+        public float SkillDamage => 0f;
+        public float Defense => 10f;
         public float CriticalRate { get; set; }
         public float CriticalDamage { get; set; }
         public float BaseSpeed => 0.5f;

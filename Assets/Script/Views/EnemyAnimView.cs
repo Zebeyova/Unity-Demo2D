@@ -29,17 +29,6 @@ namespace Script.Views
             _runTimeData = GetComponent<EnemyRunTimeData>();
         }
 
-        private void Start()
-        {
-            _runTimeData.OnEnemyHurt += OnEnemyHurtHandler;
-        }
-
-        private void OnDestroy()
-        {
-            if (!_runTimeData) return;
-            _runTimeData.OnEnemyHurt -= OnEnemyHurtHandler;
-        }
-
         private void Update()
         {
             UpdateAnimation();
@@ -57,11 +46,6 @@ namespace Script.Views
             if (!_anim) return;
             var fadeTime = fade < 0 ? CrossFadeTime : fade;
             _anim.CrossFade(hash, fadeTime, 0);
-        }
-
-        private void OnEnemyHurtHandler(float current, float max)
-        {
-            _runTimeData.currentStats = current <= 0 ? ICharacterValue.Stats.Death : ICharacterValue.Stats.Hurt;
         }
 
         #region 动画事件调用

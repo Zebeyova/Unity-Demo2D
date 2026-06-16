@@ -93,14 +93,8 @@ namespace Script.Controllers
             coll.isTrigger = true;
             coll.size = new Vector2(_runTimeData.DetectSizeX, _runTimeData.DetectSizeY);
             var detector = triggerObj.AddComponent<DetectionLogic>();
-            detector.OnPlayerEnter += () =>
-            {
-                _playerInTrigger = true;
-            };
-            detector.OnPlayerExit += () =>
-            {
-                _playerInTrigger = false;
-            };
+            detector.OnPlayerEnter += () => { _playerInTrigger = true; };
+            detector.OnPlayerExit += () => { _playerInTrigger = false; };
         }
 
         private bool IsPlayerDetected() => _playerInTrigger;
@@ -230,7 +224,15 @@ namespace Script.Controllers
         {
             if (IsPlayerDetected() &&
                 (_player.transform.position - transform.position).magnitude < _runTimeData.DistanceFromPlayer &&
-                !_isTouchingWall) _runTimeData.AttackPlayer(_player);
+                !_isTouchingWall)
+            {
+                Events.EventCenter.TriggerAttackHit(new Events.AttackEventArgs
+                {
+                    attacker = gameObject,
+                    target = _player,
+                    attackType = ICharacterValue.Stats.Attack
+                });
+            }
             else OnAttackEndHandler();
         }
 

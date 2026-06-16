@@ -6,10 +6,12 @@ namespace Script.Models
     [CreateAssetMenu(fileName = "NewPlayerProperty", menuName = "GameModel/PlayerModelSObject")]
     public class PlayerModelSObject : ScriptableObject,ICharacterValue
     {
-        public float BaseMaxHealth => 10f;
-        public float BaseDamage => 5f;
-        public float BaseSkillDamage => 8f;
-        public float BaseDefense => 30f;
+        public int Level { get; set; }
+        public float Experience { get; set; }
+        public float MaxHealth => 10f;
+        public float Damage => 5f;
+        public float SkillDamage => 8f;
+        public float Defense => 30f;
         public float CriticalRate { get; set; }
         public float CriticalDamage { get; set; }
         public float BaseSpeed => 2f;

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using Script.Interfaces;
 using Script.Models;
 using UnityEngine;
@@ -10,10 +9,13 @@ namespace Script.RunTimeDatas
     {
         [Header("动态数值")] public ICharacterValue.Stats currentState;
         public float CurrentHealth { get; set; }
-        public float BaseMaxHealth => ModelManager.PlayerModelSObject.BaseMaxHealth;
-        public float BaseDamage => ModelManager.PlayerModelSObject.BaseDamage;
-        public float BaseSkillDamage => ModelManager.PlayerModelSObject.BaseSkillDamage;
-        public float BaseDefense => ModelManager.PlayerModelSObject.BaseDefense;
+        public int Level { get; set; }
+        public float Experience { get; set; }
+        private float _currentExperience;
+        public float MaxHealth => ModelManager.PlayerModelSObject.MaxHealth;
+        public float Damage => ModelManager.PlayerModelSObject.Damage;
+        public float SkillDamage => ModelManager.PlayerModelSObject.SkillDamage;
+        public float Defense => ModelManager.PlayerModelSObject.Defense;
         public float CriticalRate { get; set; }
         public float CriticalDamage { get; set; }
         public float BaseSpeed => ModelManager.PlayerModelSObject.BaseSpeed;
@@ -30,38 +32,21 @@ namespace Script.RunTimeDatas
 
         private void Awake()
         {
-            CurrentHealth = BaseMaxHealth;
+            CurrentHealth = MaxHealth;
             currentState = ICharacterValue.Stats.Idle;
-        }
-
-        private void StartInvincibility()
-        {
-            if (_invincibilityCoroutine != null) StopCoroutine(_invincibilityCoroutine);
-            _invincibilityCoroutine = StartCoroutine(InvincibilityRoutine());
-        }
-
-        private IEnumerator InvincibilityRoutine()
-        {
-            IsInvincible = true;
-            yield return new WaitForSeconds(InvincibleTime);
-            IsInvincible = false;
-        }
-
-        public void AttackEnemy(GameObject target, ICharacterValue.Stats attackerState)
-        {
-            if (!target) return;
-            var damageSystem = FindObjectOfType<DamageSystem>();
-            if (damageSystem) damageSystem.ApplyDamage(gameObject, target, attackerState);
         }
 
         public void TakeDamage(float damage)
         {
             if (IsInvincible || damage <= 0 || CurrentHealth <= 0) return;
+
             CurrentHealth -= damage;
-            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, BaseMaxHealth);
-            OnPlayerHurt?.Invoke(CurrentHealth, BaseMaxHealth);
-            if(CurrentHealth <= 0) OnPlayerDeath?.Invoke();
-            StartInvincibility();
+            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+
+            if (CurrentHealth <= 0)
+                OnPlayerDeath?.Invoke();
+            else
+                OnPlayerHurt?.Invoke(CurrentHealth, MaxHealth);
         }
     }
 }

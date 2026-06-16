@@ -19,7 +19,9 @@ namespace Script.Controllers
         private float _horizontal;
         private bool _inGround;
         private bool _isWalking, _isRunning, _isAttacking, _isSliding;
+
         private bool _isSlidingOnCooldown;
+
         // 转向
         private bool _currentFacingRight = true;
         private bool _targetFacingRight;
@@ -39,6 +41,7 @@ namespace Script.Controllers
             _animView.OnLanding += OnLandingHandler;
             _animView.OnTurnEnd += OnTurnEndHandler;
             _animView.OnSlideEnd += OnSlideEndHandler;
+            _animView.OnAttackHit += OnAttackHitHandler;
             _animView.OnAttackEnd += OnAttackEndHandler;
             _animView.OnHurtEnd += OnHurtEndHandler;
         }
@@ -50,6 +53,7 @@ namespace Script.Controllers
             _animView.OnLanding -= OnLandingHandler;
             _animView.OnTurnEnd -= OnTurnEndHandler;
             _animView.OnSlideEnd -= OnSlideEndHandler;
+            _animView.OnAttackHit -= OnAttackHitHandler;
             _animView.OnAttackEnd -= OnAttackEndHandler;
             _animView.OnHurtEnd -= OnHurtEndHandler;
         }
@@ -67,7 +71,7 @@ namespace Script.Controllers
         private void HandleInput()
         {
             _horizontal = Input.GetAxis("Horizontal");
-            _isWalking = _isRunning = _isSliding =  false;
+            _isWalking = _isRunning = _isSliding = false;
 
             // 跳跃
             if (Input.GetKeyDown(KeyCode.K) && _inGround)
@@ -93,7 +97,6 @@ namespace Script.Controllers
             {
                 _runTimeData.currentState = ICharacterValue.Stats.Skill;
                 _isAttacking = true;
-                TryAttack(_runTimeData.currentState);
                 return;
             }
 
@@ -108,7 +111,6 @@ namespace Script.Controllers
                     case ICharacterValue.Stats.Attack:
                         _runTimeData.currentState = ICharacterValue.Stats.Attack2;
                         _isAttacking = true;
-                        TryAttack(_runTimeData.currentState);
                         return;
                 }
 
@@ -116,7 +118,6 @@ namespace Script.Controllers
                 {
                     _runTimeData.currentState = ICharacterValue.Stats.Attack;
                     _isAttacking = true;
-                    TryAttack(_runTimeData.currentState);
                     return;
                 }
             }
@@ -215,15 +216,6 @@ namespace Script.Controllers
             }
         }
 
-        private void TryAttack(ICharacterValue.Stats state)
-        {
-            // 检测前方是否有敌人
-            var hit = Physics2D.Raycast(_collider.bounds.center,
-                _currentFacingRight ? Vector2.right : Vector2.left, 1f, LayerMask.GetMask("Enemy"));
-            if (hit.collider && hit.collider.CompareTag("Enemy"))
-                _runTimeData.AttackEnemy(hit.collider.gameObject, state);
-        }
-
         private void OnJumpPeakHandler()
         {
             if (_runTimeData.currentState != ICharacterValue.Stats.Jump) return;
@@ -292,6 +284,26 @@ namespace Script.Controllers
             if (_runTimeData.currentState != ICharacterValue.Stats.Slide) return;
             _isSliding = false;
             _runTimeData.currentState = _inGround ? ICharacterValue.Stats.Idle : ICharacterValue.Stats.Fall;
+        }
+
+        private void OnAttackHitHandler()
+        {
+            var state = _runTimeData.currentState;
+            if (state != ICharacterValue.Stats.Attack && state != ICharacterValue.Stats.Attack2 &&
+                state != ICharacterValue.Stats.Skill) return;
+
+            var hit = Physics2D.Raycast(_collider.bounds.center,
+                _currentFacingRight ? Vector2.right : Vector2.left,
+                1f, LayerMask.GetMask("Enemy"));
+            if (hit.collider && hit.collider.CompareTag("Enemy"))
+            {
+                Events.EventCenter.TriggerAttackHit(new Events.AttackEventArgs
+                {
+                    attacker = gameObject,
+                    target = hit.collider.gameObject,
+                    attackType = state
+                });
+            }
         }
 
         private void OnAttackEndHandler()

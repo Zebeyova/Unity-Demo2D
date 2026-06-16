@@ -101,12 +101,14 @@ namespace Script.Views
         public event Action OnLanding;
         public event Action OnTurnEnd;
         public event Action OnSlideEnd;
+        public event Action OnAttackHit;
         public event Action OnAttackEnd;
         public event Action OnHurtEnd;
         public void TriggerJumpPeak() => OnJumpPeak?.Invoke();
         public void TriggerLanding() => OnLanding?.Invoke();
         public void TriggerTurnEnd() => OnTurnEnd?.Invoke();
         public void TriggerSlideEnd() => OnSlideEnd?.Invoke();
+        public void TriggerAttackHit() => OnAttackHit?.Invoke();
         public void TriggerAttackEnd() => OnAttackEnd?.Invoke();
         public void TriggerHurtEnd() => OnHurtEnd?.Invoke();
 

@@ -1,50 +1,108 @@
 ﻿using Script.Interfaces;
 using UnityEngine;
+using System.Collections;
 
 namespace Script.RunTimeDatas
 {
     public class DamageSystem : MonoBehaviour
     {
-        public void ApplyDamage(GameObject attacker, GameObject defender, ICharacterValue.Stats damageType)
+        private void OnEnable()
         {
-            if (!attacker || !defender) return;
-            var attackPower = GetAttackPower(attacker, damageType);
-            var defense = GetDefensePower(defender);
+            Events.EventCenter.OnAttackHit += ApplyDamage;
+        }
+
+        private void OnDisable()
+        {
+            Events.EventCenter.OnAttackHit -= ApplyDamage;
+        }
+
+        private void ApplyDamage(Events.AttackEventArgs args)
+        {
+            if (!args.attacker || !args.target) return;
+            if (GetInvincibleInfo(args.target, out var isInvincible, out var invincibleTime))
+            {
+                if (isInvincible) return; // 无敌时免疫伤害
+            }
+
+            // 计算攻击力、防御力、最终伤害
+            var attackPower = GetAttackPower(args.attacker, args.attackType);
+            var defense = GetDefensePower(args.target);
             var finalDamage = CalculateDamage(attackPower, defense);
-            if (finalDamage > 0) ApplyDamageToTarget(defender, finalDamage);
+
+            if (!(finalDamage > 0)) return;
+            ApplyDamageToTarget(args.target.GetComponent<IDamageable>(), finalDamage);
+            if (invincibleTime > 0)
+                StartCoroutine(InvincibilityCoroutine(args.target, invincibleTime));
         }
 
-        public void Heal(float amount) //回血
+        private bool GetInvincibleInfo(GameObject target, out bool isInvincible, out float invincibleTime)
         {
-            throw new System.NotImplementedException();
+            isInvincible = false;
+            invincibleTime = 0f;
+
+            var player = target.GetComponent<PlayerRunTimeData>();
+            if (player)
+            {
+                isInvincible = player.IsInvincible;
+                invincibleTime = player.InvincibleTime;
+                return true;
+            }
+
+            var enemy = target.GetComponent<EnemyRunTimeData>();
+            if (!enemy) return false;
+            isInvincible = enemy.IsInvincible;
+            invincibleTime = enemy.InvincibleTime;
+            return true;
         }
 
-        private float GetAttackPower(GameObject attacker, ICharacterValue.Stats damageType) //拿到基础攻击力
+        private void SetTargetInvincible(GameObject target, bool invincible)
+        {
+            var player = target.GetComponent<PlayerRunTimeData>();
+            if (player)
+            {
+                player.IsInvincible = invincible;
+                return;
+            }
+
+            var enemy = target.GetComponent<EnemyRunTimeData>();
+            if (enemy)
+            {
+                enemy.IsInvincible = invincible;
+            }
+        }
+
+        private IEnumerator InvincibilityCoroutine(GameObject target, float duration)
+        {
+            SetTargetInvincible(target, true);
+            yield return new WaitForSeconds(duration);
+            SetTargetInvincible(target, false);
+        }
+
+        private float GetAttackPower(GameObject attacker, ICharacterValue.Stats damageType)
         {
             var player = attacker.GetComponent<PlayerRunTimeData>();
-            if (player) return damageType == ICharacterValue.Stats.Skill ? player.BaseSkillDamage : player.BaseDamage;
+            if (player) return damageType == ICharacterValue.Stats.Skill ? player.SkillDamage : player.Damage;
             var enemy = attacker.GetComponent<EnemyRunTimeData>();
-            if (enemy) return damageType == ICharacterValue.Stats.Skill ? enemy.BaseSkillDamage : enemy.BaseDamage;
+            if (enemy) return damageType == ICharacterValue.Stats.Skill ? enemy.SkillDamage : enemy.Damage;
             return 0f;
         }
 
-        private float GetDefensePower(GameObject defender) //拿到基础防御力
+        private float GetDefensePower(GameObject defender)
         {
             var player = defender.GetComponent<PlayerRunTimeData>();
-            if (player) return player.BaseDefense;
+            if (player) return player.Defense;
             var enemy = defender.GetComponent<EnemyRunTimeData>();
-            return enemy ? enemy.BaseDefense : 0f;
+            return enemy ? enemy.Defense : 0f;
         }
 
-        private float CalculateDamage(float attack, float defense) //最终伤害计算
+        private float CalculateDamage(float attack, float defense)
         {
             return Mathf.Max(0, attack * (1 - defense / 100));
         }
 
-        private void ApplyDamageToTarget(GameObject target, float damage) //对目标进行伤害应用
+        private void ApplyDamageToTarget(IDamageable target, float damage)
         {
-            var damageable = target.GetComponent<IDamageable>();
-            damageable?.TakeDamage(damage);
+            target?.TakeDamage(damage);
         }
     }
 }

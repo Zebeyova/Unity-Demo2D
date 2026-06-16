@@ -11,10 +11,10 @@ namespace Script.Views
         private static readonly int Center = Shader.PropertyToID("_Center");
         private static bool _needRespawnFadeOut;
 
+        private Camera _camera;
         public Material blackMaskMaterial;
         [Range(0f, 2f)] public float radius = 2f;
 
-        private Camera _camera;
         private Coroutine _changeRadiusCoroutine;
         private PlayerRunTimeData _playerData;
 

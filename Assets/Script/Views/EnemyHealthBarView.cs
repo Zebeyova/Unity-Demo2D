@@ -20,7 +20,7 @@ namespace Script.Views
             if (!_enemyRunTimeData) return;
             bar = GetComponentsInChildren<Image>()[2];
             bufferBar = GetComponentsInChildren<Image>()[1];
-            _maxHealth = _enemyRunTimeData.BaseMaxHealth;
+            _maxHealth = _enemyRunTimeData.MaxHealth;
         }
 
         private void Start()

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Script.Interfaces
+﻿namespace Script.Interfaces
 {
     public interface ICharacterValue
     {
@@ -22,10 +20,12 @@ namespace Script.Interfaces
             Death
         }
 
-        float BaseMaxHealth { get; } //基础最大生命值
-        float BaseDamage { get; } //基本伤害
-        float BaseSkillDamage { get; } //技能伤害
-        float BaseDefense { get; } //基础防御力
+        int Level { get; set; } //等级
+        float Experience { get; set; } //经验
+        float MaxHealth { get; } //基础最大生命值
+        float Damage { get; } //基本伤害
+        float SkillDamage { get; } //技能伤害
+        float Defense { get; } //基础防御力
         float CriticalRate { get; set; } //暴击率
         float CriticalDamage { get; set; } //暴击率
         float BaseSpeed { get; } //移动速度
