@@ -222,7 +222,15 @@ namespace Script.Controllers
         {
             if (IsPlayerDetected() &&
                 (_player.transform.position - transform.position).magnitude < _runTimeData.DistanceFromPlayer &&
-                !_isTouchingWall) _runTimeData.AttackPlayer(_player);
+                !_isTouchingWall)
+            {
+                Events.EventCenter.TriggerAttackHit(new Events.AttackEventArgs
+                {
+                    attacker = gameObject,
+                    target = _player,
+                    attackType = IDamageable.Stats.Attack
+                });
+            }
             else OnAttackEndHandler();
         }
 
