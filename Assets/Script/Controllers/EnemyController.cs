@@ -63,12 +63,10 @@ namespace Script.Controllers
 
         private void Update()
         {
-            Debug.DrawRay((Vector2)transform.position + Vector2.up * 0.5f, transform.right + transform.up, Color.red,
-                0.5f);
             if (!_player) return;
-            if (_runTimeData.currentStats == ICharacterValue.Stats.Attack ||
-                _runTimeData.currentStats == ICharacterValue.Stats.Hurt ||
-                _runTimeData.currentStats == ICharacterValue.Stats.Death) return;
+            if (_runTimeData.currentStats == IDamageable.Stats.Attack ||
+                _runTimeData.currentStats == IDamageable.Stats.Hurt ||
+                _runTimeData.currentStats == IDamageable.Stats.Death) return;
             WallCheck();
             EnemyAI();
         }
@@ -93,14 +91,8 @@ namespace Script.Controllers
             coll.isTrigger = true;
             coll.size = new Vector2(_runTimeData.DetectSizeX, _runTimeData.DetectSizeY);
             var detector = triggerObj.AddComponent<DetectionLogic>();
-            detector.OnPlayerEnter += () =>
-            {
-                _playerInTrigger = true;
-            };
-            detector.OnPlayerExit += () =>
-            {
-                _playerInTrigger = false;
-            };
+            detector.OnPlayerEnter += () => { _playerInTrigger = true; };
+            detector.OnPlayerExit += () => { _playerInTrigger = false; };
         }
 
         private bool IsPlayerDetected() => _playerInTrigger;
@@ -184,7 +176,7 @@ namespace Script.Controllers
             {
                 // 停止移动，播放攻击动画
                 StopMoveAndIdle();
-                _runTimeData.currentStats = ICharacterValue.Stats.Attack;
+                _runTimeData.currentStats = IDamageable.Stats.Attack;
             }
             else Move(direction);
         }
@@ -197,14 +189,14 @@ namespace Script.Controllers
                 transform.eulerAngles = new Vector3(0, moveDir.x < 0 ? 180 : 0, 0);
             }
 
-            _runTimeData.currentStats = ICharacterValue.Stats.Walk;
+            _runTimeData.currentStats = IDamageable.Stats.Walk;
             _rb.velocity = moveDir.normalized * _runTimeData.BaseSpeed;
         }
 
         private void StopMoveAndIdle()
         {
             _rb.velocity = Vector2.zero;
-            _runTimeData.currentStats = ICharacterValue.Stats.Idle;
+            _runTimeData.currentStats = IDamageable.Stats.Idle;
         }
 
         private void WallCheck()
@@ -215,7 +207,7 @@ namespace Script.Controllers
 
             _wallTiming = true;
             _rb.velocity = Vector2.zero;
-            _runTimeData.currentStats = ICharacterValue.Stats.Idle;
+            _runTimeData.currentStats = IDamageable.Stats.Idle;
             _wallTimer -= Time.deltaTime;
 
             if (!(_wallTimer <= 0)) return;
@@ -236,7 +228,7 @@ namespace Script.Controllers
 
         private void OnAttackEndHandler()
         {
-            if (_runTimeData.currentStats != ICharacterValue.Stats.Attack) return;
+            if (_runTimeData.currentStats != IDamageable.Stats.Attack) return;
             // 攻击结束：根据是否检测到玩家及是否在冷却来决定状态
             if (IsPlayerDetected() && !_isTouchingWall)
             {
@@ -263,7 +255,7 @@ namespace Script.Controllers
 
         private void OnHurtEndHandler()
         {
-            if (_runTimeData.currentStats != ICharacterValue.Stats.Hurt) return;
+            if (_runTimeData.currentStats != IDamageable.Stats.Hurt) return;
             if (IsPlayerDetected() && !_isTouchingWall)
                 TryAttackOrMove(_player.transform.position - transform.position);
             else StopMoveAndIdle();
@@ -271,7 +263,7 @@ namespace Script.Controllers
 
         private void OnDeathEndHandler()
         {
-            if (_runTimeData.currentStats != ICharacterValue.Stats.Death) return;
+            if (_runTimeData.currentStats != IDamageable.Stats.Death) return;
             Destroy(gameObject);
         }
 

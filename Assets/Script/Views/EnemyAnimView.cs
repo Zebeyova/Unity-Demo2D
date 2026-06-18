@@ -10,17 +10,17 @@ namespace Script.Views
     {
         private Animator _anim;
         private EnemyRunTimeData _runTimeData;
-        private ICharacterValue.Stats _lastStats;
+        private IDamageable.Stats _lastStats;
         private const float CrossFadeTime = 0.1f;
 
-        private static readonly Dictionary<ICharacterValue.Stats, int> AnimDictionary =
-            new Dictionary<ICharacterValue.Stats, int>()
+        private static readonly Dictionary<IDamageable.Stats, int> AnimDictionary =
+            new Dictionary<IDamageable.Stats, int>()
             {
-                { ICharacterValue.Stats.Idle, Animator.StringToHash(nameof(ICharacterValue.Stats.Idle)) },
-                { ICharacterValue.Stats.Walk, Animator.StringToHash(nameof(ICharacterValue.Stats.Walk)) },
-                { ICharacterValue.Stats.Attack, Animator.StringToHash(nameof(ICharacterValue.Stats.Attack)) },
-                { ICharacterValue.Stats.Hurt, Animator.StringToHash(nameof(ICharacterValue.Stats.Hurt)) },
-                { ICharacterValue.Stats.Death, Animator.StringToHash(nameof(ICharacterValue.Stats.Death)) }
+                { IDamageable.Stats.Idle, Animator.StringToHash(nameof(IDamageable.Stats.Idle)) },
+                { IDamageable.Stats.Walk, Animator.StringToHash(nameof(IDamageable.Stats.Walk)) },
+                { IDamageable.Stats.Attack, Animator.StringToHash(nameof(IDamageable.Stats.Attack)) },
+                { IDamageable.Stats.Hurt, Animator.StringToHash(nameof(IDamageable.Stats.Hurt)) },
+                { IDamageable.Stats.Death, Animator.StringToHash(nameof(IDamageable.Stats.Death)) }
             };
 
         private void Awake()
@@ -61,7 +61,7 @@ namespace Script.Views
 
         private void OnEnemyHurtHandler(float current, float max)
         {
-            _runTimeData.currentStats = current <= 0 ? ICharacterValue.Stats.Death : ICharacterValue.Stats.Hurt;
+            _runTimeData.currentStats = current <= 0 ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
         }
 
         #region 动画事件调用

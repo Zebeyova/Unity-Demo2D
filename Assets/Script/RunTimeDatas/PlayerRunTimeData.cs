@@ -6,14 +6,17 @@ using UnityEngine;
 
 namespace Script.RunTimeDatas
 {
-    public class PlayerRunTimeData : MonoBehaviour, ICharacterValue, IDamageable
+    public class PlayerRunTimeData : MonoBehaviour, IDamageable
     {
-        [Header("动态数值")] public ICharacterValue.Stats currentState;
+        [Header("动态数值")] public IDamageable.Stats currentState;
         public float CurrentHealth { get; set; }
-        public float BaseMaxHealth => ModelManager.PlayerModelSObject.BaseMaxHealth;
-        public float BaseDamage => ModelManager.PlayerModelSObject.BaseDamage;
-        public float BaseSkillDamage => ModelManager.PlayerModelSObject.BaseSkillDamage;
-        public float BaseDefense => ModelManager.PlayerModelSObject.BaseDefense;
+        public int Level { get; set; }
+        public float Experience { get; set; }
+        private float _currentExperience;
+        public float MaxHealth => ModelManager.PlayerModelSObject.MaxHealth;
+        public float Damage => ModelManager.PlayerModelSObject.Damage;
+        public float SkillDamage => ModelManager.PlayerModelSObject.SkillDamage;
+        public float Defense => ModelManager.PlayerModelSObject.Defense;
         public float CriticalRate { get; set; }
         public float CriticalDamage { get; set; }
         public float BaseSpeed => ModelManager.PlayerModelSObject.BaseSpeed;
@@ -30,8 +33,8 @@ namespace Script.RunTimeDatas
 
         private void Awake()
         {
-            CurrentHealth = BaseMaxHealth;
-            currentState = ICharacterValue.Stats.Idle;
+            CurrentHealth = MaxHealth;
+            currentState = IDamageable.Stats.Idle;
         }
 
         private void StartInvincibility()
@@ -47,7 +50,7 @@ namespace Script.RunTimeDatas
             IsInvincible = false;
         }
 
-        public void AttackEnemy(GameObject target, ICharacterValue.Stats attackerState)
+        public void AttackEnemy(GameObject target, IDamageable.Stats attackerState)
         {
             if (!target) return;
             var damageSystem = FindObjectOfType<DamageSystem>();
@@ -58,9 +61,10 @@ namespace Script.RunTimeDatas
         {
             if (IsInvincible || damage <= 0 || CurrentHealth <= 0) return;
             CurrentHealth -= damage;
-            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, BaseMaxHealth);
-            OnPlayerHurt?.Invoke(CurrentHealth, BaseMaxHealth);
-            if(CurrentHealth <= 0) OnPlayerDeath?.Invoke();
+            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+
+            if (CurrentHealth <= 0) OnPlayerDeath?.Invoke();
+            else OnPlayerHurt?.Invoke(CurrentHealth, MaxHealth);
             StartInvincibility();
         }
     }

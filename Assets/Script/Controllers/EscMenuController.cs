@@ -22,7 +22,7 @@ namespace Script.Controllers
         private void Update()
         {
             if (!Input.GetKeyDown(KeyCode.Escape)) return;
-            Time.timeScale = _escMenu.activeSelf ? 0 : 1;
+            Time.timeScale = _escMenu.activeSelf ? 1 : 0;
             _escMenu.SetActive(!_escMenu.activeSelf);
             _escMenu.transform.Find("ButtonMenu").gameObject.SetActive(true);
             _escMenu.transform.Find("SettingMenu").gameObject.SetActive(false);

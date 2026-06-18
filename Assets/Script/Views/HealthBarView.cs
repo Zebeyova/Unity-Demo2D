@@ -20,7 +20,7 @@ namespace Script.Views
             _playerRunTimeData = GameObject.FindWithTag("Player")?.GetComponent<PlayerRunTimeData>();
             bar = GetComponentsInChildren<Image>()[2];
             bufferBar = GetComponentsInChildren<Image>()[1];
-            if (_playerRunTimeData) _maxHealth = _playerRunTimeData.BaseMaxHealth;
+            if (_playerRunTimeData) _maxHealth = _playerRunTimeData.MaxHealth;
         }
 
         private void Start()
@@ -34,7 +34,7 @@ namespace Script.Views
 
         private void Update()
         {
-            if (!_bufferDirty || !bufferBar) return;
+            if (!_bufferDirty || !bufferBar || !bar) return;
             bufferBar.fillAmount = Mathf.Lerp(bufferBar.fillAmount, bar.fillAmount, Time.deltaTime * 2f);
             if (Mathf.Approximately(bufferBar.fillAmount, bar.fillAmount)) _bufferDirty = false;
         }
