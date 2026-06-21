@@ -20,8 +20,6 @@
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/DamageSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/DamageSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EnemyRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EnemyRunTimeData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/PlayerRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/PlayerRunTimeData.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +290,7 @@
       <workItem from="1781596266819" duration="7261000" />
       <workItem from="1781776345737" duration="4391000" />
       <workItem from="1782025570762" duration="364000" />
-      <workItem from="1782025975922" duration="3768000" />
+      <workItem from="1782025975922" duration="5669000" />
     </task>
     <task id="LOCAL-00001" summary="4.6备份">
       <option name="closed" value="true" />
@@ -646,7 +644,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782028067557</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="准备开始修改敌人的无敌逻辑并添加玩家的升级系统">
+      <option name="closed" value="true" />
+      <created>1782029875632</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1782029875632</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -685,7 +691,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="添加技能伤害并修复了多段攻击混杂技能伤害有概率导致敌人无法销毁,玩家无法输入的问题" />
     <MESSAGE value="Demo2D第一版" />
     <MESSAGE value="修复敌人有概率死亡不销毁的Bug,目前还剩玩家二段连击无法触发的问题" />
     <MESSAGE value="4.18备份" />
@@ -710,7 +715,8 @@
     <MESSAGE value="111" />
     <MESSAGE value="回退修复" />
     <MESSAGE value="修复RunTimeData中有伤害计算的逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复RunTimeData中有伤害计算的逻辑" />
+    <MESSAGE value="准备开始修改敌人的无敌逻辑并添加玩家的升级系统" />
+    <option name="LAST_COMMIT_MESSAGE" value="准备开始修改敌人的无敌逻辑并添加玩家的升级系统" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

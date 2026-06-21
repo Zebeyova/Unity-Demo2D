@@ -6,7 +6,20 @@ namespace Script.RunTimeDatas
 {
     public class DamageSystem : MonoBehaviour
     {
+        [SerializeField] [Min(0f)] private float playerInvincibleDuration = 0.5f;
+        [SerializeField] [Min(0f)] private float enemyInvincibleDuration = 1f;
+
         private readonly Dictionary<GameObject, DamageCache> _damageCache = new Dictionary<GameObject, DamageCache>();
+
+        private void OnEnable()
+        {
+            Events.EventCenter.OnAttackHit += OnAttackHitHandler;
+        }
+
+        private void OnDisable()
+        {
+            Events.EventCenter.OnAttackHit -= OnAttackHitHandler;
+        }
 
         public void ApplyDamage(GameObject attacker, GameObject defender, IDamageable.Stats damageType)
         {
@@ -30,10 +43,18 @@ namespace Script.RunTimeDatas
             throw new System.NotImplementedException();
         }
 
+        private void OnAttackHitHandler(Events.AttackEventArgs args)
+        {
+            if (args == null || !args.attacker || !args.target) return;
+            ApplyDamage(args.attacker, args.target, args.attackType);
+        }
+
         private float GetAttackPower(DamageCache attacker, IDamageable.Stats damageType) //拿到基础攻击力
         {
-            if (attacker.player) return damageType == IDamageable.Stats.Skill ? attacker.player.SkillDamage : attacker.player.Damage;
-            if (attacker.enemy) return damageType == IDamageable.Stats.Skill ? attacker.enemy.SkillDamage : attacker.enemy.Damage;
+            if (attacker.player)
+                return damageType == IDamageable.Stats.Skill ? attacker.player.SkillDamage : attacker.player.Damage;
+            if (attacker.enemy)
+                return damageType == IDamageable.Stats.Skill ? attacker.enemy.SkillDamage : attacker.enemy.Damage;
             return 0f;
         }
 
@@ -89,24 +110,58 @@ namespace Script.RunTimeDatas
 
             if (player.CurrentHealth <= 0) player.NotifyDeath();
             else player.NotifyHurt();
-            if (player.CurrentHealth > 0) StartCoroutine(InvincibilityRoutine(player));
+            if (player.CurrentHealth > 0) StartCoroutine(InvincibilityRoutine(player, playerInvincibleDuration));
         }
 
         private void ApplyDamageToEnemy(EnemyRunTimeData enemy, float damage)
         {
             if (enemy.IsInvincible || damage <= 0 || enemy.CurrentHealth <= 0) return;
+
+            var previousHealth = enemy.CurrentHealth;
             enemy.CurrentHealth = Mathf.Clamp(enemy.CurrentHealth - damage, 0, enemy.MaxHealth);
             enemy.currentStats = enemy.CurrentHealth <= 0 ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
             enemy.NotifyHurt();
 
-            if (enemy.CurrentHealth > 0) StartCoroutine(InvincibilityRoutine(enemy));
+            if (enemy.CurrentHealth > 0 && TryTriggerEnemyInvincibility(enemy, previousHealth))
+                StartCoroutine(InvincibilityRoutine(enemy, enemyInvincibleDuration));
         }
 
-        private System.Collections.IEnumerator InvincibilityRoutine<T>(T target)
-            where T : class, IRunTimeData //公共无敌时间协程
+        private bool TryTriggerEnemyInvincibility(EnemyRunTimeData enemy, float previousHealth)
+        {
+            var cache = GetOrCreateCache(enemy.gameObject);
+            var maxHealth = enemy.MaxHealth;
+            var previousRatio = previousHealth / maxHealth;
+            var currentRatio = enemy.CurrentHealth / maxHealth;
+            var triggered = false;
+
+            if (!cache.enemyInvincibilityTriggered80 &&
+                previousRatio > 0.8f && currentRatio <= 0.8f)
+            {
+                cache.enemyInvincibilityTriggered80 = true;
+                triggered = true;
+            }
+
+            if (!cache.enemyInvincibilityTriggered50 &&
+                previousRatio > 0.5f && currentRatio <= 0.5f)
+            {
+                cache.enemyInvincibilityTriggered50 = true;
+                triggered = true;
+            }
+
+            if (!cache.enemyInvincibilityTriggered30 &&
+                previousRatio > 0.3f && currentRatio <= 0.3f)
+            {
+                cache.enemyInvincibilityTriggered30 = true;
+                triggered = true;
+            }
+
+            return triggered;
+        }
+
+        private System.Collections.IEnumerator InvincibilityRoutine(IRunTimeData target, float duration)
         {
             target.IsInvincible = true;
-            yield return new WaitForSeconds(target.InvincibleTime);
+            yield return new WaitForSeconds(duration);
             target.IsInvincible = false;
         }
 
@@ -115,6 +170,9 @@ namespace Script.RunTimeDatas
             public PlayerRunTimeData player;
             public EnemyRunTimeData enemy;
             public IDamageable damageable;
+            public bool enemyInvincibilityTriggered80;
+            public bool enemyInvincibilityTriggered50;
+            public bool enemyInvincibilityTriggered30;
 
             public bool IsValid => player || enemy || damageable != null;
         }
