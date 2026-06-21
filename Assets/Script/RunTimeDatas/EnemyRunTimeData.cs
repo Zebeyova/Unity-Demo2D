@@ -25,29 +25,22 @@ namespace Script.RunTimeDatas
         public float DetectSizeY => ModelManager.EnemyModelSObject.detectSizeY;
         public bool IsInvincible { get; set; }
         public float InvincibleTime => ModelManager.EnemyModelSObject.InvincibleTime;
+        private DamageSystem _damageSystem;
         public event Action<float, float> OnEnemyHurt;
 
         private void Awake()
         {
             CurrentHealth = MaxHealth;
             currentStats = IDamageable.Stats.Idle;
+            _damageSystem = FindObjectOfType<DamageSystem>();
         }
 
         public void TakeDamage(float damage)
         {
-            var damageSystem = FindObjectOfType<DamageSystem>();
-            if (!damageSystem)
-            {
-                Debug.LogError($"{nameof(DamageSystem)} not found, cannot apply damage.");
-                return;
-            }
-
-            damageSystem.ApplyRawDamage(gameObject, damage);
+            if (!_damageSystem) return;
+            _damageSystem.ApplyRawDamage(gameObject, damage);
         }
 
-        public void NotifyHurt()
-        {
-            OnEnemyHurt?.Invoke(CurrentHealth, MaxHealth);
-        }
+        public void NotifyHurt() => OnEnemyHurt?.Invoke(CurrentHealth, MaxHealth);
     }
 }

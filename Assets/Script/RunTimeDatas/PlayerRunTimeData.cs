@@ -26,6 +26,7 @@ namespace Script.RunTimeDatas
         public float HorizontalInputThreshold => ModelManager.PlayerModelSObject.horizontalInputThreshold;
         public bool IsInvincible { get; set; }
         public float InvincibleTime => ModelManager.PlayerModelSObject.InvincibleTime;
+        private DamageSystem _damageSystem;
         public event Action<float, float> OnPlayerHurt;
         public event Action OnPlayerDeath;
 
@@ -33,31 +34,18 @@ namespace Script.RunTimeDatas
         {
             CurrentHealth = MaxHealth;
             currentState = IDamageable.Stats.Idle;
+            _damageSystem = FindObjectOfType<DamageSystem>();
         }
 
         public void AttackEnemy(GameObject target, IDamageable.Stats attackerState)
         {
-            if (!target) return;
-            var damageSystem = FindObjectOfType<DamageSystem>();
-            if (!damageSystem)
-            {
-                Debug.LogError($"{nameof(DamageSystem)} not found, cannot apply damage.");
-                return;
-            }
-
-            damageSystem.ApplyDamage(gameObject, target, attackerState);
+            if (target && _damageSystem) _damageSystem.ApplyDamage(gameObject, target, attackerState);
         }
 
         public void TakeDamage(float damage)
         {
-            var damageSystem = FindObjectOfType<DamageSystem>();
-            if (!damageSystem)
-            {
-                Debug.LogError($"{nameof(DamageSystem)} not found, cannot apply damage.");
-                return;
-            }
-
-            damageSystem.ApplyRawDamage(gameObject, damage);
+            if (!_damageSystem) return;
+            _damageSystem.ApplyRawDamage(gameObject, damage);
         }
 
         public void NotifyHurt()

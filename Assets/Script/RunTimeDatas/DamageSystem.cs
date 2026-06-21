@@ -1,23 +1,28 @@
-﻿using Script.Interfaces;
+using System.Collections.Generic;
+using Script.Interfaces;
 using UnityEngine;
 
 namespace Script.RunTimeDatas
 {
     public class DamageSystem : MonoBehaviour
     {
+        private readonly Dictionary<GameObject, DamageCache> _damageCache = new Dictionary<GameObject, DamageCache>();
+
         public void ApplyDamage(GameObject attacker, GameObject defender, IDamageable.Stats damageType)
         {
             if (!attacker || !defender) return;
-            var attackPower = GetAttackPower(attacker, damageType);
-            var defense = GetDefensePower(defender);
+            var attackCache = GetOrCreateCache(attacker);
+            var defenseCache = GetOrCreateCache(defender);
+            var attackPower = GetAttackPower(attackCache, damageType);
+            var defense = GetDefensePower(defenseCache);
             var finalDamage = CalculateDamage(attackPower, defense);
-            if (finalDamage > 0) ApplyDamageToTarget(defender, finalDamage);
+            if (finalDamage > 0) ApplyDamageToTarget(defenseCache, defender, finalDamage);
         }
 
         public void ApplyRawDamage(GameObject target, float damage)
         {
             if (!target || damage <= 0) return;
-            ApplyDamageToTarget(target, damage);
+            ApplyDamageToTarget(GetOrCreateCache(target), target, damage);
         }
 
         public void Heal(float amount) //回血
@@ -25,21 +30,17 @@ namespace Script.RunTimeDatas
             throw new System.NotImplementedException();
         }
 
-        private float GetAttackPower(GameObject attacker, IDamageable.Stats damageType) //拿到基础攻击力
+        private float GetAttackPower(DamageCache attacker, IDamageable.Stats damageType) //拿到基础攻击力
         {
-            var player = attacker.GetComponent<PlayerRunTimeData>();
-            if (player) return damageType == IDamageable.Stats.Skill ? player.SkillDamage : player.Damage;
-            var enemy = attacker.GetComponent<EnemyRunTimeData>();
-            if (enemy) return damageType == IDamageable.Stats.Skill ? enemy.SkillDamage : enemy.Damage;
+            if (attacker.player) return damageType == IDamageable.Stats.Skill ? attacker.player.SkillDamage : attacker.player.Damage;
+            if (attacker.enemy) return damageType == IDamageable.Stats.Skill ? attacker.enemy.SkillDamage : attacker.enemy.Damage;
             return 0f;
         }
 
-        private float GetDefensePower(GameObject defender) //拿到基础防御力
+        private float GetDefensePower(DamageCache defender) //拿到基础防御力
         {
-            var player = defender.GetComponent<PlayerRunTimeData>();
-            if (player) return player.Defense;
-            var enemy = defender.GetComponent<EnemyRunTimeData>();
-            return enemy ? enemy.Defense : 0f;
+            if (defender.player) return defender.player.Defense;
+            return defender.enemy ? defender.enemy.Defense : 0f;
         }
 
         private float CalculateDamage(float attack, float defense) //最终伤害计算
@@ -47,43 +48,53 @@ namespace Script.RunTimeDatas
             return Mathf.Max(0, attack * (1 - defense / 100));
         }
 
-        private void ApplyDamageToTarget(GameObject target, float damage) //对目标进行伤害应用
+        private void ApplyDamageToTarget(DamageCache cachedTarget, GameObject target, float damage) //对目标进行伤害应用
         {
-            var player = target.GetComponent<PlayerRunTimeData>();
-            if (player)
+            if (cachedTarget.player)
             {
-                ApplyDamageToPlayer(player, damage);
+                ApplyDamageToPlayer(cachedTarget.player, damage);
                 return;
             }
 
-            var enemy = target.GetComponent<EnemyRunTimeData>();
-            if (enemy)
+            if (cachedTarget.enemy)
             {
-                ApplyDamageToEnemy(enemy, damage);
+                ApplyDamageToEnemy(cachedTarget.enemy, damage);
                 return;
             }
 
-            var damageable = target.GetComponent<IDamageable>();
+            var damageable = cachedTarget.damageable ?? target.GetComponent(typeof(IDamageable)) as IDamageable;
             damageable?.TakeDamage(damage);
+            cachedTarget.damageable = damageable;
+        }
+
+        private DamageCache GetOrCreateCache(GameObject target)
+        {
+            if (_damageCache.TryGetValue(target, out var cache) && cache.IsValid) return cache;
+
+            cache = new DamageCache
+            {
+                player = target.GetComponent<PlayerRunTimeData>(),
+                enemy = target.GetComponent<EnemyRunTimeData>(),
+                damageable = target.GetComponent(typeof(IDamageable)) as IDamageable
+            };
+            _damageCache[target] = cache;
+            return cache;
         }
 
         private void ApplyDamageToPlayer(PlayerRunTimeData player, float damage)
         {
             if (player.IsInvincible || damage <= 0 || player.CurrentHealth <= 0) return;
-
             player.CurrentHealth = Mathf.Clamp(player.CurrentHealth - damage, 0, player.MaxHealth);
             player.currentState = player.CurrentHealth <= 0 ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
 
             if (player.CurrentHealth <= 0) player.NotifyDeath();
             else player.NotifyHurt();
-
             if (player.CurrentHealth > 0) StartCoroutine(InvincibilityRoutine(player));
         }
 
         private void ApplyDamageToEnemy(EnemyRunTimeData enemy, float damage)
         {
             if (enemy.IsInvincible || damage <= 0 || enemy.CurrentHealth <= 0) return;
-
             enemy.CurrentHealth = Mathf.Clamp(enemy.CurrentHealth - damage, 0, enemy.MaxHealth);
             enemy.currentStats = enemy.CurrentHealth <= 0 ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
             enemy.NotifyHurt();
@@ -97,6 +108,15 @@ namespace Script.RunTimeDatas
             target.IsInvincible = true;
             yield return new WaitForSeconds(target.InvincibleTime);
             target.IsInvincible = false;
+        }
+
+        private sealed class DamageCache
+        {
+            public PlayerRunTimeData player;
+            public EnemyRunTimeData enemy;
+            public IDamageable damageable;
+
+            public bool IsValid => player || enemy || damageable != null;
         }
     }
 }
