@@ -6,7 +6,7 @@ namespace Script.Models
     public class EnemyModelSObject : ScriptableObject
     {
         public int Level { get; set; }
-        public float Experience { get; set; }
+        [Header("基础奖励")] [Min(0f)] public float experienceReward = 5f;
         public float MaxHealth => 25f;
         public float Damage => 2f;
         public float SkillDamage => 0f;

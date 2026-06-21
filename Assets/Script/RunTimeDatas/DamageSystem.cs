@@ -6,10 +6,18 @@ namespace Script.RunTimeDatas
 {
     public class DamageSystem : MonoBehaviour
     {
+        public static DamageSystem Instance { get; private set; }
         [SerializeField] [Min(0f)] private float playerInvincibleDuration = 0.5f;
         [SerializeField] [Min(0f)] private float enemyInvincibleDuration = 1f;
 
         private readonly Dictionary<GameObject, DamageCache> _damageCache = new Dictionary<GameObject, DamageCache>();
+        private LevelUpSystem _levelUpSystem;
+
+        private void Awake()
+        {
+            Instance = this;
+            _levelUpSystem = LevelUpSystem.Instance ?? FindObjectOfType<LevelUpSystem>();
+        }
 
         private void OnEnable()
         {
@@ -120,10 +128,28 @@ namespace Script.RunTimeDatas
             var previousHealth = enemy.CurrentHealth;
             enemy.CurrentHealth = Mathf.Clamp(enemy.CurrentHealth - damage, 0, enemy.MaxHealth);
             enemy.currentStats = enemy.CurrentHealth <= 0 ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
+
+            if (enemy.CurrentHealth <= 0)
+            {
+                enemy.NotifyDeath();
+                AwardEnemyExperience(enemy);
+                return;
+            }
+
             enemy.NotifyHurt();
 
-            if (enemy.CurrentHealth > 0 && TryTriggerEnemyInvincibility(enemy, previousHealth))
+            if (TryTriggerEnemyInvincibility(enemy, previousHealth))
                 StartCoroutine(InvincibilityRoutine(enemy, enemyInvincibleDuration));
+        }
+
+        private void AwardEnemyExperience(EnemyRunTimeData enemy)
+        {
+            if (!enemy || enemy.ExperienceReward <= 0f) return;
+
+            var levelUpSystem = _levelUpSystem ? _levelUpSystem : LevelUpSystem.Instance;
+            if (!levelUpSystem) return;
+
+            levelUpSystem.AddExperience(enemy.ExperienceReward);
         }
 
         private bool TryTriggerEnemyInvincibility(EnemyRunTimeData enemy, float previousHealth)

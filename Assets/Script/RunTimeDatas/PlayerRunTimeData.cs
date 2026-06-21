@@ -9,9 +9,8 @@ namespace Script.RunTimeDatas
     {
         [Header("动态数值")] public IDamageable.Stats currentState;
         public float CurrentHealth { get; set; }
-        public int Level { get; set; }
+        public int Level { get; private set; }
         public float Experience { get; set; }
-        private float _currentExperience;
         public float MaxHealth => ModelManager.PlayerModelSObject.MaxHealth;
         public float Damage => ModelManager.PlayerModelSObject.Damage;
         public float SkillDamage => ModelManager.PlayerModelSObject.SkillDamage;
@@ -27,14 +26,20 @@ namespace Script.RunTimeDatas
         public bool IsInvincible { get; set; }
         public float InvincibleTime => ModelManager.PlayerModelSObject.InvincibleTime;
         private DamageSystem _damageSystem;
+        private LevelUpSystem _levelUpSystem;
         public event Action<float, float> OnPlayerHurt;
         public event Action OnPlayerDeath;
+        public event Action<int> OnPlayerLevelChanged;
+        public event Action<float, float> OnPlayerExperienceChanged;
 
         private void Awake()
         {
             CurrentHealth = MaxHealth;
             currentState = IDamageable.Stats.Idle;
-            _damageSystem = FindObjectOfType<DamageSystem>();
+            _damageSystem = DamageSystem.Instance ?? FindObjectOfType<DamageSystem>();
+            _levelUpSystem = FindObjectOfType<LevelUpSystem>();
+            if (_levelUpSystem) _levelUpSystem.RegisterPlayer(this);
+            else SetProgress(1, 0f);
         }
 
         public void AttackEnemy(GameObject target, IDamageable.Stats attackerState)
@@ -56,6 +61,29 @@ namespace Script.RunTimeDatas
         public void NotifyDeath()
         {
             OnPlayerDeath?.Invoke();
+        }
+
+        public void SetProgress(int level, float experience)
+        {
+            SetLevel(level);
+            SetExperience(experience);
+        }
+
+        public void SetLevel(int level)
+        {
+            Level = Mathf.Max(1, level);
+            OnPlayerLevelChanged?.Invoke(Level);
+        }
+
+        public void SetExperience(float experience)
+        {
+            Experience = Mathf.Max(0f, experience);
+            OnPlayerExperienceChanged?.Invoke(Experience, GetExperienceToNextLevel());
+        }
+
+        private float GetExperienceToNextLevel()
+        {
+            return _levelUpSystem ? _levelUpSystem.GetExperienceToNextLevel(Level) : 0f;
         }
     }
 }
