@@ -95,7 +95,10 @@ namespace Script.Controllers
             detector.OnPlayerExit += () => { _playerInTrigger = false; };
         }
 
-        private bool IsPlayerDetected() => _playerInTrigger;
+        private bool IsPlayerDetected()
+        {
+            return _playerInTrigger;
+        }
 
         #endregion
 
@@ -106,7 +109,9 @@ namespace Script.Controllers
             var playerDetected = IsPlayerDetected();
 
             if (playerDetected && !_isTouchingWall)
+            {
                 TryAttackOrMove(_player.transform.position - transform.position);
+            }
             else
             {
                 // 返回起始点
@@ -178,16 +183,16 @@ namespace Script.Controllers
                 StopMoveAndIdle();
                 _runTimeData.currentStats = IDamageable.Stats.Attack;
             }
-            else Move(direction);
+            else
+            {
+                Move(direction);
+            }
         }
 
         private void Move(Vector3 direction)
         {
             var moveDir = new Vector2(direction.x, 0).normalized;
-            if (moveDir.x != 0)
-            {
-                transform.eulerAngles = new Vector3(0, moveDir.x < 0 ? 180 : 0, 0);
-            }
+            if (moveDir.x != 0) transform.eulerAngles = new Vector3(0, moveDir.x < 0 ? 180 : 0, 0);
 
             _runTimeData.currentStats = IDamageable.Stats.Walk;
             _rb.velocity = moveDir.normalized * _runTimeData.BaseSpeed;
@@ -223,14 +228,12 @@ namespace Script.Controllers
             if (IsPlayerDetected() &&
                 (_player.transform.position - transform.position).magnitude < _runTimeData.DistanceFromPlayer &&
                 !_isTouchingWall)
-            {
                 Events.EventCenter.TriggerAttackHit(new Events.AttackEventArgs
                 {
                     attacker = gameObject,
                     target = _player,
                     attackType = IDamageable.Stats.Attack
                 });
-            }
             else OnAttackEndHandler();
         }
 
@@ -272,7 +275,7 @@ namespace Script.Controllers
         private void OnDeathEndHandler()
         {
             if (_runTimeData.currentStats != IDamageable.Stats.Death) return;
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent.gameObject);
         }
 
         #endregion

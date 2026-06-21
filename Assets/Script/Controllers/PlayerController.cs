@@ -19,7 +19,9 @@ namespace Script.Controllers
         private float _horizontal;
         private bool _inGround;
         private bool _isWalking, _isRunning, _isAttacking, _isSliding;
+
         private bool _isSlidingOnCooldown;
+
         // 转向
         private bool _currentFacingRight = true;
         private bool _targetFacingRight;
@@ -137,7 +139,7 @@ namespace Script.Controllers
             if (isSpecialState)
             {
                 // 特殊状态下仍记录移动输入，用于空中移动速度
-                if (!(_wantMove)) return;
+                if (!_wantMove) return;
                 if (Input.GetKey(KeyCode.LeftShift))
                     _isRunning = true;
                 else
@@ -227,7 +229,10 @@ namespace Script.Controllers
         private void OnJumpPeakHandler()
         {
             if (_runTimeData.currentState != IDamageable.Stats.Jump) return;
-            if (!_inGround) _runTimeData.currentState = IDamageable.Stats.Fall;
+            if (!_inGround)
+            {
+                _runTimeData.currentState = IDamageable.Stats.Fall;
+            }
             else
             {
                 if (_isRunning)
@@ -243,7 +248,10 @@ namespace Script.Controllers
         {
             if (_runTimeData.currentState != IDamageable.Stats.Fall &&
                 _runTimeData.currentState != IDamageable.Stats.FallLoop) return;
-            if (!_inGround) _runTimeData.currentState = IDamageable.Stats.FallLoop;
+            if (!_inGround)
+            {
+                _runTimeData.currentState = IDamageable.Stats.FallLoop;
+            }
             else
             {
                 if (_isRunning)

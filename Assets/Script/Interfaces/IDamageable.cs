@@ -19,6 +19,7 @@
             Hurt,
             Death
         }
+
         void TakeDamage(float damage); // 受到伤害
     }
 }

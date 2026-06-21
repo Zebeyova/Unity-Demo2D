@@ -29,7 +29,10 @@ namespace Script.Views
             OnPlayerHurt(_playerRunTimeData.CurrentHealth, _maxHealth);
         }
 
-        private void OnDestroy() => _playerRunTimeData.OnPlayerHurt -= OnPlayerHurt;
+        private void OnDestroy()
+        {
+            _playerRunTimeData.OnPlayerHurt -= OnPlayerHurt;
+        }
 
 
         private void Update()

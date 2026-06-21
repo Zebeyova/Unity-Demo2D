@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using Script.Interfaces;
 using Script.Models;
 using UnityEngine;
 
 namespace Script.RunTimeDatas
 {
-    public class PlayerRunTimeData : MonoBehaviour, IDamageable
+    public class PlayerRunTimeData : MonoBehaviour, IDamageable, IRunTimeData
     {
         [Header("动态数值")] public IDamageable.Stats currentState;
         public float CurrentHealth { get; set; }
@@ -27,7 +26,6 @@ namespace Script.RunTimeDatas
         public float HorizontalInputThreshold => ModelManager.PlayerModelSObject.horizontalInputThreshold;
         public bool IsInvincible { get; set; }
         public float InvincibleTime => ModelManager.PlayerModelSObject.InvincibleTime;
-        private Coroutine _invincibilityCoroutine;
         public event Action<float, float> OnPlayerHurt;
         public event Action OnPlayerDeath;
 
@@ -37,35 +35,39 @@ namespace Script.RunTimeDatas
             currentState = IDamageable.Stats.Idle;
         }
 
-        private void StartInvincibility()
-        {
-            if (_invincibilityCoroutine != null) StopCoroutine(_invincibilityCoroutine);
-            _invincibilityCoroutine = StartCoroutine(InvincibilityRoutine());
-        }
-
-        private IEnumerator InvincibilityRoutine()
-        {
-            IsInvincible = true;
-            yield return new WaitForSeconds(InvincibleTime);
-            IsInvincible = false;
-        }
-
         public void AttackEnemy(GameObject target, IDamageable.Stats attackerState)
         {
             if (!target) return;
             var damageSystem = FindObjectOfType<DamageSystem>();
-            if (damageSystem) damageSystem.ApplyDamage(gameObject, target, attackerState);
+            if (!damageSystem)
+            {
+                Debug.LogError($"{nameof(DamageSystem)} not found, cannot apply damage.");
+                return;
+            }
+
+            damageSystem.ApplyDamage(gameObject, target, attackerState);
         }
 
         public void TakeDamage(float damage)
         {
-            if (IsInvincible || damage <= 0 || CurrentHealth <= 0) return;
-            CurrentHealth -= damage;
-            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+            var damageSystem = FindObjectOfType<DamageSystem>();
+            if (!damageSystem)
+            {
+                Debug.LogError($"{nameof(DamageSystem)} not found, cannot apply damage.");
+                return;
+            }
 
-            if (CurrentHealth <= 0) OnPlayerDeath?.Invoke();
-            else OnPlayerHurt?.Invoke(CurrentHealth, MaxHealth);
-            StartInvincibility();
+            damageSystem.ApplyRawDamage(gameObject, damage);
+        }
+
+        public void NotifyHurt()
+        {
+            OnPlayerHurt?.Invoke(CurrentHealth, MaxHealth);
+        }
+
+        public void NotifyDeath()
+        {
+            OnPlayerDeath?.Invoke();
         }
     }
 }

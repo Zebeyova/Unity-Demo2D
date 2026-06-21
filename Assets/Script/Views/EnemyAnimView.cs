@@ -14,7 +14,7 @@ namespace Script.Views
         private const float CrossFadeTime = 0.1f;
 
         private static readonly Dictionary<IDamageable.Stats, int> AnimDictionary =
-            new Dictionary<IDamageable.Stats, int>()
+            new Dictionary<IDamageable.Stats, int>
             {
                 { IDamageable.Stats.Idle, Animator.StringToHash(nameof(IDamageable.Stats.Idle)) },
                 { IDamageable.Stats.Walk, Animator.StringToHash(nameof(IDamageable.Stats.Walk)) },
@@ -27,17 +27,6 @@ namespace Script.Views
         {
             _anim = GetComponent<Animator>();
             _runTimeData = GetComponent<EnemyRunTimeData>();
-        }
-
-        private void Start()
-        {
-            _runTimeData.OnEnemyHurt += OnEnemyHurtHandler;
-        }
-
-        private void OnDestroy()
-        {
-            if (!_runTimeData) return;
-            _runTimeData.OnEnemyHurt -= OnEnemyHurtHandler;
         }
 
         private void Update()
@@ -59,21 +48,32 @@ namespace Script.Views
             _anim.CrossFade(hash, fadeTime, 0);
         }
 
-        private void OnEnemyHurtHandler(float current, float max)
-        {
-            _runTimeData.currentStats = current <= 0 ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
-        }
-
         #region 动画事件调用
 
         public event Action OnAttackPlayer;
         public event Action OnAttackEnd;
         public event Action OnHurtEnd;
         public event Action OnDeathEnd;
-        public void TriggerAttackPlayer() => OnAttackPlayer?.Invoke();
-        public void TriggerAttackEnd() => OnAttackEnd?.Invoke();
-        public void TriggerHurtEnd() => OnHurtEnd?.Invoke();
-        public void TriggerDeathEnd() => OnDeathEnd?.Invoke();
+
+        public void TriggerAttackPlayer()
+        {
+            OnAttackPlayer?.Invoke();
+        }
+
+        public void TriggerAttackEnd()
+        {
+            OnAttackEnd?.Invoke();
+        }
+
+        public void TriggerHurtEnd()
+        {
+            OnHurtEnd?.Invoke();
+        }
+
+        public void TriggerDeathEnd()
+        {
+            OnDeathEnd?.Invoke();
+        }
 
         #endregion
     }

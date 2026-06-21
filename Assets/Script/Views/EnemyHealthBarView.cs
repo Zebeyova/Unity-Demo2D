@@ -43,6 +43,7 @@ namespace Script.Views
 
         private void LateUpdate() //更新血条位置
         {
+            if (!_enemy) return;
             var enemyPosition = _enemy.transform.position;
             transform.position = new Vector3(enemyPosition.x, enemyPosition.y + 1.5f, enemyPosition.z);
         }

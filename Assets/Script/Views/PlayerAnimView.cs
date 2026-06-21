@@ -41,17 +41,6 @@ namespace Script.Views
             _runTimeData = GetComponent<PlayerRunTimeData>();
         }
 
-        private void Start()
-        {
-            _runTimeData.OnPlayerHurt += OnPlayerPlayerHealthChangedHandler;
-        }
-
-        private void OnDestroy()
-        {
-            if (!_runTimeData) return;
-            _runTimeData.OnPlayerHurt -= OnPlayerPlayerHealthChangedHandler;
-        }
-
         private void Update()
         {
             UpdateAnimation();
@@ -90,11 +79,6 @@ namespace Script.Views
             _restoreStateCoroutine = null;
         }
 
-        private void OnPlayerPlayerHealthChangedHandler(float current, float max)
-        {
-            _runTimeData.currentState = current <= 0 ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
-        }
-
         #region 动画事件回调
 
         public event Action OnJumpPeak;
@@ -104,13 +88,41 @@ namespace Script.Views
         public event Action OnAttackHit;
         public event Action OnAttackEnd;
         public event Action OnHurtEnd;
-        public void TriggerJumpPeak() => OnJumpPeak?.Invoke();
-        public void TriggerLanding() => OnLanding?.Invoke();
-        public void TriggerTurnEnd() => OnTurnEnd?.Invoke();
-        public void TriggerSlideEnd() => OnSlideEnd?.Invoke();
-        public void TriggerAttackHit() => OnAttackHit?.Invoke();
-        public void TriggerAttackEnd() => OnAttackEnd?.Invoke();
-        public void TriggerHurtEnd() => OnHurtEnd?.Invoke();
+
+        public void TriggerJumpPeak()
+        {
+            OnJumpPeak?.Invoke();
+        }
+
+        public void TriggerLanding()
+        {
+            OnLanding?.Invoke();
+        }
+
+        public void TriggerTurnEnd()
+        {
+            OnTurnEnd?.Invoke();
+        }
+
+        public void TriggerSlideEnd()
+        {
+            OnSlideEnd?.Invoke();
+        }
+
+        public void TriggerAttackHit()
+        {
+            OnAttackHit?.Invoke();
+        }
+
+        public void TriggerAttackEnd()
+        {
+            OnAttackEnd?.Invoke();
+        }
+
+        public void TriggerHurtEnd()
+        {
+            OnHurtEnd?.Invoke();
+        }
 
         #endregion
     }
