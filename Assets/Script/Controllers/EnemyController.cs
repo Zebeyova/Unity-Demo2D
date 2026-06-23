@@ -86,10 +86,10 @@ namespace Script.Controllers
         {
             var triggerObj = new GameObject("DetectionTrigger");
             triggerObj.transform.SetParent(transform);
-            triggerObj.transform.localPosition = new Vector3(1, 0.6f, 0);
+            triggerObj.transform.localPosition = new Vector3(0.3f, 0.6f, 0);
             var coll = triggerObj.AddComponent<BoxCollider2D>();
             coll.isTrigger = true;
-            coll.size = new Vector2(_runTimeData.DetectSizeX, _runTimeData.DetectSizeY);
+            coll.size = new Vector2(3f, 1.2f);
             var detector = triggerObj.AddComponent<DetectionLogic>();
             detector.OnPlayerEnter += () => { _playerInTrigger = true; };
             detector.OnPlayerExit += () => { _playerInTrigger = false; };

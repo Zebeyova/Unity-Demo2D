@@ -18,7 +18,5 @@ namespace Script.Models
         [Space] public float endError = 0.3f; // 边界误差
         public float distanceFromPlayer = 0.93f;
         public float patrolMaxDistance = 1.5f;
-        public float detectSizeX = 4f;
-        public float detectSizeY = 1.2f;
     }
 }

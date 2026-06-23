@@ -21,14 +21,12 @@ namespace Script.RunTimeDatas
         public float EndError => ModelManager.EnemyModelSObject.endError;
         public float DistanceFromPlayer => ModelManager.EnemyModelSObject.distanceFromPlayer;
         public float PatrolMaxDistance => ModelManager.EnemyModelSObject.patrolMaxDistance;
-        public float DetectSizeX => ModelManager.EnemyModelSObject.detectSizeX;
-        public float DetectSizeY => ModelManager.EnemyModelSObject.detectSizeY;
         public bool IsInvincible { get; set; }
         public float InvincibleTime => ModelManager.EnemyModelSObject.InvincibleTime;
         private DamageSystem _damageSystem;
         private LevelUpSystem _levelUpSystem;
         public event Action<float, float> OnEnemyHurt;
-        public event Action OnEnemyDeath;
+        public static event Action<Vector3> OnEnemyDeath;
         public float ExperienceReward => Experience;
 
         private void Awake()
@@ -54,7 +52,7 @@ namespace Script.RunTimeDatas
 
         public void NotifyDeath()
         {
-            OnEnemyDeath?.Invoke();
+            OnEnemyDeath?.Invoke(transform.position);
         }
 
         private float GetStatMultiplier()
