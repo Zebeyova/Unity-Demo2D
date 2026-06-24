@@ -28,9 +28,19 @@ namespace Script.RunTimeDatas
             _currentExperience = startingExperience;
         }
 
+        private void OnEnable()
+        {
+            Events.EventCenter.OnExperienceCollected += HandleExperienceCollected;
+        }
+
         private void Start()
         {
-            TryBindPlayer();
+            EnsurePlayerBound();
+        }
+
+        private void OnDisable()
+        {
+            Events.EventCenter.OnExperienceCollected -= HandleExperienceCollected;
         }
 
         private void OnDestroy()
@@ -38,48 +48,36 @@ namespace Script.RunTimeDatas
             if (Instance == this) Instance = null;
         }
 
-        public void RegisterPlayer(PlayerRunTimeData player)
-        {
-            if (!player) return;
-
-            _playerData = player;
-            _currentLevel = Mathf.Max(startingLevel, player.Level > 0 ? player.Level : startingLevel);
-            _currentExperience = Mathf.Max(startingExperience, player.Experience);
-            _playerData.SetProgress(_currentLevel, _currentExperience);
-        }
-
-        public void AddExperience(float amount)
-        {
-            if (amount <= 0f) return;
-
-            TryBindPlayer();
-            if (!_playerData) return;
-
-            _currentExperience += amount;
-
-            while (_currentExperience >= GetExperienceToNextLevel(_currentLevel))
-            {
-                _currentExperience -= GetExperienceToNextLevel(_currentLevel);
-                _currentLevel++;
-                _playerData.SetLevel(_currentLevel);
-            }
-
-            _playerData.SetExperience(_currentExperience);
-        }
-
-        public float GetExperienceToNextLevel(int level)
+        public float CalculateExperienceToNextLevel(int level)
         {
             var safeLevel = Mathf.Max(startingLevel, level);
             return baseExperienceToNextLevel * Mathf.Pow(experienceGrowth, safeLevel - startingLevel);
         }
 
-        public float GetEnemyStatMultiplier(int playerLevel)
+        public float CalculateEnemyStatMultiplier(int playerLevel)
         {
             var safeLevel = Mathf.Max(startingLevel, playerLevel);
             return 1f + Mathf.Max(0, safeLevel - startingLevel) * enemyStatGrowthPerPlayerLevel;
         }
 
-        private void TryBindPlayer()
+        private void HandleExperienceCollected(Events.ExperienceEventArgs args)
+        {
+            if (args == null || args.experience <= 0f) return;
+            EnsurePlayerBound();
+            if (!_playerData) return;
+
+            _currentExperience += args.experience;
+            while (_currentExperience >= CalculateExperienceToNextLevel(_currentLevel))
+            {
+                _currentExperience -= CalculateExperienceToNextLevel(_currentLevel);
+                _currentLevel++;
+                _playerData.ApplyLevel(_currentLevel);
+            }
+
+            _playerData.ApplyExperience(_currentExperience);
+        }
+
+        private void EnsurePlayerBound()
         {
             if (_playerData) return;
 
@@ -88,7 +86,7 @@ namespace Script.RunTimeDatas
 
             _currentLevel = Mathf.Max(startingLevel, _playerData.Level > 0 ? _playerData.Level : startingLevel);
             _currentExperience = Mathf.Max(startingExperience, _playerData.Experience);
-            _playerData.SetProgress(_currentLevel, _currentExperience);
+            _playerData.ApplyProgress(_currentLevel, _currentExperience);
         }
     }
 }

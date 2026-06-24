@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8698547724605815712}
   - component: {fileID: 8698547724605815713}
   - component: {fileID: 8698547724605815714}
+  - component: {fileID: 3530320398129182564}
+  - component: {fileID: 4033966506353115804}
   m_Layer: 0
   m_Name: ExpSquare
   m_TagString: Untagged
@@ -284,7 +286,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4822,3 +4824,32 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &3530320398129182564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8698547724605815715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016ec20062b1aa849b6f668242f1bd46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followSpeed: 0.5
+--- !u!58 &4033966506353115804
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8698547724605815715}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0}
+  serializedVersion: 2
+  m_Radius: 0.2

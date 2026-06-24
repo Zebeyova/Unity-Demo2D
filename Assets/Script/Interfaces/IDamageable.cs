@@ -20,6 +20,6 @@
             Death
         }
 
-        void TakeDamage(float damage); // 受到伤害
+        void ApplyDamage(float damage);
     }
 }

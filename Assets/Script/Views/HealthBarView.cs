@@ -25,14 +25,18 @@ namespace Script.Views
 
         private void Start()
         {
-            _playerRunTimeData.OnPlayerHurt += OnPlayerHurt;
-            _playerRunTimeData.OnPlayerExperienceChanged += OnPlayerExpChanged;
-            OnPlayerHurt(_playerRunTimeData.CurrentHealth, _maxHealth);
+            if (!_playerRunTimeData) return;
+            _playerRunTimeData.OnPlayerHurt += OnPlayerHealthBarChanged;
+            _playerRunTimeData.OnPlayerExperienceChanged += OnPlayerExpBarChanged;
+            OnPlayerHealthBarChanged(_playerRunTimeData.CurrentHealth, _maxHealth);
+            OnPlayerExpBarChanged(_playerRunTimeData.Experience, _playerRunTimeData.ExperienceToNextLevel);
         }
 
         private void OnDestroy()
         {
-            _playerRunTimeData.OnPlayerHurt -= OnPlayerHurt;
+            if (!_playerRunTimeData) return;
+            _playerRunTimeData.OnPlayerHurt -= OnPlayerHealthBarChanged;
+            _playerRunTimeData.OnPlayerExperienceChanged -= OnPlayerExpBarChanged;
         }
 
 
@@ -43,17 +47,17 @@ namespace Script.Views
             if (Mathf.Approximately(bufferBar.fillAmount, healthBar.fillAmount)) _bufferDirty = false;
         }
 
-        private void OnPlayerHurt(float current, float max)
+        private void OnPlayerHealthBarChanged(float current, float max)
         {
             _bufferDirty = true;
             healthBar.fillAmount = current / max;
             if (text) text.text = $"{current:F0} / {_maxHealth:F0}";
         }
 
-        private void OnPlayerExpChanged(float currentExp, float maxExp)
+        private void OnPlayerExpBarChanged(float currentExp, float maxExp)
         {
             if (!expBar) return;
-            expBar.fillAmount = currentExp / maxExp;
+            expBar.fillAmount = maxExp <= 0f ? 0f : Mathf.Clamp01(currentExp / maxExp);
         }
     }
 }

@@ -760,7 +760,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1913651727}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &320702971
 MonoBehaviour:
@@ -774,8 +774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f6bfdd8b8840fa83f75599a09783a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInvincibleDuration: 0.5
-  enemyInvincibleDuration: 1
 --- !u!4 &364368702 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7618713011203048737, guid: 92d0dd6d9027db342a12053e26f622b6, type: 3}
@@ -1596,6 +1594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyExpParticle: {fileID: 8698547724605815713, guid: f336f50541f54b94ca0e101d5974e446, type: 3}
+  player: {fileID: 0}
 --- !u!1 &741318389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2913,7 +2912,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1913651727}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1511496462
 MonoBehaviour:
@@ -4927,8 +4926,8 @@ Transform:
   - {fileID: 1229560160}
   - {fileID: 34891380}
   - {fileID: 1494591850}
-  - {fileID: 1511496461}
   - {fileID: 320702970}
+  - {fileID: 1511496461}
   - {fileID: 679336084}
   m_Father: {fileID: 0}
   m_RootOrder: 3

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Script.Interfaces;
 using Script.Models;
 using UnityEngine;
@@ -8,9 +9,9 @@ namespace Script.RunTimeDatas
     public class PlayerRunTimeData : MonoBehaviour, IDamageable, IRunTimeData
     {
         [Header("动态数值")] public IDamageable.Stats currentState;
-        public float CurrentHealth { get; set; }
+        public float CurrentHealth { get; private set; }
         public int Level { get; private set; }
-        public float Experience { get; set; }
+        public float Experience { get; private set; }
         public float MaxHealth => ModelManager.PlayerModelSObject.MaxHealth;
         public float Damage => ModelManager.PlayerModelSObject.Damage;
         public float SkillDamage => ModelManager.PlayerModelSObject.SkillDamage;
@@ -25,8 +26,7 @@ namespace Script.RunTimeDatas
         public float HorizontalInputThreshold => ModelManager.PlayerModelSObject.horizontalInputThreshold;
         public bool IsInvincible { get; set; }
         public float InvincibleTime => ModelManager.PlayerModelSObject.InvincibleTime;
-        private DamageSystem _damageSystem;
-        private LevelUpSystem _levelUpSystem;
+        public float ExperienceToNextLevel => GetExperienceToNextLevel();
         public event Action<float, float> OnPlayerHurt;
         public event Action OnPlayerDeath;
         public event Action<int> OnPlayerLevelChanged;
@@ -36,54 +36,86 @@ namespace Script.RunTimeDatas
         {
             CurrentHealth = MaxHealth;
             currentState = IDamageable.Stats.Idle;
-            _damageSystem = DamageSystem.Instance ?? FindObjectOfType<DamageSystem>();
-            _levelUpSystem = FindObjectOfType<LevelUpSystem>();
-            if (_levelUpSystem) _levelUpSystem.RegisterPlayer(this);
-            else SetProgress(1, 0f);
+            ApplyProgress(1, 0f);
         }
 
-        public void AttackEnemy(GameObject target, IDamageable.Stats attackerState)
+        private void OnEnable()
         {
-            if (target && _damageSystem) _damageSystem.ApplyDamage(gameObject, target, attackerState);
+            Events.EventCenter.OnDamageResolved += OnDamageResolved;
         }
 
-        public void TakeDamage(float damage)
+        private void OnDisable()
         {
-            if (!_damageSystem) return;
-            _damageSystem.ApplyRawDamage(gameObject, damage);
+            Events.EventCenter.OnDamageResolved -= OnDamageResolved;
         }
 
-        public void NotifyHurt()
+        public void RequestAttack(GameObject target, IDamageable.Stats attackerState)
         {
-            OnPlayerHurt?.Invoke(CurrentHealth, MaxHealth);
+            if (target) Events.EventCenter.TriggerAttackHit(new Events.AttackEventArgs
+            {
+                attacker = gameObject,
+                target = target,
+                attackType = attackerState
+            });
         }
 
-        public void NotifyDeath()
+        public void ApplyDamage(float damage)
         {
-            OnPlayerDeath?.Invoke();
+            if (IsInvincible || damage <= 0f || CurrentHealth <= 0f) return;
+
+            CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
+            currentState = CurrentHealth <= 0f ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
+
+            if (CurrentHealth <= 0f) RaiseDeath();
+            else RaiseHurt();
+
+            if (CurrentHealth > 0f) StartCoroutine(InvincibilityRoutine());
         }
 
-        public void SetProgress(int level, float experience)
+        public void ApplyProgress(int level, float experience)
         {
-            SetLevel(level);
-            SetExperience(experience);
+            ApplyLevel(level);
+            ApplyExperience(experience);
         }
 
-        public void SetLevel(int level)
+        public void ApplyLevel(int level)
         {
             Level = Mathf.Max(1, level);
             OnPlayerLevelChanged?.Invoke(Level);
         }
 
-        public void SetExperience(float experience)
+        public void ApplyExperience(float experience)
         {
             Experience = Mathf.Max(0f, experience);
             OnPlayerExperienceChanged?.Invoke(Experience, GetExperienceToNextLevel());
         }
 
+        private void OnDamageResolved(Events.DamageEventArgs args)
+        {
+            if (args == null || args.target != gameObject) return;
+            ApplyDamage(args.damage);
+        }
+
+        private void RaiseHurt()
+        {
+            OnPlayerHurt?.Invoke(CurrentHealth, MaxHealth);
+        }
+
+        private void RaiseDeath()
+        {
+            OnPlayerDeath?.Invoke();
+        }
+
+        private IEnumerator InvincibilityRoutine()
+        {
+            IsInvincible = true;
+            yield return new WaitForSeconds(InvincibleTime);
+            IsInvincible = false;
+        }
+
         private float GetExperienceToNextLevel()
         {
-            return _levelUpSystem ? _levelUpSystem.GetExperienceToNextLevel(Level) : 0f;
+            return LevelUpSystem.Instance.CalculateExperienceToNextLevel(Level);
         }
     }
 }

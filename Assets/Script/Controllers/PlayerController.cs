@@ -223,7 +223,7 @@ namespace Script.Controllers
             var hit = Physics2D.Raycast(_collider.bounds.center,
                 _currentFacingRight ? Vector2.right : Vector2.left, 1f, LayerMask.GetMask("Enemy"));
             if (hit.collider && hit.collider.CompareTag("Enemy"))
-                _runTimeData.AttackEnemy(hit.collider.gameObject, state);
+                _runTimeData.RequestAttack(hit.collider.gameObject, state);
         }
 
         private void OnJumpPeakHandler()
