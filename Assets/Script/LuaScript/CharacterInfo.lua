@@ -1,0 +1,1 @@
+CS.Script.Views.CharacterInfoView.SCharacterExpNum.text = "LuaTxt"
