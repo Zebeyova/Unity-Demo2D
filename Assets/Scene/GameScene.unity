@@ -1514,9 +1514,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 625775373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f84fb92aa82fc6e46ab9dd918cd1d2de, type: 3}
+  m_Script: {fileID: 11500000, guid: bd2df509e7d97a2429512a9410900b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterExpNum: {fileID: 2056708653}
+  playerRunTimeData: {fileID: 0}
 --- !u!1 &671296146
 GameObject:
   m_ObjectHideFlags: 0
@@ -6253,8 +6255,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a544a4037e722fc4cab0994c9b816d96, type: 2}
-  m_sharedMaterial: {fileID: -768546941575733, guid: a544a4037e722fc4cab0994c9b816d96, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

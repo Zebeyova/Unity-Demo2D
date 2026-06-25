@@ -18,29 +18,134 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Script/LuaScript/CharacterInfo.lua" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/LuaScript/CharacterInfo.lua.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/LuaScript/Main.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/encodings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BlueGolem.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/OrangeGolem.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Particles.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Particles/ExpSquare.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Particles/ExpSquare.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Player.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Player.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/UI.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/UI/EscMenu.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/UI/EscMenu.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/UI/MainMenu.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/UI/MainMenu.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fonts/ZiHunDaHei-Heavy(ShangYongXuShouQuan)-2 SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Fonts/ZiHunDaHei-Heavy(ShangYongXuShouQuan)-2 SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asset/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asset/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/x86_64.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/x86_64/libxlua.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/x86_64/libxlua.so.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/x86_64/xlua.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/x86_64/xlua.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/xlua.bundle.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/xlua.bundle/Contents.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/xlua.bundle/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/xlua.bundle/Contents/Info.plist.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/xlua.bundle/Contents/MacOS.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/xlua.bundle/Contents/MacOS/xlua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/xlua.bundle/Contents/MacOS/xlua.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/LuaScript.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/LuaScript/CharacterInfo.lua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/LuaScript/CharacterInfo.lua.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/LuaScript/LuaScriptLoader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/LuaScript/LuaScriptLoader.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/LuaScript/Main.lua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/LuaScript/Main.lua.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/CharacterInfoView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/CharacterInfoView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/perf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/perf/memory.lua.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/perf/memory.lua.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/perf/profiler.lua.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/perf/profiler.lua.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/tdr.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/tdr/tdr.lua.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/tdr/tdr.lua.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/xlua.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/xlua/util.lua.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Resources/xlua/util.lua.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/CodeEmit.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/CodeEmit.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/CopyByValue.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/CopyByValue.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/DelegateBridge.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/DelegateBridge.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Generator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Generator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Hotfix.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Hotfix.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/LinkXmlGen.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/LinkXmlGen/LinkXmlGen.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/LinkXmlGen/LinkXmlGen.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/LinkXmlGen/LinkXmlGen.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/LinkXmlGen/LinkXmlGen.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Report.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Report.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaClassWrap.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaClassWrap.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaClassWrapGCM.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaClassWrapGCM.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaDelegateBridge.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaDelegateBridge.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaDelegateWrap.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaDelegateWrap.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaEnumWrap.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaEnumWrap.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaEnumWrapGCM.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaEnumWrapGCM.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaInterfaceBridge.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaInterfaceBridge.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaRegister.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaRegister.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaRegisterGCM.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaRegisterGCM.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaWrapPusher.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/LuaWrapPusher.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/PackUnpack.tpl.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/PackUnpack.tpl.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/TemplateCommon.lua.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/Template/TemplateCommon.lua.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/TemplateRef.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Editor/TemplateRef.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/GenAttributes.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/GenAttributes.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/GenericDelegateBridge.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/GenericDelegateBridge.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/InternalGlobals.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/InternalGlobals.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaBase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaDLL.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaDLL.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaEnv.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaEnv.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaException.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaFunction.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaFunction.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaTable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/LuaTable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/MethodWarpsCache.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/MethodWarpsCache.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/ObjectCasters.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/ObjectCasters.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/ObjectPool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/ObjectPool.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/ObjectTranslator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/ObjectTranslator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/ObjectTranslatorPool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/ObjectTranslatorPool.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/RawObject.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/RawObject.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/SignatureLoader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/SignatureLoader.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/StaticLuaCallbacks.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/StaticLuaCallbacks.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/TemplateEngine.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/TemplateEngine/TemplateEngine.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/TemplateEngine/TemplateEngine.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/TypeExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/TypeExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Utils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XLua/Src/Utils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,6 +228,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/865783152ca8413293dd42e656c95574771800/6e/e6b725e6/DragAndDrop.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90585cf0c5a24f279207485a8de593e713e800/07/e1deeee9/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90585cf0c5a24f279207485a8de593e713e800/1f/a0752676/GameObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90585cf0c5a24f279207485a8de593e713e800/52/33dbf515/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
@@ -178,37 +284,37 @@
     <option name="showMembers" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "master",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="附加到 Unity 编辑器.附加到 Unity 编辑器">
     <configuration name="启动 Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Unity\2020.3.48f1c1\Editor\Unity.exe" />
@@ -324,15 +430,14 @@
       <workItem from="1782025975922" duration="11406000" />
       <workItem from="1782225492394" duration="3345000" />
       <workItem from="1782277137688" duration="15181000" />
-      <workItem from="1782295688645" duration="5329000" />
-    </task>
-    <task id="LOCAL-00002" summary="添加敌人撞墙处理逻辑">
-      <option name="closed" value="true" />
-      <created>1775637307228</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1775637307228</updated>
+      <workItem from="1782295688645" duration="6674000" />
+      <workItem from="1782312692466" duration="2000000" />
+      <workItem from="1782368829904" duration="586000" />
+      <workItem from="1782369441108" duration="286000" />
+      <workItem from="1782369828590" duration="305000" />
+      <workItem from="1782370160428" duration="1323000" />
+      <workItem from="1782372414232" duration="826000" />
+      <workItem from="1782373300316" duration="1693000" />
     </task>
     <task id="LOCAL-00003" summary="skills技能添加完成">
       <option name="closed" value="true" />
@@ -718,7 +823,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782286482195</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="成功实现Lua注入,准备尝试Lua编写小部分代码">
+      <option name="closed" value="true" />
+      <created>1782308066557</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1782308066557</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -734,6 +847,7 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.1" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.lua" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -757,7 +871,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="4.19备份" />
     <MESSAGE value="将玩家数据修改为Unity资源文件,实现单例模式" />
     <MESSAGE value="将敌人的属性也修改掉了" />
     <MESSAGE value="成功修改部分动画文件" />
@@ -782,7 +895,8 @@
     <MESSAGE value="备份" />
     <MESSAGE value="增加敌人死亡时掉落的经验粒子,但是还没实现追随玩家自动的效果" />
     <MESSAGE value="新增升级系统与死亡掉落经验球粒子效果" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增升级系统与死亡掉落经验球粒子效果" />
+    <MESSAGE value="成功实现Lua注入,准备尝试Lua编写小部分代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="成功实现Lua注入,准备尝试Lua编写小部分代码" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
