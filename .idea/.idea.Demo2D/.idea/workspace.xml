@@ -17,13 +17,7 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefab/ParticleExpSquare.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefab/ParticleExpSquare.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/MainMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/MainMenuController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/ParticleView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/ParticleView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-    </list>
+    <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -321,14 +315,6 @@
       <workItem from="1782383959301" duration="3755000" />
       <workItem from="1782399021236" duration="2314000" />
       <workItem from="1782465836201" duration="8190000" />
-    </task>
-    <task id="LOCAL-00005" summary="敌人攻击冷却已添加">
-      <option name="closed" value="true" />
-      <created>1775727830098</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1775727830098</updated>
     </task>
     <task id="LOCAL-00006" summary="完成敌人的受伤及死亡动画,但是受伤有延迟需要修改">
       <option name="closed" value="true" />
@@ -714,7 +700,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782480774586</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="修正ParticleView.cs文件粒子的速度效果">
+      <option name="closed" value="true" />
+      <created>1782484461517</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1782484461517</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -754,7 +748,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="将敌人的属性也修改掉了" />
     <MESSAGE value="成功修改部分动画文件" />
     <MESSAGE value="5.25备份" />
     <MESSAGE value="差一个run_turn.fallloop动画,顶头跳跃修复" />
@@ -779,7 +772,8 @@
     <MESSAGE value="新增升级系统与死亡掉落经验球粒子效果" />
     <MESSAGE value="成功实现Lua注入,准备尝试Lua编写小部分代码" />
     <MESSAGE value="修改UI样式中" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改UI样式中" />
+    <MESSAGE value="修正ParticleView.cs文件粒子的速度效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="修正ParticleView.cs文件粒子的速度效果" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
