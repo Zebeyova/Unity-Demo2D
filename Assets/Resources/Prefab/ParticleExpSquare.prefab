@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3530320398129182564}
   - component: {fileID: 4033966506353115804}
   m_Layer: 0
-  m_Name: ExpSquare
+  m_Name: ParticleExpSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4836,7 +4836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016ec20062b1aa849b6f668242f1bd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 0.5
+  smoothTime: 2
 --- !u!58 &4033966506353115804
 CircleCollider2D:
   m_ObjectHideFlags: 0

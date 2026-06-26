@@ -18,8 +18,8 @@ namespace Script.Views
         private void Awake()
         {
             _playerRunTimeData = GameObject.FindWithTag("Player")?.GetComponent<PlayerRunTimeData>();
-            healthBar = GetComponentsInChildren<Image>()[2];
-            bufferBar = GetComponentsInChildren<Image>()[1];
+            bufferBar = GetComponentsInChildren<Image>()[3];
+            healthBar = GetComponentsInChildren<Image>()[4];
             if (_playerRunTimeData) _maxHealth = _playerRunTimeData.MaxHealth;
         }
 
@@ -50,8 +50,9 @@ namespace Script.Views
         private void OnPlayerHealthBarChanged(float current, float max)
         {
             _bufferDirty = true;
-            healthBar.fillAmount = current / max;
-            if (text) text.text = $"{current:F0} / {_maxHealth:F0}";
+            var temp = current / max;
+            healthBar.fillAmount = temp;
+            if (text) text.text = $"{temp * 100f} %";
         }
 
         private void OnPlayerExpBarChanged(float currentExp, float maxExp)
