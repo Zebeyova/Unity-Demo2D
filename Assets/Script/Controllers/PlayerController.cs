@@ -135,11 +135,11 @@ namespace Script.Controllers
                                  _runTimeData.currentState == IDamageable.Stats.Hurt ||
                                  _runTimeData.currentState == IDamageable.Stats.Death;
 
-            var _wantMove = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
+            var wantMove = Mathf.Abs(_horizontal) > _runTimeData.HorizontalInputThreshold;
             if (isSpecialState)
             {
                 // 特殊状态下仍记录移动输入，用于空中移动速度
-                if (!_wantMove) return;
+                if (!wantMove) return;
                 if (Input.GetKey(KeyCode.LeftShift))
                     _isRunning = true;
                 else
@@ -148,13 +148,13 @@ namespace Script.Controllers
             else
             {
                 // 奔跑
-                if (Input.GetKey(KeyCode.LeftShift) && _wantMove)
+                if (Input.GetKey(KeyCode.LeftShift) && wantMove)
                 {
                     _runTimeData.currentState = IDamageable.Stats.Run;
                     _isRunning = true;
                 }
                 // 移动
-                else if (_wantMove)
+                else if (wantMove)
                 {
                     _runTimeData.currentState = IDamageable.Stats.Walk;
                     _isWalking = true;

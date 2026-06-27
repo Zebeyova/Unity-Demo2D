@@ -17,7 +17,25 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="" />
+    <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/UI/DirectionArrow.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/UI/DirectionArrow.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/UI/LeftArrow.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/UI/LeftArrow.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fonts/ZiHunDaHei-Heavy(ShangYongXuShouQuan)-2 SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Fonts/ZiHunDaHei-Heavy(ShangYongXuShouQuan)-2 SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/BeginnerScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/BeginnerScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/MainScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EscMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EscMenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,6 +136,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Script/RunTimeDatas/LevelUpSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@5.2.7/Editor/LayoutOverlay/ScrollableToolbar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@5.2.7/IK/Runtime/LimbSolver2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.path@4.0.2/Editor/IMGUI/RectSelector.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.psdimporter@4.3.1/Editor/TextureSettingsGUI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@1.0.0/Editor/GridPaintPaletteClipboard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.33/UnityEditor.TestRunner/CommandLineTest/Executer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.33/UnityEditor.TestRunner/CommandLineTest/ExitCallbacks.cs" root0="SKIP_HIGHLIGHTING" />
@@ -315,6 +335,7 @@
       <workItem from="1782383959301" duration="3755000" />
       <workItem from="1782399021236" duration="2314000" />
       <workItem from="1782465836201" duration="8190000" />
+      <workItem from="1782567646307" duration="5140000" />
     </task>
     <task id="LOCAL-00006" summary="完成敌人的受伤及死亡动画,但是受伤有延迟需要修改">
       <option name="closed" value="true" />
@@ -738,6 +759,17 @@
                   <entry key="Table.Default.Date.ColumnIdWidth" value="101" />
                   <entry key="Table.Default.Hash.ColumnIdWidth" value="71" />
                   <entry key="Table.GitHub.CommitStatus.ColumnIdWidth" value="72" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
                 </map>
               </option>
             </State>

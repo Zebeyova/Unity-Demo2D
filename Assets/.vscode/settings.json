@@ -1,9 +1,0 @@
-{
-    "window.autoDetectColorScheme": false,
-    "editor.allowVariableLineHeights": true,
-    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-    "editor.defaultFormatter": "ms-dotnettools.csharp",
-    "Lua.diagnostics.globals": [
-        "CS"
-    ]
-}

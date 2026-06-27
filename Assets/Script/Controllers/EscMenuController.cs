@@ -31,13 +31,13 @@ namespace Script.Controllers
         public void ClickReStartButton()
         {
             Time.timeScale = 1;
-            SceneManager.LoadScene("Scene/GameScene");
+            SceneManager.LoadScene($"Scene/{SceneManager.GetActiveScene().name}");
         }
 
         public void ClickMainMenuButton()
         {
             Time.timeScale = 1;
-            SceneManager.LoadScene("Scene/MainScene");
+            SceneManager.LoadScene("Scene/GameScene");
         }
 
         public void ClickSettingButton()
