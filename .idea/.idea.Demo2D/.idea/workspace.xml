@@ -19,22 +19,23 @@
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/extensions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/UI/DirectionArrow.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/UI/DirectionArrow.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/UI/LeftArrow.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/UI/LeftArrow.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fonts/ZiHunDaHei-Heavy(ShangYongXuShouQuan)-2 SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Fonts/ZiHunDaHei-Heavy(ShangYongXuShouQuan)-2 SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/BeginnerScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/BeginnerScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/MainScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefab/EnemyBlueGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefab/EnemyBlueGolem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefab/EnemyOrangeGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefab/EnemyOrangeGolem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/Level1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EscMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EscMenuController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Events.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Events.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/HotFix_Project.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/HotFix_Project/HelloILRunTime.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/HotFix_Project/HelloILRunTime.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/LevelModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/LevelModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/DamageSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/DamageSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EffectSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EffectSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EnemyRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EnemyRunTimeData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/LevelUpSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/LevelUpSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/PlayerRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/PlayerRunTimeData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/ParticleView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/ParticleView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -335,15 +336,8 @@
       <workItem from="1782383959301" duration="3755000" />
       <workItem from="1782399021236" duration="2314000" />
       <workItem from="1782465836201" duration="8190000" />
-      <workItem from="1782567646307" duration="5140000" />
-    </task>
-    <task id="LOCAL-00006" summary="完成敌人的受伤及死亡动画,但是受伤有延迟需要修改">
-      <option name="closed" value="true" />
-      <created>1775728896535</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1775728896535</updated>
+      <workItem from="1782567646307" duration="5399000" />
+      <workItem from="1782629867688" duration="2269000" />
     </task>
     <task id="LOCAL-00007" summary="增加死亡黑屏效果">
       <option name="closed" value="true" />
@@ -729,7 +723,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782484461517</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="增加关卡选择页面与相应逻辑,更改主页面UI">
+      <option name="closed" value="true" />
+      <created>1782573035305</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1782573035306</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -780,7 +782,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="成功修改部分动画文件" />
     <MESSAGE value="5.25备份" />
     <MESSAGE value="差一个run_turn.fallloop动画,顶头跳跃修复" />
     <MESSAGE value="玩家动画问题解决" />
@@ -805,7 +806,8 @@
     <MESSAGE value="成功实现Lua注入,准备尝试Lua编写小部分代码" />
     <MESSAGE value="修改UI样式中" />
     <MESSAGE value="修正ParticleView.cs文件粒子的速度效果" />
-    <option name="LAST_COMMIT_MESSAGE" value="修正ParticleView.cs文件粒子的速度效果" />
+    <MESSAGE value="增加关卡选择页面与相应逻辑,更改主页面UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加关卡选择页面与相应逻辑,更改主页面UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -62,11 +62,11 @@ namespace Script.RunTimeDatas
 
         private void HandleExperienceCollected(Events.ExperienceEventArgs args)
         {
-            if (args == null || args.experience <= 0f) return;
+            if (args == null || args.Experience <= 0f) return;
             EnsurePlayerBound();
             if (!_playerData) return;
 
-            _currentExperience += args.experience;
+            _currentExperience += args.Experience;
             while (_currentExperience >= CalculateExperienceToNextLevel(_currentLevel))
             {
                 _currentExperience -= CalculateExperienceToNextLevel(_currentLevel);

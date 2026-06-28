@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Script.Models
 {
-    [System.Serializable]
+    [Serializable]
     public class LevelModel : MonoBehaviour
     {
         [Tooltip("与此关卡关联的场景名称")] public string sceneName = "";

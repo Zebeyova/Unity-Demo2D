@@ -57,8 +57,8 @@ namespace Script.RunTimeDatas
             {
                 Events.EventCenter.TriggerEnemyDefeated(new Events.EnemyDeathEventArgs
                 {
-                    position = transform.position + new Vector3(0, 0.5f, 0),
-                    experience = ExperienceReward
+                    Position = transform.position + new Vector3(0, 0.5f, 0),
+                    Experience = ExperienceReward
                 });
                 return;
             }
@@ -70,8 +70,8 @@ namespace Script.RunTimeDatas
 
         private void OnDamageResolved(Events.DamageEventArgs args)
         {
-            if (args == null || args.target != gameObject) return;
-            ApplyDamage(args.damage);
+            if (args == null || args.Target != gameObject) return;
+            ApplyDamage(args.Damage);
         }
 
         private void TriggerEnemyHurt()

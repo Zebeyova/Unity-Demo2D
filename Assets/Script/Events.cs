@@ -8,26 +8,26 @@ namespace Script
     {
         public class AttackEventArgs
         {
-            public GameObject attacker;
-            public GameObject target;
-            public IDamageable.Stats attackType;
+            public GameObject Attacker;
+            public GameObject Target;
+            public IDamageable.Stats AttackType;
         }
 
         public class DamageEventArgs
         {
-            public GameObject target;
-            public float damage;
+            public GameObject Target;
+            public float Damage;
         }
 
         public class ExperienceEventArgs
         {
-            public float experience;
+            public float Experience;
         }
 
         public class EnemyDeathEventArgs
         {
-            public Vector3 position;
-            public float experience;
+            public Vector3 Position;
+            public float Experience;
         }
 
         public static class EventCenter

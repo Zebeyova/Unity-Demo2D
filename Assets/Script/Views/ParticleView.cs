@@ -71,7 +71,7 @@ namespace Script.Views
             if (!other.CompareTag("Player")) return;
             Events.EventCenter.TriggerExperienceCollected(new Events.ExperienceEventArgs
             {
-                experience = _experience
+                Experience = _experience
             });
             Destroy(gameObject);
         }

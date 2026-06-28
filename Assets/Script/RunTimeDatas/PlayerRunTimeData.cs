@@ -16,8 +16,6 @@ namespace Script.RunTimeDatas
         public float Damage => ModelManager.PlayerModelSObject.Damage;
         public float SkillDamage => ModelManager.PlayerModelSObject.SkillDamage;
         public float Defense => ModelManager.PlayerModelSObject.Defense;
-        public float CriticalRate { get; set; }
-        public float CriticalDamage { get; set; }
         public float BaseSpeed => ModelManager.PlayerModelSObject.BaseSpeed;
         public float RunSpeedMultiplier => ModelManager.PlayerModelSObject.runSpeedMultiplier;
         public float SlideSpeedMultiplier => ModelManager.PlayerModelSObject.slideSpeedMultiplier;
@@ -27,36 +25,43 @@ namespace Script.RunTimeDatas
         public bool IsInvincible { get; set; }
         public float InvincibleTime => ModelManager.PlayerModelSObject.InvincibleTime;
         public float ExperienceToNextLevel => GetExperienceToNextLevel();
+        private int _killedEnemy;
+        private int _allEnemy;
         public event Action<float, float> OnPlayerHurt;
         public event Action OnPlayerDeath;
-        public event Action<int> OnPlayerLevelChanged;
         public event Action<float, float> OnPlayerExperienceChanged;
+        public event Action OnGameOver;
 
         private void Awake()
         {
             CurrentHealth = MaxHealth;
             currentState = IDamageable.Stats.Idle;
             ApplyProgress(1, 0f);
+            _allEnemy = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            print(_allEnemy);
         }
 
         private void OnEnable()
         {
             Events.EventCenter.OnDamageResolved += OnDamageResolved;
+            Events.EventCenter.OnEnemyDeath += OnEnemyDeath;
         }
 
         private void OnDisable()
         {
             Events.EventCenter.OnDamageResolved -= OnDamageResolved;
+            Events.EventCenter.OnEnemyDeath -= OnEnemyDeath;
         }
 
         public void RequestAttack(GameObject target, IDamageable.Stats attackerState)
         {
-            if (target) Events.EventCenter.TriggerAttackHit(new Events.AttackEventArgs
-            {
-                attacker = gameObject,
-                target = target,
-                attackType = attackerState
-            });
+            if (target)
+                Events.EventCenter.TriggerAttackHit(new Events.AttackEventArgs
+                {
+                    Attacker = gameObject,
+                    Target = target,
+                    AttackType = attackerState
+                });
         }
 
         public void ApplyDamage(float damage)
@@ -81,7 +86,6 @@ namespace Script.RunTimeDatas
         public void ApplyLevel(int level)
         {
             Level = Mathf.Max(1, level);
-            OnPlayerLevelChanged?.Invoke(Level);
         }
 
         public void ApplyExperience(float experience)
@@ -92,8 +96,8 @@ namespace Script.RunTimeDatas
 
         private void OnDamageResolved(Events.DamageEventArgs args)
         {
-            if (args == null || args.target != gameObject) return;
-            ApplyDamage(args.damage);
+            if (args == null || args.Target != gameObject) return;
+            ApplyDamage(args.Damage);
         }
 
         private void RaiseHurt()
@@ -104,6 +108,12 @@ namespace Script.RunTimeDatas
         private void RaiseDeath()
         {
             OnPlayerDeath?.Invoke();
+        }
+
+        private void OnEnemyDeath(Events.EnemyDeathEventArgs obj)
+        {
+            _killedEnemy++;
+            if (_killedEnemy == _allEnemy) OnGameOver?.Invoke();
         }
 
         private IEnumerator InvincibilityRoutine()

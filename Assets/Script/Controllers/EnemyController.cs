@@ -230,9 +230,9 @@ namespace Script.Controllers
                 !_isTouchingWall)
                 Events.EventCenter.TriggerAttackHit(new Events.AttackEventArgs
                 {
-                    attacker = gameObject,
-                    target = _player,
-                    attackType = IDamageable.Stats.Attack
+                    Attacker = gameObject,
+                    Target = _player,
+                    AttackType = IDamageable.Stats.Attack
                 });
             else OnAttackEndHandler();
         }

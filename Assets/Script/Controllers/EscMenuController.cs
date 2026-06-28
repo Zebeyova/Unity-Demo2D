@@ -1,3 +1,4 @@
+using Script.RunTimeDatas;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,15 +9,26 @@ namespace Script.Controllers
         private GameObject _escMenu;
         private GameObject _buttonMenu;
         private GameObject _settingMenu;
+        public GameObject gameOverMenu;
+        private PlayerRunTimeData _playerRunTimeData;
 
         private void OnEnable()
         {
             _escMenu = GameObject.Find("EscMenu");
+            gameOverMenu = GameObject.Find("GameOverMenu");
+            _playerRunTimeData = GameObject.FindWithTag("Player").GetComponent<PlayerRunTimeData>();
+            if (_playerRunTimeData) _playerRunTimeData.OnGameOver += OnGameOverHandler;
+        }
+
+        private void OnDisable()
+        {
+            _playerRunTimeData.OnGameOver -= OnGameOverHandler;
         }
 
         private void Start()
         {
-            _escMenu.SetActive(false);
+            if (_escMenu) _escMenu.SetActive(false);
+            if (gameOverMenu) gameOverMenu.SetActive(false);
         }
 
         private void Update()
@@ -54,6 +66,12 @@ namespace Script.Controllers
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
+        }
+
+        private void OnGameOverHandler()
+        {
+            Time.timeScale = 0;
+            gameOverMenu.SetActive(true);
         }
     }
 }
