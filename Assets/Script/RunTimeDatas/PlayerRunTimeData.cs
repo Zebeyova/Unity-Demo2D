@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.IO;
 using Script.Interfaces;
 using Script.Models;
 using UnityEngine;
@@ -25,7 +26,9 @@ namespace Script.RunTimeDatas
         public bool IsInvincible { get; set; }
         public float InvincibleTime => ModelManager.PlayerModelSObject.InvincibleTime;
         public float ExperienceToNextLevel => GetExperienceToNextLevel();
-        private int _killedEnemy;
+        private string _filePath;
+        private int _currentKilledEnemy;
+        public int killedEnemy;
         private int _allEnemy;
         public event Action<float, float> OnPlayerHurt;
         public event Action OnPlayerDeath;
@@ -38,7 +41,14 @@ namespace Script.RunTimeDatas
             currentState = IDamageable.Stats.Idle;
             ApplyProgress(1, 0f);
             _allEnemy = GameObject.FindGameObjectsWithTag("Enemy").Length;
-            print(_allEnemy);
+            _filePath = Application.persistentDataPath + "/killed_enemy.json";
+            if (File.Exists(_filePath))
+            {
+                var json = File.ReadAllText(_filePath);
+                var data = JsonUtility.FromJson<KilledEnemyData>(json);
+                killedEnemy = data?.killedEnemy ?? 0;
+            }
+            else killedEnemy = 0;
         }
 
         private void OnEnable()
@@ -58,22 +68,19 @@ namespace Script.RunTimeDatas
             if (target)
                 Events.EventCenter.TriggerAttackHit(new Events.AttackEventArgs
                 {
-                    Attacker = gameObject,
-                    Target = target,
-                    AttackType = attackerState
+                    attacker = gameObject,
+                    target = target,
+                    attackType = attackerState
                 });
         }
 
         public void ApplyDamage(float damage)
         {
             if (IsInvincible || damage <= 0f || CurrentHealth <= 0f) return;
-
             CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
             currentState = CurrentHealth <= 0f ? IDamageable.Stats.Death : IDamageable.Stats.Hurt;
-
             if (CurrentHealth <= 0f) RaiseDeath();
             else RaiseHurt();
-
             if (CurrentHealth > 0f) StartCoroutine(InvincibilityRoutine());
         }
 
@@ -96,8 +103,8 @@ namespace Script.RunTimeDatas
 
         private void OnDamageResolved(Events.DamageEventArgs args)
         {
-            if (args == null || args.Target != gameObject) return;
-            ApplyDamage(args.Damage);
+            if (args == null || args.target != gameObject) return;
+            ApplyDamage(args.damage);
         }
 
         private void RaiseHurt()
@@ -112,8 +119,13 @@ namespace Script.RunTimeDatas
 
         private void OnEnemyDeath(Events.EnemyDeathEventArgs obj)
         {
-            _killedEnemy++;
-            if (_killedEnemy == _allEnemy) OnGameOver?.Invoke();
+            killedEnemy++;
+            _currentKilledEnemy++;
+            var data = new KilledEnemyData { killedEnemy = killedEnemy };
+            var json = JsonUtility.ToJson(data);
+            File.WriteAllText(_filePath, json);
+            Events.EventCenter.TriggerKilledEnemyCountChanged(killedEnemy);
+            if (_currentKilledEnemy >= _allEnemy) OnGameOver?.Invoke();
         }
 
         private IEnumerator InvincibilityRoutine()

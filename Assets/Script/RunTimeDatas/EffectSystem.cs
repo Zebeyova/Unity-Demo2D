@@ -28,10 +28,10 @@ namespace Script.RunTimeDatas
             if (args == null) return;
             if (!enemyExpParticle || !player) return;
 
-            var expParticle = Instantiate(enemyExpParticle, args.Position, Quaternion.Euler(-90f, 0f, 0f));
+            var expParticle = Instantiate(enemyExpParticle, args.position, Quaternion.Euler(-90f, 0f, 0f));
             var particleView = expParticle.GetComponent<ParticleView>() ??
                                expParticle.gameObject.AddComponent<ParticleView>();
-            particleView.Initialize(player.transform, args.Experience);
+            particleView.Initialize(player.transform, args.experience);
         }
     }
 }

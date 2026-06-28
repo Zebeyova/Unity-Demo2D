@@ -1,3 +1,6 @@
+using System.IO;
+using Script.Models;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,16 +8,29 @@ namespace Script.Controllers
 {
     public class MainMenuController : MonoBehaviour
     {
-        public GameObject settingMenu;
+        public GameObject achievementMenu;
+        private string _filePath;
 
         private void Awake()
         {
-            settingMenu = GameObject.Find("SettingMenu");
+            achievementMenu = GameObject.Find("AchievementMenu");
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            if (settingMenu) settingMenu.SetActive(false);
+            if (!achievementMenu) return;
+            achievementMenu.SetActive(false);
+            _filePath = Application.persistentDataPath + "/killed_enemy.json";
+            int killedEnemy;
+            if (File.Exists(_filePath))
+            {
+                var json = File.ReadAllText(_filePath);
+                var data = JsonUtility.FromJson<KilledEnemyData>(json);
+                killedEnemy = data?.killedEnemy ?? 0;
+            }
+            else killedEnemy = 0;
+            var achievementText = achievementMenu.transform.GetComponentInChildren<TMP_Text>();
+            if (achievementText) achievementText.text = $"已击败 : {killedEnemy}";
         }
 
         public void ClickNewGameButton()
@@ -25,7 +41,7 @@ namespace Script.Controllers
         public void ClickSettingButton()
         {
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-            settingMenu.SetActive(!settingMenu.activeSelf);
+            achievementMenu.SetActive(!achievementMenu.activeSelf);
         }
 
         public void ClickQuitButton()

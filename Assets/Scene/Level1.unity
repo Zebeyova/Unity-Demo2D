@@ -984,7 +984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e381bdf4868b9f4429edb658e4681bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverMenu: {fileID: 0}
 --- !u!1 &452266355
 GameObject:
   m_ObjectHideFlags: 0
@@ -6059,6 +6058,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 441108693}
+    - target: {fileID: 1012443571931947063, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickAchievementButton
+      objectReference: {fileID: 0}
     - target: {fileID: 1012443572343355534, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6167,6 +6170,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2181389661279506648, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
+      propertyPath: m_Name
+      value: AchievementText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889523340641659837, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188118644556755807, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
+      propertyPath: m_Name
+      value: AchievementMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 4188118644556755807, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6175,10 +6190,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 5468904377434598582, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
+      propertyPath: m_Name
+      value: Achievement
+      objectReference: {fileID: 0}
     - target: {fileID: 7243455102183894743, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 441108693}
+    - target: {fileID: 7243455102183894743, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickAchievementButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fa951bd9389cd341a7633d2d4ca8582, type: 3}
 --- !u!1 &5645430826381962478

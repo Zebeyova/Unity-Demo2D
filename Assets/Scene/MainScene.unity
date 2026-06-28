@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ce04064ee5f254eb0c3d418b386920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingMenu: {fileID: 3555353414843817541}
+  achievementMenu: {fileID: 0}
 --- !u!1 &363764456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u97F3\u4E50"
+  m_text: "\u5DF2\u51FB\u8D25 :"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a544a4037e722fc4cab0994c9b816d96, type: 2}
   m_sharedMaterial: {fileID: -768546941575733, guid: a544a4037e722fc4cab0994c9b816d96, type: 2}
@@ -1343,7 +1343,7 @@ GameObject:
   - component: {fileID: 3366028859392341698}
   - component: {fileID: 1446203234654812290}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AchievementText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1534,7 +1534,7 @@ GameObject:
   - component: {fileID: 3555353414843817544}
   - component: {fileID: 3555353414843817543}
   m_Layer: 5
-  m_Name: SettingMenu
+  m_Name: AchievementMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1758,7 +1758,7 @@ GameObject:
   - component: {fileID: 491522840458227694}
   - component: {fileID: 766060373344800100}
   m_Layer: 5
-  m_Name: Music
+  m_Name: Achievement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

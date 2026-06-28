@@ -18,24 +18,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/App.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Models/KilledEnemyData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Script/Models/KilledEnemyData.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asset/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asset/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefab/EnemyBlueGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefab/EnemyBlueGolem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefab/EnemyOrangeGolem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefab/EnemyOrangeGolem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefab/UIEscMenu.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefab/UIEscMenu.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/Level1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/Level2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/Level2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/MainScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/EscMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/EscMenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/MainMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/MainMenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Controllers/SelectSceneController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Controllers/SelectSceneController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Events.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Events.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/HotFix_Project.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/HotFix_Project/HelloILRunTime.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/HotFix_Project/HelloILRunTime.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/LevelModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/LevelModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/PlayerModelSObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/DamageSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/DamageSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EffectSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EffectSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EnemyRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/EnemyRunTimeData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/LevelUpSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/LevelUpSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/PlayerRunTimeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/RunTimeDatas/PlayerRunTimeData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/EnemyAnimView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Views/ParticleView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Views/ParticleView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,9 +137,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/Animation/Player/Slide.anim" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Controllers/EnemyController.cs.meta" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Events.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/HotFix_Project/HelloILRunTime.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Interfaces/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Interfaces/IRunTimeData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Models/KilledEnemyData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/RunTimeDatas/LevelUpSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@5.2.7/Editor/LayoutOverlay/ScrollableToolbar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@5.2.7/IK/Runtime/LimbSolver2D.cs" root0="SKIP_HIGHLIGHTING" />
@@ -207,6 +213,9 @@
     &quot;ChangesTree.GroupingKeys&quot;: [
       &quot;directory&quot;,
       &quot;repository&quot;
+    ],
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ]
   }
 }</component>
@@ -337,15 +346,10 @@
       <workItem from="1782399021236" duration="2314000" />
       <workItem from="1782465836201" duration="8190000" />
       <workItem from="1782567646307" duration="5399000" />
-      <workItem from="1782629867688" duration="2269000" />
-    </task>
-    <task id="LOCAL-00007" summary="增加死亡黑屏效果">
-      <option name="closed" value="true" />
-      <created>1775976576668</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1775976576668</updated>
+      <workItem from="1782629867688" duration="7251000" />
+      <workItem from="1782637315141" duration="5000" />
+      <workItem from="1782637347271" duration="999000" />
+      <workItem from="1782638372753" duration="4335000" />
     </task>
     <task id="LOCAL-00008" summary="增加死亡黑屏效果">
       <option name="closed" value="true" />
@@ -731,7 +735,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782573035306</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="增加游戏胜利页面">
+      <option name="closed" value="true" />
+      <created>1782632242018</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1782632242019</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -782,7 +794,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="5.25备份" />
     <MESSAGE value="差一个run_turn.fallloop动画,顶头跳跃修复" />
     <MESSAGE value="玩家动画问题解决" />
     <MESSAGE value="更新敌人逻辑" />
@@ -807,7 +818,8 @@
     <MESSAGE value="修改UI样式中" />
     <MESSAGE value="修正ParticleView.cs文件粒子的速度效果" />
     <MESSAGE value="增加关卡选择页面与相应逻辑,更改主页面UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加关卡选择页面与相应逻辑,更改主页面UI" />
+    <MESSAGE value="增加游戏胜利页面" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加游戏胜利页面" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

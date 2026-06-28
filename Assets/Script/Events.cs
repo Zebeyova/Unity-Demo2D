@@ -8,26 +8,26 @@ namespace Script
     {
         public class AttackEventArgs
         {
-            public GameObject Attacker;
-            public GameObject Target;
-            public IDamageable.Stats AttackType;
+            public GameObject attacker;
+            public GameObject target;
+            public IDamageable.Stats attackType;
         }
 
         public class DamageEventArgs
         {
-            public GameObject Target;
-            public float Damage;
+            public GameObject target;
+            public float damage;
         }
 
         public class ExperienceEventArgs
         {
-            public float Experience;
+            public float experience;
         }
 
         public class EnemyDeathEventArgs
         {
-            public Vector3 Position;
-            public float Experience;
+            public Vector3 position;
+            public float experience;
         }
 
         public static class EventCenter
@@ -36,6 +36,7 @@ namespace Script
             public static event Action<DamageEventArgs> OnDamageResolved;
             public static event Action<ExperienceEventArgs> OnExperienceCollected;
             public static event Action<EnemyDeathEventArgs> OnEnemyDeath;
+            public static event Action<int> OnKilledEnemyCountChanged;
 
             public static void TriggerAttackHit(AttackEventArgs args)
             {
@@ -55,6 +56,11 @@ namespace Script
             public static void TriggerEnemyDefeated(EnemyDeathEventArgs args)
             {
                 OnEnemyDeath?.Invoke(args);
+            }
+
+            public static void TriggerKilledEnemyCountChanged(int killCount)
+            {
+                OnKilledEnemyCountChanged?.Invoke(killCount);
             }
         }
     }

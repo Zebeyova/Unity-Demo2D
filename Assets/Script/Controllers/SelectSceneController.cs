@@ -1,6 +1,4 @@
-using System.Linq;
 using Script.Models;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -18,9 +16,9 @@ namespace Script.Controllers
         {
             var currentSelectedButton = EventSystem.current.currentSelectedGameObject;
             var sceneName = currentSelectedButton.GetComponent<LevelModel>().sceneName;
-            if (sceneName != "" && EditorBuildSettings.scenes.Any(scene => scene.path.Contains(sceneName)))
+            if (!string.IsNullOrEmpty(sceneName) && Application.CanStreamedLevelBeLoaded(sceneName))
             {
-                SceneManager.LoadScene($"Scene/{sceneName}");
+                SceneManager.LoadScene(sceneName);
             }
             else
             {

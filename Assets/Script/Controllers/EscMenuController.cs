@@ -1,4 +1,5 @@
 using Script.RunTimeDatas;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,27 +9,31 @@ namespace Script.Controllers
     {
         private GameObject _escMenu;
         private GameObject _buttonMenu;
-        private GameObject _settingMenu;
-        public GameObject gameOverMenu;
+        private GameObject _achievementMenu;
+        private GameObject _gameOverMenu;
         private PlayerRunTimeData _playerRunTimeData;
 
         private void OnEnable()
         {
             _escMenu = GameObject.Find("EscMenu");
-            gameOverMenu = GameObject.Find("GameOverMenu");
+            _achievementMenu = _escMenu.transform.Find("AchievementMenu").gameObject;
+            _gameOverMenu = GameObject.Find("GameOverMenu");
             _playerRunTimeData = GameObject.FindWithTag("Player").GetComponent<PlayerRunTimeData>();
             if (_playerRunTimeData) _playerRunTimeData.OnGameOver += OnGameOverHandler;
+            Events.EventCenter.OnKilledEnemyCountChanged += OnKilledEnemyCountChangedHandler;
         }
 
         private void OnDisable()
         {
             _playerRunTimeData.OnGameOver -= OnGameOverHandler;
+            Events.EventCenter.OnKilledEnemyCountChanged -= OnKilledEnemyCountChangedHandler;
         }
 
         private void Start()
         {
             if (_escMenu) _escMenu.SetActive(false);
-            if (gameOverMenu) gameOverMenu.SetActive(false);
+            if (_gameOverMenu) _gameOverMenu.SetActive(false);
+            OnKilledEnemyCountChangedHandler(_playerRunTimeData.killedEnemy);
         }
 
         private void Update()
@@ -37,7 +42,7 @@ namespace Script.Controllers
             Time.timeScale = _escMenu.activeSelf ? 1 : 0;
             _escMenu.SetActive(!_escMenu.activeSelf);
             _escMenu.transform.Find("ButtonMenu").gameObject.SetActive(true);
-            _escMenu.transform.Find("SettingMenu").gameObject.SetActive(false);
+            _achievementMenu.gameObject.SetActive(false);
         }
 
         public void ClickReStartButton()
@@ -52,12 +57,12 @@ namespace Script.Controllers
             SceneManager.LoadScene("Scene/GameScene");
         }
 
-        public void ClickSettingButton()
+        public void ClickAchievementButton()
         {
             _buttonMenu = _escMenu.transform.Find("ButtonMenu").gameObject;
-            _settingMenu = _escMenu.transform.Find("SettingMenu").gameObject;
+            _achievementMenu = _escMenu.transform.Find("AchievementMenu").gameObject;
             _buttonMenu.SetActive(!_buttonMenu.activeSelf);
-            _settingMenu.SetActive(!_settingMenu.activeSelf);
+            _achievementMenu.SetActive(!_achievementMenu.activeSelf);
         }
 
         public void ClickQuitButton()
@@ -70,8 +75,15 @@ namespace Script.Controllers
 
         private void OnGameOverHandler()
         {
-            Time.timeScale = 0;
-            gameOverMenu.SetActive(true);
+            _gameOverMenu.SetActive(true);
+        }
+
+        private void OnKilledEnemyCountChangedHandler(int count)
+        {
+            if (!_achievementMenu) return;
+            var achievementText = _achievementMenu.GetComponentInChildren<Transform>().gameObject
+                .GetComponentInChildren<TMP_Text>();
+            achievementText.text = $"已击败 : {count}";
         }
     }
 }

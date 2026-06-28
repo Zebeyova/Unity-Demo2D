@@ -37,8 +37,8 @@ namespace Script.RunTimeDatas
 
         private void HandleAttackHit(Events.AttackEventArgs args)
         {
-            if (args == null || !args.Attacker || !args.Target) return;
-            ResolveAttackDamage(args.Attacker, args.Target, args.AttackType);
+            if (args == null || !args.attacker || !args.target) return;
+            ResolveAttackDamage(args.attacker, args.target, args.attackType);
         }
 
         private float ReadAttackPower(DamageCache attacker, IDamageable.Stats damageType) //拿到基础攻击力
@@ -67,8 +67,8 @@ namespace Script.RunTimeDatas
             {
                 Events.EventCenter.TriggerDamageResolved(new Events.DamageEventArgs
                 {
-                    Target = target,
-                    Damage = damage
+                    target = target,
+                    damage = damage
                 });
                 return;
             }

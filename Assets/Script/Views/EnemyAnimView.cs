@@ -31,11 +31,6 @@ namespace Script.Views
 
         private void Update()
         {
-            UpdateAnimation();
-        }
-
-        private void UpdateAnimation()
-        {
             if (_runTimeData.currentStats == _lastStats) return;
             _lastStats = _runTimeData.currentStats;
             if (AnimDictionary.TryGetValue(_lastStats, out var hash)) PlayAnimation(hash);
