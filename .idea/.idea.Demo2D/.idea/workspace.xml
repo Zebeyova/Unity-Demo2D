@@ -18,13 +18,145 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b80c9d-9c58-41ed-931d-0a18f2b3836d" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Script/HotFix.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/HotFix/ILRuntimeManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Script/HotFix/ILRuntimeManager.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Demo2D/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Fonts/字魂布丁体(商用需授权) SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/MainScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Models/KilledEnemyData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Models/KilledEnemyData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Editor/ILRuntimeCLRBinding.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Editor/ILRuntimeCLRBinding.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Editor/ILRuntimeCrossBinding.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Editor/ILRuntimeCrossBinding.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Editor/ILRuntimeMenu.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Editor/ILRuntimeMenu.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/IJsonWrapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/IJsonWrapper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonData.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonException.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonMapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonMapper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonMockWrapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonMockWrapper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonReader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonReader.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonWriter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/JsonWriter.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/Lexer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/Lexer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/ParserToken.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/LitJson/ParserToken.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/01_HelloWorld.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/01_HelloWorld/HelloWorld.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/01_HelloWorld/HelloWorld.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/02_Invocation.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/02_Invocation/Invocation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/02_Invocation/Invocation.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/03_Delegate.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/03_Delegate/DelegateDemo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/03_Delegate/DelegateDemo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/04_Inheritance.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/04_Inheritance/Inheritance.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/04_Inheritance/Inheritance.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/04_Inheritance/InheritanceAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/04_Inheritance/InheritanceAdapter.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/05_CLRRedirection.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/05_CLRRedirection/CLRRedirectionDemo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/05_CLRRedirection/CLRRedirectionDemo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/06_CLRBinding.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/06_CLRBinding/CLRBindingDemo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/06_CLRBinding/CLRBindingDemo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/07_Coroutine.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/07_Coroutine/CoroutineAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/07_Coroutine/CoroutineAdapter.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/07_Coroutine/CoroutineDemo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/07_Coroutine/CoroutineDemo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/08_MonoBehaviour.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/08_MonoBehaviour/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/08_MonoBehaviour/Editor/MonoBehaviourAdapterEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/08_MonoBehaviour/Editor/MonoBehaviourAdapterEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/08_MonoBehaviour/MonoBehaviourAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/08_MonoBehaviour/MonoBehaviourAdapter.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/08_MonoBehaviour/MonoBehaviourDemo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/08_MonoBehaviour/MonoBehaviourDemo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/09_Reflection.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/09_Reflection/ReflectionDemo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/09_Reflection/ReflectionDemo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/10_LitJson.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/10_LitJson/LitJsonDemo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/10_LitJson/LitJsonDemo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/11_ValueTypeBinding.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/11_ValueTypeBinding/QuaternionBinder.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/11_ValueTypeBinding/QuaternionBinder.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/11_ValueTypeBinding/ValueTypeBindingDemo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/11_ValueTypeBinding/ValueTypeBindingDemo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/11_ValueTypeBinding/Vector2Binder.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/11_ValueTypeBinding/Vector2Binder.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/11_ValueTypeBinding/Vector3Binder.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/11_ValueTypeBinding/Vector3Binder.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/12_Performance.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/12_Performance/Performance.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/Scripts/Examples/12_Performance/Performance.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/01_HelloWorld.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/01_HelloWorld.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/01_HelloWorldSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/01_HelloWorldSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/02_Invocation.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/02_Invocation.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/02_InvocationSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/02_InvocationSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/03_DelegateDemo.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/03_DelegateDemo.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/03_DelegateDemoSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/03_DelegateDemoSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/04_Inheritance.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/04_Inheritance.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/04_InheritanceSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/04_InheritanceSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/05_CLRRedirection.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/05_CLRRedirection.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/05_CLRRedirectionSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/05_CLRRedirectionSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/06_CLRBinding.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/06_CLRBinding.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/06_CLRBindingSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/06_CLRBindingSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/07_Coroutine.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/07_Coroutine.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/07_CoroutineSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/07_CoroutineSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/08_MonoBehaviour.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/08_MonoBehaviour.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/08_MonoBehaviourSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/08_MonoBehaviourSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/09_Reflection.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/09_Reflection.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/09_ReflectionSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/09_ReflectionSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/10_LitJson.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/10_LitJson.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/10_LitJsonSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/10_LitJsonSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/11_ValueTypeBinding.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/11_ValueTypeBinding.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/11_ValueTypeBindingSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/11_ValueTypeBindingSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/12_Performance.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/12_Performance.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/12_PerformanceSettings.lighting" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/_Scenes/Examples/12_PerformanceSettings.lighting.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/performance.lua" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/ILRuntime/2.1.0/Demo/performance.lua.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/HotFix/ILRuntimeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/HotFix/ILRuntimeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/HotFix/MonoToILAdaptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/HotFix/DamageSystemAdaptor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/HotFix/MonoToILAdaptor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/HotFix/DamageSystemAdaptor.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +258,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Script/Interfaces/IRunTimeData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Models/KilledEnemyData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/RunTimeDatas/LevelUpSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.ourpalm.ilruntime@2.1.0/Runtime/Enviorment/AppDomain.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.ourpalm.ilruntime@2.1.0/Runtime/Enviorment/CrossBindingMethodInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@5.2.7/Editor/LayoutOverlay/ScrollableToolbar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@5.2.7/IK/Runtime/LimbSolver2D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.path@4.0.2/Editor/IMGUI/RectSelector.cs" root0="SKIP_HIGHLIGHTING" />
@@ -190,7 +324,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C#&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -264,6 +398,9 @@
     <configuration name="附加到" type="UnityDevicePlayer" factoryName="UnityAttachToDevicePlayer">
       <method v="2" />
     </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\18089\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -340,23 +477,10 @@
       <workItem from="1782719877292" duration="146000" />
       <workItem from="1782726273945" duration="141000" />
       <workItem from="1782793913427" duration="5620000" />
-      <workItem from="1783412726793" duration="2482000" />
-    </task>
-    <task id="LOCAL-00009" summary="重生完成">
-      <option name="closed" value="true" />
-      <created>1776241107289</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1776241107289</updated>
-    </task>
-    <task id="LOCAL-00010" summary="修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug">
-      <option name="closed" value="true" />
-      <created>1776243234099</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1776243234099</updated>
+      <workItem from="1783412726793" duration="15965000" />
+      <workItem from="1783436891640" duration="1206000" />
+      <workItem from="1783438157508" duration="3412000" />
+      <workItem from="1783585687723" duration="2063000" />
     </task>
     <task id="LOCAL-00011" summary="修复玩家站在敌人头上会触发敌人上移的Bug,修复玩家攻击后敌人无法继续攻击玩家的Bug">
       <option name="closed" value="true" />
@@ -734,7 +858,23 @@
       <option name="project" value="LOCAL" />
       <updated>1782643185496</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="新增ILRuntime代码,准备转移逻辑计算至IL工程中">
+      <option name="closed" value="true" />
+      <created>1783415277326</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1783415277326</updated>
+    </task>
+    <task id="LOCAL-00059" summary="成功将伤害计算放入热更代码中,修改过程中删除了场景中的DamageSystem物体">
+      <option name="closed" value="true" />
+      <created>1783441435931</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1783441435931</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -785,8 +925,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="玩家动画问题解决" />
-    <MESSAGE value="更新敌人逻辑" />
     <MESSAGE value="目前逻辑基本修复完成" />
     <MESSAGE value="bug修复" />
     <MESSAGE value="血条正确" />
@@ -810,7 +948,9 @@
     <MESSAGE value="增加关卡选择页面与相应逻辑,更改主页面UI" />
     <MESSAGE value="增加游戏胜利页面" />
     <MESSAGE value="V1.3版本打包完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="V1.3版本打包完成" />
+    <MESSAGE value="新增ILRuntime代码,准备转移逻辑计算至IL工程中" />
+    <MESSAGE value="成功将伤害计算放入热更代码中,修改过程中删除了场景中的DamageSystem物体" />
+    <option name="LAST_COMMIT_MESSAGE" value="成功将伤害计算放入热更代码中,修改过程中删除了场景中的DamageSystem物体" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

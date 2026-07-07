@@ -4,18 +4,30 @@ using UnityEngine;
 
 namespace Script.RunTimeDatas
 {
-    public class DamageSystem : MonoBehaviour
+    public class DamageSystem
     {
+        public static DamageSystem Instance { get; private set; }
         private readonly Dictionary<GameObject, DamageCache> _damageCache = new Dictionary<GameObject, DamageCache>();
 
-        private void OnEnable()
+        protected virtual void OnEnable() { }
+        protected virtual void OnDisable() { }
+
+        public void Initialize()
         {
-            Events.EventCenter.OnAttackHit += HandleAttackHit;
+            Instance = this;
+            OnEnable();
         }
 
-        private void OnDisable()
+        public void CleanUp()
         {
-            Events.EventCenter.OnAttackHit -= HandleAttackHit;
+            OnDisable();
+            if (Instance == this) Instance = null;
+        }
+
+        protected void HandleAttackHit(Events.AttackEventArgs args)
+        {
+            if (args == null || !args.attacker || !args.target) return;
+            ResolveAttackDamage(args.attacker, args.target, args.attackType);
         }
 
         private void ResolveAttackDamage(GameObject attacker, GameObject defender, IDamageable.Stats damageType)
@@ -30,18 +42,12 @@ namespace Script.RunTimeDatas
                 ApplyDamage(GetTargetObject(defenseCache, defender), defenseCache, finalDamage);
         }
 
-        public void Heal(float amount) //回血
-        {
-            throw new System.NotImplementedException();
-        }
+        // private void Heal(float amount) //回血
+        // {
+        //     throw new System.NotImplementedException();
+        // }
 
-        private void HandleAttackHit(Events.AttackEventArgs args)
-        {
-            if (args == null || !args.attacker || !args.target) return;
-            ResolveAttackDamage(args.attacker, args.target, args.attackType);
-        }
-
-        private float ReadAttackPower(DamageCache attacker, IDamageable.Stats damageType) //拿到基础攻击力
+        protected virtual float ReadAttackPower(DamageCache attacker, IDamageable.Stats damageType) //拿到基础攻击力
         {
             if (attacker.player)
                 return damageType == IDamageable.Stats.Skill ? attacker.player.SkillDamage : attacker.player.Damage;
@@ -50,13 +56,13 @@ namespace Script.RunTimeDatas
             return 0f;
         }
 
-        private float ReadDefensePower(DamageCache defender) //拿到基础防御力
+        protected virtual float ReadDefensePower(DamageCache defender) //拿到基础防御力
         {
             if (defender.player) return defender.player.Defense;
             return defender.enemy ? defender.enemy.Defense : 0f;
         }
 
-        private float CalculateFinalDamage(float attack, float defense) //最终伤害计算
+        protected virtual float CalculateFinalDamage(float attack, float defense) //最终伤害计算
         {
             return Mathf.Max(0, attack * (1 - defense / 100));
         }
@@ -99,7 +105,7 @@ namespace Script.RunTimeDatas
             return cache.enemy ? cache.enemy.gameObject : fallbackTarget;
         }
 
-        private sealed class DamageCache
+        protected internal class DamageCache
         {
             public PlayerRunTimeData player;
             public EnemyRunTimeData enemy;
