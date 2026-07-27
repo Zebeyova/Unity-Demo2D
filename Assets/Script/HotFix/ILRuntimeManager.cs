@@ -25,9 +25,10 @@ namespace Script.HotFix
             damageCalc?.Initialize();
         }
 
-        private void OnDestroy()
-        {
-            DamageSystem.Instance?.CleanUp();
-        }
+        // private void OnDestroy()
+        // {
+        //     DamageSystem.Instance?.CleanUp();
+        //     _appDomain = null;
+        // }
     }
 }

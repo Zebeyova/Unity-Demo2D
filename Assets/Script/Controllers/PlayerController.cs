@@ -304,9 +304,6 @@ namespace Script.Controllers
 
         private void OnAttackEndHandler()
         {
-            if (_runTimeData.currentState != IDamageable.Stats.Attack &&
-                _runTimeData.currentState != IDamageable.Stats.Attack2 &&
-                _runTimeData.currentState != IDamageable.Stats.Skill) return;
             _runTimeData.currentState = _inGround ? IDamageable.Stats.Idle : IDamageable.Stats.Fall;
             _isAttacking = false;
             _rb.gravityScale = 2;
